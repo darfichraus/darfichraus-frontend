@@ -23,6 +23,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   coronamap: any;
   selectedFeature;
   geojson;
+  legend;
 
 
   constructor() {
@@ -69,17 +70,37 @@ export class MapComponent implements OnInit, AfterViewInit {
         })
       )
     }).addTo(this.coronamap);
+
+
+    this.legend = L.control({position: 'bottomright'});
+
+    this.legend.onAdd = function (coronamap) {
+      var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 10, 20, 50, 1000, 5000, 10000, 20000],
+        labels = [],
+        from, to;
+
+      for (var i = 0; i < grades.length; i++) {
+        from = grades[i];
+        to = grades[i + 1];
+
+        let color= (e) => (this.getColor(from + 1));
+
+        labels.push(
+          '<i style="background:' + color /*this.getColor(from + 1)*/ + '"></i> ' +
+          from + (to ? '&ndash;' + to : '+'));
+      }
+
+      div.innerHTML = labels.join('<br>');
+      return div;
+    };
+
+    this.legend.addTo(this.coronamap);
+
   }
 
 
   ngAfterViewInit(): void {
-
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-
-// tiles.addTo(this.map);
 
   }
 
@@ -87,12 +108,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     let stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
 
     console.log(feature);
-    console.log(feature.properties.RS, 10);
-    console.log(stateCriticality);
-    console.log(stateCriticality[parseInt(feature.properties.RS, 10)]);
     //if ausgangssperre different border style?
-
-    //console.log(this.getColor2());
 
     let d: string;
     let b = stateCriticality[parseInt(feature.properties.RS, 10)];
@@ -115,14 +131,21 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     }
 
+    let g = stateCriticality[parseInt(feature.properties.RS, 10)];
+
+    // let color= (g) => this.getColor(g);
+
+    // mouseover: (e) => (this.highlightFeature(e)),
+
+
     return {
       weight: 1,
       opacity: 1,
       color: 'white',
       dashArray: '3',
       fillOpacity: 0.7,
-      fillColor: d
-      //fillColor: this.getColor2(stateCriticality[parseInt(feature.properties.RS, 10)])
+      //fillColor: d
+      fillColor: (g) => (this.getColor(g)),
       //fillColor: 'red'
     };
 
