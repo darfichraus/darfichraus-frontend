@@ -57,7 +57,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
     // ---- LEGEND -----
-    this.legend = L.control({position: 'bottomleft'});
+    this.legend = L.control({position: 'bottomright'});
     const legendBuilder = {
       createLegend(vm) {
         return () => {
@@ -99,8 +99,8 @@ export class MapComponent implements OnInit, AfterViewInit {
       const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
       this._div.innerHTML = '<h4>Corona Ausgangssperre</h4>' + (props ?
         '<b>' + props.GEN + '</b><br />'
-        + stateCriticality[Math.floor(Math.random() * 15)] + ' Menschen infiziert <br />'
-        + '<br /> <b>Bevölkerung:</b> ' + props.destatis.population
+        // + stateCriticality[Math.floor(Math.random() * 15)] + ' Menschen infiziert <br />'
+        // + '<br /> <b>Bevölkerung:</b> ' + props.destatis.population
         + '<br /><br /> <b>Ausgangssperre: <br /></b>21.03.2020 - 15.04.2020'
         : 'Ein Bundesland auswählen');
     };

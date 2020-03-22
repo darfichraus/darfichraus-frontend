@@ -29,9 +29,9 @@ export class FeedService {
     });
   }
 
-
   fetchDataByAreal(areal: Areal, value: string): any {
     const url = FeedService.api + areal.toString() + '/' + value;
+    // const url = FeedService.api + 'ZIP/36124';
     this.fetchData(url);
   }
 
