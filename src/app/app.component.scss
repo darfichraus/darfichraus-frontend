@@ -74,6 +74,11 @@ button {
     position: relative;
     padding: 10px;
     overflow: auto;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .non-clickable {
