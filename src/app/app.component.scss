@@ -67,10 +67,10 @@ button {
 
 .feed {
     z-index: 1;
-    background-color: rgba(255, 255, 255, .8);
-    height: calc(100vh - 84px);
+    background-color: rgba(255, 255, 255, 1);
+    height: calc(100vh - 90px);
     pointer-events: all;
-    top: 64px;
+    top: 60px;
     position: relative;
 }
 
