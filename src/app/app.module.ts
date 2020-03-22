@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +14,13 @@ import { MapComponent } from './map/map.component';
 import { LeafmapComponent } from './leafmap/leafmap.component';
 import { MeldungComponent } from './meldung/meldung.component';
 import { FormsModule } from '@angular/forms';
+import {RestrictionRepository} from './restriction.repository';
+import {FeedService} from './feed.service';
 
+
+export function restrictionProviderFactory(provider: RestrictionRepository) {
+  return () => provider.preloadData();
+}
 
 @NgModule({
   declarations: [
@@ -35,7 +41,14 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    RestrictionRepository,
+    {
+      provide: APP_INITIALIZER, useFactory: restrictionProviderFactory, deps: [
+        RestrictionRepository
+      ], multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
