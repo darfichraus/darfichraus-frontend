@@ -53,3 +53,5 @@ export class Restriction {
     publisher: string;
     searchQuery: SearchInformation;
 }
+
+export type Restrictions = Restriction[];
