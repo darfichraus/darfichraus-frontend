@@ -1,15 +1,12 @@
 <h1 class="heading">{{data.searchQuery?.arealValue}}</h1>
 
-<p class="feedItem">Aktuelle Informationen zu den Einschränkungen im Öffentlichen Nahverkehr</p>
+<p class="feedItem">Aktuelle Verordnungen und Einschränkungen bezüglich des Coronavirus Covid-19</p>
 
 
 <div *ngFor="let item of data.data" class="container">
-
-
-  <div class="type">{{translateRestrictionType(item.restrictionType)}}</div>
-  <div *ngIf="item.arealIdentifier != data.searchQuery.arealValue" class="subhead">{{item.arealIdentifier}}</div>
-  <div class="text">{{item.restrictionDescription}}</div>
-  <div class="furtherInformation"><a href="{{item.furtherInformation}}" target="_blank">Link folgen</a></div>
-  <mat-divider></mat-divider>
-
+    <div class="type">{{translateRestrictionType(item.restrictionType)}}</div>
+    <div *ngIf="item.arealIdentifier != data.searchQuery.arealValue" class="subhead">{{item.arealIdentifier}}</div>
+    <div class="text">{{item.restrictionDescription}}</div>
+    <div class="left datum">-- Beschluss vom {{item.restrictionStart | date:'dd.MM.yyyy' }}</div>
+    <div class="right furtherInformation"><a href="{{item.furtherInformation}}" target="_blank">Link folgen</a></div>
 </div>
