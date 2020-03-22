@@ -71,7 +71,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-    this.coronamap = L.map('map', {zoomControl: false}).setView([51.27264, 14.26469], 6);
+    this.coronamap = L.map('map', {zoomControl: false, scrollWheelZoom: false}).setView([51.27264, 14.26469], 6);
 
          // ------ MAP + LAYER -------
 
@@ -115,7 +115,7 @@ export class MapComponent implements OnInit, AfterViewInit {
  
              labels.push(
                '<i style="background:' + color + '"></i> ' +
-               from + (to ? '&ndash;' + to : '+'));
+               from + (to ? '' : ''));
            }
            div.innerHTML = labels.join('<br>');
            return div;
@@ -124,12 +124,10 @@ export class MapComponent implements OnInit, AfterViewInit {
      };
  
      this.legend.onAdd = legendBuilder.createLegend(this);
- 
      this.legend.addTo(this.coronamap);
  
      // ------ INFO ------
      this.info = L.control();
-     // INFO
      this.info.onAdd = function(coronamap) {
        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
        this.update();
@@ -148,7 +146,6 @@ export class MapComponent implements OnInit, AfterViewInit {
      };
  
      this.info.addTo(this.coronamap);
- 
  
      // ------ BUTTONS ZOOM CONTROL ------
      L.Control.zoomHome = L.Control.extend({
@@ -251,7 +248,6 @@ export class MapComponent implements OnInit, AfterViewInit {
       fillOpacity: 0.7,
       fillColor: this.getColor(g),
     };
-
   }
 
   // geoJSON german states
@@ -259,10 +255,16 @@ export class MapComponent implements OnInit, AfterViewInit {
   getColor(d) {
     console.log(this.mapMode);
     if(this.mapMode === 'bus') {
-      return '#000000';
+      return d >= 3 ? '#4668ae' :
+      d == 2 ? '#303e99' :
+        d == 1 ? '#253074' :
+                  '#4668ae';
     }
     if(this.mapMode === 'person') {
-      return '#ffaa33';
+      return d >= 3 ? '#f0d77a' :
+      d == 2 ? '#fcd039' :
+        d == 1 ? '#f3bb0e' :
+                  '#f0d77a';
     }
     return d >= 3 ? '#4668ae' :
       d == 2 ? '#303e99' :
