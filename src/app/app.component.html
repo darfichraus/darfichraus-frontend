@@ -1,5 +1,3 @@
-
-
 <mat-toolbar>
   <img src="../assets/wvv-projekt.png" class="wvv-logo">
   <span class="spacer"></span>
@@ -10,54 +8,54 @@
 <div class="content-body">
 
 
-<div fxLayout="row" fxLayoutAlign="space-around center">
-
-  <div fxFlex="65">
+  <div fxLayout="row" fxLayoutAlign="space-around center">
 
 
-<!-- <app-map></app-map> -->
-
-<app-map></app-map>
-
-
-
-    <mat-list class="icon-list">
-      <mat-list-item (click)="onBus()">
+    <div fxFlex="10">
+      <mat-list class="icon-list">
+        <mat-list-item (click)="onBus()">
           <mat-icon>directions_bus</mat-icon>
-      </mat-list-item>
-      <mat-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <mat-icon>people</mat-icon>
-      </mat-list-item>
-      <mat-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <mat-icon>restaurant_menu</mat-icon>
-      </mat-list-item>
-      <mat-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <mat-icon>eco</mat-icon>
-      </mat-list-item>
-      <mat-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <mat-icon>shopping_cart</mat-icon>
-      </mat-list-item>
-      <mat-list-item>
+        </mat-list-item>
+        <mat-list-item>
           <mat-icon>close</mat-icon>
-      </mat-list-item>
-    </mat-list>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+
+    <div fxFlex="60">
+
+
+      <div class="map-cont">
+        <app-map></app-map>
+
+      </div>
 
 
 
 
+      <button class="btn">Keine Einschränkung</button>
+      <button class="btn">Einschränkung</button>
+      <button class="btn">Verbote</button>
+
+      <!-- <app-meldeform></app-meldeform> -->
+
+    </div>
 
 
-
-  <button class="btn">Keine Einschränkung</button>
-  <button class="btn">Einschränkung</button>
-  <button class="btn">Verbote</button>
-
-  <app-meldeform></app-meldeform>
-
-  </div>
-
-
-    <div fxFlex="35">
+    <div fxFlex="30">
 
       <app-feed></app-feed>
 

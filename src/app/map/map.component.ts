@@ -24,44 +24,27 @@ export class MapComponent implements OnInit, AfterViewInit {
   selectedFeature;
   geojson;
   legend;
+  info;
 
 
   constructor() {
   }
 
 
+
   ngOnInit() {
 
-    /*this.map = new ol.Map({
-      target: 'map',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        })
-      ],
-      view: new ol.View({
-        center: ol.proj.fromLonLat([73.8567, 18.5204]),
-        zoom: 8
-      })
-    });
-    */
 
-    // const map = L.map('map').setView([51.505, -0.09], 13);
     this.coronamap = L.map('map', {zoomControl: false}).setView([51.27264, 9.26469], 6);
-
-
-    //var layer = L.tileLayer(mbUrl, {id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, attribution: mbAttr, maxZoom: 8, minZoom: 6});
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
     }).addTo(this.coronamap);
 
-    console.log(statesData);
-
     let statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
     console.log(statesD);
     this.geojson = L.geoJson(statesD, {
-      style: this.style,
+      style: (e) => (this.style(e)),
       onEachFeature: (feature, layer) => (
         layer.on({
           mouseover: (e) => (this.highlightFeature(e)),
@@ -75,6 +58,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.legend = L.control({position: 'bottomright'});
 
     this.legend.onAdd = function (coronamap) {
+      console.log("legend on Add");
       var div = L.DomUtil.create('div', 'info legend'),
         grades = [0, 10, 20, 50, 1000, 5000, 10000, 20000],
         labels = [],
@@ -84,10 +68,11 @@ export class MapComponent implements OnInit, AfterViewInit {
         from = grades[i];
         to = grades[i + 1];
 
+
         let color= (e) => (this.getColor(from + 1));
 
         labels.push(
-          '<i style="background:' + color /*this.getColor(from + 1)*/ + '"></i> ' +
+          '<i style="background:' + color + /*this.getColor(from + 1)*/ + '"></i> ' +
           from + (to ? '&ndash;' + to : '+'));
       }
 
@@ -96,6 +81,33 @@ export class MapComponent implements OnInit, AfterViewInit {
     };
 
     this.legend.addTo(this.coronamap);
+
+
+
+
+
+    // INFO
+    this.info = L.control();
+        // INFO
+    this.info.onAdd = function (coronamap) {
+          this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+          this.update();
+          return this._div;
+      };
+  
+      // method that we will use to update the control based on feature properties passed
+      this.info.update = function (props) {
+        let stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
+          this._div.innerHTML = '<h4>Corona Ausgangssperre</h4>' +  (props ?
+              '<b>'+ props.GEN+ '</b><br />'
+              + stateCriticality[Math.floor(Math.random()*15)] + ' Menschen infiziert <br />'
+              +'<br /> <b>Bevölkerung:</b> ' + props.destatis.population
+              +'<br /><br /> <b>Ausgangssperre: <br /></b>21.03.2020 - 15.04.2020'
+              : 'Ein Bundesland auswählen');
+      };
+
+    this.info.addTo(this.coronamap);
+
 
   }
 
@@ -108,32 +120,8 @@ export class MapComponent implements OnInit, AfterViewInit {
     let stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
 
     console.log(feature);
-    //if ausgangssperre different border style?
-
-    let d: string;
-    let b = stateCriticality[parseInt(feature.properties.RS, 10)];
-    if (b > 20000) {
-      d = '#800026';
-    } else if (b > 10000) {
-      d = '#BD0026';
-    } else if (b > 5000) {
-      d = '#E31A1C';
-    } else if (b > 1000) {
-      d = '#FC4E2A';
-    } else if (b > 50) {
-      d = '#FD8D3C';
-    } else if (b > 20) {
-      d = '#FEB24C';
-    } else if (b > 10) {
-      d = '#FED976';
-    } else {
-      d = '#FFEDA0';
-
-    }
 
     let g = stateCriticality[parseInt(feature.properties.RS, 10)];
-
-    // let color= (g) => this.getColor(g);
 
     // mouseover: (e) => (this.highlightFeature(e)),
 
@@ -145,7 +133,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       dashArray: '3',
       fillOpacity: 0.7,
       //fillColor: d
-      fillColor: (g) => (this.getColor(g)),
+      fillColor: this.getColor(g),
       //fillColor: 'red'
     };
 
@@ -164,24 +152,6 @@ export class MapComponent implements OnInit, AfterViewInit {
                   '#FFEDA0';
   }
 
-
-  getColor2() {
-
-    return '#FFEDA0';
-    /*
-    if (d === undefined) {
-      return '#FFEDA0';
-    }
-    return d > 20000 ? '#800026' :
-        d > 10000  ? '#BD0026' :
-        d > 5000  ? '#E31A1C' :
-        d > 1000  ? '#FC4E2A' :
-        d > 50   ? '#FD8D3C' :
-        d > 20   ? '#FEB24C' :
-        d > 10   ? '#FED976' :
-              '#FFEDA0';
-              */
-  }
 
   onEachFeature(feature, layer) {
     layer.on({
@@ -229,7 +199,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
       layer.bringToFront();
     }
-    //info.update(layer.feature.properties);
+    this.info.update(layer.feature.properties);
   }
 
   resetHighlight(e) {
@@ -240,7 +210,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     } else {
       this.setFilledHighlightedPolygon(layer);
     }
-    //info.update();
+    this.info.update();
   }
 
   zoomToFeature(e) {

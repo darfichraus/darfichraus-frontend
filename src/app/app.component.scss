@@ -1,5 +1,5 @@
 .content-body {
-    padding: 100px;
+    padding: 10px;
 }
 
 
@@ -22,12 +22,20 @@ mat-list-item:hover {
 
 mat-toolbar {
     background-color: transparent;
+    z-index: 2 !important;
 }
 
 button {
-    width: 200px;
+    width: 190px;
 }
 
 .wvv-logo {
     width: 250px;
+}
+
+
+.map-cont {
+    width: 100%;
+    height: 600px;
+    background-color: green;
 }
