@@ -86,7 +86,8 @@ button {
 }
 
 // Icons
-.mat.material-icons {
+.material-icons {
+    pointer-events: all;
     background:white;
     font-size: 48px;
   }
