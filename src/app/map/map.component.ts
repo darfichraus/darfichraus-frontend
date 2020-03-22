@@ -71,7 +71,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-    this.coronamap = L.map('map', {zoomControl: false}).setView([51.27264, 14.26469], 6);
+    this.coronamap = L.map('map', {zoomControl: false, scrollWheelZoom: false}).setView([51.27264, 14.26469], 6);
 
          // ------ MAP + LAYER -------
 
@@ -259,10 +259,12 @@ export class MapComponent implements OnInit, AfterViewInit {
   getColor(d) {
     console.log(this.mapMode);
     if(this.mapMode === 'bus') {
-      return '#000000';
+      return d >= 3 ? '#4668ae' :
+      d == 2 ? '#303e99' :
+        d == 1 ? '#253074' :
+                  '#4668ae';
     }
     if(this.mapMode === 'person') {
-      return '#ffaa33';
       return d >= 3 ? '#f0d77a' :
       d == 2 ? '#fcd039' :
         d == 1 ? '#f3bb0e' :
