@@ -1,3 +1,5 @@
+import {Areal} from './_model/areal.enum';
+
 export enum RestrictionType {
 
   PUBLIC_TRANSPORTATION = 'Nahverkehr',
@@ -11,6 +13,26 @@ export enum RestrictionType {
 export enum RestrictionState {
   RESTRICTION = 'Einschränkung',
   BAN = 'Verbot'
+}
+
+export class SearchInformation {
+  areal: Areal;
+  arealValue: string;
+
+  constructor(areal: Areal, arealValue: string) {
+    this.areal = areal;
+    this.arealValue = arealValue;
+  }
+}
+
+export class FetchResult {
+  data: Restriction[] = [];
+  searchQuery: SearchInformation;
+
+  constructor(data: Restriction[], searchQuery: SearchInformation) {
+    this.data = data;
+    this.searchQuery = searchQuery;
+  }
 }
 
 export class Restriction {
@@ -27,4 +49,5 @@ export class Restriction {
     furtherInformation: string;
     recipient: string;
     publisher: string;
+    searchQuery: SearchInformation;
 }

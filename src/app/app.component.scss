@@ -26,7 +26,7 @@ mat-list-item:hover {
     flex: 1 1 auto;
 }
 
-mat-toolbar {
+.mat-toolbar {
     background-color: transparent;
     z-index: 2 !important;
 }
@@ -34,7 +34,7 @@ mat-toolbar {
 button {
     width: 190px;
     pointer-events: all;
-    background-color: white;
+    background-color: rgba(255, 255, 255, .8);
 }
 
 .wvv-logo {
@@ -68,7 +68,7 @@ button {
 .feed {
     z-index: 1;
     background-color: rgba(255, 255, 255, .8);
-    height: calc(100vh - 64px);
+    height: calc(100vh - 84px);
     pointer-events: all;
     top: 64px;
     position: relative;
@@ -88,9 +88,42 @@ button {
 // Icons
 .material-icons {
     pointer-events: all;
-    background:white;
-    font-size: 48px;
+    border-radius: 2px;
+    font-size: 30px;
+    color: black;
+    text-shadow: 2px 2px 5px #444;
+    transition: transform .2s;
   }
+
+.material-icons:hover {
+    transform: scale(1.5);
+}
+
+
+// State icons
+.icon.bus:hover, .icon.bus:active {
+    color: #3A49CB;
+}
+
+.icon.people:hover, .icon.people:active {
+    color: #6E5BE1;
+}
+
+.icon.restaurant:hover, .icon.restaurant:active {
+    color: #2584B4;
+}
+
+.icon.eco:hover, .icon.eco:active {
+    color: #268478;
+}
+
+.icon.shopping:hover, .icon.shopping:active {
+    color: #B4C03F;
+}
+
+.icon.close:hover, .icon.close:active {
+    color: #FAC401;
+}
 
 .mat-icon {
     height: 48px;

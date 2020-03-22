@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FeedService} from '../feed.service';
-import {Restriction, RestrictionType} from '../Restriction';
+import {FetchResult, Restriction, RestrictionType} from '../Restriction';
 
 @Component({
   selector: 'app-feed',
@@ -9,7 +9,7 @@ import {Restriction, RestrictionType} from '../Restriction';
 })
 export class FeedComponent implements OnInit {
 
-  data: Restriction[] = [];
+  data: FetchResult;
 
   constructor(private feedService: FeedService) {
   }
