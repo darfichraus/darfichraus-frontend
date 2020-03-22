@@ -30,8 +30,8 @@ export class AppComponent implements OnInit{
 
   openDialog(): void {
     const dialogRef = this.dialog.open(MeldungComponent, {
-      width: '1200px',
-      height: '900px',
+      width: '900px',
+      height: '700px',
       restoreFocus: false,
       autoFocus: false,
       data: {}

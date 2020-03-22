@@ -39,7 +39,7 @@ export class FetchResult {
 
 export class Restriction {
 
-    id: string;
+    id?: string;
     areal: string;
     arealIdentifier: string;
     restrictionState: RestrictionState;
@@ -51,7 +51,7 @@ export class Restriction {
     furtherInformation: string;
     recipient: string;
     publisher: string;
-    searchQuery: SearchInformation;
+    searchQuery?: SearchInformation;
 }
 
 export type Restrictions = Restriction[];

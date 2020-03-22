@@ -29,3 +29,19 @@ h1.heading {font-family: "Playfair Display";}
     text-align: center;
     font-size: 80%
   }
+
+
+
+  .mat-dialog-override {
+    mat-dialog-container {
+      > :first-child {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      mat-dialog-content,
+      div[mat-dialog-content] {
+        flex-grow: 1;
+      }
+    }
+  }

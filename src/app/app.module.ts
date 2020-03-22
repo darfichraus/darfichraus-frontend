@@ -16,6 +16,7 @@ import { MeldungComponent } from './meldung/meldung.component';
 import { FormsModule } from '@angular/forms';
 import {RestrictionRepository} from './restriction.repository';
 import {FeedService} from './feed.service';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
@@ -47,7 +48,9 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
       provide: APP_INITIALIZER, useFactory: restrictionProviderFactory, deps: [
         RestrictionRepository
       ], multi: true
-    }
+    },
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-dialog-override'}}
+
   ],
   bootstrap: [AppComponent]
 })
