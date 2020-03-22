@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-
+import { MeldungComponent } from './meldung/meldung.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,26 @@ export class AppComponent {
   title = 'dir-frontend';
 
 
+  constructor(private dialog: MatDialog) {
 
-
-
-  onBus() {
   }
 
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(MeldungComponent, {
+      width: '1200px',
+      height: '900px',
+      restoreFocus: false,
+      autoFocus: false,
+      data: {}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  onBus() {
+    console.log("onBus()");
+  }
 }
