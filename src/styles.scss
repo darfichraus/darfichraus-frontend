@@ -1,3 +1,10 @@
+// Font Faces
+
+@font-face {
+    font-family: "Playfair Display";
+    src: url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+}
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
@@ -5,7 +12,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 //@import "~leaflet/dist/leaflet.css";
 
-
+h1.heading {font-family: "Playfair Display";}
+.feed .type {padding-bottom: 1em;}
 .info { display: inline-block; margin: 10px 550px 0px 0px !important; padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; }
 .info h4 { margin: 0 0 5px; color: #777; }
 .legend { text-align: left; line-height: 18px; color: #555; }
