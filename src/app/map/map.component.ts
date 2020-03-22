@@ -19,7 +19,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   mapMode: string;
   @Input('mode') set mode (mode: string) {
-    this.mapMode == mode;
+    this.mapMode = mode;
     // change color
     console.log(mode);
     if(this.coronamap !== undefined) {
@@ -28,9 +28,24 @@ export class MapComponent implements OnInit, AfterViewInit {
         this.coronamap.removeLayer(layer);
     }); */
 
-    this.coronamap.eachLayer((layer) => {
-      this.coronamap.removeLayer(layer);
-    });
+
+    this.geojson.clearLayers();
+    
+
+    const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
+     
+     this.geojson = L.geoJson(statesD, {
+       style: (e) => (this.style(e)),
+       onEachFeature: (feature, layer) => (
+         layer.on({
+           mouseover: (e) => (this.highlightFeature(e)),
+           mouseout: (e) => (this.resetHighlight(e)),
+           click: (e) => (this.zoomToFeature(e, feature))
+         })
+       )
+     }).addTo(this.coronamap);
+
+
 
 
   
@@ -67,6 +82,7 @@ export class MapComponent implements OnInit, AfterViewInit {
      }).addTo(this.coronamap);
  
      const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
+     
      this.geojson = L.geoJson(statesD, {
        style: (e) => (this.style(e)),
        onEachFeature: (feature, layer) => (
@@ -239,6 +255,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   // geoJSON german states
   // get color depending on population density value
   getColor(d) {
+    console.log(this.mapMode);
     if(this.mapMode === 'bus') {
       return '#000000';
     }

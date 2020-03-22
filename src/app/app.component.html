@@ -18,11 +18,11 @@
 
     <div fxFlex="10">
       <mat-list class="icon-list">
-        <mat-list-item (click)="onBus()">
-          <mat-icon matBadge="2" matBadgePosition="above after">directions_bus</mat-icon>
+        <mat-list-item (click)="onIcon('bus')">
+          <mat-icon [class.selected]="this.mode == 'bus'" matBadge="2" matBadgePosition="above after">directions_bus</mat-icon>
         </mat-list-item>
-        <mat-list-item (click)="onPerson()">
-          <mat-icon>people</mat-icon>
+        <mat-list-item (click)="onIcon('person')">
+          <mat-icon [class.selected]="this.mode == 'person'">people</mat-icon>
         </mat-list-item>
         <mat-list-item>
           <mat-icon>restaurant_menu</mat-icon>

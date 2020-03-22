@@ -31,11 +31,7 @@ export class AppComponent {
     });
   }
 
-  onBus() {
-    this.mode="bus";
-  }
-
-  onPerson() {
-    this.mode="person";
+  onIcon(icon) {
+    this.mode = icon;
   }
 }
