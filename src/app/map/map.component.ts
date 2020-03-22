@@ -240,7 +240,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   style(feature) {
-    const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
+    const stateCriticality = [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1];
     const g: number = stateCriticality[parseInt(feature.properties.RS, 10)];
 
     return {
@@ -264,14 +264,10 @@ export class MapComponent implements OnInit, AfterViewInit {
     if(this.mapMode === 'person') {
       return '#ffaa33';
     }
-    return d > 20000 ? '#800026' :
-      d > 10000 ? '#BD0026' :
-        d > 5000 ? '#E31A1C' :
-          d > 1000 ? '#FC4E2A' :
-            d > 50 ? '#FD8D3C' :
-              d > 20 ? '#FEB24C' :
-                d > 10 ? '#FED976' :
-                  '#FFEDA0';
+    return d >= 3 ? '#4668ae' :
+      d == 2 ? '#303e99' :
+        d == 1 ? '#253074' :
+                  '#4668ae';
   }
 
 
@@ -285,8 +281,8 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   setOutlinedHighlightedPolygon(layer) {
     layer.setStyle({
-      weight: 2,
-      color: '#8B0000',
+      weight: 3,
+      color: 'white',
       dashArray: '',
       fillOpacity: 0.7
     });
@@ -294,8 +290,8 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   setFilledHighlightedPolygon(layer) {
     layer.setStyle({
-      weight: 2,
-      color: '#8B0000',
+      weight: 3,
+      color: 'white',
       dashArray: '',
       fillOpacity: 5
     });
@@ -346,9 +342,5 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     this.setFilledHighlightedPolygon(e.target);
   }
-
-
-  // Custom Zoom Control
-
 
 }
