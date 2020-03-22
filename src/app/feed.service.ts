@@ -32,6 +32,14 @@ export class FeedService {
     };
 
     this.http.get<Restriction[]>(url, httpOptions).subscribe(data => {
+
+      const country = data.filter(e => Areal[e.areal] === Areal.COUNTRY);
+
+      country.forEach(f => data.splice(data.findIndex(e => e.id === f.id), 1));
+      data.reverse();
+      country.forEach(c => data.push(c));
+      data.reverse();
+
       this.dataSource.next(new FetchResult(data, searchQuery));
 
       console.log(this.bus_count);

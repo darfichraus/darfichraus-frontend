@@ -30,10 +30,10 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
     this.geojson.clearLayers();
-    
+
 
     const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
-     
+
      this.geojson = L.geoJson(statesD, {
        style: (e) => (this.style(e)),
        onEachFeature: (feature, layer) => (
@@ -73,14 +73,16 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     this.coronamap = L.map('map', {zoomControl: false, scrollWheelZoom: false}).setView([51.27264, 14.26469], 6);
 
+    this.coronamap.dragging.disable();
+
          // ------ MAP + LAYER -------
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-       id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
+       id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 7
      }).addTo(this.coronamap);
- 
+
      const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
-     
+
      this.geojson = L.geoJson(statesD, {
        style: (e) => (this.style(e)),
        onEachFeature: (feature, layer) => (
@@ -93,7 +95,7 @@ export class MapComponent implements OnInit, AfterViewInit {
      }).addTo(this.coronamap);
 
     this.buildMap();
-   
+
   }
 
   buildMap() {
@@ -107,12 +109,12 @@ export class MapComponent implements OnInit, AfterViewInit {
              grades = ['VON HEUTE', 'VON GESTERN', 'ÄLTER ALS 3 TAGE'],
              labels = [],
              from, to;
- 
+
            for (let i = 0; i < grades.length; i++) {
              from = grades[i];
              to = grades[i + 1];
              const color = vm.getColor(from + 1);
- 
+
              labels.push(
                '<i style="background:' + color + '"></i> ' +
                from + (to ? '' : ''));
@@ -122,10 +124,10 @@ export class MapComponent implements OnInit, AfterViewInit {
          };
        }
      };
- 
+
      this.legend.onAdd = legendBuilder.createLegend(this);
      this.legend.addTo(this.coronamap);
- 
+
      // ------ INFO ------
      this.info = L.control();
      this.info.onAdd = function(coronamap) {
@@ -133,7 +135,7 @@ export class MapComponent implements OnInit, AfterViewInit {
        this.update();
        return this._div;
      };
- 
+
      // method that we will use to update the control based on feature properties passed
      this.info.update = function(props) {
        const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
@@ -144,9 +146,9 @@ export class MapComponent implements OnInit, AfterViewInit {
          + '<br /><br /> <b>Ausgangssperre: <br /></b>21.03.2020 - 15.04.2020'
          : 'Ein Bundesland auswählen');
      };
- 
+
      this.info.addTo(this.coronamap);
- 
+
      // ------ BUTTONS ZOOM CONTROL ------
      L.Control.zoomHome = L.Control.extend({
        options: {
@@ -158,37 +160,37 @@ export class MapComponent implements OnInit, AfterViewInit {
          zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
          zoomHomeTitle: 'Zoom home'
        },
- 
+
        onAdd(map) {
          const controlName = 'gin-control-zoom',
            container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
            options = this.options;
- 
+
          this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
            controlName + '-in', container, this._zoomIn);
          this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
            controlName + '-home', container, this._zoomHome);
          this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
            controlName + '-out', container, this._zoomOut);
- 
+
          this._updateDisabled();
          map.on('zoomend zoomlevelschange', this._updateDisabled, this);
- 
+
          return container;
        },
- 
+
        onRemove(map) {
          map.off('zoomend zoomlevelschange', this._updateDisabled, this);
        },
- 
+
        _zoomIn(e) {
          this._map.zoomIn(e.shiftKey ? 3 : 1);
        },
- 
+
        _zoomOut(e) {
          this._map.zoomOut(e.shiftKey ? 3 : 1);
        },
- 
+
        _zoomHome(e) {
          this._map.setView([51.27264, 14.26469], 6);
          console.log(this.selectedFeature);
@@ -201,21 +203,21 @@ export class MapComponent implements OnInit, AfterViewInit {
          link.innerHTML = html;
          link.href = '#';
          link.title = title;
- 
+
          L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
            .on(link, 'click', L.DomEvent.stop)
            .on(link, 'click', fn, this)
            .on(link, 'click', this._refocusOnMap, this);
- 
+
          return link;
        },
        _updateDisabled() {
          const map = this._map,
            className = 'leaflet-disabled';
- 
+
          L.DomUtil.removeClass(this._zoomInButton, className);
          L.DomUtil.removeClass(this._zoomOutButton, className);
- 
+
          if (map._zoom === map.getMinZoom()) {
            L.DomUtil.addClass(this._zoomOutButton, className);
          }
@@ -224,7 +226,7 @@ export class MapComponent implements OnInit, AfterViewInit {
          }
        }
      });
- 
+
      this.zoomHome = new L.Control.zoomHome();
      this.zoomHome.addTo(this.coronamap);
 
