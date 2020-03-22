@@ -15,22 +15,22 @@
     <div fxFlex="10">
       <mat-list class="icon-list">
         <mat-list-item (click)="onIcon('bus')">
-          <mat-icon [class.selected]="this.mode == 'bus'" class="icon bus" matBadge="2" matBadgePosition="above after">directions_bus</mat-icon>
+          <mat-icon [class.selected]="this.mode == 'bus'" class="icon bus" matBadge="{{this.feedService.bus_count}}" matBadgeHidden="{{this.feedService.bus_count == 0}}" matBadgePosition="above after">directions_bus</mat-icon>
         </mat-list-item>
         <mat-list-item (click)="onIcon('person')">
-          <mat-icon class="icon people" [class.selected]="this.mode == 'person'">people</mat-icon>
+          <mat-icon class="icon people" [class.selected]="this.mode == 'person'" matBadge="{{this.feedService.person_count}}" matBadgeHidden="{{this.feedService.person_count == 0}}" matBadgePosition="above after">people</mat-icon>
         </mat-list-item>
         <mat-list-item (click)="onIcon('restaurant')">
-          <mat-icon class="icon restaurant" [class.selected]="this.mode == 'restaurant'">restaurant_menu</mat-icon>
+          <mat-icon class="icon restaurant" [class.selected]="this.mode == 'restaurant'" matBadge="{{this.feedService.restaurant_count}}" matBadgeHidden="{{this.feedService.restaurant_count == 0}}" matBadgePosition="above after">restaurant_menu</mat-icon>
         </mat-list-item>
         <mat-list-item (click)="onIcon('eco')">
-          <mat-icon class="icon eco" [class.selected]="this.mode == 'eco'">eco</mat-icon>
+          <mat-icon class="icon eco" [class.selected]="this.mode == 'eco'" matBadge="{{this.feedService.eco_count}}" matBadgeHidden="{{this.feedService.eco_count == 0}}" matBadgePosition="above after">eco</mat-icon>
         </mat-list-item>
         <mat-list-item (click)="onIcon('shopping')">
-          <mat-icon class="icon shopping" [class.selected]="this.mode == 'shopping'" matBadge="6" matBadgePosition="above after">shopping_cart</mat-icon>
+          <mat-icon class="icon shopping" [class.selected]="this.mode == 'shopping'" matBadge="{{this.feedService.shopping_count}}" matBadgeHidden="{{this.feedService.shopping_count == 0}}" matBadgePosition="above after">shopping_cart</mat-icon>
         </mat-list-item>
         <mat-list-item (click)="onIcon('close')">
-          <mat-icon class="icon close" [class.selected]="this.mode == 'close'">cancel</mat-icon>
+          <mat-icon class="icon close" [class.selected]="this.mode == 'close'" matBadge="{{this.feedService.close_count}}" matBadgeHidden="{{this.feedService.close_count == 0}}" matBadgePosition="above after">cancel</mat-icon>
         </mat-list-item>
       </mat-list>
  
