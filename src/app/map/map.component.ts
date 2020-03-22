@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 
 import * as L from 'leaflet';
-//import statesData from './res/bundeslaender_simplify200.json';
+// import statesData from './res/bundeslaender_simplify200.json';
 
 import * as statesData from '../../json-assets/bundeslaender_simplify200.json';
 
@@ -32,7 +32,6 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
 
-
   ngOnInit() {
 
     // ------ MAP + LAYER -------
@@ -56,169 +55,164 @@ export class MapComponent implements OnInit, AfterViewInit {
     }).addTo(this.coronamap);
 
 
-
     // ---- LEGEND -----
     this.legend = L.control({position: 'bottomright'});
 
-    let onAdd2 = ((e) => {
-      console.log("legend on Add");
-      var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10, 20, 50, 1000, 5000, 10000, 20000],
-        labels = [],
-        from, to;
 
-      for (var i = 0; i < grades.length; i++) {
-        from = grades[i];
-        to = grades[i + 1];
+    // let onMyLegend = {
+    //   console.log("legend on Add");
+    //   const div = L.DomUtil.create('div', 'info legend'),
+    //     grades = [0, 10, 20, 50, 1000, 5000, 10000, 20000],
+    //     labels = [],
+    //     from, to;
+    //
+    //   for (var i = 0; i < grades.length; i++) {
+    //     from = grades[i];
+    //     to = grades[i + 1];
+    //     // --------- STEFAN ---------
+    //     const color = this.getColor(from + 1);
+    //
+    //     labels.push(
+    //       '<i style="background:' + color + '"></i> ' +
+    //       from + (to ? '&ndash;' + to : '+'));
+    //   }
+    //
+    //   div.innerHTML = labels.join('<br>');
+    //   return div;
+    // };
 
+    const legendBuilder = {
 
-        let color= (e) => (this.getColor(from + 1));
+      createLegend(vm) {
+        return () => {
+          let div = L.DomUtil.create('div', 'info legend'),
+            grades = [0, 10, 20, 50, 1000, 5000, 10000, 20000],
+            labels = [],
+            from, to;
 
-        labels.push(
-          '<i style="background:' + color + /*this.getColor(from + 1)*/ + '"></i> ' +
-          from + (to ? '&ndash;' + to : '+'));
+          for (let i = 0; i < grades.length; i++) {
+            from = grades[i];
+            to = grades[i + 1];
+            const color = vm.getColor(from + 1);
+
+            labels.push(
+              '<i style="background:' + color + '"></i> ' +
+              from + (to ? '&ndash;' + to : '+'));
+          }
+
+          div.innerHTML = labels.join('<br>');
+          return div;
+        };
       }
-
-      div.innerHTML = labels.join('<br>');
-      return div;
-    });
-
-
-
-
-    this.legend.onAdd = function (coronamap) {
-      console.log("legend on Add");
-      var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10, 20, 50, 1000, 5000, 10000, 20000],
-        labels = [],
-        from, to;
-
-      for (var i = 0; i < grades.length; i++) {
-        from = grades[i];
-        to = grades[i + 1];
-
-        // --------- STEFAN ---------
-        //let color= (e) => (this.getColor(from + 1));
-
-        labels.push(
-          '<i style="background:' + 'red' + '"></i> ' +
-          from + (to ? '&ndash;' + to : '+'));
-      }
-
-      div.innerHTML = labels.join('<br>');
-      return div;
     };
+
+    this.legend.onAdd = legendBuilder.createLegend(this);
 
     this.legend.addTo(this.coronamap);
 
 
-
-
-
     // ------ INFO ------
     this.info = L.control();
-        // INFO
-    this.info.onAdd = function (coronamap) {
-          this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-          this.update();
-          return this._div;
-      };
-  
-      // method that we will use to update the control based on feature properties passed
-      this.info.update = function (props) {
-        let stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
-          this._div.innerHTML = '<h4>Corona Ausgangssperre</h4>' +  (props ?
-              '<b>'+ props.GEN+ '</b><br />'
-              + stateCriticality[Math.floor(Math.random()*15)] + ' Menschen infiziert <br />'
-              +'<br /> <b>Bevölkerung:</b> ' + props.destatis.population
-              +'<br /><br /> <b>Ausgangssperre: <br /></b>21.03.2020 - 15.04.2020'
-              : 'Ein Bundesland auswählen');
-      };
+    // INFO
+    this.info.onAdd = function(coronamap) {
+      this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+      this.update();
+      return this._div;
+    };
+
+    // method that we will use to update the control based on feature properties passed
+    this.info.update = function(props) {
+      const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
+      this._div.innerHTML = '<h4>Corona Ausgangssperre</h4>' + (props ?
+        '<b>' + props.GEN + '</b><br />'
+        + stateCriticality[Math.floor(Math.random() * 15)] + ' Menschen infiziert <br />'
+        + '<br /> <b>Bevölkerung:</b> ' + props.destatis.population
+        + '<br /><br /> <b>Ausgangssperre: <br /></b>21.03.2020 - 15.04.2020'
+        : 'Ein Bundesland auswählen');
+    };
 
     this.info.addTo(this.coronamap);
-
 
 
     // ------ BUTTONS ZOOM CONTROL ------
     L.Control.zoomHome = L.Control.extend({
       options: {
-          position: 'topleft',
-          zoomInText: '+',
-          zoomInTitle: 'Zoom in',
-          zoomOutText: '-',
-          zoomOutTitle: 'Zoom out',
-          zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
-          zoomHomeTitle: 'Zoom home'
+        position: 'topleft',
+        zoomInText: '+',
+        zoomInTitle: 'Zoom in',
+        zoomOutText: '-',
+        zoomOutTitle: 'Zoom out',
+        zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
+        zoomHomeTitle: 'Zoom home'
       },
-  
-      onAdd: function (map) {
-          var controlName = 'gin-control-zoom',
-              container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
-              options = this.options;
-  
-          this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
+
+      onAdd(map) {
+        const controlName = 'gin-control-zoom',
+          container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
+          options = this.options;
+
+        this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
           controlName + '-in', container, this._zoomIn);
-          this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
+        this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
           controlName + '-home', container, this._zoomHome);
-          this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
+        this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
           controlName + '-out', container, this._zoomOut);
-  
-          this._updateDisabled();
-          map.on('zoomend zoomlevelschange', this._updateDisabled, this);
-  
-          return container;
+
+        this._updateDisabled();
+        map.on('zoomend zoomlevelschange', this._updateDisabled, this);
+
+        return container;
       },
-  
-      onRemove: function (map) {
-          map.off('zoomend zoomlevelschange', this._updateDisabled, this);
+
+      onRemove(map) {
+        map.off('zoomend zoomlevelschange', this._updateDisabled, this);
       },
-  
-      _zoomIn: function (e) {
-          this._map.zoomIn(e.shiftKey ? 3 : 1);
+
+      _zoomIn(e) {
+        this._map.zoomIn(e.shiftKey ? 3 : 1);
       },
-  
-      _zoomOut: function (e) {
-          this._map.zoomOut(e.shiftKey ? 3 : 1);
+
+      _zoomOut(e) {
+        this._map.zoomOut(e.shiftKey ? 3 : 1);
       },
-  
-      _zoomHome: function (e) {
-          this.coronamap.setView([51.27264, 9.26469], 6);
+
+      _zoomHome(e) {
+        this.coronamap.setView([51.27264, 9.26469], 6);
       },
-  
-      _createButton: function (html, title, className, container, fn) {
-          var link = L.DomUtil.create('a', className, container);
-          link.innerHTML = html;
-          link.href = '#';
-          link.title = title;
-  
-          L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
-              .on(link, 'click', L.DomEvent.stop)
-              .on(link, 'click', fn, this)
-              .on(link, 'click', this._refocusOnMap, this);
-  
-          return link;
+
+      _createButton(html, title, className, container, fn) {
+        const link = L.DomUtil.create('a', className, container);
+        link.innerHTML = html;
+        link.href = '#';
+        link.title = title;
+
+        L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
+          .on(link, 'click', L.DomEvent.stop)
+          .on(link, 'click', fn, this)
+          .on(link, 'click', this._refocusOnMap, this);
+
+        return link;
       },
-  
-      _updateDisabled: function () {
-          var map = this._map,
-              className = 'leaflet-disabled';
-  
-          L.DomUtil.removeClass(this._zoomInButton, className);
-          L.DomUtil.removeClass(this._zoomOutButton, className);
-  
-          if (map._zoom === map.getMinZoom()) {
-              L.DomUtil.addClass(this._zoomOutButton, className);
-          }
-          if (map._zoom === map.getMaxZoom()) {
-              L.DomUtil.addClass(this._zoomInButton, className);
-          }
+
+      _updateDisabled() {
+        const map = this._map,
+          className = 'leaflet-disabled';
+
+        L.DomUtil.removeClass(this._zoomInButton, className);
+        L.DomUtil.removeClass(this._zoomOutButton, className);
+
+        if (map._zoom === map.getMinZoom()) {
+          L.DomUtil.addClass(this._zoomOutButton, className);
+        }
+        if (map._zoom === map.getMaxZoom()) {
+          L.DomUtil.addClass(this._zoomInButton, className);
+        }
       }
-  });
-  
+    });
+
 
     this.zoomHome = L.Control.zoomHome();
     this.zoomHome.addTo(this.coronamap);
-
 
 
   }
@@ -245,7 +239,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   }
 
-  //geoJSON german states
+  // geoJSON german states
   // get color depending on population density value
   getColor(d) {
     return d > 20000 ? '#800026' :
@@ -287,8 +281,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   highlightFeature(e) {
-    var layer = e.target;
-    var zoomlevel = this.coronamap.getZoom();
+    const layer = e.target;
+    const zoomlevel = this.coronamap.getZoom();
 
     if (zoomlevel <= 6 || e.target != this.selectedFeature) {
       this.setOutlinedHighlightedPolygon(layer);
@@ -296,10 +290,10 @@ export class MapComponent implements OnInit, AfterViewInit {
     } else {
       this.setFilledHighlightedPolygon(layer);
       console.log(layer.getBounds().getCenter);
-      //var label = new L.Label()
-      //label.setContent("static label")
-      //label.setLatLng(layer.getBounds().getCenter())
-      //this.coronamap.showLabel(label);
+      // var label = new L.Label()
+      // label.setContent("static label")
+      // label.setLatLng(layer.getBounds().getCenter())
+      // this.coronamap.showLabel(label);
     }
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -309,8 +303,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   resetHighlight(e) {
-    var layer = e.target;
-    var zoomlevel = this.coronamap.getZoom();
+    const layer = e.target;
+    const zoomlevel = this.coronamap.getZoom();
     if (zoomlevel <= 6 || e.target != this.selectedFeature) {
       this.geojson.resetStyle(e.target);
     } else {
@@ -331,12 +325,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
 
-
-
-
-  //Custom Zoom Control
-  
-
+  // Custom Zoom Control
 
 
 }
