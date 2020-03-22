@@ -99,12 +99,12 @@ export class MapComponent implements OnInit, AfterViewInit {
   buildMap() {
 
      // ---- LEGEND -----
-     this.legend = L.control({position: 'bottomright'});
+     this.legend = L.control({position: 'bottomleft'});
      const legendBuilder = {
        createLegend(vm) {
          return () => {
            let div = L.DomUtil.create('div', 'info legend'),
-             grades = [0, 10, 20, 50, 1000, 5000, 10000, 20000],
+             grades = ['VON HEUTE', 'VON GESTERN', 'ÄLTER ALS 3 TAGE'],
              labels = [],
              from, to;
  
