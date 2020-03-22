@@ -48,8 +48,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
 
-  
-
     }
 
   }
@@ -73,7 +71,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-    this.coronamap = L.map('map', {zoomControl: false}).setView([51.27264, 9.26469], 6);
+    this.coronamap = L.map('map', {zoomControl: false}).setView([51.27264, 14.26469], 6);
 
          // ------ MAP + LAYER -------
 
@@ -195,7 +193,7 @@ export class MapComponent implements OnInit, AfterViewInit {
        },
  
        _zoomHome(e) {
-         this._map.setView([51.27264, 9.26469], 6);
+         this._map.setView([51.27264, 14.26469], 6);
        },
        _createButton(html, title, className, container, fn) {
          const link = L.DomUtil.create('a', className, container);
