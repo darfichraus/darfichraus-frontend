@@ -55,7 +55,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
     // ---- LEGEND -----
-    this.legend = L.control({position: 'bottomright'});
+    this.legend = L.control({position: 'bottomleft'});
     const legendBuilder = {
       createLegend(vm) {
         return () => {
