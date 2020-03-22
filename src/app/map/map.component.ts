@@ -124,8 +124,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     let g = stateCriticality[parseInt(feature.properties.RS, 10)];
 
     // mouseover: (e) => (this.highlightFeature(e)),
-
-
     return {
       weight: 1,
       opacity: 1,

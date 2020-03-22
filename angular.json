@@ -32,14 +32,12 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/@clr/icons/clr-icons.min.css",
               "node_modules/@clr/ui/clr-ui.min.css",
-              "src/styles.scss",
-              // "src/assets/leaflet.css"
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js",
               "node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js",
-              "node_modules/@clr/icons/clr-icons.min.js",
-              // "src/assets/leaflet.js"
+              "node_modules/@clr/icons/clr-icons.min.js"
             ]
           },
           "configurations": {
@@ -136,5 +134,8 @@
       }
     }
   },
-  "defaultProject": "dir-frontend"
+  "defaultProject": "dir-frontend",
+  "cli": {
+    "analytics": "eddf24a7-6e61-4135-aa56-bb70587a457d"
+  }
 }
