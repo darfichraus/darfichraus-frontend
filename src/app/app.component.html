@@ -5,10 +5,15 @@
 </mat-toolbar>
 
 
+
+
 <div class="content-body">
 
+  <div id="background-map" class="map-cont">
+    <app-map></app-map>
+  </div>
 
-  <div fxLayout="row" fxLayoutAlign="space-around center">
+  <div class="non-clickable" fxLayout="row" fxLayoutAlign="space-around center">
 
 
     <div fxFlex="10">
@@ -35,16 +40,7 @@
     </div>
 
 
-    <div fxFlex="60">
-
-
-      <div class="map-cont">
-        <app-map></app-map>
-
-      </div>
-
-
-
+    <div class="center-column" fxFlex="60">
 
       <button class="btn">Keine Einschränkung</button>
       <button class="btn">Einschränkung</button>
@@ -55,7 +51,7 @@
     </div>
 
 
-    <div fxFlex="30">
+    <div class="feed" fxFlex="30">
 
       <app-feed></app-feed>
 
