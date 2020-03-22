@@ -10,13 +10,17 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule} from './material.module';
 import { MeldeformComponent } from './meldeform/meldeform.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MapComponent } from './map/map.component';
+import { LeafmapComponent } from './leafmap/leafmap.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FeedComponent,
-    MeldeformComponent
+    MeldeformComponent,
+    MapComponent,
+    LeafmapComponent
   ],
   imports: [
     BrowserModule,
