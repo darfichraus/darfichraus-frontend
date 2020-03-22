@@ -3,13 +3,13 @@
 <p class="info">Aktuelle Informationen zu den Einschränkungen im Öffentlichen Nahverkehr</p>
 
 
-    <div *ngFor="let item of this.data | async" class="container">
+<div *ngFor="let item of data" class="container">
 
 
-        <div class="ort">{{item.ort}}</div>
-        <div class="titel">{{item.shortDescription}}</div>
-        <div class="text">{{item.restrictionDescription}}</div>
-        <div class="datum">{{item.restrictionStart}}</div>
-        <mat-divider></mat-divider>
+  <div class="ort">{{translateRestrictionType(item.restrictionType)}}</div>
+  <div class="titel">{{item.arealIdentifier}}</div>
+  <div class="text">{{item.restrictionDescription}}</div>
+  <div class="furtherInformation"><a href="{{item.furtherInformation}}" target="_blank">Link folgen</a></div>
+  <mat-divider></mat-divider>
 
-    </div>
+</div>
