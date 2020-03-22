@@ -60,8 +60,8 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     let statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
     console.log(statesD);
-    this.geojson = L.geoJson(statesD, {
-      style: this.style,
+    this.geojson = L.geoJSON(statesD, {
+      style: (e) => (this.style(e)),
       onEachFeature: (feature, layer) => (
         layer.on({
           mouseover: (e) => (this.highlightFeature(e)),
@@ -136,17 +136,13 @@ export class MapComponent implements OnInit, AfterViewInit {
     // let color= (g) => this.getColor(g);
 
     // mouseover: (e) => (this.highlightFeature(e)),
-
-
     return {
       weight: 1,
       opacity: 1,
       color: 'white',
       dashArray: '3',
       fillOpacity: 0.7,
-      //fillColor: d
-      fillColor: (g) => (this.getColor(g)),
-      //fillColor: 'red'
+      fillColor: this.getColor(g),
     };
 
   }
