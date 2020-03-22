@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, of} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FetchResult, Restriction, SearchInformation} from './Restriction';
 import {Areal} from './_model/areal.enum';
@@ -34,6 +34,11 @@ export class FeedService {
     // const url = FeedService.api + 'ZIP/36124';
 
     this.fetchData(url, new SearchInformation(areal, value));
+  }
+
+  fetchDataForAll(): any {
+    const url = FeedService.api;
+    this.fetchData(url, new SearchInformation(Areal.COUNTRY, 'Deutschland'));
   }
 
 }
