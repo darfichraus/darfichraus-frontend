@@ -63,7 +63,7 @@ button {
     position: absolute;
     z-index: 0;
     height: calc(100% - 80px);
-    width: 100%;
+    width: calc(100% - 10px);
     overflow: hidden;
 }
 
