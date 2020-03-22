@@ -1,30 +1,51 @@
 .heading {
-    font-size: 300%;
+  font-size: 300%;
 }
 
-.info {
-    margin-bottom: 50px;
+.feedItem {
+  margin-bottom: 50px;
 }
 
 .ort {
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .titel {
-    font-weight: bold;
-    font-size: 200%;
-    margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 200%;
+  margin-bottom: 20px;
+}
+
+.type {
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 135.69%;
 }
 
 .text {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+  font-family: "Source Sans Pro", serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 135.69%;
+}
+
+.subhead {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 32px;
 }
 
 .datum {
-    //float: right;
-    margin-bottom: 10px;
-    text-align: right;
+  //float: right;
+  margin-bottom: 10px;
+  text-align: right;
 }
 
 .furtherInformation {
@@ -35,5 +56,5 @@
 }
 
 .container {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
