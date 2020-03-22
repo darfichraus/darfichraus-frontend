@@ -42,7 +42,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     }).addTo(this.coronamap);
 
     const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
-    console.log(statesD);
     this.geojson = L.geoJson(statesD, {
       style: (e) => (this.style(e)),
       onEachFeature: (feature, layer) => (
@@ -57,32 +56,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     // ---- LEGEND -----
     this.legend = L.control({position: 'bottomright'});
-
-
-    // let onMyLegend = {
-    //   console.log("legend on Add");
-    //   const div = L.DomUtil.create('div', 'info legend'),
-    //     grades = [0, 10, 20, 50, 1000, 5000, 10000, 20000],
-    //     labels = [],
-    //     from, to;
-    //
-    //   for (var i = 0; i < grades.length; i++) {
-    //     from = grades[i];
-    //     to = grades[i + 1];
-    //     // --------- STEFAN ---------
-    //     const color = this.getColor(from + 1);
-    //
-    //     labels.push(
-    //       '<i style="background:' + color + '"></i> ' +
-    //       from + (to ? '&ndash;' + to : '+'));
-    //   }
-    //
-    //   div.innerHTML = labels.join('<br>');
-    //   return div;
-    // };
-
     const legendBuilder = {
-
       createLegend(vm) {
         return () => {
           let div = L.DomUtil.create('div', 'info legend'),
@@ -99,7 +73,6 @@ export class MapComponent implements OnInit, AfterViewInit {
               '<i style="background:' + color + '"></i> ' +
               from + (to ? '&ndash;' + to : '+'));
           }
-
           div.innerHTML = labels.join('<br>');
           return div;
         };
@@ -109,7 +82,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.legend.onAdd = legendBuilder.createLegend(this);
 
     this.legend.addTo(this.coronamap);
-
 
     // ------ INFO ------
     this.info = L.control();
@@ -177,7 +149,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       },
 
       _zoomHome(e) {
-        this.coronamap.setView([51.27264, 9.26469], 6);
+       this._map.setView([51.27264, 9.26469], 6);
       },
 
       _createButton(html, title, className, container, fn) {
@@ -211,7 +183,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     });
 
 
-    this.zoomHome = L.Control.zoomHome();
+    this.zoomHome = new L.Control.zoomHome();
     this.zoomHome.addTo(this.coronamap);
 
 
