@@ -1,0 +1,15 @@
+<h1 class="heading">Deutschland</h1>
+
+<p class="info">Aktuelle Informationen zu den Einschränkungen im Öffentlichen Nahverkehr</p>
+
+
+<div *ngFor="let item of data" class="container">
+
+
+  <div class="ort">{{translateRestrictionType(item.restrictionType)}}</div>
+  <div class="titel">{{item.arealIdentifier}}</div>
+  <div class="text">{{item.restrictionDescription}}</div>
+  <div class="furtherInformation"><a href="{{item.furtherInformation}}" target="_blank">Link folgen</a></div>
+  <mat-divider></mat-divider>
+
+</div>
