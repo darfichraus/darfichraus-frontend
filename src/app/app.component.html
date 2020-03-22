@@ -10,7 +10,7 @@
 <div class="content-body">
 
   <div id="background-map" class="map-cont">
-    <app-map></app-map>
+    <app-map [mode]="this.mode"></app-map>
   </div>
 
   <div class="non-clickable" fxLayout="row" fxLayoutAlign="space-around center">
@@ -19,9 +19,9 @@
     <div fxFlex="10">
       <mat-list class="icon-list">
         <mat-list-item (click)="onBus()">
-          <mat-icon>directions_bus</mat-icon>
+          <mat-icon matBadge="2" matBadgePosition="above after">directions_bus</mat-icon>
         </mat-list-item>
-        <mat-list-item>
+        <mat-list-item (click)="onPerson()">
           <mat-icon>people</mat-icon>
         </mat-list-item>
         <mat-list-item>
@@ -31,12 +31,13 @@
           <mat-icon>eco</mat-icon>
         </mat-list-item>
         <mat-list-item>
-          <mat-icon>shopping_cart</mat-icon>
+          <mat-icon matBadge="6" matBadgePosition="above after">shopping_cart</mat-icon>
         </mat-list-item>
         <mat-list-item>
           <mat-icon>close</mat-icon>
         </mat-list-item>
       </mat-list>
+ 
     </div>
 
 

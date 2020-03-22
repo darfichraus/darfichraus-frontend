@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent {
   title = 'dir-frontend';
+  mode: string;
 
 
   constructor(private dialog: MatDialog) {
@@ -31,6 +32,10 @@ export class AppComponent {
   }
 
   onBus() {
-    console.log("onBus()");
+    this.mode="bus";
+  }
+
+  onPerson() {
+    this.mode="person";
   }
 }
