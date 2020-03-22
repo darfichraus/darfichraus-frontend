@@ -115,7 +115,7 @@ export class MapComponent implements OnInit, AfterViewInit {
  
              labels.push(
                '<i style="background:' + color + '"></i> ' +
-               from + (to ? '&ndash;' + to : '+'));
+               from + (to ? '' : ''));
            }
            div.innerHTML = labels.join('<br>');
            return div;
