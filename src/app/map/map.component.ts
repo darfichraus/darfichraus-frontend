@@ -25,6 +25,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   geojson;
   legend;
   info;
+  zoomHome;
 
 
   constructor() {
@@ -34,14 +35,14 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-
+    // ------ MAP + LAYER -------
     this.coronamap = L.map('map', {zoomControl: false}).setView([51.27264, 9.26469], 6);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
     }).addTo(this.coronamap);
 
-    let statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
+    const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
     console.log(statesD);
     this.geojson = L.geoJson(statesD, {
       style: (e) => (this.style(e)),
@@ -55,9 +56,11 @@ export class MapComponent implements OnInit, AfterViewInit {
     }).addTo(this.coronamap);
 
 
+
+    // ---- LEGEND -----
     this.legend = L.control({position: 'bottomright'});
 
-    this.legend.onAdd = function (coronamap) {
+    let onAdd2 = ((e) => {
       console.log("legend on Add");
       var div = L.DomUtil.create('div', 'info legend'),
         grades = [0, 10, 20, 50, 1000, 5000, 10000, 20000],
@@ -78,6 +81,32 @@ export class MapComponent implements OnInit, AfterViewInit {
 
       div.innerHTML = labels.join('<br>');
       return div;
+    });
+
+
+
+
+    this.legend.onAdd = function (coronamap) {
+      console.log("legend on Add");
+      var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 10, 20, 50, 1000, 5000, 10000, 20000],
+        labels = [],
+        from, to;
+
+      for (var i = 0; i < grades.length; i++) {
+        from = grades[i];
+        to = grades[i + 1];
+
+        // --------- STEFAN ---------
+        //let color= (e) => (this.getColor(from + 1));
+
+        labels.push(
+          '<i style="background:' + 'red' + '"></i> ' +
+          from + (to ? '&ndash;' + to : '+'));
+      }
+
+      div.innerHTML = labels.join('<br>');
+      return div;
     };
 
     this.legend.addTo(this.coronamap);
@@ -86,7 +115,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
 
-    // INFO
+    // ------ INFO ------
     this.info = L.control();
         // INFO
     this.info.onAdd = function (coronamap) {
@@ -109,6 +138,89 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.info.addTo(this.coronamap);
 
 
+
+    // ------ BUTTONS ZOOM CONTROL ------
+    L.Control.zoomHome = L.Control.extend({
+      options: {
+          position: 'topleft',
+          zoomInText: '+',
+          zoomInTitle: 'Zoom in',
+          zoomOutText: '-',
+          zoomOutTitle: 'Zoom out',
+          zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
+          zoomHomeTitle: 'Zoom home'
+      },
+  
+      onAdd: function (map) {
+          var controlName = 'gin-control-zoom',
+              container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
+              options = this.options;
+  
+          this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
+          controlName + '-in', container, this._zoomIn);
+          this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
+          controlName + '-home', container, this._zoomHome);
+          this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
+          controlName + '-out', container, this._zoomOut);
+  
+          this._updateDisabled();
+          map.on('zoomend zoomlevelschange', this._updateDisabled, this);
+  
+          return container;
+      },
+  
+      onRemove: function (map) {
+          map.off('zoomend zoomlevelschange', this._updateDisabled, this);
+      },
+  
+      _zoomIn: function (e) {
+          this._map.zoomIn(e.shiftKey ? 3 : 1);
+      },
+  
+      _zoomOut: function (e) {
+          this._map.zoomOut(e.shiftKey ? 3 : 1);
+      },
+  
+      _zoomHome: function (e) {
+          this.coronamap.setView([51.27264, 9.26469], 6);
+      },
+  
+      _createButton: function (html, title, className, container, fn) {
+          var link = L.DomUtil.create('a', className, container);
+          link.innerHTML = html;
+          link.href = '#';
+          link.title = title;
+  
+          L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
+              .on(link, 'click', L.DomEvent.stop)
+              .on(link, 'click', fn, this)
+              .on(link, 'click', this._refocusOnMap, this);
+  
+          return link;
+      },
+  
+      _updateDisabled: function () {
+          var map = this._map,
+              className = 'leaflet-disabled';
+  
+          L.DomUtil.removeClass(this._zoomInButton, className);
+          L.DomUtil.removeClass(this._zoomOutButton, className);
+  
+          if (map._zoom === map.getMinZoom()) {
+              L.DomUtil.addClass(this._zoomOutButton, className);
+          }
+          if (map._zoom === map.getMaxZoom()) {
+              L.DomUtil.addClass(this._zoomInButton, className);
+          }
+      }
+  });
+  
+
+    this.zoomHome = L.Control.zoomHome();
+    this.zoomHome.addTo(this.coronamap);
+
+
+
   }
 
 
@@ -117,22 +229,18 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   style(feature) {
-    let stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
+    const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
+    const g: number = stateCriticality[parseInt(feature.properties.RS, 10)];
 
     console.log(feature);
 
-    let g = stateCriticality[parseInt(feature.properties.RS, 10)];
-
-    // mouseover: (e) => (this.highlightFeature(e)),
     return {
       weight: 1,
       opacity: 1,
       color: 'white',
       dashArray: '3',
       fillOpacity: 0.7,
-      //fillColor: d
       fillColor: this.getColor(g),
-      //fillColor: 'red'
     };
 
   }
@@ -221,6 +329,14 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     this.setFilledHighlightedPolygon(e.target);
   }
+
+
+
+
+
+  //Custom Zoom Control
+  
+
 
 
 }
