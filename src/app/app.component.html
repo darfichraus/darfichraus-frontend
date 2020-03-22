@@ -15,22 +15,22 @@
     <div fxFlex="10">
       <mat-list class="icon-list">
         <mat-list-item (click)="onIcon('bus')">
-          <mat-icon [class.selected]="this.mode == 'bus'" matBadge="2" matBadgePosition="above after">directions_bus</mat-icon>
+          <mat-icon [class.selected]="this.mode == 'bus'" class="icon bus" matBadge="2" matBadgePosition="above after">directions_bus</mat-icon>
         </mat-list-item>
         <mat-list-item (click)="onIcon('person')">
-          <mat-icon [class.selected]="this.mode == 'person'">people</mat-icon>
+          <mat-icon class="icon people" [class.selected]="this.mode == 'person'">people</mat-icon>
         </mat-list-item>
-        <mat-list-item>
-          <mat-icon>restaurant_menu</mat-icon>
+        <mat-list-item (click)="onIcon('restaurant')">
+          <mat-icon class="icon restaurant" [class.selected]="this.mode == 'restaurant'">restaurant_menu</mat-icon>
         </mat-list-item>
-        <mat-list-item>
-          <mat-icon>eco</mat-icon>
+        <mat-list-item (click)="onIcon('eco')">
+          <mat-icon class="icon eco" [class.selected]="this.mode == 'eco'">eco</mat-icon>
         </mat-list-item>
-        <mat-list-item>
-          <mat-icon matBadge="6" matBadgePosition="above after">shopping_cart</mat-icon>
+        <mat-list-item (click)="onIcon('shopping')">
+          <mat-icon class="icon shopping" [class.selected]="this.mode == 'shopping'" matBadge="6" matBadgePosition="above after">shopping_cart</mat-icon>
         </mat-list-item>
-        <mat-list-item>
-          <mat-icon>close</mat-icon>
+        <mat-list-item (click)="onIcon('close')">
+          <mat-icon class="icon close" [class.selected]="this.mode == 'close'">cancel</mat-icon>
         </mat-list-item>
       </mat-list>
  

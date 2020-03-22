@@ -29,10 +29,12 @@ export class FetchResult {
   data: Restriction[] = [];
   searchQuery: SearchInformation;
 
-  constructor(data: Restriction[], searchQuery: SearchInformation) {
+  constructor(data?: Restriction[], searchQuery?: SearchInformation) {
     this.data = data;
     this.searchQuery = searchQuery;
   }
+
+
 }
 
 export class Restriction {
