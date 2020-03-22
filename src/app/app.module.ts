@@ -12,6 +12,8 @@ import { MeldeformComponent } from './meldeform/meldeform.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from './map/map.component';
 import { LeafmapComponent } from './leafmap/leafmap.component';
+import { MeldungComponent } from './meldung/meldung.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { LeafmapComponent } from './leafmap/leafmap.component';
     FeedComponent,
     MeldeformComponent,
     MapComponent,
-    LeafmapComponent
+    LeafmapComponent,
+    MeldungComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { LeafmapComponent } from './leafmap/leafmap.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

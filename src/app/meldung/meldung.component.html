@@ -1,0 +1,117 @@
+<h1 mat-dialog-title>Corona: Verordnung hinzufügen</h1>
+<div mat-dialog-content>
+
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+
+        <div fxFlex="45">
+
+            <h3 class="section">Geltungsbereich</h3>
+
+            <mat-radio-group>
+                <mat-radio-button value="1">Bundesweit</mat-radio-button>
+                <mat-radio-button value="2">Bundesland</mat-radio-button>
+                <mat-radio-button value="3">Landkreis</mat-radio-button>
+            </mat-radio-group>
+
+
+            <div fxLayout="row" fxLayoutGap="10px">
+
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>Bundesland</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>Postleitzahl</mat-label>
+                    <input matInput placeholder="2929" [(ngModel)]="zip">
+                </mat-form-field>
+
+            </div>
+
+            <h4>Kategorie</h4>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Kategorie</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let food of foods2" [value]="food.value">
+                        {{food.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Titel</mat-label>
+                <input matInput [(ngModel)]="this.title">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Beschreibung</mat-label>
+                <textarea matInput [(ngModel)]="this.description"></textarea>
+            </mat-form-field>
+
+            <mat-radio-group>
+                <mat-radio-button value="1">Keine Einschränkung</mat-radio-button>
+                <mat-radio-button value="2">Einschränkungen</mat-radio-button>
+                <mat-radio-button value="3">Verbote</mat-radio-button>
+            </mat-radio-group>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Quelle</mat-label>
+                <input matInput placeholder="" [(ngModel)]="this.source">
+            </mat-form-field>
+
+
+            <h3>Gültigkeit</h3>
+
+            <div fxLayout="row" fxLayoutGap="10px">
+
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>Anfang</mat-label>
+                    <input matInput [matDatepicker]="picker1" [(ngModel)]="start">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>Ende</mat-label>
+                    <input matInput [matDatepicker]="picker2" [(ngModel)]="end">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+
+            </div>
+
+
+        </div>
+
+
+        <div fxFlex="45">
+
+            <h1>Vorschau</h1>
+            <mat-divider></mat-divider>
+
+            <p>Ort: {{this.location}} {{this.zip}}</p>
+
+            <h3>{{this.title}}</h3>
+            <p>{{this.description}}</p>
+            <p class="source">Quelle: {{this.source}}</p>
+            <p>von: {{this.start}} bis: {{this.end}}</p>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-stroked-button (click)="onNoClick()">Abbrechen</button>
+    <button mat-stroked-button [mat-dialog-close]="" cdkFocusInitial>Senden</button>
+</div>
