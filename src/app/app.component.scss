@@ -34,6 +34,7 @@ mat-toolbar {
 button {
     width: 190px;
     pointer-events: all;
+    background-color: white;
 }
 
 .wvv-logo {
@@ -42,7 +43,17 @@ button {
 
 .center-column {
     padding: 10px;
+    height: 60vh;
     z-index: 2;
+}
+
+.clickable {
+    pointer-events: all;
+}
+
+#bottom-controls {
+    float: bottom;
+    align-content: center;
 }
 
 #background-map {
