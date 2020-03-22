@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FeedService } from '../feed.service';
-import { Observable } from 'rxjs';
-import { Restriction } from '../Restriction';
+import {Component, OnInit} from '@angular/core';
+import {FeedService} from '../feed.service';
+import {Restriction} from '../Restriction';
 
 @Component({
   selector: 'app-feed',
@@ -10,22 +9,17 @@ import { Restriction } from '../Restriction';
 })
 export class FeedComponent implements OnInit {
 
-  data: Observable<Restriction[]>;
+  data: Restriction[] = [];
 
-  constructor(private feedService: FeedService) { }
+  constructor(private feedService: FeedService) {
+  }
 
   ngOnInit(): void {
 
-    this.data = this.feedService.fetchData();
-    
-    /*let data2 = this.feedService.fetchData().subscribe((val) => {
-      this.data = val;
-      console.log(val);
-    }, (err) => {
-      console.log(err);
+    this.feedService.data.subscribe(data => {
+      this.data = data;
     });
-    */
-    
+
   }
 
 }

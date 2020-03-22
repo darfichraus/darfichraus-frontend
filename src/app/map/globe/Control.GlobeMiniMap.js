@@ -26,11 +26,9 @@
 		//layer is the map layer to be shown in the minimap
 		initialize: function (options) {
 			L.Util.setOptions(this, options);
-			console.log(this.options);
 		},
 
 		onAdd: function (map) {
-			console.log('onAdd()');
 
 			this._mainMap = map;
 
@@ -54,7 +52,6 @@
 		},
 
 		addTo: function (map) {
-			console.log('addTo()');
 			L.Control.prototype.addTo.call(this, map);
 			this.initCanvas();
 

@@ -4,6 +4,8 @@ import * as L from 'leaflet';
 // import statesData from './res/bundeslaender_simplify200.json';
 
 import * as statesData from '../../json-assets/bundeslaender_simplify200.json';
+import {FeedService} from '../feed.service';
+import {Areal} from '../_model/areal.enum';
 
 declare var ol: any;
 
@@ -28,7 +30,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   zoomHome;
 
 
-  constructor() {
+  constructor(private feedService: FeedService) {
   }
 
 
@@ -48,14 +50,14 @@ export class MapComponent implements OnInit, AfterViewInit {
         layer.on({
           mouseover: (e) => (this.highlightFeature(e)),
           mouseout: (e) => (this.resetHighlight(e)),
-          click: (e) => (this.zoomToFeature(e))
+          click: (e) => (this.zoomToFeature(e, feature))
         })
       )
     }).addTo(this.coronamap);
 
 
     // ---- LEGEND -----
-    this.legend = L.control({position: 'bottomright'});
+    this.legend = L.control({position: 'bottomleft'});
     const legendBuilder = {
       createLegend(vm) {
         return () => {
@@ -149,9 +151,8 @@ export class MapComponent implements OnInit, AfterViewInit {
       },
 
       _zoomHome(e) {
-       this._map.setView([51.27264, 9.26469], 6);
+        this._map.setView([51.27264, 9.26469], 6);
       },
-
       _createButton(html, title, className, container, fn) {
         const link = L.DomUtil.create('a', className, container);
         link.innerHTML = html;
@@ -165,7 +166,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
         return link;
       },
-
       _updateDisabled() {
         const map = this._map,
           className = 'leaflet-disabled';
@@ -182,11 +182,8 @@ export class MapComponent implements OnInit, AfterViewInit {
       }
     });
 
-
     this.zoomHome = new L.Control.zoomHome();
     this.zoomHome.addTo(this.coronamap);
-
-
   }
 
 
@@ -197,8 +194,6 @@ export class MapComponent implements OnInit, AfterViewInit {
   style(feature) {
     const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
     const g: number = stateCriticality[parseInt(feature.properties.RS, 10)];
-
-    console.log(feature);
 
     return {
       weight: 1,
@@ -233,7 +228,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   setOutlinedHighlightedPolygon(layer) {
     layer.setStyle({
       weight: 2,
@@ -261,7 +255,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     } else {
       this.setFilledHighlightedPolygon(layer);
-      console.log(layer.getBounds().getCenter);
       // var label = new L.Label()
       // label.setContent("static label")
       // label.setLatLng(layer.getBounds().getCenter())
@@ -285,7 +278,10 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.info.update();
   }
 
-  zoomToFeature(e) {
+  zoomToFeature(e, info) {
+
+    this.feedService.fetchDataByAreal(Areal.STATE, info['properties']['GEN']);
+
     this.coronamap.resetStyle;
     if (this.selectedFeature != null) {
       this.setOutlinedHighlightedPolygon(this.selectedFeature);

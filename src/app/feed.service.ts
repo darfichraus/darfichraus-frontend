@@ -1,37 +1,38 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {BehaviorSubject, of} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Restriction } from './Restriction';
+import {Areal} from './_model/areal.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedService {
 
-  static readonly api = 'http://api.darfichraus.de:8082/restrictions';
+  static readonly api = 'http://api.darfichraus.de:8082/restrictions/';
 
-  data: any[] = [
-      {
-        ort: "Bayern",
-        titel: "Öffentlicher Betrieb nach Ferienplan",
-        text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-        datum: "21.03.2020",
-      },
+  private dataSource = new BehaviorSubject<Restriction[]>([]);
+  data = this.dataSource.asObservable();
 
-      {
-        ort: "Berlin",
-        titel: "Kein Fahrplan mehr auf ausgewählten Strecken",
-        text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-        datum: "20.03.2020",
-      }
-    ];
-  
 
   constructor(private readonly http: HttpClient) { }
 
+  fetchData(url: string): any {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'API-KEY': '5a7c3a9a69f00a5877b847ee645981673aa6994464ddba3ee8d4a805934deb76'
+      })
+    };
 
-  fetchData(): any {
-    return this.http.get<Restriction[]>(FeedService.api);
+    this.http.get<Restriction[]>(url, httpOptions).subscribe(data => {
+      this.dataSource.next(data);
+    });
+  }
+
+
+  fetchDataByAreal(areal: Areal, value: string): any {
+    const url = FeedService.api + areal.toString() + '/' + value;
+    this.fetchData(url);
   }
 
 }
