@@ -60,7 +60,7 @@ button {
     padding-top: 60px;
     position: absolute;
     z-index: 0;
-    height: 100%;
+    height: calc(100% - 80px);
     width: 100%;
     overflow: hidden;
 }
