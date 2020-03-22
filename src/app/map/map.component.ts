@@ -124,12 +124,10 @@ export class MapComponent implements OnInit, AfterViewInit {
      };
  
      this.legend.onAdd = legendBuilder.createLegend(this);
- 
      this.legend.addTo(this.coronamap);
  
      // ------ INFO ------
      this.info = L.control();
-     // INFO
      this.info.onAdd = function(coronamap) {
        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
        this.update();
@@ -148,7 +146,6 @@ export class MapComponent implements OnInit, AfterViewInit {
      };
  
      this.info.addTo(this.coronamap);
- 
  
      // ------ BUTTONS ZOOM CONTROL ------
      L.Control.zoomHome = L.Control.extend({
@@ -251,7 +248,6 @@ export class MapComponent implements OnInit, AfterViewInit {
       fillOpacity: 0.7,
       fillColor: this.getColor(g),
     };
-
   }
 
   // geoJSON german states
