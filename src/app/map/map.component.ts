@@ -68,7 +68,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     const legendBuilder = {
       createLegend(vm) {
         return () => {
-          let div = L.DomUtil.create('div', 'info legend'),
+          let div = L.DomUtil.create('div', 'legend'),
             grades = ['von heute', 'innerhalb der letzten 7 Tage', 'älter als eine Woche', 'keine Informationen'],
             labels = [],
             from, to;
@@ -106,7 +106,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.coronamap.dragging.disable();
     // ------ MAP + LAYER -------
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-      id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
+      attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
     }).addTo(this.coronamap);
 
     const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
