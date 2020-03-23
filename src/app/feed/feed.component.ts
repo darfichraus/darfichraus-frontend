@@ -11,6 +11,7 @@ import {RestrictionRepository} from '../restriction.repository';
 export class FeedComponent implements OnInit {
 
   data: FetchResult;
+  query: string;
 
   constructor(private feedService: FeedService,
               private restrictionRepository: RestrictionRepository) {

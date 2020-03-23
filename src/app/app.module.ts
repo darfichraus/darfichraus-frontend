@@ -19,7 +19,7 @@ import {MeldungReactiveComponent} from './meldung-reactive/meldung-reactive.comp
 import {NumericDirective} from './meldung/number-input.directive';
 import {DeviceDetectorModule} from 'ngx-device-detector';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-
+import {SearchPipe} from '../app/search.pipe';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -33,7 +33,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     LeafmapComponent,
     MeldungComponent,
     MeldungReactiveComponent,
-    NumericDirective
+    NumericDirective,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
