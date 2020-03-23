@@ -36,10 +36,10 @@ export class MeldungComponent implements OnInit {
   PUBLIC_PLACES: 'Öffentliche Plätze',
   RETAIL:  'Einzelhandel',
   CURFEW: 'Ausgangssperre'
-  } 
+  }
 
   counties: Food[] = [
-    {value: 'Baden-Württtemberg', viewValue: 'Baden-Württtemberg'},
+    {value: 'Baden-Württemberg', viewValue: 'Baden-Württemberg'},
     {value: 'Bayern', viewValue: 'Bayern'},
     {value: 'Berlin', viewValue: 'Berlin'},
     {value: 'Brandenburg', viewValue: 'Brandenburg'},

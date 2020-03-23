@@ -1,14 +1,10 @@
-import {Component, OnInit, AfterViewInit, Input} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 
 import * as L from 'leaflet';
-// import statesData from './res/bundeslaender_simplify200.json';
 
 import * as statesData from '../../json-assets/bundeslaender_simplify200.json';
 import {FeedService} from '../feed.service';
 import {Areal} from '../_model/areal.enum';
-
-declare var ol: any;
-
 
 @Component({
   selector: 'app-map',
@@ -17,37 +13,30 @@ declare var ol: any;
 })
 export class MapComponent implements OnInit, AfterViewInit {
 
+  private static HOME_VIEW = [51.27264, 14.26469];
   mapMode: string;
 
   @Input('mode') set mode(mode: string) {
     this.mapMode = mode;
     // change color
-    console.log(mode);
     if (this.coronamap !== undefined) {
 
+      this.geojson.clearLayers();
+      const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
 
+      this.geojson = L.geoJson(statesD, {
+        style: (e) => (this.style(e)),
+        onEachFeature: (feature, layer) => (
+          layer.on({
+            mouseover: (e) => (this.highlightFeature(e)),
+            mouseout: (e) => (this.resetHighlight(e)),
+            click: (e) => (this.zoomToFeature(e, feature))
+          })
+        )
+      }).addTo(this.coronamap);
 
-    this.geojson.clearLayers();
-
-
-    const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
-
-     this.geojson = L.geoJson(statesD, {
-       style: (e) => (this.style(e)),
-       onEachFeature: (feature, layer) => (
-         layer.on({
-           mouseover: (e) => (this.highlightFeature(e)),
-           mouseout: (e) => (this.resetHighlight(e)),
-           click: (e) => (this.zoomToFeature(e, feature))
-         })
-       )
-     }).addTo(this.coronamap);
-
-
-
-
+      this.renewLegend();
     }
-
   }
 
 
@@ -68,169 +57,94 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-
-    this.coronamap = L.map('map', {zoomControl: false, scrollWheelZoom: false}).setView([51.27264, 14.26469], 6);
-
-    this.coronamap.dragging.disable();
-
-         // ------ MAP + LAYER -------
-
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-      id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
-    }).addTo(this.coronamap);
-
-     const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
-
-     this.geojson = L.geoJson(statesD, {
-       style: (e) => (this.style(e)),
-       onEachFeature: (feature, layer) => (
-         layer.on({
-           mouseover: (e) => (this.highlightFeature(e)),
-           mouseout: (e) => (this.resetHighlight(e)),
-           click: (e) => (this.zoomToFeature(e, feature))
-         })
-       )
-     }).addTo(this.coronamap);
-
     this.buildMap();
+  }
 
+  renewLegend() {
+    const legendBuilder = {
+      createLegend(vm) {
+        return () => {
+          let div = L.DomUtil.create('div', 'info legend'),
+            grades = ['von heute', 'gestern', 'älter als 2 Tage'],
+            labels = [],
+            from, to;
+
+          for (let i = 0; i < grades.length; i++) {
+            from = grades[i];
+            to = grades[i + 1];
+            const color = vm.getColor(i + 1);
+
+            labels.push(
+              '<i style="background:' + color + '"></i> ' +
+              from + (to ? '' : ''));
+          }
+          div.innerHTML = labels.join('<br>');
+          return div;
+        };
+      }
+    };
+    this.legend.onAdd = legendBuilder.createLegend(this);
+    this.legend.addTo(this.coronamap);
+  }
+
+  zoomToHomeView() {
+    this.coronamap.setView(MapComponent.HOME_VIEW, 6);
+    console.log(this.selectedFeature);
+    if (this.selectedFeature != null) {
+      this.geojson.resetStyle(this.selectedFeature);
+    }
+
+    this.feedService.fetchDataForAll();
   }
 
   buildMap() {
 
-     // ---- LEGEND -----
-     this.legend = L.control({position: 'bottomleft'});
-     const legendBuilder = {
-       createLegend(vm) {
-         return () => {
-           let div = L.DomUtil.create('div', 'info legend'),
-             grades = ['VON HEUTE', 'VON GESTERN', 'ÄLTER ALS 3 TAGE'],
-             labels = [],
-             from, to;
+    this.coronamap = L.map('map', {zoomControl: false, scrollWheelZoom: false}).setView(MapComponent.HOME_VIEW, 6);
+    this.coronamap.dragging.disable();
+    // ------ MAP + LAYER -------
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw&country=de', {
+      id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
+    }).addTo(this.coronamap);
 
-           for (let i = 0; i < grades.length; i++) {
-             from = grades[i];
-             to = grades[i + 1];
-             const color = vm.getColor(from + 1);
+    const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
 
-             labels.push(
-               '<i style="background:' + color + '"></i> ' +
-               from + (to ? '' : ''));
-           }
-           div.innerHTML = labels.join('<br>');
-           return div;
-         };
-       }
-     };
+    this.geojson = L.geoJson(statesD, {
+      style: (e) => (this.style(e)),
+      onEachFeature: (feature, layer) => (
+        layer.on({
+          mouseover: (e) => (this.highlightFeature(e)),
+          mouseout: (e) => (this.resetHighlight(e)),
+          click: (e) => (this.zoomToFeature(e, feature))
+        })
+      )
+    }).addTo(this.coronamap);
 
-     this.legend.onAdd = legendBuilder.createLegend(this);
-     this.legend.addTo(this.coronamap);
+    this.legend = L.control({position: 'bottomleft'});
 
-     // ------ INFO ------
-     this.info = L.control();
-     this.info.onAdd = function(coronamap) {
-       this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-       this.update();
-       return this._div;
-     };
+    this.renewLegend();
 
-     // method that we will use to update the control based on feature properties passed
-     this.info.update = function(props) {
-       const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
-       this._div.innerHTML = '<h4>Corona Ausgangssperre</h4>' + (props ?
-         '<b>' + props.GEN + '</b><br />'
-         // + stateCriticality[Math.floor(Math.random() * 15)] + ' Menschen infiziert <br />'
-         // + '<br /> <b>Bevölkerung:</b> ' + props.destatis.population
-         + '<br /><br /> <b>Ausgangssperre: <br /></b>21.03.2020 - 15.04.2020'
-         : 'Ein Bundesland auswählen');
-     };
+    // ------ INFO ------
+    this.info = L.control();
+    this.info.onAdd = function(coronamap) {
+      this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+      this.update();
+      return this._div;
+    };
 
-     this.info.addTo(this.coronamap);
+    // method that we will use to update the control based on feature properties passed
+    this.info.update = function(props) {
+      const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
+      this._div.innerHTML = '<h4>Corona Ausgangssperre</h4>' + (props ?
+        '<b>' + props.GEN + '</b><br />'
+        // + stateCriticality[Math.floor(Math.random() * 15)] + ' Menschen infiziert <br />'
+        // + '<br /> <b>Bevölkerung:</b> ' + props.destatis.population
+        + '<br /><br /> <b>Ausgangssperre: <br /></b>21.03.2020 - 15.04.2020'
+        : 'Ein Bundesland auswählen');
+    };
 
-     // ------ BUTTONS ZOOM CONTROL ------
-     L.Control.zoomHome = L.Control.extend({
-       options: {
-         position: 'topleft',
-         zoomInText: '+',
-         zoomInTitle: 'Zoom in',
-         zoomOutText: '-',
-         zoomOutTitle: 'Zoom out',
-         zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
-         zoomHomeTitle: 'Zoom home'
-       },
-
-       onAdd(map) {
-         const controlName = 'gin-control-zoom',
-           container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
-           options = this.options;
-
-         this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
-           controlName + '-in', container, this._zoomIn);
-         this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
-           controlName + '-home', container, this._zoomHome);
-         this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
-           controlName + '-out', container, this._zoomOut);
-
-         this._updateDisabled();
-         map.on('zoomend zoomlevelschange', this._updateDisabled, this);
-
-         return container;
-       },
-
-       onRemove(map) {
-         map.off('zoomend zoomlevelschange', this._updateDisabled, this);
-       },
-
-       _zoomIn(e) {
-         this._map.zoomIn(e.shiftKey ? 3 : 1);
-       },
-
-       _zoomOut(e) {
-         this._map.zoomOut(e.shiftKey ? 3 : 1);
-       },
-
-       _zoomHome(e) {
-         this._map.setView([51.27264, 14.26469], 6);
-         console.log(this.selectedFeature);
-         if(this.selectedFeature!=null) {
-                  this.geojson.resetStyle(this.selectedFeature);
-         }
-       },
-       _createButton(html, title, className, container, fn) {
-         const link = L.DomUtil.create('a', className, container);
-         link.innerHTML = html;
-         link.href = '#';
-         link.title = title;
-
-         L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
-           .on(link, 'click', L.DomEvent.stop)
-           .on(link, 'click', fn, this)
-           .on(link, 'click', this._refocusOnMap, this);
-
-         return link;
-       },
-       _updateDisabled() {
-         const map = this._map,
-           className = 'leaflet-disabled';
-
-         L.DomUtil.removeClass(this._zoomInButton, className);
-         L.DomUtil.removeClass(this._zoomOutButton, className);
-
-         if (map._zoom === map.getMinZoom()) {
-           L.DomUtil.addClass(this._zoomOutButton, className);
-         }
-         if (map._zoom === map.getMaxZoom()) {
-           L.DomUtil.addClass(this._zoomInButton, className);
-         }
-       }
-     });
-
-     this.zoomHome = new L.Control.zoomHome();
-     this.zoomHome.addTo(this.coronamap);
-
+    this.info.addTo(this.coronamap);
 
   }
-
 
   ngAfterViewInit(): void {
 
@@ -250,13 +164,10 @@ export class MapComponent implements OnInit, AfterViewInit {
     };
   }
 
-  // geoJSON german states
-  // get color depending on population density value
+
   getColor(d) {
     return this.getMapColorByModeAndSeverity(this.mapMode, d);
   }
-
-
 
   getMapColorByModeAndSeverity(mode, severity): string {
 
@@ -324,7 +235,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         }
     }
 
-    return '';
+    return '#333333';
   }
 
   onEachFeature(feature, layer) {
@@ -362,10 +273,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     } else {
       this.setFilledHighlightedPolygon(layer);
-      // var label = new L.Label()
-      // label.setContent("static label")
-      // label.setLatLng(layer.getBounds().getCenter())
-      // this.coronamap.showLabel(label);
     }
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -382,13 +289,12 @@ export class MapComponent implements OnInit, AfterViewInit {
     } else {
       this.setFilledHighlightedPolygon(layer);
     }
+
     this.info.update();
   }
 
   zoomToFeature(e, info) {
-
-    this.feedService.fetchDataByAreal(Areal.STATE, info['properties']['GEN']);
-
+    this.fetchDataForFeature(Areal.STATE, info['properties']['GEN']);
     this.coronamap.resetStyle;
     if (this.selectedFeature != null) {
       this.setOutlinedHighlightedPolygon(this.selectedFeature);
@@ -398,6 +304,11 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     this.setFilledHighlightedPolygon(e.target);
   }
+
+  fetchDataForFeature(areal: Areal, value: string) {
+    this.feedService.fetchDataByAreal(areal, value);
+  }
+
 }
 
 enum ColorTransportation {
@@ -408,7 +319,7 @@ enum ColorTransportation {
 
 enum ColorEvents {
   STAGE_ONE = '#6E5BE1',
-  STAGE_TWO = '#6E5BE1',
+  STAGE_TWO = '#9382FD',
   STAGE_THREE = '#BFB5FF'
 }
 

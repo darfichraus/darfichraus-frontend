@@ -3,16 +3,40 @@ import {Areal} from './_model/areal.enum';
 export enum RestrictionType {
 
   PUBLIC_TRANSPORTATION = 'PUBLIC_TRANSPORTATION',
-  EVENTS_AND_ASSEMBLIES = 'Veranstaltungen und Gruppen',
-  GASTRONOMY = 'Gastronomie',
-  PUBLIC_PLACES = 'Öffentliche Plätze',
-  RETAIL = 'Einzelhandel',
-  CURFEW = 'Ausgangssperre'
+  EVENTS_AND_ASSEMBLIES = 'EVENTS_AND_ASSEMBLIES',
+  GASTRONOMY = 'GASTRONOMY',
+  PUBLIC_PLACES = 'PUBLIC_PLACES',
+  RETAIL = 'RETAIL',
+  CURFEW = 'CURFEW'
+}
+
+export class RestrictionTypeTranslator {
+
+    public static translate(restrictionType: RestrictionType): string {
+
+      switch (restrictionType) {
+        case RestrictionType.PUBLIC_TRANSPORTATION:
+          return 'Nahverkehr';
+        case RestrictionType.EVENTS_AND_ASSEMBLIES:
+          return 'Veranstaltungen und Gruppen';
+        case RestrictionType.GASTRONOMY:
+          return 'Gastronomie';
+        case RestrictionType.PUBLIC_PLACES:
+          return 'Öffentliche Plätze';
+        case RestrictionType.RETAIL:
+          return 'Einzelhandel';
+        case RestrictionType.CURFEW:
+          return 'Ausgangssperre';
+        default:
+          return 'Allgemeiner Hinweis';
+      }
+    }
+
 }
 
 export enum RestrictionState {
-  RESTRICTION = 'Einschränkung',
-  BAN = 'Verbot'
+  RESTRICTION = 'RESTRICTION',
+  BAN = 'BAN'
 }
 
 export class SearchInformation {

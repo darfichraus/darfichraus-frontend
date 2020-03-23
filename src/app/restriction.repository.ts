@@ -8,7 +8,7 @@ export class RestrictionRepository {
 
   restrictions: Restrictions;
 
-  
+
 
   constructor(private feedService: FeedService) {
 
@@ -17,13 +17,7 @@ export class RestrictionRepository {
   preloadData() {
 
     this.feedService.data.subscribe(results => {
-      console.log('we have data');
-      console.log(results);
       this.restrictions = results.data;
-
-      
-     
-
     });
 
     this.feedService.fetchDataForAll();

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FeedService} from '../feed.service';
-import {FetchResult, Restriction, RestrictionType} from '../Restriction';
+import {FetchResult, Restriction, RestrictionType, RestrictionTypeTranslator} from '../Restriction';
 
 @Component({
   selector: 'app-feed',
@@ -22,7 +22,7 @@ export class FeedComponent implements OnInit {
   }
 
   translateRestrictionType(input: RestrictionType): string {
-    return (RestrictionType[input].toString());
+    return RestrictionTypeTranslator.translate(input);
   }
 
 }
