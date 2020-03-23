@@ -47,6 +47,9 @@ mat-dialog-content {
     font-weight: normal;
     font-size: 16px;
     line-height: 135.69%;
+    max-width: 363px;
+    overflow-wrap: break-word;  /* CSS3 */   
+
   }
 
   .datum {

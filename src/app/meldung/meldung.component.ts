@@ -89,8 +89,13 @@ export class MeldungComponent implements OnInit {
 
     const restriction = new Restriction();
     restriction.areal = this.areal;
-    restriction.arealIdentifier = this.location;
-    restriction.restrictionType = RestrictionType[this.kategorie];
+    if(this.areal == "COUNTRY") {
+      restriction.arealIdentifier = "Deutschland";
+    }
+    else {
+      restriction.restrictionType = RestrictionType[this.kategorie];
+
+    }
     restriction.restrictionState = RestrictionState[this.restrictionState];
     restriction.shortDescription = this.title;
     restriction.restrictionDescription = this.description;
