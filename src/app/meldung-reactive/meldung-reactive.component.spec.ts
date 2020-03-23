@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MeldeformComponent } from './meldeform.component';
+import { MeldungReactiveComponent } from './meldung-reactive.component';
 
-describe('MeldeformComponent', () => {
-  let component: MeldeformComponent;
-  let fixture: ComponentFixture<MeldeformComponent>;
+describe('MeldungReactiveComponent', () => {
+  let component: MeldungReactiveComponent;
+  let fixture: ComponentFixture<MeldungReactiveComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MeldeformComponent ]
+      declarations: [ MeldungReactiveComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MeldeformComponent);
+    fixture = TestBed.createComponent(MeldungReactiveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

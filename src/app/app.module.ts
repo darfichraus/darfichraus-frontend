@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeedComponent } from './feed/feed.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule} from './material.module';
-import { MeldeformComponent } from './meldeform/meldeform.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from './map/map.component';
 import { LeafmapComponent } from './leafmap/leafmap.component';
@@ -17,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import {RestrictionRepository} from './restriction.repository';
 import {FeedService} from './feed.service';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MeldungReactiveComponent } from './meldung-reactive/meldung-reactive.component';
 
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
@@ -27,10 +27,10 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
   declarations: [
     AppComponent,
     FeedComponent,
-    MeldeformComponent,
     MapComponent,
     LeafmapComponent,
-    MeldungComponent
+    MeldungComponent,
+    MeldungReactiveComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,10 @@
-<h1 mat-dialog-title class="subhead">Corona: Verordnung hinzufügen</h1>
+<h1 mat-dialog-title class="modal-heading">Corona: Verordnung hinzufügen</h1>
 <div mat-dialog-content>
 
     <div>
 
 
-        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between start">
 
             <div fxFlex="45">
     
@@ -89,7 +89,8 @@
     
     
             </div>
-    
+
+
     
             <div fxFlex="45" >
     
@@ -102,7 +103,7 @@
                 <!-- <p>{{this.zip}}</p> -->
     
                 <p class="text">{{this.description}}</p>
-                <p class="source">Quelle: {{this.source}}</p>
+                <p class="source">{{this.source}}</p>
                 <p class="datum" *ngIf="this.start != undefined">{{this.start}} - {{this.end}}</p>
             </div>
     
