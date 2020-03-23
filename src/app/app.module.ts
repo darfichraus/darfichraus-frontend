@@ -12,12 +12,13 @@ import {HttpClientModule} from '@angular/common/http';
 import {MapComponent} from './map/map.component';
 import {LeafmapComponent} from './leafmap/leafmap.component';
 import {MeldungComponent} from './meldung/meldung.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RestrictionRepository} from './restriction.repository';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {MeldungReactiveComponent} from './meldung-reactive/meldung-reactive.component';
 import {NumericDirective} from './meldung/number-input.directive';
 import {DeviceDetectorModule} from 'ngx-device-detector';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
@@ -43,6 +44,7 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     MaterialModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     DeviceDetectorModule.forRoot()
   ],
   providers: [
@@ -52,7 +54,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
         RestrictionRepository
       ], multi: true
     },
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-dialog-override'}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-dialog-override'}},
+    {provide: MAT_DATE_LOCALE, useValue: 'de'},
 
   ],
   bootstrap: [AppComponent]

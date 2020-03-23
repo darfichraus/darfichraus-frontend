@@ -5,6 +5,7 @@ import {FeedService} from './feed.service';
 import {FetchResult, RestrictionType, RestrictionTypeTranslator} from './Restriction';
 import {RestrictionRepository} from './restriction.repository';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import { MeldungReactiveComponent } from './meldung-reactive/meldung-reactive.component';
 
 @Component({
   selector: 'app-root',
