@@ -82,7 +82,7 @@ export class MapComponent implements OnInit, AfterViewInit {
               '<i style="background:' + color + '"></i> ' +
               from + (to ? '' : ''));
           }
-          div.innerHTML = labels.join('<br>');
+          div.innerHTML = '<strong><p>Letzter Beschluss</p></strong>' + labels.join('<br>');
           return div;
         };
       }
