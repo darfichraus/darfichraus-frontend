@@ -25,26 +25,26 @@ export class MapComponent implements OnInit, AfterViewInit {
     console.log(mode);
     if (this.coronamap !== undefined) {
 
-      /*this.coronamap.eachLayer(function (layer) {
-        this.coronamap.removeLayer(layer);
-    }); */
 
 
-      this.geojson.clearLayers();
+    this.geojson.clearLayers();
 
 
-      const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
+    const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
 
-      this.geojson = L.geoJson(statesD, {
-        style: (e) => (this.style(e)),
-        onEachFeature: (feature, layer) => (
-          layer.on({
-            mouseover: (e) => (this.highlightFeature(e)),
-            mouseout: (e) => (this.resetHighlight(e)),
-            click: (e) => (this.zoomToFeature(e, feature))
-          })
-        )
-      }).addTo(this.coronamap);
+     this.geojson = L.geoJson(statesD, {
+       style: (e) => (this.style(e)),
+       onEachFeature: (feature, layer) => (
+         layer.on({
+           mouseover: (e) => (this.highlightFeature(e)),
+           mouseout: (e) => (this.resetHighlight(e)),
+           click: (e) => (this.zoomToFeature(e, feature))
+         })
+       )
+     }).addTo(this.coronamap);
+
+
+
 
     }
 
@@ -73,24 +73,24 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     this.coronamap.dragging.disable();
 
-    // ------ MAP + LAYER -------
+         // ------ MAP + LAYER -------
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
     }).addTo(this.coronamap);
 
-    const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
+     const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
 
-    this.geojson = L.geoJson(statesD, {
-      style: (e) => (this.style(e)),
-      onEachFeature: (feature, layer) => (
-        layer.on({
-          mouseover: (e) => (this.highlightFeature(e)),
-          mouseout: (e) => (this.resetHighlight(e)),
-          click: (e) => (this.zoomToFeature(e, feature))
-        })
-      )
-    }).addTo(this.coronamap);
+     this.geojson = L.geoJson(statesD, {
+       style: (e) => (this.style(e)),
+       onEachFeature: (feature, layer) => (
+         layer.on({
+           mouseover: (e) => (this.highlightFeature(e)),
+           mouseout: (e) => (this.resetHighlight(e)),
+           click: (e) => (this.zoomToFeature(e, feature))
+         })
+       )
+     }).addTo(this.coronamap);
 
     this.buildMap();
 
@@ -98,135 +98,137 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   buildMap() {
 
-    // ---- LEGEND -----
-    this.legend = L.control({position: 'bottomleft'});
-    const legendBuilder = {
-      createLegend(vm) {
-        return () => {
-          let div = L.DomUtil.create('div', 'info legend'),
-            grades = ['VON HEUTE', 'VON GESTERN', 'ÄLTER ALS 3 TAGE'],
-            labels = [],
-            from, to;
+     // ---- LEGEND -----
+     this.legend = L.control({position: 'bottomleft'});
+     const legendBuilder = {
+       createLegend(vm) {
+         return () => {
+           let div = L.DomUtil.create('div', 'info legend'),
+             grades = ['VON HEUTE', 'VON GESTERN', 'ÄLTER ALS 3 TAGE'],
+             labels = [],
+             from, to;
 
-          for (let i = 0; i < grades.length; i++) {
-            from = grades[i];
-            to = grades[i + 1];
-            const color = vm.getColor(from + 1);
+           for (let i = 0; i < grades.length; i++) {
+             from = grades[i];
+             to = grades[i + 1];
+             const color = vm.getColor(from + 1);
 
-            labels.push(
-              '<i style="background:' + color + '"></i> ' +
-              from + (to ? '' : ''));
-          }
-          div.innerHTML = labels.join('<br>');
-          return div;
-        };
-      }
-    };
+             labels.push(
+               '<i style="background:' + color + '"></i> ' +
+               from + (to ? '' : ''));
+           }
+           div.innerHTML = labels.join('<br>');
+           return div;
+         };
+       }
+     };
 
-    this.legend.onAdd = legendBuilder.createLegend(this);
-    this.legend.addTo(this.coronamap);
+     this.legend.onAdd = legendBuilder.createLegend(this);
+     this.legend.addTo(this.coronamap);
 
-    // ------ INFO ------
-    this.info = L.control();
-    this.info.onAdd = function(coronamap) {
-      this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-      this.update();
-      return this._div;
-    };
+     // ------ INFO ------
+     this.info = L.control();
+     this.info.onAdd = function(coronamap) {
+       this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+       this.update();
+       return this._div;
+     };
 
-    // method that we will use to update the control based on feature properties passed
-    this.info.update = function(props) {
-      const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
-      this._div.innerHTML = '<h4>Gewähltes Bundesland</h4>' + (props ?
-        '<b>' + props.GEN + '</b><br />'
-        // + stateCriticality[Math.floor(Math.random() * 15)] + ' Menschen infiziert <br />'
-        // + '<br /> <b>Bevölkerung:</b> ' + props.destatis.population
-        // + '<br /><br /> <b>Ausgangssperre: <br /></b>21.03.2020 - 15.04.2020'
-        : 'Ein Bundesland auswählen');
-    };
+     // method that we will use to update the control based on feature properties passed
+     this.info.update = function(props) {
+       const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
+       this._div.innerHTML = '<h4>Corona Ausgangssperre</h4>' + (props ?
+         '<b>' + props.GEN + '</b><br />'
+         // + stateCriticality[Math.floor(Math.random() * 15)] + ' Menschen infiziert <br />'
+         // + '<br /> <b>Bevölkerung:</b> ' + props.destatis.population
+         + '<br /><br /> <b>Ausgangssperre: <br /></b>21.03.2020 - 15.04.2020'
+         : 'Ein Bundesland auswählen');
+     };
 
-    this.info.addTo(this.coronamap);
+     this.info.addTo(this.coronamap);
 
-    // ------ BUTTONS ZOOM CONTROL ------
-    L.Control.zoomHome = L.Control.extend({
-      options: {
-        position: 'topleft',
-        zoomInText: '+',
-        zoomInTitle: 'Zoom in',
-        zoomOutText: '-',
-        zoomOutTitle: 'Zoom out',
-        zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
-        zoomHomeTitle: 'Zoom home'
-      },
+     // ------ BUTTONS ZOOM CONTROL ------
+     L.Control.zoomHome = L.Control.extend({
+       options: {
+         position: 'topleft',
+         zoomInText: '+',
+         zoomInTitle: 'Zoom in',
+         zoomOutText: '-',
+         zoomOutTitle: 'Zoom out',
+         zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
+         zoomHomeTitle: 'Zoom home'
+       },
 
-      onAdd(map) {
-        const controlName = 'gin-control-zoom',
-          container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
-          options = this.options;
+       onAdd(map) {
+         const controlName = 'gin-control-zoom',
+           container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
+           options = this.options;
 
-        this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
-          controlName + '-in', container, this._zoomIn);
-        this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
-          controlName + '-home', container, this._zoomHome);
-        this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
-          controlName + '-out', container, this._zoomOut);
+         this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
+           controlName + '-in', container, this._zoomIn);
+         this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
+           controlName + '-home', container, this._zoomHome);
+         this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
+           controlName + '-out', container, this._zoomOut);
 
-        this._updateDisabled();
-        map.on('zoomend zoomlevelschange', this._updateDisabled, this);
+         this._updateDisabled();
+         map.on('zoomend zoomlevelschange', this._updateDisabled, this);
 
-        return container;
-      },
+         return container;
+       },
 
-      onRemove(map) {
-        map.off('zoomend zoomlevelschange', this._updateDisabled, this);
-      },
+       onRemove(map) {
+         map.off('zoomend zoomlevelschange', this._updateDisabled, this);
+       },
 
-      _zoomIn(e) {
-        this._map.zoomIn(e.shiftKey ? 3 : 1);
-      },
+       _zoomIn(e) {
+         this._map.zoomIn(e.shiftKey ? 3 : 1);
+       },
 
-      _zoomOut(e) {
-        this._map.zoomOut(e.shiftKey ? 3 : 1);
-      },
+       _zoomOut(e) {
+         this._map.zoomOut(e.shiftKey ? 3 : 1);
+       },
 
-      _zoomHome(e) {
-        this._map.setView([51.27264, 14.26469], 6);
-        console.log(this.selectedFeature);
-        if (this.selectedFeature != null) {
-          this.geojson.resetStyle(this.selectedFeature);
-        }
-      },
-      _createButton(html, title, className, container, fn) {
-        const link = L.DomUtil.create('a', className, container);
-        link.innerHTML = html;
-        link.href = '#';
-        link.title = title;
+       _zoomHome(e) {
+         this._map.setView([51.27264, 14.26469], 6);
+         console.log(this.selectedFeature);
+         if(this.selectedFeature!=null) {
+                  this.geojson.resetStyle(this.selectedFeature);
+         }
+       },
+       _createButton(html, title, className, container, fn) {
+         const link = L.DomUtil.create('a', className, container);
+         link.innerHTML = html;
+         link.href = '#';
+         link.title = title;
 
-        L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
-          .on(link, 'click', L.DomEvent.stop)
-          .on(link, 'click', fn, this)
-          .on(link, 'click', this._refocusOnMap, this);
+         L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
+           .on(link, 'click', L.DomEvent.stop)
+           .on(link, 'click', fn, this)
+           .on(link, 'click', this._refocusOnMap, this);
 
-        return link;
-      },
-      _updateDisabled() {
-        const map = this._map,
-          className = 'leaflet-disabled';
+         return link;
+       },
+       _updateDisabled() {
+         const map = this._map,
+           className = 'leaflet-disabled';
 
-        L.DomUtil.removeClass(this._zoomInButton, className);
-        L.DomUtil.removeClass(this._zoomOutButton, className);
+         L.DomUtil.removeClass(this._zoomInButton, className);
+         L.DomUtil.removeClass(this._zoomOutButton, className);
 
-        if (map._zoom === map.getMinZoom()) {
-          L.DomUtil.addClass(this._zoomOutButton, className);
-        }
-        if (map._zoom === map.getMaxZoom()) {
-          L.DomUtil.addClass(this._zoomInButton, className);
-        }
-      }
-    });
+         if (map._zoom === map.getMinZoom()) {
+           L.DomUtil.addClass(this._zoomOutButton, className);
+         }
+         if (map._zoom === map.getMaxZoom()) {
+           L.DomUtil.addClass(this._zoomInButton, className);
+         }
+       }
+     });
 
-    this.zoomHome = new L.Control.zoomHome();
-    this.zoomHome.addTo(this.coronamap);
+     this.zoomHome = new L.Control.zoomHome();
+     this.zoomHome.addTo(this.coronamap);
+
+
   }
 
 
@@ -251,28 +253,10 @@ export class MapComponent implements OnInit, AfterViewInit {
   // geoJSON german states
   // get color depending on population density value
   getColor(d) {
-    console.log(this.mapMode);
-
-    const test = this.getMapColorByModeAndSeverity(this.mapMode, d);
-    return test;
-
-    if (this.mapMode === 'bus') {
-      return d >= 3 ? '#4668ae' :
-        d === 2 ? '#303e99' :
-          d === 1 ? '#253074' :
-            '#4668ae';
-    }
-    if (this.mapMode === 'person') {
-      return d >= 3 ? '#f0d77a' :
-        d === 2 ? '#fcd039' :
-          d === 1 ? '#f3bb0e' :
-            '#f0d77a';
-    }
-    return d >= 3 ? '#4668ae' :
-      d === 2 ? '#303e99' :
-        d === 1 ? '#253074' :
-          '#4668ae';
+    return this.getMapColorByModeAndSeverity(this.mapMode, d);
   }
+
+
 
   getMapColorByModeAndSeverity(mode, severity): string {
 
