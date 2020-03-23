@@ -15,8 +15,8 @@ import { LeafmapComponent } from './leafmap/leafmap.component';
 import { MeldungComponent } from './meldung/meldung.component';
 import { FormsModule } from '@angular/forms';
 import {RestrictionRepository} from './restriction.repository';
-import {FeedService} from './feed.service';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import {DeviceDetectorModule} from 'ngx-device-detector';
 
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
@@ -40,7 +40,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     FlexLayoutModule,
     MaterialModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DeviceDetectorModule.forRoot()
   ],
   providers: [
     RestrictionRepository,

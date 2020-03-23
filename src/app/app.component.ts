@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {FeedService} from './feed.service';
 import {FetchResult, RestrictionType, RestrictionTypeTranslator} from './Restriction';
 import {RestrictionRepository} from './restriction.repository';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-root',
@@ -16,10 +17,19 @@ export class AppComponent implements OnInit, AfterContentInit {
   data: FetchResult;
   selectedMode: string;
 
+  isMobile = false;
+
+
+  geoLocationOptions = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
 
   constructor(private dialog: MatDialog, public feedService: FeedService,
-              private restrictionRepository: RestrictionRepository) {
-
+              private restrictionRepository: RestrictionRepository,
+              private deviceDetectorService: DeviceDetectorService) {
+    this.isMobile = !this.deviceDetectorService.isDesktop();
   }
 
   ngOnInit() {
@@ -78,12 +88,32 @@ export class AppComponent implements OnInit, AfterContentInit {
     }
   }
 
+  success(pos) {
+    const crd = pos.coords;
+    const msg = 'Your current position is:' + `Latitude : ${crd.latitude}` +  `Longitude: ${crd.longitude}` + `More or less ${crd.accuracy} meters.`;
+    alert(msg);
+  }
+
+  error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
   ngAfterContentInit(): void {
 
+    // if (navigator.geolocation) {
+    //   console.log('Geolocation is supported!');
+    //   navigator.geolocation.getCurrentPosition(this.success, this.error, this.geoLocationOptions);
+    // } else {
+    //   console.log('Geolocation is not supported for this Browser/OS.');
+    // }
+
     setTimeout(() => {
-        this.onIcon('bus');
+        if (!this.isMobile) {
+          this.onIcon('bus');
+        }
       }, 1
     );
+
 
   }
 
