@@ -4,6 +4,7 @@ mat-form-field {
     width: 100%;
 }
 
+
 .send {
     float: right;
 }
@@ -81,3 +82,8 @@ mat-dialog-content {
     margin: -24px -24px 8px -24px;
     width: auto;
 }
+
+textarea {
+    resize: none;
+    height: 50px;
+  }

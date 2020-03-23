@@ -100,7 +100,7 @@
             <div fxFlex="45">
 
                 <h1 class="subhead">Vorschau</h1>
-                <p class="restriction">{{this.restrictionState}}</p>
+                <p class="restriction">{{this.restrictionState == 'ban' ? 'Verbote' : 'Einschränkungen'}}</p>
                 <mat-divider></mat-divider>
 
                 <p class="type">{{this.cats[this.kategorie]}}</p>
@@ -111,8 +111,8 @@
                 <!-- <p>{{this.zip}}</p> -->
 
                 <p class="text">{{this.description}}</p>
-                <p class="source">{{this.source}}</p>
-                <p class="datum" *ngIf="this.start != undefined">{{this.start}} - {{this.end}}</p>
+                <p class="restriction">{{this.source}}</p>
+                <span class="datum" *ngIf="this.start != undefined">von {{this.formatDate(this.start)}}</span><span class="datum" *ngIf="this.end != undefined">bis {{this.formatDate(this.end)}}</span>
             </div>
 
         </div>

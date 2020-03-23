@@ -4,6 +4,9 @@ import { RestrictionType, Restriction, RestrictionState, RestrictionTypeTranslat
 import { HttpClient } from '@angular/common/http';
 import { FeedService } from '../feed.service';
 
+import * as moment from 'moment';
+import 'moment-timezone';
+
 
 interface Food {
   value: string;
@@ -27,6 +30,8 @@ export class MeldungComponent implements OnInit {
   start: string;
   end: string;
   kategorie: string;
+  restrictionState: string = 'restriction';
+
 
 
   cats = {
@@ -68,7 +73,6 @@ export class MeldungComponent implements OnInit {
     {value: 'RETAIL', viewValue: RestrictionType.RETAIL},
     {value: 'CURFEW', viewValue: RestrictionType.CURFEW},
   ];
-  restrictionState: any;
   translator: RestrictionTypeTranslator = new RestrictionTypeTranslator();
 
   constructor(   public dialogRef: MatDialogRef<MeldungComponent>, private feedService: FeedService) { }
@@ -128,6 +132,20 @@ export class MeldungComponent implements OnInit {
         return 'Allgemeiner Hinweis';
     }
   }
+
+  formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [day, month, year].join('.');
+}
 
 
 
