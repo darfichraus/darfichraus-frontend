@@ -59,8 +59,6 @@
   color: #5B5B5B;
 }
 
-
-
 .furtherInformation {
   font-family: Source Sans Pro;
   font-style: normal;
@@ -95,6 +93,11 @@ a {
     width: 100%;
     position: relative;
     z-index: -1;
+}
+
+.feed-item-container:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
 }
 
 .left {
