@@ -3,7 +3,7 @@
 <p class="feedItem">Aktuelle Verordnungen und Einschränkungen bezüglich des Coronavirus Covid-19</p>
 
 
-<div *ngFor="let item of data.data" class="container">
+<div *ngFor="let item of data.data" class="container feed-item-container">
     <div class="type">{{translateRestrictionType(item.restrictionType)}}</div>
     <div *ngIf="item.arealIdentifier != data.searchQuery.arealValue" class="subhead">{{item.arealIdentifier}}</div>
     <div class="text">{{item.restrictionDescription}}</div>
