@@ -7,19 +7,19 @@
         <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
 
             <div fxFlex="45">
-    
+
                 <h2 class="subhead">Geltungsbereich</h2>
-    
-                <mat-radio-group [(ngModel)]="this.bereich">
+
+                <mat-radio-group [(ngModel)]="this.areal">
                     <mat-radio-button value="COUNTRY">Bundesweit</mat-radio-button>
                     <mat-radio-button value="COUNTY">Bundesland</mat-radio-button>
-                    <mat-radio-button value="ZIP">Landkreis</mat-radio-button>
+                    <mat-radio-button value="ZIP">Stadt</mat-radio-button>
                 </mat-radio-group>
-    
-    
-                <div fxLayout="row" fxLayoutGap="10px" *ngIf="this.bereich !== 'COUNTRY'">
-    
-                    <mat-form-field fxFlex="50" appearance="outline" *ngIf="this.bereich != 'ZIP' ">
+
+
+                <div fxLayout="row" fxLayoutGap="10px" *ngIf="this.areal !== 'COUNTRY'">
+
+                    <mat-form-field fxFlex="50" appearance="outline" *ngIf="this.areal != 'ZIP' ">
                         <mat-label>Bundesland</mat-label>
                         <mat-select [(ngModel)]="location">
                             <mat-option *ngFor="let county of counties" [value]="county.value">
@@ -27,15 +27,15 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field fxFlex="50" appearance="outline" *ngIf="this.bereich !== 'COUNTY'">
+                    <mat-form-field fxFlex="50" appearance="outline" *ngIf="this.areal !== 'COUNTY'">
                         <mat-label>Postleitzahl</mat-label>
                         <input matInput placeholder="2929" [(ngModel)]="zip">
                     </mat-form-field>
-    
+
                 </div>
-    
+
                 <h2 class="subhead">Kategorie</h2>
-    
+
                 <mat-form-field appearance="outline">
                     <mat-label>Kategorie</mat-label>
                     <mat-select [(ngModel)]="this.kategorie">
@@ -44,80 +44,79 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-    
+
                 <mat-form-field appearance="outline">
                     <mat-label>Titel</mat-label>
                     <input matInput [(ngModel)]="this.title">
                 </mat-form-field>
-    
+
                 <mat-form-field appearance="outline">
                     <mat-label>Beschreibung</mat-label>
                     <textarea matInput [(ngModel)]="this.description"></textarea>
                 </mat-form-field>
-    
-                <mat-radio-group>
-                    <mat-radio-button value="1">Keine Einschränkung</mat-radio-button>
-                    <mat-radio-button value="2">Einschränkungen</mat-radio-button>
-                    <mat-radio-button value="3">Verbote</mat-radio-button>
+
+                <mat-radio-group [(ngModel)]="this.restrictionState">
+                    <mat-radio-button value="restriction">Einschränkungen</mat-radio-button>
+                    <mat-radio-button value="ban">Verbote</mat-radio-button>
                 </mat-radio-group>
-    
+
                 <mat-form-field appearance="outline">
                     <mat-label>Quelle</mat-label>
                     <input matInput placeholder="" [(ngModel)]="this.source">
                 </mat-form-field>
-    
-    
+
+
                 <h3 class="subhead">Gültigkeit</h3>
-    
+
                 <div fxLayout="row" fxLayoutGap="10px">
-    
+
                     <mat-form-field fxFlex="50" appearance="outline">
                         <mat-label>Anfang</mat-label>
                         <input matInput [matDatepicker]="picker1" [(ngModel)]="start">
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                         <mat-datepicker #picker1></mat-datepicker>
                     </mat-form-field>
-    
+
                     <mat-form-field fxFlex="50" appearance="outline">
                         <mat-label>Ende</mat-label>
                         <input matInput [matDatepicker]="picker2" [(ngModel)]="end">
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2></mat-datepicker>
                     </mat-form-field>
-    
+
                 </div>
-    
-    
+
+
             </div>
-    
-    
+
+
             <div fxFlex="45" >
-    
+
                 <h1 class="subhead">Vorschau</h1>
                 <mat-divider></mat-divider>
-    
+
                 <p class="type">{{this.cats[this.kategorie]}}</p>
 
                 <h1 class="subhead" *ngIf="this.location !='COUNTRY'">{{this.location}}</h1>
                 <!-- <p>{{this.zip}}</p> -->
-    
+
                 <p class="text">{{this.description}}</p>
                 <p class="source">Quelle: {{this.source}}</p>
                 <p class="datum" *ngIf="this.start != undefined">{{this.start}} - {{this.end}}</p>
             </div>
-    
+
         </div>
 
 
 
     </div>
 
-  
+
 
 
 
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
     <button mat-stroked-button (click)="onNoClick()">Abbrechen</button>
-    <button mat-stroked-button disabled (click)="onSubmit()" cdkFocusInitial>Senden</button>
+    <button mat-stroked-button (click)="onSubmit()" cdkFocusInitial>Senden</button>
 </div>

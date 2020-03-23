@@ -97,7 +97,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       this.geojson.resetStyle(this.selectedFeature);
     }
 
-    this.feedService.fetchDataForAll();
+    this.restrictionRepository.resetFilter();
   }
 
   buildMap() {
