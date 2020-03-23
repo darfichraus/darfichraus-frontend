@@ -1,12 +1,17 @@
 import {Injectable} from '@angular/core';
 import {FeedService} from './feed.service';
-import { Restrictions, RestrictionType} from './Restriction';
+import {FetchResult, Restrictions, RestrictionType} from './Restriction';
+import {BehaviorSubject} from 'rxjs';
 
 
 @Injectable()
 export class RestrictionRepository {
 
   restrictions: Restrictions;
+  allRestrictions: Restrictions;
+
+  private filterDataSource = new BehaviorSubject<Restrictions>([]);
+  filteredRestrictions = this.filterDataSource.asObservable();
 
 
 
@@ -18,9 +23,20 @@ export class RestrictionRepository {
 
     this.feedService.data.subscribe(results => {
       this.restrictions = results.data;
+      this.allRestrictions = results.data;
     });
 
     this.feedService.fetchDataForAll();
+  }
+
+  filterByType(restrictionType: RestrictionType) {
+    this.restrictions = this.allRestrictions.filter(e => e.restrictionType === restrictionType);
+    this.filterDataSource.next(this.restrictions);
+  }
+
+  resetFilter() {
+    this.restrictions = this.allRestrictions;
+    this.filterDataSource.next(this.allRestrictions);
   }
 
 }

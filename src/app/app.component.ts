@@ -2,7 +2,8 @@ import {AfterContentInit, Component, OnInit} from '@angular/core';
 import {MeldungComponent} from './meldung/meldung.component';
 import {MatDialog} from '@angular/material/dialog';
 import {FeedService} from './feed.service';
-import {FetchResult} from './Restriction';
+import {FetchResult, RestrictionType, RestrictionTypeTranslator} from './Restriction';
+import {RestrictionRepository} from './restriction.repository';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent implements OnInit, AfterContentInit {
   data: FetchResult;
 
 
-  constructor(private dialog: MatDialog, public feedService: FeedService) {
+  constructor(private dialog: MatDialog, public feedService: FeedService,
+              private restrictionRepository: RestrictionRepository) {
 
   }
 
@@ -43,13 +45,33 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   onIcon(icon) {
     this.mode = icon;
+    this.restrictionRepository.filterByType(this.translateMapModeToRestrictionType(this.mode));
+  }
+
+  translateMapModeToRestrictionType(mapMode): RestrictionType {
+    switch (mapMode) {
+      case 'bus':
+        return RestrictionType.PUBLIC_TRANSPORTATION;
+      case 'person':
+        return RestrictionType.EVENTS_AND_ASSEMBLIES;
+      case 'restaurant':
+        return RestrictionType.GASTRONOMY;
+      case 'eco':
+        return RestrictionType.PUBLIC_PLACES;
+      case 'shopping':
+        return RestrictionType.RETAIL;
+      case 'close':
+        return RestrictionType.CURFEW;
+      default:
+        return RestrictionType.CURFEW;
+    }
   }
 
   ngAfterContentInit(): void {
 
     setTimeout(() => {
-        this.mode = 'bus';
-      }, 100
+        this.onIcon('bus');
+      }, 1
     );
 
   }
