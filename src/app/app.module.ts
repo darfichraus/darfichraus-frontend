@@ -17,6 +17,7 @@ import {RestrictionRepository} from './restriction.repository';
 import {FeedService} from './feed.service';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MeldungReactiveComponent } from './meldung-reactive/meldung-reactive.component';
+import { NumericDirective } from './meldung/number-input.directive';
 
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
@@ -30,7 +31,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     MapComponent,
     LeafmapComponent,
     MeldungComponent,
-    MeldungReactiveComponent
+    MeldungReactiveComponent,
+    NumericDirective
   ],
   imports: [
     BrowserModule,

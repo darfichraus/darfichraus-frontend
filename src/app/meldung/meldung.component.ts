@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { RestrictionType, Restriction, RestrictionState } from '../Restriction';
+import { RestrictionType, Restriction, RestrictionState, RestrictionTypeTranslator } from '../Restriction';
 import { HttpClient } from '@angular/common/http';
 import { FeedService } from '../feed.service';
 
@@ -23,7 +23,7 @@ export class MeldungComponent implements OnInit {
   location: string;
   source: string;
   zip: string;
-  bereich: string;
+  areal: string = "COUNTRY";
   start: string;
   end: string;
   kategorie: string;
@@ -68,6 +68,8 @@ export class MeldungComponent implements OnInit {
     {value: 'RETAIL', viewValue: RestrictionType.RETAIL},
     {value: 'CURFEW', viewValue: RestrictionType.CURFEW},
   ];
+  restrictionState: any;
+  translator: RestrictionTypeTranslator = new RestrictionTypeTranslator();
 
   constructor(   public dialogRef: MatDialogRef<MeldungComponent>, private feedService: FeedService) { }
 
@@ -81,31 +83,52 @@ export class MeldungComponent implements OnInit {
 
   onSubmit() {
 
-    let restriction = {
-      areal: 'STATE',
-      arealIdentifier: 'Bayern',
-      restrictionState: RestrictionState[RestrictionState.RESTRICTION],
-      restrictionType: RestrictionType.PUBLIC_PLACES,
-      restrictionStart: "2020-02-02",
-      restrictionDuration: 2,
-      shortDescription: 'asdf',
-      restrictionDescription: 'laskfjlasdf',
-      furtherInformation: 'www',
-      recipient: 'ich',
-      publisher: 'ich',
-    }
+    const restriction = new Restriction();
+    restriction.areal = this.areal;
+    restriction.arealIdentifier = this.location;
+    restriction.restrictionType = RestrictionType[this.kategorie];
+    restriction.restrictionState = RestrictionState[this.restrictionState];
+    restriction.shortDescription = this.title;
+    restriction.restrictionDescription = this.description;
+    restriction.furtherInformation = this.source;
+    restriction.restrictionStart = this.start;
+    restriction.restrictionEnd = this.end;
 
-
-
+    console.log(restriction);
 
 
     this.feedService.submit(restriction).subscribe(val => {
-      console.log(val);
       this.dialogRef.close();
-
+      this.feedService.fetchDataForAll();
     }, (err) => {
       console.log(err);
     });
   }
+
+
+
+
+
+  translate(restrictionType: RestrictionType): string {
+
+    switch (restrictionType) {
+      case RestrictionType.PUBLIC_TRANSPORTATION:
+        return 'Nahverkehr';
+      case RestrictionType.EVENTS_AND_ASSEMBLIES:
+        return 'Veranstaltungen und Gruppen';
+      case RestrictionType.GASTRONOMY:
+        return 'Gastronomie';
+      case RestrictionType.PUBLIC_PLACES:
+        return 'Öffentliche Plätze';
+      case RestrictionType.RETAIL:
+        return 'Einzelhandel';
+      case RestrictionType.CURFEW:
+        return 'Ausgangssperre';
+      default:
+        return 'Allgemeiner Hinweis';
+    }
+  }
+
+
 
 }

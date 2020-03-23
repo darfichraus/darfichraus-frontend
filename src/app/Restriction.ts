@@ -31,12 +31,11 @@ export class RestrictionTypeTranslator {
           return 'Allgemeiner Hinweis';
       }
     }
-
 }
 
 export enum RestrictionState {
-  RESTRICTION = 'RESTRICTION',
-  BAN = 'BAN'
+  restriction = 'restriction',
+  ban = 'ban'
 }
 
 export class SearchInformation {
@@ -69,7 +68,7 @@ export class Restriction {
   restrictionState: RestrictionState;
   restrictionType: RestrictionType;
   restrictionStart: string;
-  restrictionDuration: number;
+  restrictionEnd: string;
   shortDescription: string;
   restrictionDescription: string;
   furtherInformation: string;

@@ -65,3 +65,19 @@ mat-dialog-content {
     line-height: 135.69%;
     padding-bottom: 15px;
   }
+
+  .restriction {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 135.69%;
+    padding-bottom: 15px;
+    float: right;
+  }
+
+  .mat-dialog-title {
+    //padding: 24px;
+    margin: -24px -24px 8px -24px;
+    width: auto;
+}

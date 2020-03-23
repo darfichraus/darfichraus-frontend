@@ -14,6 +14,7 @@ export class AppComponent implements OnInit, AfterContentInit {
   title = 'dir-frontend';
   mode: string;
   data: FetchResult;
+  selectedMode: string;
 
 
   constructor(private dialog: MatDialog, public feedService: FeedService,
@@ -45,7 +46,17 @@ export class AppComponent implements OnInit, AfterContentInit {
 
   onIcon(icon) {
     this.mode = icon;
+    this.selectedMode = icon;
     this.restrictionRepository.filterByType(this.translateMapModeToRestrictionType(this.mode));
+  }
+
+  onIconIn(icon) {
+    this.mode = icon;
+    this.restrictionRepository.filterByType(this.translateMapModeToRestrictionType(this.mode));
+  }
+
+  onIconOut() {
+    this.onIcon(this.selectedMode);
   }
 
   translateMapModeToRestrictionType(mapMode): RestrictionType {
