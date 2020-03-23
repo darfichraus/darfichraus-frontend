@@ -42,17 +42,12 @@ export class FeedService {
 
       this.dataSource.next(new FetchResult(data, searchQuery));
 
-      console.log(this.bus_count);
-
       this.bus_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.PUBLIC_TRANSPORTATION).length;
       this.person_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.EVENTS_AND_ASSEMBLIES).length;
       this.restaurant_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.GASTRONOMY).length;
       this.eco_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.PUBLIC_PLACES).length;
       this.shopping_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.RETAIL).length;
       this.close_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.CURFEW).length;
-
-      console.log(this.bus_count);
-
     });
   }
 
@@ -69,8 +64,6 @@ fetchDataForAll(): any {
   }
 
   submit(restriction: Restriction) {
-
-    console.log(restriction);
 
     const httpOptions = {
       headers: new HttpHeaders({
