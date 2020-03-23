@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { MeldungComponent } from './meldung/meldung.component';
-import { MatDialog } from '@angular/material/dialog';
-import { FeedService } from './feed.service';
-import { FetchResult } from './Restriction';
+import {AfterContentInit, Component, OnInit} from '@angular/core';
+import {MeldungComponent} from './meldung/meldung.component';
+import {MatDialog} from '@angular/material/dialog';
+import {FeedService} from './feed.service';
+import {FetchResult} from './Restriction';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, AfterContentInit {
   title = 'dir-frontend';
   mode: string;
   data: FetchResult;
@@ -23,9 +23,8 @@ export class AppComponent implements OnInit{
 
     this.feedService.data.subscribe(data => {
       this.data = data;
+    });
 
-      console.log(this.data.data);
-    });  
   }
 
   openDialog(): void {
@@ -44,6 +43,15 @@ export class AppComponent implements OnInit{
 
   onIcon(icon) {
     this.mode = icon;
+  }
+
+  ngAfterContentInit(): void {
+
+    setTimeout(() => {
+        this.mode = 'bus';
+      }, 100
+    );
+
   }
 
 
