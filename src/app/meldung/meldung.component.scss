@@ -82,11 +82,16 @@ mat-dialog-content {
 
   .mat-dialog-title {
     //padding: 24px;
-    margin: -24px -24px 8px -24px;
+    margin: -24px -24px 0px -24px;
     width: auto;
 }
 
 textarea {
     resize: none;
     height: 50px;
+  }
+
+  .divider {
+      height: 100%;
+      background-color: #f0f0f0;
   }
