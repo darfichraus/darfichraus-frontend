@@ -1,18 +1,35 @@
 // Font Faces
 
 @font-face {
-    font-family: "Playfair Display";
-    src: url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+  font-family: "Playfair Display";
+}
+
+.content-desktop {
+  display: block;
+}
+
+.content-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .content-desktop {
+    display: none;
+  }
+  .content-mobile {
+    display: block;
+  }
 }
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { 
-  height: 100%; 
+html, body {
+  height: 100%;
 }
-body { 
-  margin: 0; 
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 //@import "~leaflet/dist/leaflet.css";
@@ -25,44 +42,49 @@ h1.heading {
   padding-bottom: 1em;
 }
 
-.info { 
-  display: absolute; 
+.isMobile {
+  padding-left: 0.5em !important;
+  padding-right: 0.5em !important;
+}
+
+.info {
+  display: absolute;
   float: left;
-  //margin: 10px 600px 0px 0px !important; 
-  padding: 6px 8px; 
+  //margin: 10px 600px 0px 0px !important;
+  padding: 6px 8px;
   left: 50px;
   top: 19px;
-  font: 12px/14px Arial, Helvetica, sans-serif; 
-  background: white; 
-  background: rgba(255,255,255,0.8); 
-  box-shadow: 0 0 15px rgba(0,0,0,0.2); 
-  border-radius: 5px; 
+  font: 12px/14px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
   position: left;
 }
 
-.info h4 { 
-  margin: 0 0 5px; 
-  color: #777; 
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
 }
 
-.legend { 
-  font: 12px/14px Arial, Helvetica, sans-serif; 
-  text-align: left; 
-  line-height: 18px; 
-  color: #555; 
-  background: white; 
-  background: rgba(255,255,255,0.6); 
-  box-shadow: 0 0 15px rgba(0,0,0,0.2); 
-  border-radius: 5px; 
-  padding: 6px 8px; 
+.legend {
+  font: 12px/14px Arial, Helvetica, sans-serif;
+  text-align: left;
+  line-height: 18px;
+  color: #555;
+  background: white;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 6px 8px;
 }
 
-.legend i { 
-  width: 18px; 
-  height: 18px; 
-  float: left; 
-  margin-right: 8px; 
-  opacity: 0.7; 
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
 }
 
 .legend span, .legend label {
@@ -75,15 +97,17 @@ h1.heading {
   font-size: 80%;
 }
 
-.leaflet-bar a { 
-  background-color: #fff; 
-  border-bottom: 1px solid #ccc; 
-  color: #444; display: block; 
-  height: 26px; width: 26px; 
-  line-height: 1.45 !important; 
-  text-align: center; 
-  text-decoration: none; 
-  font: bold 18px 'Lucida Console', Monaco, monospace; 
+.leaflet-bar a {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  color: #444;
+  display: block;
+  height: 26px;
+  width: 26px;
+  line-height: 1.45 !important;
+  text-align: center;
+  text-decoration: none;
+  font: bold 18px 'Lucida Console', Monaco, monospace;
 }
 
 .mat-dialog-override {
@@ -93,6 +117,7 @@ h1.heading {
       flex-direction: column;
       height: 100%;
     }
+
     mat-dialog-content,
     div[mat-dialog-content] {
       flex-grow: 1;

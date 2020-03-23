@@ -30,6 +30,7 @@
     "leaflet": "1.6.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
+    "ngx-device-detector": "^1.4.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
