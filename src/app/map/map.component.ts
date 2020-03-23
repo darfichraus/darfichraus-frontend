@@ -53,8 +53,6 @@ export class MapComponent implements OnInit, AfterViewInit {
   info;
   zoomHome;
 
-
-
   constructor(private feedService: FeedService,
               private restrictionRepository: RestrictionRepository) {
   }
@@ -91,6 +89,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.legend.addTo(this.coronamap);
   }
 
+  // ------ ZOOM ------
   zoomToHomeView() {
     this.coronamap.setView(MapComponent.HOME_VIEW, 6);
     if (this.selectedFeature != null) {
@@ -104,6 +103,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     this.coronamap = L.map('map', {zoomControl: false, scrollWheelZoom: false}).setView(MapComponent.HOME_VIEW, 6);
     this.coronamap.dragging.disable();
+
     // ------ MAP + LAYER -------
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
@@ -123,11 +123,10 @@ export class MapComponent implements OnInit, AfterViewInit {
     }).addTo(this.coronamap);
 
     this.legend = L.control({position: 'bottomleft'});
-
     this.renewLegend();
 
     // ------ INFO ------
-    this.info = L.control();
+    this.info = L.control({position: 'topleft'});
     this.info.onAdd = function(coronamap) {
       this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
       this.update();

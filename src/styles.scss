@@ -26,11 +26,13 @@ h1.heading {
 }
 
 .info { 
-  display: relative; 
+  display: absolute; 
   float: left;
-  margin: 10px 550px 0px 0px !important; 
+  //margin: 10px 600px 0px 0px !important; 
   padding: 6px 8px; 
-  font: 14px/16px Arial, Helvetica, sans-serif; 
+  left: 50px;
+  top: 19px;
+  font: 12px/14px Arial, Helvetica, sans-serif; 
   background: white; 
   background: rgba(255,255,255,0.8); 
   box-shadow: 0 0 15px rgba(0,0,0,0.2); 
@@ -44,12 +46,12 @@ h1.heading {
 }
 
 .legend { 
-  font: 14px/16px Arial, Helvetica, sans-serif; 
+  font: 12px/14px Arial, Helvetica, sans-serif; 
   text-align: left; 
   line-height: 18px; 
   color: #555; 
   background: white; 
-  background: rgba(255,255,255,0.8); 
+  background: rgba(255,255,255,0.6); 
   box-shadow: 0 0 15px rgba(0,0,0,0.2); 
   border-radius: 5px; 
   padding: 6px 8px; 
@@ -71,7 +73,6 @@ h1.heading {
   opacity: 0.7;
   text-align: center;
   font-size: 80%;
-  margin: 101px;
 }
 
 .leaflet-bar a { 
