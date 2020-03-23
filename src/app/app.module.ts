@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeedComponent } from './feed/feed.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule} from './material.module';
+import { MeldeformComponent } from './meldeform/meldeform.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MapComponent } from './map/map.component';
 import { LeafmapComponent } from './leafmap/leafmap.component';
@@ -18,6 +19,7 @@ import {FeedService} from './feed.service';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { MeldungReactiveComponent } from './meldung-reactive/meldung-reactive.component';
 import { NumericDirective } from './meldung/number-input.directive';
+import {DeviceDetectorModule} from 'ngx-device-detector';
 
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
@@ -28,6 +30,7 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
   declarations: [
     AppComponent,
     FeedComponent,
+    MeldeformComponent,
     MapComponent,
     LeafmapComponent,
     MeldungComponent,
@@ -42,7 +45,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     FlexLayoutModule,
     MaterialModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DeviceDetectorModule.forRoot()
   ],
   providers: [
     RestrictionRepository,
