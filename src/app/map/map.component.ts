@@ -14,7 +14,6 @@ import {Restriction, Restrictions, RestrictionType} from '../Restriction';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit {
-
   private static HOME_VIEW = [51.27264, 14.26469];
   mapMode: string;
 
@@ -105,6 +104,9 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.coronamap.dragging.disable();
 
     // ------ MAP + LAYER -------
+    //L.tileLayer.provider('OpenStreetMap.BlackAndWhite.DE'), { id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6}).addTo(this.coronamap);
+
+
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
       attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
     }).addTo(this.coronamap);
