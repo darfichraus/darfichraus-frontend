@@ -2,7 +2,7 @@ import {Areal} from './_model/areal.enum';
 
 export enum RestrictionType {
 
-  PUBLIC_TRANSPORTATION = 'Nahverkehr',
+  PUBLIC_TRANSPORTATION = 'PUBLIC_TRANSPORTATION',
   EVENTS_AND_ASSEMBLIES = 'Veranstaltungen und Gruppen',
   GASTRONOMY = 'Gastronomie',
   PUBLIC_PLACES = 'Öffentliche Plätze',
@@ -39,19 +39,19 @@ export class FetchResult {
 
 export class Restriction {
 
-    id?: string;
-    areal: string;
-    arealIdentifier: string;
-    restrictionState: RestrictionState;
-    restrictionType: RestrictionType;
-    restrictionStart: string;
-    restrictionDuration: number;
-    shortDescription: string;
-    restrictionDescription: string;
-    furtherInformation: string;
-    recipient: string;
-    publisher: string;
-    searchQuery?: SearchInformation;
+  id?: string;
+  areal: string;
+  arealIdentifier: string;
+  restrictionState: RestrictionState;
+  restrictionType: RestrictionType;
+  restrictionStart: string;
+  restrictionDuration: number;
+  shortDescription: string;
+  restrictionDescription: string;
+  furtherInformation: string;
+  recipient: string;
+  publisher: string;
+  searchQuery?: SearchInformation;
 }
 
 export type Restrictions = Restriction[];

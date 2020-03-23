@@ -9,7 +9,7 @@ import {Areal} from './_model/areal.enum';
 })
 export class FeedService {
 
-  static readonly api = 'http://api.darfichraus.de:8082/restrictions/';
+  static readonly api = 'https://api.darfichraus.de/restrictions/';
   // @ts-ignore
   private dataSource = new BehaviorSubject<FetchResult>(new FetchResult());
   data = this.dataSource.asObservable();
