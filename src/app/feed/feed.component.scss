@@ -71,7 +71,6 @@
   text-transform: uppercase;
 
   /* Gray 3 */
-
   color: #828282;
 }
 
@@ -97,7 +96,7 @@ a {
 
 .feed-item-container:hover {
   background-color: #f0f0f0;
-  cursor: pointer;
+  cursor: default;
 }
 
 .left {

@@ -32,6 +32,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatBadgeModule,
     //MatTreeModule,
     //MatExpansionModule
+    MatChipsModule,
   ]
 })
 export class MaterialModule {

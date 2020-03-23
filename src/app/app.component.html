@@ -1,8 +1,10 @@
 <mat-toolbar>
   <img src="../assets/wvv-projekt.png" class="wvv-logo content-desktop">
   <img src="../assets/logo.svg" class="logo">
-  <div class="toolbar-links">
-    <a href="">Impressum</a>
+  <div class="toolbar-links" style="position: fixed; right: 10px;"> 
+    <button mat-stroked-button (click)="openDialog()" style="color: #2D3780;">
+      Impressum
+    </button>
   </div>
 </mat-toolbar>
 
@@ -66,10 +68,13 @@
     <div class="feed" fxFlex="" [class.isMobile]="isMobile">
 
       <div class="content-desktop">
-        <button mat-stroked-button (click)="openDialog()">
+        <button mat-stroked-button (click)="openDialog()" >
           <mat-icon>add</mat-icon>
           Verordnung
         </button>
+        <div style="float: right; margin-top: 10px;">
+          <b>34</b> Einschränkungen, <b>8</b> Verbote
+        </div>
       </div>
       <app-feed></app-feed>
 
