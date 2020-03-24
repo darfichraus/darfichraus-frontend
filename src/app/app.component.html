@@ -1,13 +1,17 @@
 <mat-toolbar>
   <img src="../assets/wvv-projekt.png" class="wvv-logo content-desktop">
   <img src="../assets/logo.svg" class="logo">
-  <div class="toolbar-links" style="position: fixed; right: 10px; display: hidden">
+  <div class="toolbar-links" style="position: fixed; right: 10px">
     <button mat-stroked-button (click)="openDialog()" style="color: #2D3780;">
       Impressum
     </button>
     <button mat-stroked-button (click)="openVideo()" style="color: #2D3780;">
       <fa-icon [icon]="this.faYoutube"></fa-icon>
       Video 
+    </button>
+    <button mat-stroked-button (click)="openContact()" style="color: #2D3780;">
+      <fa-icon [icon]="this.faEnvelope"></fa-icon>
+      Kontakt 
     </button>
   </div>
 </mat-toolbar>

@@ -24,6 +24,7 @@ import { ImpressumComponent } from './impressum/impressum.component';
 import { HomeComponent } from './home/home.component';
 import { PlayerComponent } from './player/player.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
@@ -42,7 +43,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     SearchPipe,
     ImpressumComponent,
     HomeComponent,
-    PlayerComponent
+    PlayerComponent,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,

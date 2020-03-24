@@ -1,0 +1,72 @@
+<mat-toolbar mat-dialog-title>
+    <mat-toolbar-row>
+        <span class="modal-heading">Kontaktformular</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div mat-dialog-content>
+
+
+    <form [formGroup]="myForm">
+
+
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+
+            <mat-form-field appearance="outline" fxFlex="50">
+                <mat-label>Vorname</mat-label>
+                <input required formControlName="firstName" matInput maxlength="32">
+                <mat-error *ngIf="f.firstName.touched && f.firstName.errors?.required">Vorname fehlt.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="50">
+                <mat-label>Nachname</mat-label>
+                <input required formControlName="lastName" matInput maxlength="32">
+                <mat-error *ngIf="f.lastName.touched && f.lastName.errors?.required">Nachname fehlt.</mat-error>
+            </mat-form-field>
+
+        </div>
+
+
+
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+
+
+            <mat-form-field appearance="outline" fxFlex="50">
+                <mat-label>Email</mat-label>
+                <input required type="text" formControlName="email" matInput
+                    placeholder="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                <mat-error *ngIf="f.email.touched && f.email.errors?.required">Email Adresse fehlt.</mat-error>
+                <mat-error *ngIf="f.email.touched && f.email.errors?.pattern">Ungültige Email Adresse</mat-error>
+
+
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" fxFlex="50">
+                <mat-label>Titel</mat-label>
+                <input required formControlName="title" matInput maxlength="32">
+                <mat-error *ngIf="f.title.touched && f.title.errors?.required">Titel fehlt.</mat-error>
+            </mat-form-field>
+
+        </div>
+
+
+        <mat-form-field appearance="outline" class="max-width">
+            <mat-label>Nachricht</mat-label>
+            <textarea required formControlName="message" matInput maxlength="1024"></textarea>
+            <mat-error *ngIf="f.message.touched && f.message.errors?.required">Nachricht fehlt.</mat-error>
+        </mat-form-field>
+
+
+
+
+    </form>
+
+
+</div>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-stroked-button (click)="onNoClick()">Abbrechen</button>
+    <button mat-stroked-button [disabled]="!myForm.valid" (click)="onSubmit()" cdkFocusInitial>Senden</button>
+</div>

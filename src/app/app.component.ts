@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { PlayerComponent } from './player/player.component';
 
-import {faHandPointLeft, } from '@fortawesome/free-regular-svg-icons';
+import {faEnvelope, } from '@fortawesome/free-regular-svg-icons';
 import {faYoutube, } from '@fortawesome/free-brands-svg-icons';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 
 @Component({
@@ -15,6 +16,7 @@ import {faYoutube, } from '@fortawesome/free-brands-svg-icons';
 export class AppComponent  {
 
   faYoutube = faYoutube;
+  faEnvelope = faEnvelope;
 
   constructor(private dialog: MatDialog) {
 
@@ -38,6 +40,20 @@ export class AppComponent  {
   openVideo(): void {
     const dialogRef = this.dialog.open(PlayerComponent, {
       width: '610px',
+      restoreFocus: false,
+      autoFocus: false,
+      hasBackdrop: true,
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openContact(): void {
+    const dialogRef = this.dialog.open(ContactFormComponent, {
+      width: '700px',
       restoreFocus: false,
       autoFocus: false,
       hasBackdrop: true,
