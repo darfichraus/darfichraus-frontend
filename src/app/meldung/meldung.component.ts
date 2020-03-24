@@ -40,7 +40,7 @@ export class MeldungComponent implements OnInit {
   GASTRONOMY: 'Gastronomie',
   PUBLIC_PLACES: 'Öffentliche Plätze',
   RETAIL:  'Einzelhandel',
-  CURFEW: 'Ausgangssperre'
+  CURFEW: 'Ausgangsbeschränkung'
   }
 
   counties: Food[] = [
@@ -132,7 +132,7 @@ export class MeldungComponent implements OnInit {
       case RestrictionType.RETAIL:
         return 'Einzelhandel';
       case RestrictionType.CURFEW:
-        return 'Ausgangssperre';
+        return 'Ausgangsbeschränkung';
       default:
         return 'Allgemeiner Hinweis';
     }
@@ -144,9 +144,9 @@ export class MeldungComponent implements OnInit {
         day = '' + d.getDate(),
         year = d.getFullYear();
 
-    if (month.length < 2) 
+    if (month.length < 2)
         month = '0' + month;
-    if (day.length < 2) 
+    if (day.length < 2)
         day = '0' + day;
 
     return [day, month, year].join('.');

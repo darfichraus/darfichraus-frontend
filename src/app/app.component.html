@@ -5,16 +5,12 @@
     <button mat-stroked-button (click)="openDialog()" style="color: #2D3780;">
       Impressum
     </button>
-    <button mat-stroked-button (click)="openVideo()" style="color: #2D3780;">
+    <button mat-button (click)="openVideo()" style="color: #2D3780;">
       <fa-icon [icon]="this.faYoutube"></fa-icon>
-      Video 
     </button>
-    <button mat-stroked-button (click)="openContact()" style="color: #2D3780;">
+    <button mat-button (click)="openContact()" style="color: #2D3780;">
       <fa-icon [icon]="this.faEnvelope"></fa-icon>
-      Kontakt 
     </button>
   </div>
 </mat-toolbar>
-
-
 <router-outlet></router-outlet>

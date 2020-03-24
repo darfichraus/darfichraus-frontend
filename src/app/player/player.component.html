@@ -1,10 +1,15 @@
 <mat-toolbar mat-dialog-title>
     <mat-toolbar-row>
-        <span>Konzeptvideo</span>
-        <span class="spacer"></span>
+        <span>#wirvsvirus - Hackathon der Bundesregierung Pitch</span>
+        <span class="spacer">
+        </span>
         <mat-icon (click)="onClose()">close</mat-icon>
     </mat-toolbar-row>
 </mat-toolbar>
+
+<span class="video-message">
+        Wir haben für euch beim Hackathon der Bundesregierung vom 20.03. - 22.03.2020 mitgemacht. <br/><br/>Das Konzept und Pitch-Video zum Thema Krisenkommunikation könnt ihr euch hier ansehen.
+</span>
 
 <iframe width="560" height="315" [src]="this.safeURL" frameborder="0" allowfullscreen (load)="isLoading=false"></iframe>
 
