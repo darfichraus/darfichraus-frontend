@@ -66,13 +66,13 @@ import { MatChipsModule } from '@angular/material/chips';
     MatRadioModule,
     MatButtonToggleModule,
     MatTableModule,
-    //MatPaginatorModule,
-    //MatSortModule,
-    //MatStepperModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatStepperModule,
     MatDividerModule,
     MatBadgeModule,
-    //MatTreeModule,
-    //MatExpansionModule
+    MatTreeModule,
+    MatExpansionModule,
     MatChipsModule,
   ]
 })
