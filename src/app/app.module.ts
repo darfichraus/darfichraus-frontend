@@ -25,7 +25,8 @@ import { HomeComponent } from './home/home.component';
 import { PlayerComponent } from './player/player.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContactFormComponent } from './contact-form/contact-form.component';
-
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { AdminReviewComponent } from './admin-review/admin-review.component';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -44,7 +45,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     ImpressumComponent,
     HomeComponent,
     PlayerComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    AdminReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,10 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     FormsModule,
     ReactiveFormsModule,
     DeviceDetectorModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    // RecaptchaModule,
+    // RecaptchaFormsModule, // if you need forms support
+
   ],
   providers: [
     RestrictionRepository,

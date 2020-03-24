@@ -1,0 +1,60 @@
+<div class="body">
+
+    <h1>Admin Review Page</h1>
+
+
+    <mat-form-field>
+        <mat-icon class="pre-text" matPrefix>search</mat-icon>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> id</th>
+            <td mat-cell *matCellDef="let element" matTooltip="{{element.id}}"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="shortDescription">
+            <th mat-header-cell *matHeaderCellDef> shortDescription </th>
+            <td mat-cell *matCellDef="let element" matTooltip="{{element.shortDescription}}"> {{element.shortDescription}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="restrictionType">
+            <th mat-header-cell *matHeaderCellDef> restrictionType </th>
+            <td mat-cell *matCellDef="let element"> {{element.restrictionType}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="areal">
+            <th mat-header-cell *matHeaderCellDef> areal </th>
+            <td mat-cell *matCellDef="let element"> {{element.areal}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="restrictionDescription">
+            <th mat-header-cell *matHeaderCellDef> restrictionDescription </th>
+            <td mat-cell *matCellDef="let element"> {{element.restrictionDescription}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="review">
+            <th mat-header-cell *matHeaderCellDef> review </th>
+            <td mat-cell *matCellDef="let element"> {{element.review}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+
+
+
+
+
+</div>

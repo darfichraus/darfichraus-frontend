@@ -52,4 +52,10 @@ export class ContactFormComponent implements OnInit {
   get f(): FormGroup['controls'] {
     return this.myForm.controls;
   }
+
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+}
+
+
 }
