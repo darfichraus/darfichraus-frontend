@@ -145,8 +145,8 @@ export class MeldungReactiveComponent implements OnInit {
 
     restriction.restrictionState = this.f.restrictionState.value;
     restriction.restrictionType = this.f.restrictionType.value;
-    restriction.restrictionStart = this.f.restrictionStart.value;
-    restriction.restrictionEnd = this.f.restrictionEnd.value;
+    restriction.restrictionStart = '2020-03-02'; // this.f.restrictionStart.value;
+    restriction.restrictionEnd = '2020-02-02'; // this.f.restrictionEnd.value;
     restriction.shortDescription = this.f.shortDescription.value;
     restriction.restrictionDescription = this.f.restrictionDescription.value;
     restriction.furtherInformation = this.f.furtherInformation.value;

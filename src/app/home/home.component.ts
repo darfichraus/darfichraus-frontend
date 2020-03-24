@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
       height: '700px',
       restoreFocus: false,
       autoFocus: false,
+      hasBackdrop: true,
       data: {}
     });
 
