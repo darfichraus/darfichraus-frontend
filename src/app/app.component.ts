@@ -3,6 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { PlayerComponent } from './player/player.component';
 
+import {faHandPointLeft, } from '@fortawesome/free-regular-svg-icons';
+import {faYoutube, } from '@fortawesome/free-brands-svg-icons';
+
 
 @Component({
   selector: 'app-root',
@@ -10,6 +13,8 @@ import { PlayerComponent } from './player/player.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  {
+
+  faYoutube = faYoutube;
 
   constructor(private dialog: MatDialog) {
 
@@ -21,6 +26,7 @@ export class AppComponent  {
       height: '700px',
       restoreFocus: false,
       autoFocus: false,
+      hasBackdrop: true,
       data: {}
     });
 

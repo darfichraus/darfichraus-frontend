@@ -23,6 +23,8 @@ import {SearchPipe} from '../app/search.pipe';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { HomeComponent } from './home/home.component';
 import { PlayerComponent } from './player/player.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -52,7 +54,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
+    FontAwesomeModule
   ],
   providers: [
     RestrictionRepository,
