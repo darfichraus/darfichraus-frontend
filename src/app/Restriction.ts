@@ -26,7 +26,7 @@ export class RestrictionTypeTranslator {
         case RestrictionType.RETAIL:
           return 'Einzelhandel';
         case RestrictionType.CURFEW:
-          return 'Ausgangssperre';
+          return 'Ausgangsbeschränkung';
         default:
           return 'Allgemeiner Hinweis';
       }

@@ -29,7 +29,7 @@ export class MeldungReactiveComponent implements OnInit {
     { value: 'GASTRONOMY', viewValue: 'Gastronomie' },
     { value: 'PUBLIC_PLACES', viewValue: 'Öffentliche Plätze' },
     { value: 'RETAIL', viewValue: 'Einzelhandel' },
-    { value: 'CURFEW', viewValue: 'Ausgangssperre' }
+    { value: 'CURFEW', viewValue: 'Ausgangsbeschränkung' }
   ];
 
   counties: DropSelection[] = [
