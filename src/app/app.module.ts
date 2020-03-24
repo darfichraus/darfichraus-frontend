@@ -22,6 +22,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {SearchPipe} from '../app/search.pipe';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { HomeComponent } from './home/home.component';
+import { PlayerComponent } from './player/player.component';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -38,7 +39,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     NumericDirective,
     SearchPipe,
     ImpressumComponent,
-    HomeComponent
+    HomeComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,
