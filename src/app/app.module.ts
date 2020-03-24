@@ -27,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { AdminReviewComponent } from './admin-review/admin-review.component';
+import { PreviewModalComponent } from './preview-modal/preview-modal.component';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -46,7 +47,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     HomeComponent,
     PlayerComponent,
     ContactFormComponent,
-    AdminReviewComponent
+    AdminReviewComponent,
+    PreviewModalComponent
   ],
   imports: [
     BrowserModule,

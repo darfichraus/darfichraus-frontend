@@ -1,0 +1,29 @@
+<mat-toolbar mat-dialog-title>
+    <mat-toolbar-row>
+        <span class="modal-heading">Overview</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div mat-dialog-content>
+
+
+    <div *ngFor="let item of data | keyvalue">
+        <p class="pre-text">{{item.key}}: </p><p>{{item.value}}</p>
+        <mat-divider></mat-divider>
+
+    </div>
+
+
+
+
+</div>
+
+
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-stroked-button (click)="onClose()">Abbrechen</button>
+    <div>
+        <button mat-stroked-button color="warn" (click)="onSetPending()" >Zurückweisen</button>
+        <button mat-stroked-button color="primary" (click)="onSetAccepted()" >Validieren</button>
+    </div>
+    
+</div>

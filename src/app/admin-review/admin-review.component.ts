@@ -4,6 +4,8 @@ import { Restriction } from '../Restriction';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { PreviewModalComponent } from '../preview-modal/preview-modal.component';
 
 
 
@@ -23,7 +25,7 @@ export class AdminReviewComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
-  constructor(public adminReviewService: AdminReviewService) { }
+  constructor(public adminReviewService: AdminReviewService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -45,6 +47,24 @@ export class AdminReviewComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  onPreview(row) {
+
+      const dialogRef = this.dialog.open(PreviewModalComponent, {
+        width: '700px',
+        restoreFocus: false,
+        autoFocus: false,
+        hasBackdrop: true,
+        data: row,
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+
+  }
+
+ 
   
 
 }
