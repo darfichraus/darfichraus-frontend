@@ -141,12 +141,17 @@ export class MapComponent implements OnInit, AfterViewInit {
       this._div.innerHTML = '<h4>Corona Länderinformation</h4>' + (props ?
         '<b>' + props.GEN + '</b><br />'
         + '<ul>'
-        + '<li><b>22.03.20</b> - Kontaktverbot</li>'
+        + '<li><b>23.03.20</b> - Weitreichendes Kontaktverbot</li>'
         + '<li><b>10.03.20</b> - Gaststätten geschlossen</li>'
         + '</ul>'
         // + stateCriticality[Math.floor(Math.random() * 15)] + ' Menschen infiziert <br />'
         // + '<br /> <b>Bevölkerung:</b> ' + props.destatis.population
-        + ''
+        + '<b>Wichtige Rufnummern: </b>'
+        + '<ul>'
+        + '<li><b>Bürgertelefon</b> <br />0211 / 9119-1001</li>'
+        + '<li><b>Ärztl. Bereitschaftsdienst</b> <br />116-117</li>'
+        + '<li><b>Bürgschaftsbank NRW</b> <br />02131 / 5107-200</li>'
+        + '</ul>'
         : 'Ein Bundesland auswählen');
     };
 
