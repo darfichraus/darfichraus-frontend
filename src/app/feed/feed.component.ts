@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FeedService} from '../feed.service';
-import {FetchResult, Restriction, RestrictionType, RestrictionTypeTranslator} from '../Restriction';
+import {FetchResult, Restriction, RestrictionType, RestrictionTypeTranslator, RestrictionState, RestrictionStateTranslator} from '../Restriction';
 import {RestrictionRepository} from '../restriction.repository';
 
 @Component({
@@ -24,6 +24,7 @@ export class FeedComponent implements OnInit {
     });
 
     this.restrictionRepository.filteredRestrictions.subscribe(data => {
+      console.log("update");
       this.data.data = data;
     });
 
@@ -31,6 +32,11 @@ export class FeedComponent implements OnInit {
 
   translateRestrictionType(input: RestrictionType): string {
     return RestrictionTypeTranslator.translate(input);
+  }
+
+  translateRestrictionState(input: RestrictionState): string {
+    return RestrictionStateTranslator.translate(input);
+
   }
 
 }

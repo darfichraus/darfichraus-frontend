@@ -11,7 +11,9 @@
       </button>
   </mat-form-field>
 
-<div *ngFor="let item of data.data | search:'arealIdentifier,restrictionDescription':query" class="container feed-item-container">
+  <!-- <div *ngFor="let item of data.data | search:'arealIdentifier,restrictionDescription':query" class="container feed-item-container"> -->
+    <div *ngFor="let item of data.data" class="container feed-item-container">
+        <div [class.ban]="item.restrictionState == 'BAN'" class="state">{{translateRestrictionState(item.restrictionState)}}</div>
     <div class="type">{{translateRestrictionType(item.restrictionType)}}</div>
     <div *ngIf="item.arealIdentifier != data.searchQuery.arealValue" class="subhead">{{item.arealIdentifier}}</div>
     <div class="text">{{item.restrictionDescription}}</div>
