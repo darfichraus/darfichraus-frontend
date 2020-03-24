@@ -4,6 +4,8 @@ import {Restriction, RestrictionType, RestrictionTypeTranslator} from '../Restri
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { PreviewModalComponent } from '../preview-modal/preview-modal.component';
 
 
 
@@ -15,7 +17,7 @@ import { MatSort } from '@angular/material/sort';
 export class AdminReviewComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['id', 'shortDescription', 'restrictionType', 'areal', 'restrictionDescription'];
+  displayedColumns: string[] = ['restrictionType', 'areal', 'shortDescription',];
   dataSource;
   query = '';
 
@@ -23,7 +25,7 @@ export class AdminReviewComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
-  constructor(public adminReviewService: AdminReviewService) { }
+  constructor(public adminReviewService: AdminReviewService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -52,6 +54,20 @@ export class AdminReviewComponent implements OnInit {
 
   translateRestrictionType(restrictionType: RestrictionType): string {
     return RestrictionTypeTranslator.translate(restrictionType);
+  }
+
+  openDialog(row): void {
+    const dialogRef = this.dialog.open(PreviewModalComponent, {
+      width: '900px',
+      restoreFocus: false,
+      autoFocus: false,
+      hasBackdrop: true,
+      data: row
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 

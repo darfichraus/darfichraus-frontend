@@ -10,7 +10,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from './material.module';
 import {HttpClientModule} from '@angular/common/http';
 import {MapComponent} from './map/map.component';
-import {LeafmapComponent} from './leafmap/leafmap.component';
 import {MeldungComponent} from './meldung/meldung.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RestrictionRepository} from './restriction.repository';
@@ -38,7 +37,6 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     AppComponent,
     FeedComponent,
     MapComponent,
-    LeafmapComponent,
     MeldungComponent,
     MeldungReactiveComponent,
     NumericDirective,

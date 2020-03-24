@@ -3,7 +3,7 @@
 <p class="feedItem">Aktuelle Verordnungen und Einschränkungen bezüglich des Coronavirus Covid-19</p>
 
 <mat-form-field>
-    <mat-icon matPrefix class="icon-input-prefix">search</mat-icon>
+    <mat-icon matPrefix class="pre-text">search</mat-icon>
     <mat-label>Suche</mat-label>
       <input matInput [(ngModel)]="query" placeholder="Titel oder Beschreibung...">
       <button mat-icon-button *ngIf="query" matSuffix (click)="this.query=''">

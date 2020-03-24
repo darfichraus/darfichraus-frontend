@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(MeldungComponent, {
+    const dialogRef = this.dialog.open(MeldungReactiveComponent, {
       width: '900px',
       height: '700px',
       restoreFocus: false,

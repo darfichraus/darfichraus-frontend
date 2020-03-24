@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RestrictionState, RestrictionType } from '../Restriction';
+import { RestrictionState, RestrictionType, Restriction } from '../Restriction';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FeedService } from '../feed.service';
@@ -16,8 +16,8 @@ interface DropSelection {
 })
 export class MeldungReactiveComponent implements OnInit {
   restrictionStates = [
-    {value: 'ban', viewValue: 'Verbot'},
-    {value: 'restriction', viewValue: 'Einschränkung'}
+    {value: 'BAN', viewValue: 'Verbot'},
+    {value: 'RESTRICTION', viewValue: 'Einschränkung'}
   ];
 
   restrictionTypes = [
@@ -78,15 +78,15 @@ export class MeldungReactiveComponent implements OnInit {
     restrictionType: [[], [Validators.required]],
     shortDescription: [
       '',
-      [Validators.required, Validators.minLength(4), Validators.maxLength(32)]
+      [Validators.required, Validators.maxLength(32)]
     ],
     restrictionDescription: [
       '',
-      [Validators.required, Validators.minLength(4), Validators.maxLength(2048)]
+      [Validators.required, Validators.minLength(10), Validators.maxLength(2048)]
     ],
-    restrictionState: ['restriction', [Validators.required]],
+    restrictionState: ['RESTRICTION', [Validators.required]],
 
-    publisher: [
+    furtherInformation: [
       '',
       [Validators.required, Validators.maxLength(32)]
     ],
@@ -107,13 +107,62 @@ export class MeldungReactiveComponent implements OnInit {
     private feedService: FeedService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.f.areal.valueChanges.subscribe(value => {
+      if(value === 'COUNTRY') {
+        this.f.county.setValidators(null);
+        this.f.zip.setValidators(null);
+      }
+      else if (value === 'COUNTY') {
+        this.f.county.setValidators([Validators.required]);
+        this.f.zip.setValidators(null);
+      }
+      else if (value === 'ZIP') {
+        this.f.county.setValidators(null);
+        this.f.zip.setValidators([Validators.required]);
+      }
+    });
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  onSubmit() {}
+  onSubmit() {
+
+    let restriction = new Restriction();
+    restriction.areal = this.f.areal.value;
+
+    if(restriction.areal === 'COUNTRY') {
+      restriction.arealIdentifier = 'Deutschland';
+    }
+    else if(restriction.areal === 'COUNTY') {
+      restriction.arealIdentifier = this.f.county.value;
+    }
+    else if(restriction.areal === 'ZIP') {
+      restriction.arealIdentifier = this.f.zip.value;
+    }
+
+    restriction.restrictionState = this.f.restrictionState.value;
+    restriction.restrictionType = this.f.restrictionType.value;
+    restriction.restrictionStart = this.f.restrictionStart.value;
+    restriction.restrictionEnd = this.f.restrictionEnd.value;
+    restriction.shortDescription = this.f.shortDescription.value;
+    restriction.restrictionDescription = this.f.restrictionDescription.value;
+    restriction.furtherInformation = this.f.furtherInformation.value;
+    restriction.recipient = 'recipient1';
+    restriction.publisher = 'publisher1';
+
+    console.log(restriction);
+    
+    this.feedService.submit(restriction).subscribe(val => {
+      this.dialogRef.close();
+      this.feedService.fetchDataForAll();
+    }, (err) => {
+      console.log(err);
+    });
+
+  }
 
 
   get f(): FormGroup['controls'] {
