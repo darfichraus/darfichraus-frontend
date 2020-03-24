@@ -2,3 +2,20 @@
     margin: auto;
 }
 
+mat-icon:hover {
+    cursor: pointer;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-tooolbar, mat-toolbar-row {
+    background-color:transparent
+}
+
+.mat-dialog-title {
+    //padding: 24px;
+    margin: -24px -24px 24px -24px;
+    width: auto;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -15,10 +16,16 @@ export class PlayerComponent implements OnInit {
   loads: boolean = true;
 
 
-  constructor(private _sanitizer: DomSanitizer){
+  constructor(private _sanitizer: DomSanitizer, public dialogRef: MatDialogRef<PlayerComponent>,
+    ){
     this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.src);
  }
   ngOnInit(): void {
   }
+
+  onClose(): void {
+    this.dialogRef.close();
+  }
+
 
 }

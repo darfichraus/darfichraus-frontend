@@ -1,3 +1,11 @@
+<mat-toolbar mat-dialog-title>
+    <mat-toolbar-row>
+        <span>Konzeptvideo</span>
+        <span class="spacer"></span>
+        <mat-icon (click)="onClose()">close</mat-icon>
+    </mat-toolbar-row>
+</mat-toolbar>
+
 <iframe width="560" height="315" [src]="this.safeURL" frameborder="0" allowfullscreen (load)="isLoading=false"></iframe>
 
 <p class="loading" *ngIf="isLoading">loading...</p>

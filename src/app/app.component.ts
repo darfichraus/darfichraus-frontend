@@ -31,9 +31,10 @@ export class AppComponent  {
 
   openVideo(): void {
     const dialogRef = this.dialog.open(PlayerComponent, {
-      width: '600px',
+      width: '610px',
       restoreFocus: false,
       autoFocus: false,
+      hasBackdrop: true,
       data: {}
     });
 
