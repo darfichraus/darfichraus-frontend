@@ -10,14 +10,15 @@ mat-icon:hover {
     flex: 1 1 auto;
 }
 
-mat-toolbar, mat-toolbar-row {
-    background-color:transparent
-}
-
 .mat-dialog-title {
     //padding: 24px;
     margin: -24px -24px 24px -24px;
     width: auto;
+}
+
+.mat-toolbar {
+    background: #f5f5f5;
+    color: rgba(0,0,0,.87);
 }
 
 .video-message{
