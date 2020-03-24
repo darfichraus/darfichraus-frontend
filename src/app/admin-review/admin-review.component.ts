@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminReviewService } from './admin-review-service/admin-review.service';
-import { Restriction } from '../Restriction';
+import {Restriction, RestrictionType, RestrictionTypeTranslator} from '../Restriction';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
-import { PreviewModalComponent } from '../preview-modal/preview-modal.component';
 
 
 
@@ -25,7 +23,7 @@ export class AdminReviewComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
-  constructor(public adminReviewService: AdminReviewService, private dialog: MatDialog) { }
+  constructor(public adminReviewService: AdminReviewService) { }
 
   ngOnInit(): void {
 
@@ -48,23 +46,13 @@ export class AdminReviewComponent implements OnInit {
     }
   }
 
-  onPreview(row) {
-
-      const dialogRef = this.dialog.open(PreviewModalComponent, {
-        width: '700px',
-        restoreFocus: false,
-        autoFocus: false,
-        hasBackdrop: true,
-        data: row,
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-      });
-
+  translateRestrictionToIcon(restrictionType: RestrictionType): string {
+    return RestrictionTypeTranslator.translateToIcon(restrictionType);
   }
 
- 
-  
+  translateRestrictionType(restrictionType: RestrictionType): string {
+    return RestrictionTypeTranslator.translate(restrictionType);
+  }
+
 
 }
