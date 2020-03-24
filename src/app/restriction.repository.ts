@@ -36,6 +36,9 @@ export class RestrictionRepository {
 
   resetFilter() {
     this.restrictions = this.allRestrictions;
+    console.log("reset called()");
+    console.log(this.restrictions);
+    console.log(this.allRestrictions);
     this.filterDataSource.next(this.allRestrictions);
   }
 

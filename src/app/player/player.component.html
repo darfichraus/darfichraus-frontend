@@ -1,0 +1,3 @@
+<iframe width="560" height="315" [src]="this.safeURL" frameborder="0" allowfullscreen (load)="isLoading=false"></iframe>
+
+<p class="loading" *ngIf="isLoading">loading...</p>

@@ -33,9 +33,24 @@ export class RestrictionTypeTranslator {
     }
 }
 
+export class RestrictionStateTranslator {
+
+  public static translate(restrictionState: RestrictionState): string {
+
+    switch (restrictionState) {
+      case RestrictionState.ban:
+        return 'Verbot';
+      case RestrictionState.restriction:
+        return 'Einschränkung';
+      default:
+        return 'undefined';
+    }
+  }
+}
+
 export enum RestrictionState {
-  restriction = 'restriction',
-  ban = 'ban'
+  restriction = 'RESTRICTION',
+  ban = 'BAN'
 }
 
 export class SearchInformation {
