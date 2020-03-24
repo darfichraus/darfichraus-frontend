@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AdminReviewService } from './admin-review-service/admin-review.service';
 import { Restriction } from '../Restriction';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
 
@@ -14,25 +16,11 @@ export class AdminReviewComponent implements OnInit {
 
 
   displayedColumns: string[] = ['id', 'shortDescription', 'restrictionType', 'areal', 'restrictionDescription'];
-
   dataSource;
+  query = '';
 
-
-/*
-  id?: string;
-  areal: string;
-  arealIdentifier: string;
-  restrictionState: RestrictionState;
-  restrictionType: RestrictionType;
-  restrictionStart: string;
-  restrictionEnd: string;
-  shortDescription: string;
-  restrictionDescription: string;
-  furtherInformation: string;
-  recipient: string;
-  publisher: string;
-  searchQuery?: SearchInformation;
-  */
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
   constructor(public adminReviewService: AdminReviewService) { }
@@ -42,7 +30,9 @@ export class AdminReviewComponent implements OnInit {
     this.adminReviewService.fetchData().subscribe(data => {
 
       this.dataSource = new MatTableDataSource(data);
-      console.log(this.dataSource);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
     }, (err) => {
       console.log(err);
     });
@@ -51,6 +41,9 @@ export class AdminReviewComponent implements OnInit {
   applyFilter(value: string) {
     console.log(value);
     this.dataSource.filter = value.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   
 
