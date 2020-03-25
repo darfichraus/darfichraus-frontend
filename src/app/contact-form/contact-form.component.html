@@ -1,15 +1,18 @@
 <mat-toolbar mat-dialog-title>
     <mat-toolbar-row>
-        <span class="modal-heading">Kontaktformular</span>
+        <span class="modal-heading">Kontakt</span>
     </mat-toolbar-row>
 </mat-toolbar>
 
 
 <div mat-dialog-content>
-
+        <span class="contact-message">
+                Für Anfragen jeglicher Art benutzt bitte das unten stehende Kontaktformular. 
+                Wir helfen gerne weiter und kümmern uns so schnell wie möglich um Deine Anfrage.  
+            <br/>
+        </span>
 
     <form [formGroup]="myForm">
-
 
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
 
@@ -27,10 +30,7 @@
 
         </div>
 
-
-
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
-
 
             <mat-form-field appearance="outline" fxFlex="50">
                 <mat-label>Email</mat-label>
@@ -38,10 +38,7 @@
                     placeholder="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
                 <mat-error *ngIf="f.email.touched && f.email.errors?.required">Email Adresse fehlt.</mat-error>
                 <mat-error *ngIf="f.email.touched && f.email.errors?.pattern">Ungültige Email Adresse</mat-error>
-
-
             </mat-form-field>
-
 
             <mat-form-field appearance="outline" fxFlex="50">
                 <mat-label>Titel</mat-label>
@@ -58,9 +55,7 @@
             <mat-error *ngIf="f.message.touched && f.message.errors?.required">Nachricht fehlt.</mat-error>
         </mat-form-field>
 
-
         <!-- <re-captcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></re-captcha> -->
-
 
     </form>
 
