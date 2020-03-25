@@ -140,11 +140,14 @@ button {
     font: 14px/14px Arial, Helvetica, sans-serif;
     font-weight: bold;
     //line-height: 36px;
-    margin-left: 30px;
+    margin-left: 40px;
     margin-bottom: 10px;
     color: #2E3680;
-    //display: none;
-    width: 400px;
+    //width: 10px;
+    padding: 10px;
+    background: rgba(255,255,255, .9);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }
 
 .transport-icon-label {
