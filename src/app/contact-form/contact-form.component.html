@@ -6,12 +6,12 @@
 
 
 <div mat-dialog-content>
+    <div style="margin-bottom: 15px;">
         <span class="contact-message">
                 Für Anfragen jeglicher Art benutzt bitte das unten stehende Kontaktformular. 
-                Wir helfen gerne weiter und kümmern uns so schnell wie möglich um Deine Anfrage.  
-            <br/>
+                Wir helfen gerne weiter und kümmern uns so schnell wie möglich um Eure Anfragen.  
         </span>
-
+    </div>
     <form [formGroup]="myForm">
 
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
@@ -48,7 +48,6 @@
 
         </div>
 
-
         <mat-form-field appearance="outline" class="max-width">
             <mat-label>Nachricht</mat-label>
             <textarea required formControlName="message" matInput maxlength="1024"></textarea>
@@ -58,7 +57,6 @@
         <!-- <re-captcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></re-captcha> -->
 
     </form>
-
 
 </div>
 
