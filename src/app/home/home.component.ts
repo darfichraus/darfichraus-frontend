@@ -13,14 +13,11 @@ import { MeldungReactiveComponent } from '../meldung-reactive/meldung-reactive.c
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
   title = 'dir-frontend';
   mode: string;
   data: FetchResult;
   selectedMode: string;
-
   isMobile = false;
-
 
   geoLocationOptions = {
     enableHighAccuracy: true,
@@ -35,11 +32,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.feedService.data.subscribe(data => {
       this.data = data;
     });
-
   }
 
   openDialog(): void {
@@ -116,7 +111,5 @@ export class HomeComponent implements OnInit {
         }
       }, 1
     );
-
-
   }
 }

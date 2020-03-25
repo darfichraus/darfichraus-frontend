@@ -13,12 +13,18 @@
                       matBadge="{{this.feedService.bus_count}}" matBadgeHidden="{{this.feedService.bus_count == 0}}"
                       matBadgePosition="above after">directions_bus
             </mat-icon>
+            <div class="content-bar-label transport-icon-label">
+                Nahverkehr
+            </div>  
           </mat-list-item>
           <mat-list-item (click)="onIcon('person')" (mouseover)="onIconIn('person')" (mouseleave)="onIconOut()">
             <mat-icon class="icon people" [class.selected]="this.mode == 'person'"
                       matBadge="{{this.feedService.person_count}}" matBadgeHidden="{{this.feedService.person_count == 0}}"
                       matBadgePosition="above after">people
             </mat-icon>
+            <div class="content-bar-label people-icon-label">
+                Veranstaltungen und Gruppen
+            </div>  
           </mat-list-item>
           <mat-list-item (click)="onIcon('restaurant')" (mouseover)="onIconIn('restaurant')" (mouseleave)="onIconOut()">
             <mat-icon class="icon restaurant" [class.selected]="this.mode == 'restaurant'"
@@ -26,11 +32,17 @@
                       matBadgeHidden="{{this.feedService.restaurant_count == 0}}" matBadgePosition="above after">
               restaurant_menu
             </mat-icon>
+            <div class="content-bar-label restaurant-icon-label">
+                Gastronomie
+            </div>  
           </mat-list-item>
           <mat-list-item (click)="onIcon('eco')" (mouseover)="onIconIn('eco')" (mouseleave)="onIconOut()">
             <mat-icon class="icon eco" [class.selected]="this.mode == 'eco'" matBadge="{{this.feedService.eco_count}}"
                       matBadgeHidden="{{this.feedService.eco_count == 0}}" matBadgePosition="above after">eco
             </mat-icon>
+            <div class="content-bar-label eco-icon-label">
+                Öffentliche Plätze
+              </div>  
           </mat-list-item>
           <mat-list-item (click)="onIcon('shopping')" (mouseover)="onIconIn('shopping')" (mouseleave)="onIconOut()">
             <mat-icon class="icon shopping" [class.selected]="this.mode == 'shopping'"
@@ -38,22 +50,25 @@
                       matBadgeHidden="{{this.feedService.shopping_count == 0}}" matBadgePosition="above after">
               shopping_cart
             </mat-icon>
+            <div class="content-bar-label shopping-icon-label">
+                Einzelhandel
+              </div>  
           </mat-list-item>
           <mat-list-item (click)="onIcon('close')" (mouseover)="onIconIn('close')" (mouseleave)="onIconOut()">
             <mat-icon class="icon close" [class.selected]="this.mode == 'close'"
                       matBadge="{{this.feedService.close_count}}" matBadgeHidden="{{this.feedService.close_count == 0}}"
                       matBadgePosition="above after">cancel
-            </mat-icon>
+            </mat-icon>        
+            <div class="content-bar-label closed-icon-label">
+              Sperren
+            </div>            
           </mat-list-item>
         </mat-list>
-  
       </div>
-  
   
       <div class="center-column content-desktop" fxFlex="60">
   
       </div>
-  
 
       <div class="feed" fxFlex="" [class.isMobile]="isMobile">
   
