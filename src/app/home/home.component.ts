@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
       restoreFocus: false,
       autoFocus: false,
       hasBackdrop: true,
+      panelClass: 'custom-dialog-container',
       data: {}
     });
 
