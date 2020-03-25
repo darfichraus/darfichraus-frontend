@@ -27,6 +27,8 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { AdminReviewComponent } from './admin-review/admin-review.component';
 import { PreviewModalComponent } from './preview-modal/preview-modal.component';
+import { UnverifiedRestrComponent } from './unverified-restr/unverified-restr.component';
+import { VerifiedRestrComponent } from './verified-restr/verified-restr.component';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -46,7 +48,9 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     PlayerComponent,
     ContactFormComponent,
     AdminReviewComponent,
-    PreviewModalComponent
+    PreviewModalComponent,
+    UnverifiedRestrComponent,
+    VerifiedRestrComponent
   ],
   imports: [
     BrowserModule,
