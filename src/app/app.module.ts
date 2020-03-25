@@ -10,12 +10,10 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from './material.module';
 import {HttpClientModule} from '@angular/common/http';
 import {MapComponent} from './map/map.component';
-import {MeldungComponent} from './meldung/meldung.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RestrictionRepository} from './restriction.repository';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {MeldungReactiveComponent} from './meldung-reactive/meldung-reactive.component';
-import {NumericDirective} from './meldung/number-input.directive';
 import {DeviceDetectorModule} from 'ngx-device-detector';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {SearchPipe} from '../app/search.pipe';
@@ -29,6 +27,9 @@ import { AdminReviewComponent } from './admin-review/admin-review.component';
 import { PreviewModalComponent } from './preview-modal/preview-modal.component';
 import { UnverifiedRestrComponent } from './unverified-restr/unverified-restr.component';
 import { VerifiedRestrComponent } from './verified-restr/verified-restr.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
+import { DialogWrapperComponent } from './dialog-wrapper/dialog-wrapper.component';
+import { NumericDirective } from './meldung-reactive/number-input.directive';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -39,7 +40,6 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     AppComponent,
     FeedComponent,
     MapComponent,
-    MeldungComponent,
     MeldungReactiveComponent,
     NumericDirective,
     SearchPipe,
@@ -50,7 +50,9 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     AdminReviewComponent,
     PreviewModalComponent,
     UnverifiedRestrComponent,
-    VerifiedRestrComponent
+    VerifiedRestrComponent,
+    SubscribeComponent,
+    DialogWrapperComponent
   ],
   imports: [
     BrowserModule,

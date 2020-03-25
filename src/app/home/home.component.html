@@ -73,7 +73,10 @@
       <div class="feed" fxFlex="" [class.isMobile]="isMobile">
   
         <div class="content-desktop">
-          <button mat-stroked-button (click)="openDialog()" style="width: 242px">
+            <button mat-stroked-button (click)="openBookmarkDialog()" style="width: 38px; margin-right: 5px;">
+                <mat-icon style="font-size: 20px; padding-top: 8px;">bookmark</mat-icon>
+              </button>
+          <button mat-stroked-button (click)="openRestrictionDialog()" style="width: 242px">
             <mat-icon style="font-size: 20px; padding-top: 8px;">add</mat-icon>
             Verordnung eintragen
           </button>
