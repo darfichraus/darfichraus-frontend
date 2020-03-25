@@ -55,7 +55,7 @@ export class MeldungReactiveComponent implements OnInit {
     { value: 'COUNTRY', viewValue: 'Bundesweit'},
     { value: 'COUNTY', viewValue: 'Bundesland'},
     { value: 'ZIP', viewValue: 'Stadt'},
-  ]
+  ];
 
   areal: string;
   arealIdentifier: string;
@@ -73,7 +73,7 @@ export class MeldungReactiveComponent implements OnInit {
 
   myForm: FormGroup = this.fb.group({
     areal: ['COUNTY', [Validators.required]],
-    county: [''],
+    county: ['', [Validators.required]],
     zip: [''],
     restrictionType: [[], [Validators.required]],
     shortDescription: [
@@ -82,7 +82,7 @@ export class MeldungReactiveComponent implements OnInit {
     ],
     restrictionDescription: [
       '',
-      [Validators.required, Validators.minLength(10), Validators.maxLength(2048)]
+      [Validators.required, Validators.minLength(1), Validators.maxLength(2048)]
     ],
     restrictionState: ['RESTRICTION', [Validators.required]],
 
@@ -109,16 +109,18 @@ export class MeldungReactiveComponent implements OnInit {
 
   ngOnInit(): void {
     this.f.areal.valueChanges.subscribe(value => {
-      if(value === 'COUNTRY') {
-        this.f.county.setValidators(null);
-        this.f.zip.setValidators(null);
-      }
-      else if (value === 'COUNTY') {
+      if (value === 'COUNTRY') {
+        this.f.county.clearValidators();
+        this.f.county.updateValueAndValidity();
+        this.f.zip.clearValidators();
+        this.f.zip.updateValueAndValidity();
+      } else if (value === 'COUNTY') {
         this.f.county.setValidators([Validators.required]);
-        this.f.zip.setValidators(null);
-      }
-      else if (value === 'ZIP') {
-        this.f.county.setValidators(null);
+        this.f.zip.clearValidators();
+        this.f.zip.updateValueAndValidity();
+      } else if (value === 'ZIP') {
+        this.f.county.clearValidators();
+        this.f.county.updateValueAndValidity();
         this.f.zip.setValidators([Validators.required]);
       }
     });
@@ -130,16 +132,14 @@ export class MeldungReactiveComponent implements OnInit {
 
   onSubmit() {
 
-    let restriction = new Restriction();
+    const restriction = new Restriction();
     restriction.areal = this.f.areal.value;
 
-    if(restriction.areal === 'COUNTRY') {
+    if (restriction.areal === 'COUNTRY') {
       restriction.arealIdentifier = 'Deutschland';
-    }
-    else if(restriction.areal === 'COUNTY') {
+    } else if (restriction.areal === 'COUNTY') {
       restriction.arealIdentifier = this.f.county.value;
-    }
-    else if(restriction.areal === 'ZIP') {
+    } else if (restriction.areal === 'ZIP') {
       restriction.arealIdentifier = this.f.zip.value;
     }
 
@@ -154,7 +154,7 @@ export class MeldungReactiveComponent implements OnInit {
     restriction.publisher = 'publisher1';
 
     console.log(restriction);
-    
+
     this.feedService.submit(restriction).subscribe(val => {
       this.dialogRef.close();
       this.feedService.fetchDataForAll();

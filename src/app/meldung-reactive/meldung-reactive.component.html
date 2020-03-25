@@ -34,10 +34,11 @@
                         <mat-error *ngIf="f.county.touched && f.county.errors?.required">Bundesland fehlt.</mat-error>
                     </mat-select>
                 </mat-form-field>
+
                 <mat-form-field fxFlex="50" appearance="outline" *ngIf="f.areal.value !== 'COUNTY'">
                     <mat-label>Postleitzahl</mat-label>
                     <input numeric matInput placeholder="12345" formControlName="zip" maxlength="5">
-                    <mat-error *ngIf="f.zip.touched && f.zip.errors?.required">Postleitzahl fehlt.</mat-error>                
+                    <mat-error *ngIf="f.zip.touched && f.zip.errors?.required">Postleitzahl fehlt.</mat-error>
                 </mat-form-field>
 
             </div>
@@ -56,10 +57,6 @@
                 </mat-error>
             </mat-form-field>
 
-
-
-
-
             <mat-form-field appearance="outline">
                 <mat-label>Kurzbeschreibung</mat-label>
                 <input formControlName="shortDescription" matInput maxlength="32">
@@ -70,14 +67,12 @@
             <mat-form-field appearance="outline">
                 <mat-label>Beschreibung</mat-label>
                 <textarea formControlName="restrictionDescription" matInput></textarea>
-                <mat-hint>Mind. 20 Zeichen.</mat-hint>
+                <!-- <mat-hint>Mind. 20 Zeichen.</mat-hint> -->
                 <mat-error *ngIf="f.restrictionDescription.touched && f.restrictionDescription.errors?.required">
                     Beschreibung darf nicht leer sein.</mat-error>
                 <mat-error *ngIf="f.restrictionDescription.touched && f.restrictionDescription.errors?.minlength">
                     Beschreibung ist zu kurz.</mat-error>
             </mat-form-field>
-
-
 
             <mat-radio-group formControlName="restrictionState">
                 <mat-radio-button *ngFor="let state of this.restrictionStates" value="{{state.value}}">
@@ -87,40 +82,35 @@
             <mat-form-field appearance="outline">
                 <mat-label>Quelle</mat-label>
                 <input formControlName="furtherInformation" matInput maxlength="32">
-                <mat-error *ngIf="f.furtherInformation.touched && f.furtherInformation.errors?.required">Quelle fehlt.</mat-error>
+                <mat-error *ngIf="f.furtherInformation.touched && f.furtherInformation.errors?.required">Quelle fehlt.
+                </mat-error>
             </mat-form-field>
 
             <h3 class="subhead">Gültigkeit</h3>
-
 
             <div fxLayout="row" fxLayoutGap="10px">
 
                 <mat-form-field fxFlex="50" appearance="outline">
                     <mat-label>Anfang</mat-label>
-                    <input matInput [matDatepicker]="picker1" formControlName="restrictionStart" disabled>
+                    <input matInput [matDatepicker]="picker1" formControlName="restrictionStart" disabled [max]="this.f.restrictionEnd.value">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1 disabled="false"></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="50" appearance="outline">
                     <mat-label>Ende</mat-label>
-                    <input matInput [matDatepicker]="picker2" formControlName="restrictionEnd" disabled>
+                    <input matInput [matDatepicker]="picker2" formControlName="restrictionEnd" disabled [min]="this.f.restrictionStart.value">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+                    <mat-datepicker #picker2 disabled="false" ></mat-datepicker>
                 </mat-form-field>
 
             </div>
 
-
         </form>
-
-
-
 
         <div fxFlex="1" class="divider">
             <mat-divider [vertical]="true"></mat-divider>
         </div>
-
 
         <div fxFlex="45">
 
@@ -133,7 +123,6 @@
             <h1 class="subhead" *ngIf="this.f.areal.value == 'COUNTRY'">Deutschland</h1>
             <h1 class="subhead" *ngIf="this.f.areal.value =='COUNTY'">{{this.f.county.value}}</h1>
             <h1 class="subhead" *ngIf="this.f.areal.value =='ZIP'"> {{this.f.zip.value}}</h1>
-            <!-- <p>{{this.zip}}</p> -->
 
             <p class="text">{{this.f.restrictionDescription.value}}</p>
             <p class="restriction">{{this.f.furtherInformation.value}}</p>
