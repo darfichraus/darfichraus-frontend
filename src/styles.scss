@@ -140,6 +140,10 @@ h1.heading {
   font: bold 18px 'Lucida Console', Monaco, monospace;
 }
 
+
+
+
+
 .mat-dialog-override {
   mat-dialog-container {
     > :first-child {
@@ -162,4 +166,8 @@ h1.heading {
   font-size: 26px;
   line-height: 36px;
   margin-left: 5px;
+}
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 0px;
 }

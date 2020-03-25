@@ -71,7 +71,7 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
         RestrictionRepository
       ], multi: true
     },
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-dialog-override'}},
+    //{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-dialog-override'}},
     {provide: MAT_DATE_LOCALE, useValue: 'de'},
 
   ],

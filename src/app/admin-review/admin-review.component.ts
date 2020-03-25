@@ -16,6 +16,17 @@ import { PreviewModalComponent } from '../preview-modal/preview-modal.component'
 })
 export class AdminReviewComponent implements OnInit {
 
+  restrictionTypes = [
+    { value: 'PUBLIC_TRANSPORTATION', viewValue: 'Nahverkehr' },
+    {
+      value: 'EVENTS_AND_ASSEMBLIES',
+      viewValue: 'Veranstaltungen und Gruppen'
+    },
+    { value: 'GASTRONOMY', viewValue: 'Gastronomie' },
+    { value: 'PUBLIC_PLACES', viewValue: 'Öffentliche Plätze' },
+    { value: 'RETAIL', viewValue: 'Einzelhandel' },
+    { value: 'CURFEW', viewValue: 'Ausgangsbeschränkung' }
+  ];
 
   displayedColumns: string[] = ['restrictionType', 'areal', 'shortDescription',];
   dataSource;

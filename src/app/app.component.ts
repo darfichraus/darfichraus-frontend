@@ -29,6 +29,7 @@ export class AppComponent  {
       restoreFocus: false,
       autoFocus: false,
       hasBackdrop: true,
+      panelClass: 'mat-dialog-override',
       data: {}
     });
 

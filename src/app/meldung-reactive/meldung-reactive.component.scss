@@ -53,7 +53,7 @@ mat-dialog-content {
   }
 
   .datum {
-    font-family: Source Sans Pro;
+    font-family: "Source Sans Pro", serif;
     font-style: italic;
     font-weight: 300;
     font-size: 16px;
@@ -87,11 +87,45 @@ mat-dialog-content {
 }
 
 textarea {
-    resize: none;
     height: 70px;
   }
 
-  .divider {
-      height: 100%;
-      background-color: #f0f0f0;
+
+  form {
+    border-right: 10px solid #f5f5f5;
+    padding-right: 24px;
+    margin-right: 24px;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+.modal {
+    height: 100%;
+    display: flex;
+   flex-direction: column;
+}
+
+.modal__content {
+    padding: 12px 24px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.dialog-actions {
+    padding: 10px;
+}
+
+.left-column {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

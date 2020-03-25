@@ -1,19 +1,19 @@
-<mat-toolbar mat-dialog-title>
-    <mat-toolbar-row>
-        <span class="modal-heading"> Corona: Verordnung hinzufügen</span>
-    </mat-toolbar-row>
-</mat-toolbar>
+<div class="modal">
+
+
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span class="modal-heading"> Corona: Verordnung hinzufügen</span>
+        </mat-toolbar-row>
+    </mat-toolbar>
 
 
 
-<div mat-dialog-content>
-
-
-    <div fxFlex fxLayout="row" fxLayoutAlign="space-between start">
+    <div class="modal__content" fxLayout="row" fxLayoutAlign="space-between start" >
 
 
 
-        <form [formGroup]="myForm" fxFlex="45">
+        <form [formGroup]="myForm" fxFlex="60" class="left-column">
 
             <h2 class="subhead">Geltungsbereich</h2>
 
@@ -34,10 +34,11 @@
                         <mat-error *ngIf="f.county.touched && f.county.errors?.required">Bundesland fehlt.</mat-error>
                     </mat-select>
                 </mat-form-field>
+
                 <mat-form-field fxFlex="50" appearance="outline" *ngIf="f.areal.value !== 'COUNTY'">
                     <mat-label>Postleitzahl</mat-label>
                     <input numeric matInput placeholder="12345" formControlName="zip" maxlength="5">
-                    <mat-error *ngIf="f.zip.touched && f.zip.errors?.required">Postleitzahl fehlt.</mat-error>                
+                    <mat-error *ngIf="f.zip.touched && f.zip.errors?.required">Postleitzahl fehlt.</mat-error>
                 </mat-form-field>
 
             </div>
@@ -56,9 +57,162 @@
                 </mat-error>
             </mat-form-field>
 
+            <mat-form-field appearance="outline">
+                <mat-label>Kurzbeschreibung</mat-label>
+                <input formControlName="shortDescription" matInput maxlength="32">
+                <mat-error *ngIf="f.shortDescription.touched && f.shortDescription.errors?.required">Kurzbeschreibung
+                    darf nicht leer sein.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Beschreibung</mat-label>
+                <textarea formControlName="restrictionDescription" matInput></textarea>
+                <mat-error *ngIf="f.restrictionDescription.touched && f.restrictionDescription.errors?.required">
+                    Beschreibung darf nicht leer sein.</mat-error>
+                <mat-error *ngIf="f.restrictionDescription.touched && f.restrictionDescription.errors?.minlength">
+                    Beschreibung ist zu kurz.</mat-error>
+            </mat-form-field>
+
+            <mat-radio-group formControlName="restrictionState">
+                <mat-radio-button *ngFor="let state of this.restrictionStates" value="{{state.value}}">
+                    {{state.viewValue}}</mat-radio-button>
+            </mat-radio-group>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Quelle</mat-label>
+                <input formControlName="furtherInformation" matInput maxlength="32">
+                <mat-error *ngIf="f.furtherInformation.touched && f.furtherInformation.errors?.required">Quelle fehlt.
+                </mat-error>
+            </mat-form-field>
+
+            <h3 class="subhead">Gültigkeit</h3>
+
+            <div fxLayout="row" fxLayoutGap="10px">
+
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>Anfang</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="restrictionStart" disabled [max]="this.f.restrictionEnd.value">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="50" appearance="outline">
+                    <mat-label>Ende</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="restrictionEnd" disabled [min]="this.f.restrictionStart.value">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2 disabled="false" ></mat-datepicker>
+                </mat-form-field>
+
+            </div>
+
+        </form>
+        
+        
+        <div fxFlex="40">
+
+            <h1 class="subhead">Vorschau</h1>
+            <p class="restriction">{{this.f.restrictionState.value == 'ban' ? 'Verbot' : 'Einschränkung'}}</p>
+            <mat-divider></mat-divider>
+
+            <p class="type">{{this.translator(this.f.restrictionType.value)}}</p>
+
+            <h1 class="subhead" *ngIf="this.f.areal.value == 'COUNTRY'">Deutschland</h1>
+            <h1 class="subhead" *ngIf="this.f.areal.value =='COUNTY'">{{this.f.county.value}}</h1>
+            <h1 class="subhead" *ngIf="this.f.areal.value =='ZIP'"> {{this.f.zip.value}}</h1>
+
+            <p class="text">{{this.f.restrictionDescription.value}}</p>
+            <p class="restriction">{{this.f.furtherInformation.value}}</p>
+            <span class="datum" *ngIf="this.f.restrictionStart.value != ''">von
+                {{this.f.restrictionStart.value | date: 'dd.MM.yyyy'}} </span><span class="datum"
+                *ngIf="this.f.restrictionEnd.value != ''">bis
+                {{this.f.restrictionEnd.value | date: 'dd.MM.yyyy'}}</span>
+
+        </div>
 
 
 
+
+
+       
+
+    </div>
+
+
+
+    <div class="dialog-actions" fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-stroked-button (click)="onNoClick()">Abbrechen</button>
+        <button mat-stroked-button [disabled]="!myForm.valid" (click)="onSubmit()" cdkFocusInitial>Senden</button>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+    <mat-toolbar mat-dialog-title>
+    <mat-toolbar-row>
+        <span class="modal-heading"> Corona: Verordnung hinzufügen</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+<div mat-dialog-content>
+
+
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between start">
+
+        <form [formGroup]="myForm" fxFlex="60">
+
+            <h2 class="subhead">Geltungsbereich</h2>
+
+            <mat-radio-group formControlName="areal">
+                <mat-radio-button *ngFor="let areal of this.areals" value="{{areal.value}}">{{areal.viewValue}}
+                </mat-radio-button>
+            </mat-radio-group>
+
+
+            <div fxLayout="row" fxLayoutGap="10px" *ngIf="f.areal.value !== 'COUNTRY'">
+
+                <mat-form-field fxFlex="50" appearance="outline" *ngIf="f.areal.value != 'ZIP' ">
+                    <mat-label>Bundesland</mat-label>
+                    <mat-select formControlName="county">
+                        <mat-option *ngFor="let county of counties" [value]="county.value">
+                            {{county.viewValue}}
+                        </mat-option>
+                        <mat-error *ngIf="f.county.touched && f.county.errors?.required">Bundesland fehlt.</mat-error>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field fxFlex="50" appearance="outline" *ngIf="f.areal.value !== 'COUNTY'">
+                    <mat-label>Postleitzahl</mat-label>
+                    <input numeric matInput placeholder="12345" formControlName="zip" maxlength="5">
+                    <mat-error *ngIf="f.zip.touched && f.zip.errors?.required">Postleitzahl fehlt.</mat-error>
+                </mat-form-field>
+
+            </div>
+
+
+            <h2 class="subhead">Kategorie</h2>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Bereich</mat-label>
+                <mat-select formControlName="restrictionType">
+                    <mat-option *ngFor="let restriction of this.restrictionTypes" [value]="restriction.value">
+                        {{restriction.viewValue}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="f.restrictionType.touched && f.restrictionType.errors?.required">Kategorie fehlt.
+                </mat-error>
+            </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Kurzbeschreibung</mat-label>
@@ -70,14 +224,11 @@
             <mat-form-field appearance="outline">
                 <mat-label>Beschreibung</mat-label>
                 <textarea formControlName="restrictionDescription" matInput></textarea>
-                <mat-hint>Mind. 20 Zeichen.</mat-hint>
                 <mat-error *ngIf="f.restrictionDescription.touched && f.restrictionDescription.errors?.required">
                     Beschreibung darf nicht leer sein.</mat-error>
                 <mat-error *ngIf="f.restrictionDescription.touched && f.restrictionDescription.errors?.minlength">
                     Beschreibung ist zu kurz.</mat-error>
             </mat-form-field>
-
-
 
             <mat-radio-group formControlName="restrictionState">
                 <mat-radio-button *ngFor="let state of this.restrictionStates" value="{{state.value}}">
@@ -87,53 +238,44 @@
             <mat-form-field appearance="outline">
                 <mat-label>Quelle</mat-label>
                 <input formControlName="furtherInformation" matInput maxlength="32">
-                <mat-error *ngIf="f.furtherInformation.touched && f.furtherInformation.errors?.required">Quelle fehlt.</mat-error>
+                <mat-error *ngIf="f.furtherInformation.touched && f.furtherInformation.errors?.required">Quelle fehlt.
+                </mat-error>
             </mat-form-field>
 
             <h3 class="subhead">Gültigkeit</h3>
-
 
             <div fxLayout="row" fxLayoutGap="10px">
 
                 <mat-form-field fxFlex="50" appearance="outline">
                     <mat-label>Anfang</mat-label>
-                    <input matInput [matDatepicker]="picker1" formControlName="restrictionStart" disabled>
+                    <input matInput [matDatepicker]="picker1" formControlName="restrictionStart" disabled [max]="this.f.restrictionEnd.value">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1 disabled="false"></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="50" appearance="outline">
                     <mat-label>Ende</mat-label>
-                    <input matInput [matDatepicker]="picker2" formControlName="restrictionEnd" disabled>
+                    <input matInput [matDatepicker]="picker2" formControlName="restrictionEnd" disabled [min]="this.f.restrictionStart.value">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+                    <mat-datepicker #picker2 disabled="false" ></mat-datepicker>
                 </mat-form-field>
 
             </div>
 
-
         </form>
 
 
-
-
-        <div fxFlex="1" class="divider">
-            <mat-divider [vertical]="true"></mat-divider>
-        </div>
-
-
-        <div fxFlex="45">
+        <div fxFlex="40">
 
             <h1 class="subhead">Vorschau</h1>
-            <p class="restriction">{{this.f.restrictionState.value == 'ban' ? 'Verbote' : 'Einschränkungen'}}</p>
+            <p class="restriction">{{this.f.restrictionState.value == 'ban' ? 'Verbot' : 'Einschränkung'}}</p>
             <mat-divider></mat-divider>
 
-            <p class="type">{{this.f.restrictionType.value}}</p>
+            <p class="type">{{this.translator(this.f.restrictionType.value)}}</p>
 
             <h1 class="subhead" *ngIf="this.f.areal.value == 'COUNTRY'">Deutschland</h1>
             <h1 class="subhead" *ngIf="this.f.areal.value =='COUNTY'">{{this.f.county.value}}</h1>
             <h1 class="subhead" *ngIf="this.f.areal.value =='ZIP'"> {{this.f.zip.value}}</h1>
-            <!-- <p>{{this.zip}}</p> -->
 
             <p class="text">{{this.f.restrictionDescription.value}}</p>
             <p class="restriction">{{this.f.furtherInformation.value}}</p>
@@ -149,7 +291,9 @@
 
 </div>
 
-<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
-    <button mat-stroked-button (click)="onNoClick()">Abbrechen</button>
-    <button mat-stroked-button [disabled]="!myForm.valid" (click)="onSubmit()" cdkFocusInitial>Senden</button>
-</div>
+
+
+
+
+-->
+
