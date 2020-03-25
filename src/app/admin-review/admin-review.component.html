@@ -1,47 +1,63 @@
 <div class="body">
 
-  <h1>Admin Review Page</h1>
+    <h1>Admin Review Page</h1>
 
 
-  <mat-form-field>
-    <mat-icon class="pre-text" matPrefix>search</mat-icon>
-    <input matInput [(ngModel)]="query" (keyup)="applyFilter(this.query)" placeholder="Filter">
-    <button mat-icon-button *ngIf="query" matSuffix (click)="this.query=''; applyFilter('')">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Filter
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+    
+            <mat-form-field>
+                <mat-icon class="pre-text" matPrefix>search</mat-icon>
+                <input matInput [(ngModel)]="query" (keyup)="applyFilter(this.query)" placeholder="Filter">
+                <button mat-icon-button *ngIf="query" matSuffix (click)="this.query=''; applyFilter('')">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+    
+            <mat-checkbox *ngFor="let restr of this.restrictionTypes">{{restr.viewValue}}</mat-checkbox>
+        </mat-expansion-panel>
+    
+    
 
 
-  <table mat-table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="shortDescription">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> shortDescription</th>
-      <td mat-cell *matCellDef="let element"> {{element.shortDescription}} </td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="restrictionType">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> restrictionType</th>
-      <td mat-cell *matCellDef="let element" class="col-restr">
-        <mat-icon matTooltip="{{translateRestrictionType(element.restrictionType)}}">
-          {{translateRestrictionToIcon(element.restrictionType)}}
-        </mat-icon>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="shortDescription">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> shortDescription</th>
+            <td mat-cell *matCellDef="let element"> {{element.shortDescription}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="areal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> areal</th>
-      <td mat-cell *matCellDef="let element" class="col-restr"> {{element.areal}} </td>
-    </ng-container>
+        <ng-container matColumnDef="restrictionType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> restrictionType</th>
+            <td mat-cell *matCellDef="let element" class="col-restr">
+                <mat-icon matTooltip="{{translateRestrictionType(element.restrictionType)}}">
+                    {{translateRestrictionToIcon(element.restrictionType)}}
+                </mat-icon>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="review">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> review</th>
-      <td mat-cell *matCellDef="let element"> {{element.review}} </td>
-    </ng-container>
+        <ng-container matColumnDef="areal">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> areal</th>
+            <td mat-cell *matCellDef="let element" class="col-restr"> {{element.areal}} </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></tr>
+        <ng-container matColumnDef="review">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> review</th>
+            <td mat-cell *matCellDef="let element"> {{element.review}} </td>
+        </ng-container>
 
-  </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></tr>
+
+    </table>
 
 </div>
 
