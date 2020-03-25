@@ -4,8 +4,8 @@ import {DeviceDetectorService} from 'ngx-device-detector';
 import { FetchResult, RestrictionType } from '../Restriction';
 import { FeedService } from '../feed.service';
 import { RestrictionRepository } from '../restriction.repository';
-import { MeldungComponent } from '../meldung/meldung.component';
 import { MeldungReactiveComponent } from '../meldung-reactive/meldung-reactive.component';
+import { SubscribeComponent } from '../subscribe/subscribe.component';
 
 @Component({
   selector: 'app-home',
@@ -37,8 +37,24 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openDialog(): void {
+  openRestrictionDialog(): void {
     const dialogRef = this.dialog.open(MeldungReactiveComponent, {
+      width: '900px',
+      height: '700px',
+      restoreFocus: false,
+      autoFocus: false,
+      hasBackdrop: true,
+      panelClass: 'custom-dialog-container',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openBookmarkDialog(): void {
+    const dialogRef = this.dialog.open(SubscribeComponent, {
       width: '900px',
       height: '700px',
       restoreFocus: false,
