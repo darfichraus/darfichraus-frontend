@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
       autoFocus: false,
       hasBackdrop: true,
       panelClass: 'custom-dialog-container',
-      data: {}
+      data: undefined
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
       restoreFocus: false,
       autoFocus: false,
       hasBackdrop: true,
-      panelClass: 'custom-dialog-container',
+      panelClass: 'mat-dialog-override',
       data: {}
     });
 

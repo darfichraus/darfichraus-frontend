@@ -3,6 +3,78 @@
     <h1>Admin Review Page</h1>
 
 
+
+    <p-table #dt [columns]="selectedColumns" [value]="primeData" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedRestr">
+        <ng-template pTemplate="caption">
+            <div style="text-align:left">
+                <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+                            selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns"></p-multiSelect>
+            </div>
+            <div style="text-align: right">        
+                <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            </div>
+
+        </ng-template>
+
+        
+
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th style="width: 3em">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+            </tr>
+
+            <tr>
+                <td style="width: 40px !important;">
+                </td>
+
+                <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                    <input *ngSwitchCase="'shortDescription'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')" >
+                    <!-- <p-dropdown *ngSwitchCase="'brand'" [options]="brands" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown> -->
+                    <p-multiSelect *ngSwitchCase="'restrictionType'" [options]="restrTypes" defaultLabel="All" (onChange)="dt.filter($event.value, col.field, 'in')" [style]="{minWidth: '100%'}"></p-multiSelect>
+                    <p-multiSelect *ngSwitchCase="'areal'" [options]="areals" defaultLabel="All" (onChange)="dt.filter($event.value, col.field, 'in')" [style]="{minWidth: '100%'}"></p-multiSelect>
+                    <p-multiSelect *ngSwitchCase="'arealIdentifier'" [options]="arealIdentifiers" defaultLabel="All" (onChange)="dt.filter($event.value, col.field, 'in')" [style]="{minWidth: '100%'}"></p-multiSelect>
+                </th>
+            </tr>
+
+
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td style="width: 40px !important;">
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                </td>
+                <td *ngFor="let col of columns" style="max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" (click)="openDialog(rowData)" style="cursor: pointer;">
+                    <mat-icon *ngIf="col.field =='restrictionType'" matTooltip="{{translateRestrictionType(rowData[col.field])}}">
+                        {{translateRestrictionToIcon(rowData[col.field])}}
+                    </mat-icon>
+                    
+                     {{rowData[col.field]}}
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+
+<div style="height: 100px;"></div>
+
+
+
+
+
+
+
+
+
+
     <mat-tab-group>
         <mat-tab label="Unverified">
             <unverified-restr></unverified-restr>
@@ -31,6 +103,8 @@
             </mat-form-field>
     
             <mat-checkbox *ngFor="let restr of this.restrictionTypes">{{restr.viewValue}}</mat-checkbox>
+
+            <button mat-button>reset filters</button>
         </mat-expansion-panel>
     
     
@@ -71,3 +145,5 @@
 </div>
 
 <mat-paginator [pageSizeOptions]="[5, 50, 100]" showFirstLastButtons></mat-paginator>
+
+

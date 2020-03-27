@@ -1,3 +1,105 @@
-<app-dialog-wrapper headlineLabel="Abonnieren">   
-    </app-dialog-wrapper>
+<app-dialog-wrapper headlineLabel="Abonnieren"></app-dialog-wrapper>
     
+    <div mat-dialog-content>
+        <div style="margin-bottom: 15px;">
+            <span class="contact-message">
+                   Abonniert hier Neuigkeiten zu Eurem Bundesland.
+            </span>
+        </div>
+        <form [formGroup]="myForm">
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input required type="text" formControlName="email" matInput
+                        placeholder="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                    <mat-error *ngIf="f.email.touched && f.email.errors?.required">Email Adresse fehlt.</mat-error>
+                    <mat-error *ngIf="f.email.touched && f.email.errors?.pattern">Ungültige Email Adresse</mat-error>
+                </mat-form-field>
+    
+
+
+                    <h3>Bereich</h3>
+
+
+                    <mat-radio-group formControlName="areal">
+                        <mat-radio-button *ngFor="let areal of this.areals" value="{{areal.value}}" style="margin-right: 20px;">{{areal.viewValue}}</mat-radio-button>
+                    </mat-radio-group>
+        
+        
+                    <div *ngIf="f.areal.value !== 'COUNTRY'">
+        
+                        <!-- 
+                             <mat-form-field fxFlex="50" appearance="outline" *ngIf="f.areal.value != 'ZIP' ">
+                            <mat-label>Bundesland</mat-label>
+                            <mat-select formControlName="county">
+                                <mat-option *ngFor="let county of counties" [value]="county.value">
+                                    {{county.viewValue}}
+                                </mat-option>
+                                <mat-error *ngIf="f.county.touched && f.county.errors?.required">Bundesland fehlt.</mat-error>
+                            </mat-select>
+                        </mat-form-field>
+                        -->
+                       
+
+
+
+
+
+                        <mat-form-field appearance="outline" *ngIf="f.areal.value != 'ZIP' ">
+                            <mat-select formControlName="bankCtrl" placeholder="Bundesland" #singleSelect>
+                              <mat-option>
+                                <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
+                              </mat-option>
+                        
+                              <mat-option *ngFor="let bank of filteredBanks | async" [value]="bank">
+                                {{bank.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+
+
+
+
+        
+                        <mat-form-field appearance="outline" *ngIf="f.areal.value !== 'STATE'">
+                            <mat-label>Postleitzahl</mat-label>
+                            <input numeric matInput placeholder="12345" formControlName="zip" maxlength="5">
+                            <mat-error *ngIf="f.zip.touched && f.zip.errors?.required">Postleitzahl fehlt.</mat-error>
+                        </mat-form-field>
+
+
+        
+                    </div>
+
+                   <!-- <mat-checkbox style="display: block" *ngFor="let county of this.counties">{{county.viewValue}}</mat-checkbox> -->
+
+
+
+
+
+                    <h3>Einschränkungen</h3>
+
+                    <!-- <mat-checkbox style="display: block" *ngFor="let restr of this.restrictionTypes">{{restr.viewValue}}</mat-checkbox> -->
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Auswahlmöglichkeiten</mat-label>
+                        <mat-select formControlName="restrictionType" multiple>
+                          <mat-option *ngFor="let restr of this.restrictionTypes" [value]="restr.value">{{restr.viewValue}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+
+          <!--<button mat-button (click)="onPrint()">print</button>-->
+
+          <mat-checkbox formControlName="opt">Hiermit bestätige ich, dass ich die <a href="www.google.de">Datenschutzerklärung</a> gelesen habe.</mat-checkbox>
+
+        </form>
+    </div>
+    
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-stroked-button (click)="onNoClick()">Abbrechen</button>
+    <button mat-stroked-button [disabled]="!myForm.valid" (click)="onSubmit()" cdkFocusInitial>Senden</button>
+</div>

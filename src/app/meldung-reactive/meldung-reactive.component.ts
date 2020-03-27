@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { RestrictionState, RestrictionType, Restriction, RestrictionTypeTranslator } from '../Restriction';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { RestrictionState, RestrictionType, RestrictionTypeTranslator, Restriction } from '../Restriction';
 import { FeedService } from '../feed.service';
 
 interface DropSelection {
@@ -53,7 +53,7 @@ export class MeldungReactiveComponent implements OnInit {
 
   areals: DropSelection[] = [
     { value: 'COUNTRY', viewValue: 'Bundesweit'},
-    { value: 'COUNTY', viewValue: 'Bundesland'},
+    { value: 'STATE', viewValue: 'Bundesland'},
     { value: 'ZIP', viewValue: 'Stadt'},
   ];
 
@@ -72,7 +72,7 @@ export class MeldungReactiveComponent implements OnInit {
   // matcher: ErrorStateMatcher = new MyErrorStateMatcher();
 
   myForm: FormGroup = this.fb.group({
-    areal: ['COUNTY', [Validators.required]],
+    areal: ['STATE', [Validators.required]],
     county: ['', [Validators.required]],
     zip: [''],
     restrictionType: [[], [Validators.required]],
@@ -106,24 +106,48 @@ export class MeldungReactiveComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<MeldungReactiveComponent>,
-    private feedService: FeedService
+    private feedService: FeedService,
+    @Inject(MAT_DIALOG_DATA) public data
   ) {}
 
   ngOnInit(): void {
+
+    if(this.data !== undefined) {
+      this.f.areal.setValue(this.data.areal);
+      console.log(this.data.areal);
+      console.log(this.f.areal.value);
+
+      if(this.data.areal === 'COUNTRY') {
+        this.onSelectCountry();
+      }
+      else if (this.data.areal === 'STATE') {
+        this.f.county.setValue(this.data.arealIdentifier);
+        this.onSelectCounty();
+      }
+
+      else if (this.data.areal === 'ZIP') {
+        this.f.zip.setValue(this.data.arealIdentifier);
+        this.onSelectZip();
+      }
+
+      this.f.restrictionType.setValue(this.data.restrictionType);
+      this.f.restrictionStart.setValue(this.data.restrictionStart);
+      this.f.restrictionEnd.setValue(this.data.restrictionEnd);
+      this.f.shortDescription.setValue(this.data.shortDescription);
+      this.f.restrictionDescription.setValue(this.data.restrictionDescription);
+      this.f.furtherInformation.setValue(this.data.furtherInformation);
+      // this.f.recipient.setValue(this.data.areal);
+      // this.f.publisher.setValue(this.data.areal);
+    }
+
+
     this.f.areal.valueChanges.subscribe(value => {
       if (value === 'COUNTRY') {
-        this.f.county.clearValidators();
-        this.f.county.updateValueAndValidity();
-        this.f.zip.clearValidators();
-        this.f.zip.updateValueAndValidity();
-      } else if (value === 'COUNTY') {
-        this.f.county.setValidators([Validators.required]);
-        this.f.zip.clearValidators();
-        this.f.zip.updateValueAndValidity();
+        this.onSelectCountry();
+      } else if (value === 'STATE') {
+        this.onSelectCounty();
       } else if (value === 'ZIP') {
-        this.f.county.clearValidators();
-        this.f.county.updateValueAndValidity();
-        this.f.zip.setValidators([Validators.required]);
+        this.onSelectZip();
       }
     });
 
@@ -133,6 +157,25 @@ export class MeldungReactiveComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  onSelectCountry(): any {
+    this.f.county.clearValidators();
+    this.f.county.updateValueAndValidity();
+    this.f.zip.clearValidators();
+    this.f.zip.updateValueAndValidity();
+  }
+
+  onSelectCounty(): any {
+    this.f.county.setValidators([Validators.required]);
+    this.f.zip.clearValidators();
+    this.f.zip.updateValueAndValidity();
+  }
+
+  onSelectZip(): any {
+    this.f.county.clearValidators();
+    this.f.county.updateValueAndValidity();
+    this.f.zip.setValidators([Validators.required]);
+  }
+
   onSubmit() {
 
     const restriction = new Restriction();
@@ -140,7 +183,7 @@ export class MeldungReactiveComponent implements OnInit {
 
     if (restriction.areal === 'COUNTRY') {
       restriction.arealIdentifier = 'Deutschland';
-    } else if (restriction.areal === 'COUNTY') {
+    } else if (restriction.areal === 'STATE') {
       restriction.arealIdentifier = this.f.county.value;
     } else if (restriction.areal === 'ZIP') {
       restriction.arealIdentifier = this.f.zip.value;

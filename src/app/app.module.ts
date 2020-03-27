@@ -31,6 +31,12 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
 import { DialogWrapperComponent } from './dialog-wrapper/dialog-wrapper.component';
 import { NumericDirective } from './meldung-reactive/number-input.directive';
 
+import {TableModule} from 'primeng/table';
+import {InputTextModule} from 'primeng/inputtext';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {DropdownModule} from 'primeng/dropdown';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
 }
@@ -66,8 +72,15 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     ReactiveFormsModule,
     DeviceDetectorModule.forRoot(),
     FontAwesomeModule,
+    NgxMatSelectSearchModule,
     // RecaptchaModule,
     // RecaptchaFormsModule, // if you need forms support
+
+       //NG-Prime
+       TableModule,
+       InputTextModule,
+       MultiSelectModule,
+       DropdownModule,
 
   ],
   providers: [
