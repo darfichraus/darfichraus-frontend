@@ -7,6 +7,7 @@ import {FeedService} from '../feed.service';
 import {Areal} from '../_model/areal.enum';
 import {RestrictionRepository} from '../restriction.repository';
 import {Restriction, Restrictions, RestrictionType} from '../Restriction';
+import {faHome} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-map',
@@ -16,6 +17,8 @@ import {Restriction, Restrictions, RestrictionType} from '../Restriction';
 export class MapComponent implements OnInit, AfterViewInit {
   private static HOME_VIEW = [51.27264, 14.26469];
   mapMode: string;
+
+  faHome = faHome;
 
   @Input('mode') set mode(mode: string) {
     this.mapMode = mode;
