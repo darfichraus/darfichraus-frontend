@@ -1,0 +1,22 @@
+image: node
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: "Build and push"
+          caches:
+            - node
+          services:
+            - docker
+          script:
+            - npm install
+            - npm install -g @angular/cli
+            - ng build --prod
+            - REPO="crimsyfrontend/ng-frontend"
+            - VERSION="${BITBUCKET_COMMIT}"
+            - echo ${DOCKERHUB_PASSWORD} | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            - docker build -t ${REPO} .
+            - docker tag ${REPO} ${REPO}:${VERSION}
+            - docker push ${REPO}
+
