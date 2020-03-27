@@ -6,6 +6,11 @@ import { FeedService } from '../feed.service';
 import { RestrictionRepository } from '../restriction.repository';
 import { MeldungReactiveComponent } from '../meldung-reactive/meldung-reactive.component';
 import { SubscribeComponent } from '../subscribe/subscribe.component';
+import {faEnvelope, } from '@fortawesome/free-regular-svg-icons';
+import {faYoutube, } from '@fortawesome/free-brands-svg-icons';
+import { ImpressumComponent } from '../impressum/impressum.component';
+import { PlayerComponent } from '../player/player.component';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +23,9 @@ export class HomeComponent implements OnInit {
   data: FetchResult;
   selectedMode: string;
   isMobile = false;
+
+  faYoutube = faYoutube;
+  faEnvelope = faEnvelope;
 
   geoLocationOptions = {
     enableHighAccuracy: true,
@@ -36,6 +44,51 @@ export class HomeComponent implements OnInit {
       this.data = data;
     });
   }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ImpressumComponent, {
+      width: '900px',
+      height: '700px',
+      restoreFocus: false,
+      autoFocus: false,
+      hasBackdrop: true,
+      panelClass: 'mat-dialog-override',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openVideo(): void {
+    const dialogRef = this.dialog.open(PlayerComponent, {
+      width: '610px',
+      restoreFocus: false,
+      autoFocus: false,
+      hasBackdrop: true,
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openContact(): void {
+    const dialogRef = this.dialog.open(ContactFormComponent, {
+      width: '700px',
+      restoreFocus: false,
+      autoFocus: false,
+      hasBackdrop: true,
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
 
   openRestrictionDialog(): void {
     const dialogRef = this.dialog.open(MeldungReactiveComponent, {

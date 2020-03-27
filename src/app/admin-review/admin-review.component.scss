@@ -7,14 +7,7 @@
 table {
     width: 100%;
   }
-
-  td {
-    max-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  
+ 
   mat-form-field {
       width: 100%;
   }

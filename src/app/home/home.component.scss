@@ -1,3 +1,39 @@
+mat-toolbar {
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    background-color: transparent;
+}
+
+.toolbar-links{
+    font: 12px/14px Arial, Helvetica, sans-serif;
+    
+}
+
+.logo {
+    height: 60px;
+}
+
+.wvv-logo {
+    width: 250px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.mat-toolbar {
+    background-color: transparent;
+    z-index: 2 !important;
+}
+
+
+
+
+
+
+
+
 .content-body {
     padding: 10px;
     top: 64px;
@@ -187,3 +223,7 @@ button .mat-icon {
     width: 30px;
     text-shadow: none;
 }
+
+
+
+
