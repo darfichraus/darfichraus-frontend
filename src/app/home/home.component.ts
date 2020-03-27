@@ -109,12 +109,12 @@ export class HomeComponent implements OnInit {
   openBookmarkDialog(): void {
     const dialogRef = this.dialog.open(SubscribeComponent, {
       width: '900px',
-      height: '700px',
+      height: '800px',
       restoreFocus: false,
       autoFocus: false,
       hasBackdrop: true,
       panelClass: 'mat-dialog-override',
-      data: {}
+      data: {type: undefined}
     });
 
     dialogRef.afterClosed().subscribe(result => {

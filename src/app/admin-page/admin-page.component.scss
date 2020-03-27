@@ -38,3 +38,6 @@ mat-list-item:hover {
     cursor: pointer;
 }
 
+
+.mat-button:focus .mat-button-focus-overlay { background-color: transparent; }
+
