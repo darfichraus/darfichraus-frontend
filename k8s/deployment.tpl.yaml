@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: production
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: crimsyfrontend/ng-frontend:${BITBUCKET_COMMIT}
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: docker-hub-crimsy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: production
+  labels:
+    app: frontend
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: frontend
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: frontend
+  namespace: production
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  labels:
+    app: frontend
+
+spec:
+  tls:
+    - hosts:
+        - crimsy.tech
+      secretName: crimsy-tech-tls-root
+  rules:
+    - host: crimsy.tech
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: frontend
+              servicePort: 80
