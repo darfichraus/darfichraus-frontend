@@ -15,27 +15,29 @@ import {RestrictionRepository} from './restriction.repository';
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {MeldungReactiveComponent} from './meldung-reactive/meldung-reactive.component';
 import {DeviceDetectorModule} from 'ngx-device-detector';
-import {MAT_DATE_LOCALE} from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {SearchPipe} from '../app/search.pipe';
-import {ImpressumComponent} from './impressum/impressum.component';
-import {HomeComponent} from './home/home.component';
-import {PlayerComponent} from './player/player.component';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {ContactFormComponent} from './contact-form/contact-form.component';
-import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha';
-import {AdminReviewComponent} from './admin-review/admin-review.component';
-import {PreviewModalComponent} from './preview-modal/preview-modal.component';
-import {UnverifiedRestrComponent} from './unverified-restr/unverified-restr.component';
-import {VerifiedRestrComponent} from './verified-restr/verified-restr.component';
-import {SubscribeComponent} from './subscribe/subscribe.component';
-import {DialogWrapperComponent} from './dialog-wrapper/dialog-wrapper.component';
-import {NumericDirective} from './meldung-reactive/number-input.directive';
+import { ImpressumComponent } from './impressum/impressum.component';
+import { HomeComponent } from './home/home.component';
+import { PlayerComponent } from './player/player.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ContactFormComponent } from './contact-form/contact-form.component';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { AdminReviewComponent } from './admin-review/admin-review.component';
+import { PreviewModalComponent } from './preview-modal/preview-modal.component';
+import { UnverifiedRestrComponent } from './unverified-restr/unverified-restr.component';
+import { VerifiedRestrComponent } from './verified-restr/verified-restr.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
+import { DialogWrapperComponent } from './dialog-wrapper/dialog-wrapper.component';
+import { NumericDirective } from './meldung-reactive/number-input.directive';
 
 import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {DropdownModule} from 'primeng/dropdown';
-import {NgxMatSelectSearchModule} from 'ngx-mat-select-search';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -58,7 +60,9 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     UnverifiedRestrComponent,
     VerifiedRestrComponent,
     SubscribeComponent,
-    DialogWrapperComponent
+    DialogWrapperComponent,
+    AdminPageComponent,
+    SubscriptionsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -76,11 +80,11 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     // RecaptchaModule,
     // RecaptchaFormsModule, // if you need forms support
 
-    //NG-Prime
-    TableModule,
-    InputTextModule,
-    MultiSelectModule,
-    DropdownModule,
+       //NG-Prime
+       TableModule,
+       InputTextModule,
+       MultiSelectModule,
+       DropdownModule,
 
   ],
   providers: [
@@ -97,6 +101,6 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
   bootstrap: [AppComponent]
 })
 
-export class AppModule {
+export class AppModule{
 
 }

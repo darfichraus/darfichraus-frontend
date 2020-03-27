@@ -1,12 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import { SubscribeService } from './subscribe.service';
-import { SubscribePayload} from './subscribe.service';
+import { SubscribePayload } from './subscribe.service';
 import { ReplaySubject, Subject } from 'rxjs';
 import { MatSelect } from '@angular/material/select';
 import { takeUntil, take } from 'rxjs/operators';
 import { RestrictionType, RestrictionState } from '../Restriction';
+import { minOneChecked } from './custom-val.validator';
 
 interface DropSelection {
   value: string;
@@ -20,21 +26,21 @@ export interface Bank {
 
 export const BANKS: Bank[] = [
   { value: 'Baden-Württemberg', viewValue: 'Baden-Württemberg' },
-    { value: 'Bayern', viewValue: 'Bayern' },
-    { value: 'Berlin', viewValue: 'Berlin' },
-    { value: 'Brandenburg', viewValue: 'Brandenburg' },
-    { value: 'Bremen', viewValue: 'Bremen' },
-    { value: 'Hamburg', viewValue: 'Hamburg' },
-    { value: 'Hessen', viewValue: 'Hessen' },
-    { value: 'Mecklenburg-Vorpommern', viewValue: 'Mecklenburg-Vorpommern' },
-    { value: 'Niedersachsen', viewValue: 'Niedersachsen' },
-    { value: 'Nordrhein-Westfalen', viewValue: 'Nordrhein-Westfalen' },
-    { value: 'Rheinland-Pfalz', viewValue: 'Rheinland-Pfalz' },
-    { value: 'Saarland', viewValue: 'Saarland' },
-    { value: 'Sachsen', viewValue: 'Sachsen' },
-    { value: 'Sachsen-Anhalt', viewValue: 'Sachsen-Anhalt' },
-    { value: 'Schleswig-Holstein', viewValue: 'Schleswig-Holstein' },
-    { value: 'Thüringen', viewValue: 'Thüringen' }
+  { value: 'Bayern', viewValue: 'Bayern' },
+  { value: 'Berlin', viewValue: 'Berlin' },
+  { value: 'Brandenburg', viewValue: 'Brandenburg' },
+  { value: 'Bremen', viewValue: 'Bremen' },
+  { value: 'Hamburg', viewValue: 'Hamburg' },
+  { value: 'Hessen', viewValue: 'Hessen' },
+  { value: 'Mecklenburg-Vorpommern', viewValue: 'Mecklenburg-Vorpommern' },
+  { value: 'Niedersachsen', viewValue: 'Niedersachsen' },
+  { value: 'Nordrhein-Westfalen', viewValue: 'Nordrhein-Westfalen' },
+  { value: 'Rheinland-Pfalz', viewValue: 'Rheinland-Pfalz' },
+  { value: 'Saarland', viewValue: 'Saarland' },
+  { value: 'Sachsen', viewValue: 'Sachsen' },
+  { value: 'Sachsen-Anhalt', viewValue: 'Sachsen-Anhalt' },
+  { value: 'Schleswig-Holstein', viewValue: 'Schleswig-Holstein' },
+  { value: 'Thüringen', viewValue: 'Thüringen' }
 ];
 
 @Component({
@@ -43,12 +49,8 @@ export const BANKS: Bank[] = [
   styleUrls: ['./subscribe.component.scss']
 })
 export class SubscribeComponent implements OnInit {
-
   myForm: FormGroup = this.fb.group({
-    email: [
-      '',
-      [Validators.required, Validators.maxLength(32)]
-    ],
+    email: ['', [Validators.required, Validators.maxLength(32)]],
     areal: ['STATE', [Validators.required]],
     county: ['', [Validators.required]],
     zip: [''],
@@ -57,7 +59,12 @@ export class SubscribeComponent implements OnInit {
     opt: ['', [Validators.required]]
   });
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<SubscribeComponent>, private subscribeService: SubscribeService) { }
+  constructor(
+    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<SubscribeComponent>,
+    private subscribeService: SubscribeService,
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {}
 
   restrictionTypes = [
     { value: 'PUBLIC_TRANSPORTATION', viewValue: 'Nahverkehr' },
@@ -91,9 +98,9 @@ export class SubscribeComponent implements OnInit {
   ];
 
   areals: DropSelection[] = [
-    { value: 'COUNTRY', viewValue: 'Bundesweit'},
-    { value: 'STATE', viewValue: 'Bundesland'},
-    { value: 'ZIP', viewValue: 'Stadt'},
+    { value: 'COUNTRY', viewValue: 'Bundesweit' },
+    { value: 'STATE', viewValue: 'Bundesland' },
+    { value: 'ZIP', viewValue: 'Stadt' }
   ];
 
   areal: string;
@@ -101,46 +108,24 @@ export class SubscribeComponent implements OnInit {
   restrictionState: RestrictionState;
   restrictionType: RestrictionType;
 
+  /** list of banks */
+  protected banks: Bank[] = BANKS;
 
+  /** control for the selected bank */
+  // public bankCtrl: FormControl = new FormControl();
 
+  /** control for the MatSelect filter keyword */
+  public bankFilterCtrl: FormControl = new FormControl();
 
+  /** list of banks filtered by search keyword */
+  public filteredBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
 
+  @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
-
-
-
-
-
-
-
-    /** list of banks */
-    protected banks: Bank[] = BANKS;
-
-    /** control for the selected bank */
-    //public bankCtrl: FormControl = new FormControl();
-  
-    /** control for the MatSelect filter keyword */
-    public bankFilterCtrl: FormControl = new FormControl();
-  
-    /** list of banks filtered by search keyword */
-    public filteredBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
-  
-    @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
-  
-    /** Subject that emits when the component has been destroyed. */
-    protected _onDestroy = new Subject<void>();
-
-
-
-
-
-
-
-
-
+  /** Subject that emits when the component has been destroyed. */
+  protected _onDestroy = new Subject<void>();
 
   ngOnInit(): void {
-
     this.f.areal.valueChanges.subscribe(value => {
       if (value === 'COUNTRY') {
         this.onSelectCountry();
@@ -151,14 +136,25 @@ export class SubscribeComponent implements OnInit {
       }
     });
 
+    /*
 
+    ---------
 
+    SET AREAL TYPE BASES ON SELECTION (FROM DATA.AREAL)
 
+    --------------
+    */
 
+    const fg: FormGroup = new FormGroup({ test: new FormControl() });
+    this.restrictionTypes.forEach(restr => {
+      const fc: FormControl = new FormControl(restr.value === this.data.type);
+      fg.addControl(restr.value, fc);
+    });
 
+    fg.removeControl('test');
 
-
-    //this.bankCtrl.setValue(this.banks[10]);
+    fg.setValidators(minOneChecked());
+    this.myForm.addControl('restrTypes', fg);
 
     // load the initial bank list
     this.filteredBanks.next(this.banks.slice());
@@ -169,12 +165,6 @@ export class SubscribeComponent implements OnInit {
       .subscribe(() => {
         this.filterBanks();
       });
-
-
-
-
-
-
   }
 
   onSelectCountry(): any {
@@ -196,20 +186,17 @@ export class SubscribeComponent implements OnInit {
     this.f.zip.setValidators([Validators.required]);
   }
 
-
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   onSubmit() {
-
     let data: SubscribePayload;
     data.email = this.f.email.value;
     data.areal = this.f.area.value;
     data.types = this.f.restrictionType.value;
 
     console.log(data);
-
 
     this.subscribeService.postSubscription(data);
   }
@@ -218,28 +205,8 @@ export class SubscribeComponent implements OnInit {
     return this.myForm.controls;
   }
 
-
-
-  onPrint() {
-    console.log(this.f.email.errors);
-    console.log(this.f.restrictionType.errors);
-    console.log(this.f.areal.errors);
-    console.log(this.f.county.errors);
-    console.log(this.f.zip.errors);
-  }
-
-
-
-
-
-
-
-
-
-
-
   ngAfterViewInit() {
-    this.setInitialValue();
+    // this.setInitialValue();
   }
 
   ngOnDestroy() {
@@ -247,6 +214,7 @@ export class SubscribeComponent implements OnInit {
     this._onDestroy.complete();
   }
 
+  /*
   protected setInitialValue() {
     this.filteredBanks
       .pipe(take(1), takeUntil(this._onDestroy))
@@ -258,7 +226,7 @@ export class SubscribeComponent implements OnInit {
         // and after the mat-option elements are available
         //this.singleSelect.compareWith = (a: Bank, b: Bank) => a && b && a.value === b.value;
       });
-  }
+  }*/
 
   protected filterBanks() {
     if (!this.banks) {
@@ -277,8 +245,4 @@ export class SubscribeComponent implements OnInit {
       this.banks.filter(bank => bank.value.toLowerCase().indexOf(search) > -1)
     );
   }
-
-
-
-
 }

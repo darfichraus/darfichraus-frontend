@@ -1,4 +1,21 @@
-<div class="content-body">
+
+  <mat-toolbar>
+    <a href="https://wirvsvirushackathon.org"><img src="../assets/logo-wvv.svg" class="wvv-logo content-desktop"></a>
+    <a href="https://www.darfichraus.de"><img src="../assets/logo.svg" class="logo"></a>
+    <div class="toolbar-links" style="position: fixed; right: 10px">
+      <button mat-stroked-button (click)="openDialog()" style="color: #2D3780;">
+        Impressum
+      </button>
+      <button mat-button (click)="openVideo()" style="color: #2D3780;">
+        <fa-icon [icon]="this.faYoutube"></fa-icon>
+      </button>
+      <button mat-button (click)="openContact()" style="color: #2D3780;">
+        <fa-icon [icon]="this.faEnvelope"></fa-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  
+  <div class="content-body">
 
     <div id="background-map" class="map-cont content-desktop" style="height: 99%">
       <app-map [mode]="this.mode"></app-map>

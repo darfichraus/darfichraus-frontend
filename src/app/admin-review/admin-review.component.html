@@ -3,6 +3,17 @@
     <h1>Admin Review Page</h1>
 
 
+    <mat-tab-group>
+        <mat-tab label="Unverified">
+            <unverified-restr></unverified-restr>
+        </mat-tab>
+        <mat-tab label="Verified">
+            <verified-restr></verified-restr>
+        </mat-tab>
+      </mat-tab-group>
+
+
+
 
     <p-table #dt [columns]="selectedColumns" [value]="primeData" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedRestr">
@@ -75,17 +86,9 @@
 
 
 
-    <mat-tab-group>
-        <mat-tab label="Unverified">
-            <unverified-restr></unverified-restr>
-        </mat-tab>
-        <mat-tab label="Verified">
-            <verified-restr></verified-restr>
-        </mat-tab>
-      </mat-tab-group>
+<!-- 
 
-
-        <mat-expansion-panel>
+   <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     Filter
@@ -145,5 +148,8 @@
 </div>
 
 <mat-paginator [pageSizeOptions]="[5, 50, 100]" showFirstLastButtons></mat-paginator>
+
+-->
+     
 
 
