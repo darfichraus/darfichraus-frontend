@@ -1,4 +1,4 @@
-image: node
+image: atlassian/default-image:2
 
 pipelines:
   branches:
@@ -48,7 +48,7 @@ pipelines:
             - docker push ${REPO}
       - step:
           name: "Deploy to dev"
-          deployment: development
+          deployment: staging
           script:
             - envsubst < k8s/deployment.dev.tpl.yaml > k8s/deployment.yaml
             - pipe: atlassian/kubectl-run:1.1.3
