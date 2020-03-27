@@ -19,29 +19,6 @@ interface DropSelection {
   viewValue: string;
 }
 
-export interface Bank {
-  value: string;
-  viewValue: string;
-}
-
-export const BANKS: Bank[] = [
-  { value: 'Baden-Württemberg', viewValue: 'Baden-Württemberg' },
-  { value: 'Bayern', viewValue: 'Bayern' },
-  { value: 'Berlin', viewValue: 'Berlin' },
-  { value: 'Brandenburg', viewValue: 'Brandenburg' },
-  { value: 'Bremen', viewValue: 'Bremen' },
-  { value: 'Hamburg', viewValue: 'Hamburg' },
-  { value: 'Hessen', viewValue: 'Hessen' },
-  { value: 'Mecklenburg-Vorpommern', viewValue: 'Mecklenburg-Vorpommern' },
-  { value: 'Niedersachsen', viewValue: 'Niedersachsen' },
-  { value: 'Nordrhein-Westfalen', viewValue: 'Nordrhein-Westfalen' },
-  { value: 'Rheinland-Pfalz', viewValue: 'Rheinland-Pfalz' },
-  { value: 'Saarland', viewValue: 'Saarland' },
-  { value: 'Sachsen', viewValue: 'Sachsen' },
-  { value: 'Sachsen-Anhalt', viewValue: 'Sachsen-Anhalt' },
-  { value: 'Schleswig-Holstein', viewValue: 'Schleswig-Holstein' },
-  { value: 'Thüringen', viewValue: 'Thüringen' }
-];
 
 @Component({
   selector: 'app-subscribe',
@@ -52,9 +29,9 @@ export class SubscribeComponent implements OnInit {
   myForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.maxLength(32)]],
     areal: ['STATE', [Validators.required]],
-    county: ['', [Validators.required]],
+    //county: ['', [Validators.required]],
     zip: [''],
-    restrictionType: [[], [Validators.required]],
+    //restrictionType: [[], [Validators.required]],
     bankCtrl: ['', [Validators.required]],
     opt: ['', [Validators.required]]
   });
@@ -109,7 +86,7 @@ export class SubscribeComponent implements OnInit {
   restrictionType: RestrictionType;
 
   /** list of banks */
-  protected banks: Bank[] = BANKS;
+  protected banks: DropSelection[] = this.counties;
 
   /** control for the selected bank */
   // public bankCtrl: FormControl = new FormControl();
@@ -118,7 +95,7 @@ export class SubscribeComponent implements OnInit {
   public bankFilterCtrl: FormControl = new FormControl();
 
   /** list of banks filtered by search keyword */
-  public filteredBanks: ReplaySubject<Bank[]> = new ReplaySubject<Bank[]>(1);
+  public filteredBanks: ReplaySubject<DropSelection[]> = new ReplaySubject<DropSelection[]>(1);
 
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
@@ -142,7 +119,7 @@ export class SubscribeComponent implements OnInit {
 
     SET AREAL TYPE BASES ON SELECTION (FROM DATA.AREAL)
 
-    --------------
+    f--------------
     */
 
     const fg: FormGroup = new FormGroup({ test: new FormControl() });
@@ -168,21 +145,21 @@ export class SubscribeComponent implements OnInit {
   }
 
   onSelectCountry(): any {
-    this.f.county.clearValidators();
-    this.f.county.updateValueAndValidity();
+    this.f.bankCtrl.clearValidators();
+    this.f.bankCtrl.updateValueAndValidity();
     this.f.zip.clearValidators();
     this.f.zip.updateValueAndValidity();
   }
 
   onSelectCounty(): any {
-    this.f.county.setValidators([Validators.required]);
+    this.f.bankCtrl.setValidators([Validators.required]);
     this.f.zip.clearValidators();
     this.f.zip.updateValueAndValidity();
   }
 
   onSelectZip(): any {
-    this.f.county.clearValidators();
-    this.f.county.updateValueAndValidity();
+    this.f.bankCtrl.clearValidators();
+    this.f.bankCtrl.updateValueAndValidity();
     this.f.zip.setValidators([Validators.required]);
   }
 
@@ -190,15 +167,38 @@ export class SubscribeComponent implements OnInit {
     this.dialogRef.close();
   }
 
+
+
+
+
   onSubmit() {
-    let data: SubscribePayload;
+    let data: SubscribePayload = new SubscribePayload();
     data.email = this.f.email.value;
-    data.areal = this.f.area.value;
-    data.types = this.f.restrictionType.value;
+    data.areal = this.f.areal.value;
+    data.contactAllowed = true;
+    if(this.f.areal.value === 'COUNTRY') {
+      data.arealIdentifier = 'Deutschland';
+    }
+    else if(this.f.areal.value === 'STATE'){
+      data.arealIdentifier = this.f.bankCtrl.value.value;
+    }
+    else if(this.f.areal.value === 'ZIP'){
+      data.arealIdentifier = this.f.zip.value;
+    }
+
+
+    for(let key in this.f.restrTypes.value) {
+      this.f.restrTypes.value[key] == true ? data.types.push(key) : undefined;
+    }
+
 
     console.log(data);
 
-    this.subscribeService.postSubscription(data);
+    this.subscribeService.postSubscription(data).subscribe((val) => {
+      this.dialogRef.close();
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   get f(): FormGroup['controls'] {

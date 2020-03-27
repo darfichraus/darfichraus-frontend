@@ -59,37 +59,23 @@
 
         <h3>Einschränkungen</h3>
 
-
-        <!-- 
-        <mat-form-field appearance="outline">
-            <mat-label>Auswahlmöglichkeiten</mat-label>
-            <mat-select formControlName="restrictionType" multiple>
-                <mat-option *ngFor="let restr of this.restrictionTypes" [value]="restr.value">{{restr.viewValue}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        -->
-
-
-
         <div formGroupName="restrTypes">
             <mat-checkbox *ngFor="let restr of this.restrictionTypes" formControlName="{{restr.value}}"
                 style="display: block;">{{restr.value}}</mat-checkbox>
-                <mat-error *ngIf="f.restrTypes.touched && f.restrTypes.errors?.minOneChecked" style="font-size: 80%; margin-top: 5px;">Auswahl fehlt.</mat-error>
+                <mat-error *ngIf="f.restrTypes.touched && f.restrTypes.errors?.minOneChecked" style="font-size: 80%; margin-top: 5px; margin-left: 10px;">Auswahl fehlt.</mat-error>
 
         </div>
-
-
-
-
-        <!--<button mat-button (click)="onPrint()">print</button>-->
 
         <div style="margin-top: 30px;">
                 <mat-checkbox formControlName="opt">Hiermit bestätige ich, dass ich die <a
                     href="www.google.de">Datenschutzerklärung</a> gelesen habe.</mat-checkbox>
           
         </div>
+
+        
     </form>
+
+
 </div>
 
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
