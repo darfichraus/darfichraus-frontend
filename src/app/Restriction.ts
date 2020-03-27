@@ -35,7 +35,7 @@ export class RestrictionTypeTranslator {
   public static translateToIcon(restrictionType: RestrictionType): string {
     switch (restrictionType) {
       case RestrictionType.PUBLIC_TRANSPORTATION:
-        return 'bus';
+        return 'directions_bus';
       case RestrictionType.EVENTS_AND_ASSEMBLIES:
         return 'people';
       case RestrictionType.GASTRONOMY:
