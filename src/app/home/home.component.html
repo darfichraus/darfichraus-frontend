@@ -1,11 +1,28 @@
-<div class="content-body">
 
-    <div id="background-map" class="map-cont content-desktop">
+  <mat-toolbar>
+    <a href="https://wirvsvirushackathon.org"><img src="../assets/logo-wvv.svg" class="wvv-logo content-desktop"></a>
+    <a href="https://www.darfichraus.de"><img src="../assets/logo.svg" class="logo"></a>
+    <div class="toolbar-links" style="position: fixed; right: 10px">
+      <button mat-stroked-button (click)="openDialog()" style="color: #2D3780;">
+        Impressum
+      </button>
+      <button mat-button (click)="openVideo()" style="color: #2D3780;">
+        <fa-icon [icon]="this.faYoutube"></fa-icon>
+      </button>
+      <button mat-button (click)="openContact()" style="color: #2D3780;">
+        <fa-icon [icon]="this.faEnvelope"></fa-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  
+  <div class="content-body">
+
+    <div id="background-map" class="map-cont content-desktop" style="height: 99%">
       <app-map [mode]="this.mode"></app-map>
     </div>
-  
+
     <div class="non-clickable content-desktop" fxLayout="row" fxLayoutAlign="space-around center">
-  
+
       <div fxFlex="10" class="content-desktop">
         <mat-list class="icon-list">
           <mat-list-item (click)="onIcon('bus')" (mouseover)="onIconIn('bus')" (mouseleave)="onIconOut()">
@@ -15,7 +32,7 @@
             </mat-icon>
             <div class="content-bar-label transport-icon-label">
                 <div style="opacity: 10;">Nahverkehr</div>
-            </div>  
+            </div>
           </mat-list-item>
           <mat-list-item (click)="onIcon('person')" (mouseover)="onIconIn('person')" (mouseleave)="onIconOut()">
             <mat-icon class="icon people" [class.selected]="this.mode == 'person'"
@@ -24,7 +41,7 @@
             </mat-icon>
             <div class="content-bar-label people-icon-label">
                 Veranstaltungen und Gruppen
-            </div>  
+            </div>
           </mat-list-item>
           <mat-list-item (click)="onIcon('restaurant')" (mouseover)="onIconIn('restaurant')" (mouseleave)="onIconOut()">
             <mat-icon class="icon restaurant" [class.selected]="this.mode == 'restaurant'"
@@ -34,15 +51,15 @@
             </mat-icon>
             <div class="content-bar-label restaurant-icon-label">
                 Gastronomie
-            </div>  
+            </div>
           </mat-list-item>
           <mat-list-item (click)="onIcon('eco')" (mouseover)="onIconIn('eco')" (mouseleave)="onIconOut()">
             <mat-icon class="icon eco" [class.selected]="this.mode == 'eco'" matBadge="{{this.feedService.eco_count}}"
-                      matBadgeHidden="{{this.feedService.eco_count == 0}}" matBadgePosition="above after">eco
+                      matBadgeHidden="{{this.feedService.eco_count == 0}}" matBadgePosition="above after">map
             </mat-icon>
             <div class="content-bar-label eco-icon-label">
                 Öffentliche Plätze
-              </div>  
+              </div>
           </mat-list-item>
           <mat-list-item (click)="onIcon('shopping')" (mouseover)="onIconIn('shopping')" (mouseleave)="onIconOut()">
             <mat-icon class="icon shopping" [class.selected]="this.mode == 'shopping'"
@@ -52,26 +69,26 @@
             </mat-icon>
             <div class="content-bar-label shopping-icon-label">
                 Einzelhandel
-              </div>  
+              </div>
           </mat-list-item>
           <mat-list-item (click)="onIcon('close')" (mouseover)="onIconIn('close')" (mouseleave)="onIconOut()">
             <mat-icon class="icon close" [class.selected]="this.mode == 'close'"
                       matBadge="{{this.feedService.close_count}}" matBadgeHidden="{{this.feedService.close_count == 0}}"
                       matBadgePosition="above after">cancel
-            </mat-icon>        
+            </mat-icon>
             <div class="content-bar-label closed-icon-label">
               Ausgangsbeschränkungen
-            </div>            
+            </div>
           </mat-list-item>
         </mat-list>
       </div>
-  
+
       <div class="center-column content-desktop" fxFlex="60">
-  
+
       </div>
 
       <div class="feed" fxFlex="" [class.isMobile]="isMobile">
-  
+
         <div class="content-desktop">
             <button mat-stroked-button (click)="openBookmarkDialog()" style="width: 38px; margin-right: 5px;">
                 <mat-icon style="font-size: 20px; padding-top: 8px;">bookmark</mat-icon>
@@ -85,11 +102,11 @@
           </div>
         </div>
         <app-feed></app-feed>
-  
+
       </div>
-  
-  
+
+
     </div>
-  
-  
+
+
   </div>

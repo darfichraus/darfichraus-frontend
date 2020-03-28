@@ -35,7 +35,10 @@ import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {DropdownModule} from 'primeng/dropdown';
+import {ContextMenuModule} from 'primeng/contextmenu';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -58,7 +61,9 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     UnverifiedRestrComponent,
     VerifiedRestrComponent,
     SubscribeComponent,
-    DialogWrapperComponent
+    DialogWrapperComponent,
+    AdminPageComponent,
+    SubscriptionsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +86,7 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
        InputTextModule,
        MultiSelectModule,
        DropdownModule,
+       ContextMenuModule,
 
   ],
   providers: [

@@ -33,6 +33,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "leaflet": "1.6.0",
+    "material-design-icons": "^3.0.1",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
     "ng-recaptcha": "^5.0.0",
@@ -40,6 +41,7 @@
     "ngx-mat-select-search": "^2.1.2",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.2",
+    "ol": "^6.2.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
