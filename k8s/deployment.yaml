@@ -50,13 +50,33 @@ metadata:
 spec:
   tls:
     - hosts:
-        - crimsy.tech
-      secretName: crimsy-tech-tls-root
+        - darfichraus.de
+      secretName: darfichraus-de-tls
+    - hosts:
+        - darfichraus.com
+      secretName: darfichrausi-com-tls
+    - hosts:
+        - darfichraus.info
+      secretName: darfichraus-info-tls
   rules:
-    - host: crimsy.tech
+    - host: darfichraus.de
       http:
         paths:
           - path: /
             backend:
               serviceName: frontend
               servicePort: 80
+    - host: darfichraus.com
+        http:
+          paths:
+              - path: /
+                backend:
+                  serviceName: frontend
+                  servicePort: 80
+    - host: darfichraus.info
+        http:
+          paths:
+              - path: /
+                backend:
+                  serviceName: frontend
+                  servicePort: 80
