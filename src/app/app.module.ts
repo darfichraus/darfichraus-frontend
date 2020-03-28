@@ -22,7 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { PlayerComponent } from './player/player.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContactFormComponent } from './contact-form/contact-form.component';
-import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings, RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
 import { AdminReviewComponent } from './admin-review/admin-review.component';
 import { PreviewModalComponent } from './preview-modal/preview-modal.component';
 import { UnverifiedRestrComponent } from './unverified-restr/unverified-restr.component';
@@ -78,8 +78,9 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     DeviceDetectorModule.forRoot(),
     FontAwesomeModule,
     NgxMatSelectSearchModule,
-    // RecaptchaModule,
-    // RecaptchaFormsModule, // if you need forms support
+    
+    RecaptchaModule,
+    RecaptchaFormsModule, // if you need forms support
 
        //NG-Prime
        TableModule,
@@ -98,6 +99,14 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     },
     //{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-dialog-override'}},
     {provide: MAT_DATE_LOCALE, useValue: 'de'},
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: { siteKey: '6LeExuQUAAAAAAHjylk0W43a2TGcTqgZ-5X0uvp6' } as RecaptchaSettings,
+    },
+    {
+      provide: RECAPTCHA_LANGUAGE,
+      useValue: 'en',
+    },
 
   ],
   bootstrap: [AppComponent]

@@ -14,6 +14,7 @@ import { takeUntil, take } from 'rxjs/operators';
 import { RestrictionType, RestrictionState } from '../Restriction';
 import { minOneChecked } from './custom-val.validator';
 
+
 interface DropSelection {
   value: string;
   viewValue: string;
@@ -33,7 +34,8 @@ export class SubscribeComponent implements OnInit {
     zip: [''],
     //restrictionType: [[], [Validators.required]],
     bankCtrl: ['', [Validators.required]],
-    opt: ['', [Validators.required]]
+    opt: ['', [Validators.required]],
+    recaptcha: [null, [Validators.required]]
   });
 
   constructor(
@@ -245,4 +247,14 @@ export class SubscribeComponent implements OnInit {
       this.banks.filter(bank => bank.value.toLowerCase().indexOf(search) > -1)
     );
   }
+
+
+
+
+  public resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+  }
+
+
+  
 }

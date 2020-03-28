@@ -3,13 +3,14 @@ import {BehaviorSubject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FetchResult, Restriction, SearchInformation, RestrictionType} from './Restriction';
 import {Areal} from './_model/areal.enum';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedService {
 
-  static readonly api = 'https://api.darfichraus.de/restrictions/';
+  static readonly api = environment.apiUrl + 'restrictions/';
   // @ts-ignore
   private dataSource = new BehaviorSubject<FetchResult>(new FetchResult());
   data = this.dataSource.asObservable();
@@ -21,17 +22,19 @@ export class FeedService {
   shopping_count = 0;
   close_count = 0;
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'API-KEY': environment.apiKey
+    })
+  };
+
 
   constructor(private readonly http: HttpClient) { }
 
   fetchData(url: string, searchQuery: SearchInformation): any {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'API-KEY': '5a7c3a9a69f00a5877b847ee645981673aa6994464ddba3ee8d4a805934deb76'
-      })
-    };
 
-    this.http.get<Restriction[]>(url, httpOptions).subscribe(data => {
+
+    this.http.get<Restriction[]>(url, this.httpOptions).subscribe(data => {
 
       const country = data.filter(e => Areal[e.areal] === Areal.COUNTRY);
 
