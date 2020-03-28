@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://api.dev.crimsy.tech/',
-  apiKey: '5a7c3a9a69f00a5877b847ee645981673aa6994464ddba3ee8d4a805934deb76',
+  apiKey: '6bce1751a010f90b68eb887cae8e2141cce149d5de664412e67cdf150006aa16f2bd0373ce496aa5'
 
 };
 
