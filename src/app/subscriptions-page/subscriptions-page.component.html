@@ -1,5 +1,11 @@
-<p-table #dt [value]="primeData" [paginator]="true" [rows]="20" [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedRestr">
+<div class="body">
+
+    <h1>Subscriptions</h1>
+    
+    <p-table #dt [value]="primeData" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"  [(selection)]="selectedRestr"
+    [(contextMenuSelection)]="selectedSub" [contextMenu]="cm">
+    
         <ng-template pTemplate="caption">
            
             <div style="text-align: right">        
@@ -35,7 +41,7 @@
 
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr>
+            <tr [pContextMenuRow]="rowData">
                 <td style="width: 40px !important;">
                     <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
                 </td>
@@ -56,3 +62,10 @@
         </ng-template>
 
     </p-table>
+
+    <p-contextMenu #cm [model]="items"></p-contextMenu>
+
+    <div style="height: 100px;"></div>
+
+
+</div>
