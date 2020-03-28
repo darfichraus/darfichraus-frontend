@@ -1,10 +1,10 @@
 # This workflow will build a package using Maven and then publish it to GitHub docker registry
 # For more information see: https://github.com/actions/setup-java#apache-maven-with-a-settings-path
 
-name: Release new Docker Image
+name: Deploy to Production
 env:
-   NAMESPACE: production
-   REPO: crimsyfrontend/ng-frontend
+  NAMESPACE: production
+  REPO: crimsyfrontend/ng-frontend
 
 on:
   push:
@@ -13,18 +13,18 @@ on:
 
 jobs:
   docker:
-    name: Publish to Docker Registry 
+    name: Publish to Docker Registry
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
       - name: Cache node modules
-          uses: actions/cache@v1
-          with:
-            path: ~/.npm
-            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-            restore-keys: |
-              ${{ runner.os }}-node-
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - uses: actions/setup-node@v1
         with:
           node-version: '13.x'
@@ -47,17 +47,17 @@ jobs:
     needs: [docker]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: deploy to cluster
-      uses: steebchen/kubectl@v1.0.0
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
-      with:
-        args: set image --record deployment/frontend frontend=${REPO}:${GITHUB_RUN_ID} -n ${NAMESPACE}
-    - name: verify deployment
-      uses: steebchen/kubectl@v1.0.0
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
-      with:
-        args: '"rollout status deployment/frontend -n ${NAMESPACE}"'
+      - uses: actions/checkout@master
+      - name: deploy to cluster
+        uses: steebchen/kubectl@v1.0.0
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: set image --record deployment/frontend frontend=${REPO}:${GITHUB_RUN_ID} -n ${NAMESPACE}
+      - name: verify deployment
+        uses: steebchen/kubectl@v1.0.0
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: '"rollout status deployment/frontend -n ${NAMESPACE}"'
 

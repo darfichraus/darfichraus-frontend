@@ -1,15 +1,15 @@
 # This workflow will build a package using Maven and then publish it to GitHub docker registry
 # For more information see: https://github.com/actions/setup-java#apache-maven-with-a-settings-path
 
-name: Release new Docker Image
+name: Deploy to Production
 env:
-  NAMESPACE: development
+  NAMESPACE: production
   REPO: crimsyfrontend/ng-frontend
 
 on:
   push:
     branches:
-      - develop
+      - master
 
 jobs:
   docker:
@@ -19,12 +19,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Cache node modules
-          uses: actions/cache@v1
-          with:
-            path: ~/.npm
-            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-            restore-keys: |
-              ${{ runner.os }}-node-
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - uses: actions/setup-node@v1
         with:
           node-version: '13.x'
