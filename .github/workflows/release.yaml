@@ -46,13 +46,13 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: deploy to cluster
-        uses: steebchen/kubectl@v1.0.0
+        uses: docker://benjamsch/kubectl
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
         with:
           args: set image --record deployment/frontend frontend=${REPO}:${GITHUB_RUN_ID} -n ${NAMESPACE}
       - name: verify deployment
-        uses: steebchen/kubectl@v1.0.0
+        uses: docker://benjamsch/kubectl
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
         with:

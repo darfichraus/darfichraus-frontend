@@ -4,7 +4,7 @@ metadata:
   name: frontend
   namespace: development
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -53,7 +53,7 @@ spec:
         - dev.crimsy.tech
       secretName: crimsy-tech-tls-dev-root
   rules:
-    - host: crimsy.tech
+    - host: dev.crimsy.tech
       http:
         paths:
           - path: /
