@@ -14,6 +14,8 @@ export class AdminReviewService {
     })
   };
 
+  apiExt = 'admin/restrictions';
+
 
 
 
@@ -22,8 +24,22 @@ export class AdminReviewService {
 
   fetchData(): any {
 
-    return this.http.get<Restriction[]>(environment.apiUrl + 'restrictions/', this.httpOptions);
+    return this.http.get<Restriction[]>(environment.apiUrl + this.apiExt, this.httpOptions);
   }
 
+  deleteRestriction(restriction): any {
+    let url = environment.apiUrl + this.apiExt;
+
+    const options = {
+      headers: new HttpHeaders({
+        'API-KEY': environment.apiKey
+      }),
+      body: restriction
+    };
+
+    return this.http.request('delete', url, options);
+  }
+
+  
 
 }

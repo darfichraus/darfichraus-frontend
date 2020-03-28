@@ -1,6 +1,4 @@
-import {AfterContentInit, Component, OnInit} from '@angular/core';
-
-
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +7,6 @@ import {AfterContentInit, Component, OnInit} from '@angular/core';
 })
 export class AppComponent  {
 
-
-
-  constructor() {
-
-  }
-
- 
+  constructor() {}
 
 }

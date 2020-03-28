@@ -11,21 +11,15 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class PlayerComponent implements OnInit {
 
   safeURL;
-  src='https://www.youtube.com/embed/7bJ5fIwd9wg';
-  isLoading: boolean = true;
-  loads: boolean = true;
+  src = 'https://www.youtube.com/embed/7bJ5fIwd9wg';
+  isLoading;
 
 
-  constructor(private _sanitizer: DomSanitizer, public dialogRef: MatDialogRef<PlayerComponent>,
-    ){
+  constructor(private _sanitizer: DomSanitizer, public dialogRef: MatDialogRef<PlayerComponent>) {
     this.safeURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.src);
  }
   ngOnInit(): void {
+    this.isLoading = true;
   }
-
-  onClose(): void {
-    this.dialogRef.close();
-  }
-
 
 }

@@ -3,7 +3,6 @@
 }
 
 
-
 mat-sidenav {
     width: 300px;
 }
@@ -16,28 +15,24 @@ mat-icon {
     font-weight: bold;
     text-shadow: none !important;
     color: #2865b6 !important;
-  }
-
-  .text {
-    color: #ffffff;
-  }
-
-
-  .parent {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  .child {
-    flex-grow: 1;
-  }
-
-mat-list-item:hover {
-    background-color: #f5f5f5;
-    cursor: pointer;
 }
 
+.parent {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
-.mat-button:focus .mat-button-focus-overlay { background-color: transparent; }
+.child {
+  flex-grow: 1;
+}
 
+mat-list-item:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+mat-list-item:focus {
+  outline: none;
+  border: 0;
+}

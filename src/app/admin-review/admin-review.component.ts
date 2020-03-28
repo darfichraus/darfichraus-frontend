@@ -6,9 +6,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { Restriction, RestrictionType, RestrictionTypeTranslator } from '../Restriction';
 import { MeldungReactiveComponent } from '../meldung-reactive/meldung-reactive.component';
-
-
-
+import {MenuItem} from 'primeng/api';
+import { ConfirmComponent } from '../confirm/confirm.component';
+import { NONE_TYPE } from '@angular/compiler';
 
 @Component({
   selector: 'app-admin-review',
@@ -31,76 +31,15 @@ export class AdminReviewComponent implements OnInit {
 
   displayedColumns: string[] = ['restrictionType', 'areal', 'shortDescription',];
   dataSource;
-  query = '';
+  // query = '';
+  items: MenuItem[];
+  selectedRestriction;
+
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-
-
   primeData: Restriction[] = [];
-
-  constructor(public adminReviewService: AdminReviewService, private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-
-    this.adminReviewService.fetchData().subscribe(data => {
-
-      this.primeData = data;
-      this._selectedColumns = this.cols;
-      this._selectedColumns = [
-      { field: 'restrictionType', header: 'restrictionType'},
-      { field: 'areal', header: 'areal'},
-      { field: 'arealIdentifier', header: 'arealIdentifier'},
-      { field: 'shortDescription', header: 'shortDescription'}];
-
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
-  applyFilter(value: string) {
-    console.log(value);
-    this.dataSource.filter = value.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  translateRestrictionToIcon(restrictionType: RestrictionType): string {
-    return RestrictionTypeTranslator.translateToIcon(restrictionType);
-  }
-
-  translateRestrictionType(restrictionType: RestrictionType): string {
-    return RestrictionTypeTranslator.translate(restrictionType);
-  }
-
-  openDialog(row): void {
-    const dialogRef = this.dialog.open(MeldungReactiveComponent, {
-      width: '900px',
-      height: '700px',
-      restoreFocus: false,
-      autoFocus: false,
-      hasBackdrop: true,
-      data: row,
-      panelClass: 'custom-dialog-container'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-
-
-
-
-
-
 
 
   cols: any[] = [ 
@@ -152,6 +91,92 @@ export class AdminReviewComponent implements OnInit {
       { label: 'Schleswig-Holstein', value: 'Schleswig-Holstein' },
       { label: 'Thüringen', value: 'Thüringen' }
     ];
+
+
+  constructor(public adminReviewService: AdminReviewService, private dialog: MatDialog) { }
+
+  ngOnInit(): void {
+    this.items = [
+      { label: 'Delete', icon: 'pi pi-times', command: (event) => this.deleteRestriction(this.selectedRestriction) }
+  ];
+
+    this.adminReviewService.fetchData().subscribe(data => {
+
+      this.primeData = data;
+      this._selectedColumns = this.cols;
+      this._selectedColumns = [
+      { field: 'restrictionType', header: 'restrictionType'},
+      { field: 'areal', header: 'areal'},
+      { field: 'arealIdentifier', header: 'arealIdentifier'},
+      { field: 'shortDescription', header: 'shortDescription'}];
+
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  deleteRestriction(restr) {
+
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '350px',
+      autoFocus: false,
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+
+        this.adminReviewService.deleteRestriction(restr).subscribe((val)=> {
+          console.log("succ. deleted restr");
+          const index = this.primeData.indexOf(this.selectedRestriction);
+          this.primeData = this.primeData.filter((val, i) => i !== index);
+        }, (err)=> {
+          console.log(err);
+        });
+      }
+    });
+  }
+
+  /*
+  applyFilter(value: string) {
+    console.log(value);
+    this.dataSource.filter = value.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+  */
+
+  translateRestrictionToIcon(restrictionType: RestrictionType): string {
+    return RestrictionTypeTranslator.translateToIcon(restrictionType);
+  }
+
+  translateRestrictionType(restrictionType: RestrictionType): string {
+    return RestrictionTypeTranslator.translate(restrictionType);
+  }
+
+  openDialog(row): void {
+    const dialogRef = this.dialog.open(MeldungReactiveComponent, {
+      width: '900px',
+      height: '700px',
+      restoreFocus: false,
+      autoFocus: false,
+      hasBackdrop: true,
+      data: row,
+      panelClass: 'custom-dialog-container'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
+
 
 
  @Input() get selectedColumns(): any[] {

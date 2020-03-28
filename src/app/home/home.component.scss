@@ -47,11 +47,13 @@ mat-list-item:hover {
     cursor: pointer;
 }
 
+/*
 button {
     width: 190px;
     pointer-events: all;
     background-color: rgba(255, 255, 255, .8);
 }
+*/
 
 .center-column {
     padding: 10px;
@@ -147,27 +149,10 @@ button {
 
 
 
-.icon.bus:hover, .icon.bus:active, .icon.bus.selected + .transport-icon-label {
-    display: inline;
-}
-
-.icon.people:hover, .icon.people:active, .icon.people.selected + .people-icon-label {
-    display: inline;
-}
-
-.icon.restaurant:hover, .icon.restaurant:active, .icon.restaurant.selected + .restaurant-icon-label  {
-    display: inline;
-}
-
-.icon.eco:hover, .icon.eco:hover, .icon.eco.selected + .eco-icon-label  {
-    display: inline;
-}
-
-.icon.shopping:hover, .icon.shopping:hover, .icon.shopping.selected + .shopping-icon-label  {
-    display: inline;
-}
-
-.icon.close:hover, .icon.close:hover, .icon.close.selected + .closed-icon-label {
+.icon.bus:hover, .icon.bus:active, .icon.bus.selected + .transport-icon-label, .icon.people:hover, .icon.people:active,
+ .icon.people.selected + .people-icon-label, .icon.restaurant:hover, .icon.restaurant:active, .icon.restaurant.selected + .restaurant-icon-label,
+ .icon.eco:hover, .icon.eco:hover, .icon.eco.selected + .eco-icon-label, .icon.shopping:hover, .icon.shopping:hover, .icon.shopping.selected + .shopping-icon-label,
+ .icon.close:hover, .icon.close:hover, .icon.close.selected + .closed-icon-label {
     display: inline;
 }
 
@@ -185,29 +170,10 @@ button {
     border-radius: 5px;
 }
 
-.transport-icon-label {
+.transport-icon-label, .people-icon-label, .restaurant-icon-label, .eco-icon-label, .shopping-icon-label, .closed-icon-label   {
     display: none;
 }
 
-.people-icon-label {
-    display: none; 
-}
-
-.restaurant-icon-label {
-    display: none;  
-}
-
-.eco-icon-label {
-    display: none;   
-}
-
-.shopping-icon-label {
-    display: none;
-}
-
-.closed-icon-label {
-    display: none;
-}
 
 .mat-icon {
     height: 48px;

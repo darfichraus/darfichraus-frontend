@@ -90,8 +90,6 @@ export class SubscribeComponent implements OnInit {
   /** list of banks */
   protected banks: DropSelection[] = this.counties;
 
-  /** control for the selected bank */
-  // public bankCtrl: FormControl = new FormControl();
 
   /** control for the MatSelect filter keyword */
   public bankFilterCtrl: FormControl = new FormControl();

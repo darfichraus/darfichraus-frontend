@@ -13,8 +13,4 @@ export class ImpressumComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClose(): void {
-    this.dialogRef.close();
-  }
-
 }

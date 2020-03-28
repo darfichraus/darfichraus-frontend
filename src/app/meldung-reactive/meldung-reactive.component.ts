@@ -68,9 +68,6 @@ export class MeldungReactiveComponent implements OnInit {
   furtherInformation: string;
   publisher: string;
 
-  // roles: number[] = [0, 1, 2, 3];
-  // matcher: ErrorStateMatcher = new MyErrorStateMatcher();
-
   myForm: FormGroup = this.fb.group({
     areal: ['STATE', [Validators.required]],
     county: ['', [Validators.required]],
@@ -136,8 +133,6 @@ export class MeldungReactiveComponent implements OnInit {
       this.f.shortDescription.setValue(this.data.shortDescription);
       this.f.restrictionDescription.setValue(this.data.restrictionDescription);
       this.f.furtherInformation.setValue(this.data.furtherInformation);
-      // this.f.recipient.setValue(this.data.areal);
-      // this.f.publisher.setValue(this.data.areal);
     }
 
 
@@ -199,7 +194,6 @@ export class MeldungReactiveComponent implements OnInit {
     restriction.recipient = 'recipient1';
     restriction.publisher = 'publisher1';
 
-    console.log(restriction);
 
     this.feedService.submit(restriction).subscribe(val => {
       this.dialogRef.close();
@@ -210,8 +204,8 @@ export class MeldungReactiveComponent implements OnInit {
 
   }
 
-
   get f(): FormGroup['controls'] {
     return this.myForm.controls;
   }
+
 }

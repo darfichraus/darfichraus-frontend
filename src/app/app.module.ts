@@ -24,7 +24,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings, RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
 import { AdminReviewComponent } from './admin-review/admin-review.component';
-import { PreviewModalComponent } from './preview-modal/preview-modal.component';
 import { UnverifiedRestrComponent } from './unverified-restr/unverified-restr.component';
 import { VerifiedRestrComponent } from './verified-restr/verified-restr.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
@@ -39,6 +38,7 @@ import {ContextMenuModule} from 'primeng/contextmenu';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -57,13 +57,13 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     PlayerComponent,
     ContactFormComponent,
     AdminReviewComponent,
-    PreviewModalComponent,
     UnverifiedRestrComponent,
     VerifiedRestrComponent,
     SubscribeComponent,
     DialogWrapperComponent,
     AdminPageComponent,
-    SubscriptionsPageComponent
+    SubscriptionsPageComponent,
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +80,7 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     NgxMatSelectSearchModule,
     
     RecaptchaModule,
-    RecaptchaFormsModule, // if you need forms support
+    RecaptchaFormsModule,
 
        //NG-Prime
        TableModule,

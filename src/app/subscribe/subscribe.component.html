@@ -17,10 +17,7 @@
             <mat-error *ngIf="f.email.touched && f.email.errors?.pattern">Ungültige Email Adresse</mat-error>
         </mat-form-field>
 
-
-
         <h3>Bereich</h3>
-
 
         <div class="section">
             <mat-radio-group formControlName="areal">
@@ -28,8 +25,6 @@
                     {{areal.viewValue}}</mat-radio-button>
             </mat-radio-group>
         </div>
-
-
 
         <div *ngIf="f.areal.value !== 'COUNTRY'">
 
@@ -52,8 +47,6 @@
                 <mat-error *ngIf="f.zip.touched && f.zip.errors?.required">Postleitzahl fehlt.</mat-error>
             </mat-form-field>
 
-
-
         </div>
 
 
@@ -66,7 +59,7 @@
 
         </div>
 
-        <div style="margin-top: 30px;">
+        <div style="margin-top: 30px; margin-bottom: 30px;">
                 <mat-checkbox formControlName="opt">Hiermit bestätige ich, dass ich die <a
                     href="www.google.de">Datenschutzerklärung</a> gelesen habe.</mat-checkbox>
           
