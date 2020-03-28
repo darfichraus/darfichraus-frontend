@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Restriction } from 'src/app/Restriction';
-
 import { environment } from '../../environments/environment';
 
 
