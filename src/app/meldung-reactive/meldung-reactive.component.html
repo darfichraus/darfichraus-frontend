@@ -105,6 +105,9 @@
 
             </div>
 
+             <mat-slide-toggle *ngIf="data !== undefined" formControlName="verified">Verified</mat-slide-toggle>
+
+
         </form>
         
         
@@ -141,7 +144,9 @@
 
     <div class="dialog-actions" fxLayout="row" fxLayoutAlign="space-between center">
         <button mat-stroked-button (click)="onNoClick()">Abbrechen</button>
-        <button mat-stroked-button [disabled]="!myForm.valid" (click)="onSubmit()" cdkFocusInitial>Senden</button>
+        <!-- <button *ngIf="this.data && !this.data.verified" mat-stroked-button (click)="onVerify()" color="primary">Verifizieren</button>
+        <button *ngIf="this.data && this.data.verified" mat-stroked-button (click)="onUnverify()" color="warn">Ablehnen</button> -->
+        <button mat-stroked-button [disabled]="!myForm.valid" (click)="onSubmit()">Senden</button>
     </div>
 
 </div>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VerifiedRestrComponent } from './verified-restr.component';
+import { RestrTableComponent } from './restr-table.component';
 
-describe('VerifiedRestrComponent', () => {
-  let component: VerifiedRestrComponent;
-  let fixture: ComponentFixture<VerifiedRestrComponent>;
+describe('RestrTableComponent', () => {
+  let component: RestrTableComponent;
+  let fixture: ComponentFixture<RestrTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VerifiedRestrComponent ]
+      declarations: [ RestrTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VerifiedRestrComponent);
+    fixture = TestBed.createComponent(RestrTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

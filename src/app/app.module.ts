@@ -24,8 +24,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings, RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
 import { AdminReviewComponent } from './admin-review/admin-review.component';
-import { UnverifiedRestrComponent } from './unverified-restr/unverified-restr.component';
-import { VerifiedRestrComponent } from './verified-restr/verified-restr.component';
+
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { DialogWrapperComponent } from './dialog-wrapper/dialog-wrapper.component';
 import { NumericDirective } from './meldung-reactive/number-input.directive';
@@ -39,6 +38,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { RestrTableComponent } from './restr-table/restr-table.component';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -57,13 +57,12 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     PlayerComponent,
     ContactFormComponent,
     AdminReviewComponent,
-    UnverifiedRestrComponent,
-    VerifiedRestrComponent,
     SubscribeComponent,
     DialogWrapperComponent,
     AdminPageComponent,
     SubscriptionsPageComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    RestrTableComponent
   ],
   imports: [
     BrowserModule,

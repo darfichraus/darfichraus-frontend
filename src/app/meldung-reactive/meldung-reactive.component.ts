@@ -1,8 +1,19 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { RestrictionState, RestrictionType, RestrictionTypeTranslator, Restriction } from '../Restriction';
+import {
+  RestrictionState,
+  RestrictionType,
+  RestrictionTypeTranslator,
+  Restriction
+} from '../Restriction';
 import { FeedService } from '../feed.service';
+import { AdminReviewService } from '../admin-review/admin-review.service';
 
 interface DropSelection {
   value: string;
@@ -16,8 +27,8 @@ interface DropSelection {
 })
 export class MeldungReactiveComponent implements OnInit {
   restrictionStates = [
-    {value: 'BAN', viewValue: 'Verbot'},
-    {value: 'RESTRICTION', viewValue: 'Einschränkung'}
+    { value: 'BAN', viewValue: 'Verbot' },
+    { value: 'RESTRICTION', viewValue: 'Einschränkung' }
   ];
 
   restrictionTypes = [
@@ -52,11 +63,13 @@ export class MeldungReactiveComponent implements OnInit {
   ];
 
   areals: DropSelection[] = [
-    { value: 'COUNTRY', viewValue: 'Bundesweit'},
-    { value: 'STATE', viewValue: 'Bundesland'},
-    { value: 'ZIP', viewValue: 'Stadt'},
+    { value: 'COUNTRY', viewValue: 'Bundesweit' },
+    { value: 'STATE', viewValue: 'Bundesland' },
+    { value: 'ZIP', viewValue: 'Stadt' }
   ];
 
+  /*
+  
   areal: string;
   arealIdentifier: string;
   restrictionState: RestrictionState;
@@ -68,34 +81,24 @@ export class MeldungReactiveComponent implements OnInit {
   furtherInformation: string;
   publisher: string;
 
+  */
+
   myForm: FormGroup = this.fb.group({
     areal: ['STATE', [Validators.required]],
     county: ['', [Validators.required]],
     zip: [''],
     restrictionType: [[], [Validators.required]],
-    shortDescription: [
-      '',
-      [Validators.required, Validators.maxLength(32)]
-    ],
+    shortDescription: ['', [Validators.required, Validators.maxLength(32)]],
     restrictionDescription: [
       '',
       [Validators.required, Validators.minLength(1), Validators.maxLength(2048)]
     ],
     restrictionState: ['RESTRICTION', [Validators.required]],
 
-    furtherInformation: [
-      '',
-      [Validators.required, Validators.maxLength(32)]
-    ],
-    restrictionStart: [
-      '',
-      [Validators.required]
-    ],
-    restrictionEnd: [
-      '',
-      [Validators.required]
-    ],
-
+    furtherInformation: ['', [Validators.required, Validators.maxLength(32)]],
+    restrictionStart: ['', [Validators.required]],
+    restrictionEnd: ['', [Validators.required]],
+    verified: [false, []]
   });
 
   translator = RestrictionTypeTranslator.translate;
@@ -104,25 +107,24 @@ export class MeldungReactiveComponent implements OnInit {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<MeldungReactiveComponent>,
     private feedService: FeedService,
-    @Inject(MAT_DIALOG_DATA) public data
+    @Inject(MAT_DIALOG_DATA) public data: Restriction,
+    private adminReviewService: AdminReviewService
   ) {}
 
   ngOnInit(): void {
+    if (this.data !== undefined) {
+      this.f.verified.setValue(this.data.verified);
 
-    if(this.data !== undefined) {
       this.f.areal.setValue(this.data.areal);
       console.log(this.data.areal);
       console.log(this.f.areal.value);
 
-      if(this.data.areal === 'COUNTRY') {
+      if (this.data.areal === 'COUNTRY') {
         this.onSelectCountry();
-      }
-      else if (this.data.areal === 'STATE') {
+      } else if (this.data.areal === 'STATE') {
         this.f.county.setValue(this.data.arealIdentifier);
         this.onSelectCounty();
-      }
-
-      else if (this.data.areal === 'ZIP') {
+      } else if (this.data.areal === 'ZIP') {
         this.f.zip.setValue(this.data.arealIdentifier);
         this.onSelectZip();
       }
@@ -135,7 +137,6 @@ export class MeldungReactiveComponent implements OnInit {
       this.f.furtherInformation.setValue(this.data.furtherInformation);
     }
 
-
     this.f.areal.valueChanges.subscribe(value => {
       if (value === 'COUNTRY') {
         this.onSelectCountry();
@@ -145,7 +146,6 @@ export class MeldungReactiveComponent implements OnInit {
         this.onSelectZip();
       }
     });
-
   }
 
   onNoClick(): void {
@@ -172,7 +172,35 @@ export class MeldungReactiveComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.data !== undefined) {
+      // put request
+      const restr = this.constructRestriction();
+      console.log("about to update restr via aRS");
+      this.adminReviewService.updateRestriction(restr).subscribe(
+        val => {
+          console.log("about to updaterestrfromdata" );
+          console.log(restr);
+          this.adminReviewService.updateRestrictionFromData(restr);
+          this.dialogRef.close();
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.feedService.submit(this.constructRestriction()).subscribe(
+        val => {
+          this.dialogRef.close();
+          // this.feedService.fetchDataForAll();
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  }
 
+  constructRestriction(): Restriction {
     const restriction = new Restriction();
     restriction.areal = this.f.areal.value;
 
@@ -194,18 +222,15 @@ export class MeldungReactiveComponent implements OnInit {
     restriction.recipient = 'recipient1';
     restriction.publisher = 'publisher1';
 
+    if (this.data !== undefined) {
+      restriction.id = this.data.id;
+      restriction.verified = this.f.verified.value;
+    }
 
-    this.feedService.submit(restriction).subscribe(val => {
-      this.dialogRef.close();
-      this.feedService.fetchDataForAll();
-    }, (err) => {
-      console.log(err);
-    });
-
+    return restriction;
   }
 
   get f(): FormGroup['controls'] {
     return this.myForm.controls;
   }
-
 }

@@ -41,7 +41,7 @@ export class RestrictionTypeTranslator {
       case RestrictionType.GASTRONOMY:
         return 'restaurant_menu';
       case RestrictionType.PUBLIC_PLACES:
-        return 'eco';
+        return 'map';
       case RestrictionType.RETAIL:
         return 'shopping_cart';
       case RestrictionType.CURFEW:
@@ -109,6 +109,7 @@ export class Restriction {
   recipient: string;
   publisher: string;
   searchQuery?: SearchInformation;
+  verified?;
 }
 
 export type Restrictions = Restriction[];

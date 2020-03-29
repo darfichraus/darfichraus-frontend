@@ -13,6 +13,11 @@
   
           <a mat-list-item routerLink="/" style="height: 0;"></a>
   
+          <mat-list-item [routerLink]="['./home']" (click)="drawer.toggle()" routerLinkActive="list-item-active">
+            <mat-icon matListIcon>home</mat-icon>
+            Main Site
+          </mat-list-item>
+
           <mat-list-item [routerLink]="['restrictions']" (click)="drawer.toggle()" routerLinkActive="list-item-active">
             <mat-icon matListIcon>security</mat-icon>
             Restrictions
