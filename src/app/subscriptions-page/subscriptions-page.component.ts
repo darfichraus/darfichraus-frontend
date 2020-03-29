@@ -3,6 +3,8 @@ import { Subscription } from './Subscription';
 import { RestrictionType, RestrictionTypeTranslator } from '../Restriction';
 import { SubscriptionService } from './subscription.service';
 import {MenuItem} from 'primeng/api';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 
 @Component({
@@ -28,7 +30,7 @@ export class SubscriptionsPageComponent implements OnInit {
   ];
 
 
-  constructor(public subscriptionService: SubscriptionService) { }
+  constructor(public subscriptionService: SubscriptionService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -52,6 +54,23 @@ export class SubscriptionsPageComponent implements OnInit {
 
   deleteSub(sub) {
 
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      width: '350px',
+      autoFocus: false,
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+
+        this.subscriptionService.deleteSubscription(sub).subscribe((val)=> {
+          const index = this.primeData.indexOf(this.selectedSub);
+          this.primeData = this.primeData.filter((val, i) => i !== index);
+        }, (err)=> {
+          console.log(err);
+        });
+      }
+    });
   }
 
 

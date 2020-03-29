@@ -50,8 +50,26 @@
             <mat-error *ngIf="f.message.touched && f.message.errors?.required">Nachricht fehlt.</mat-error>
         </mat-form-field>
 
-        <!-- <re-captcha (resolved)="resolved($event)" siteKey="YOUR_SITE_KEY"></re-captcha> -->
 
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+
+            <div fxFlex="50" class="contact-message">
+                
+                Platzhalter Datenschutzerkärung
+
+                 <!-- DATENSCHUTZERKLÄRUNG -->
+
+
+                <!-- -------------------- -->
+
+            </div>
+
+                <re-captcha required formControlName="recaptcha"></re-captcha>
+
+        </div>
+
+       
+    
     </form>
 
 </div>

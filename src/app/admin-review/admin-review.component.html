@@ -12,7 +12,8 @@
       </mat-tab-group>
 
     <p-table #dt [columns]="selectedColumns" [value]="primeData" [paginator]="true" [rows]="20" [rowsPerPageOptions]="[10, 20, 50]" [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedRestr">
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedRestr"
+    [(contextMenuSelection)]="selectedRestriction" [contextMenu]="cm">
 
         <ng-template pTemplate="caption">
 
@@ -54,11 +55,11 @@
         </ng-template>
 
         <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr>
+            <tr [pContextMenuRow]="rowData">
                 <td style="width: 40px !important;">
                     <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
                 </td>
-                <td *ngFor="let col of columns" style="max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" (click)="openDialog(rowData)" style="cursor: pointer;">
+                <td *ngFor="let col of columns" class="overflow" (click)="openDialog(rowData)" style="cursor: pointer;">
                     <mat-icon *ngIf="col.field =='restrictionType'" matTooltip="{{translateRestrictionType(rowData[col.field])}}">
                         {{translateRestrictionToIcon(rowData[col.field])}}
                     </mat-icon>
@@ -68,6 +69,8 @@
         </ng-template>
 
     </p-table>
+
+    <p-contextMenu #cm [model]="items"></p-contextMenu>
 
 
 <div style="height: 100px;"></div>

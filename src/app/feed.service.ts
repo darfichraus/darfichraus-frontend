@@ -68,13 +68,7 @@ fetchDataForAll(): any {
 
   submit(restriction: Restriction) {
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'API-KEY': '5a7c3a9a69f00a5877b847ee645981673aa6994464ddba3ee8d4a805934deb76'
-      })
-    };
-
-    return this.http.post(FeedService.api, restriction, httpOptions);
+    return this.http.post(FeedService.api, restriction, this.httpOptions);
 
   }
 }

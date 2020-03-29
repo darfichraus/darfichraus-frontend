@@ -13,31 +13,33 @@ export class ContactFormComponent implements OnInit {
 
     firstName: [
       '',
-      [Validators.required, Validators.maxLength(32)]
+      [Validators.required]
     ],
     lastName: [
       '',
-      [Validators.required, Validators.maxLength(32)]
+      [Validators.required]
     ],
     email: [
       '',
-      [Validators.required, Validators.maxLength(32)]
+      [Validators.required]
     ],
     title: [
       '',
-      [Validators.required, Validators.maxLength(32)]
+      [Validators.required]
     ],
     message: [
       '',
-      [Validators.required, Validators.maxLength(1024)]
+      [Validators.required]
     ],
+    recaptcha: [
+      null, [Validators.required]
+    ]
 
   });
 
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<ContactFormComponent>,
-    //private feedService: FeedService
   ) {}
 
   ngOnInit(): void {}
@@ -46,16 +48,16 @@ export class ContactFormComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onSubmit() {}
+  onSubmit() {
+
+    // submit contact
+    this.dialogRef.close();
+  }
 
 
   get f(): FormGroup['controls'] {
     return this.myForm.controls;
   }
-
-  resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
-}
 
 
 }

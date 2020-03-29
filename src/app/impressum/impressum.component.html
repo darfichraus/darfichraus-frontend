@@ -1,11 +1,5 @@
-<mat-toolbar mat-dialog-title>
-    <mat-toolbar-row>
-        <span class="modal-heading">Impressum</span>
-        <span class="spacer">
-        </span>
-        <mat-icon (click)="onClose()" style="float: right">close</mat-icon>
-    </mat-toolbar-row>
-</mat-toolbar>
+<app-dialog-wrapper headlineLabel="Impressum">   
+</app-dialog-wrapper>
 
 <div mat-dialog-content>
 
@@ -16,8 +10,6 @@
 
   </div>
  
-  <!-- <br/><br/><hr> -->
-
   <mat-divider></mat-divider>
   <div class='impressum'><h1>Impressum</h1><p>Angaben gemäß § 5 TMG</p><p> - <br/> 
     </p><p> <strong>Vertreten durch: </strong><br/>
@@ -40,5 +32,5 @@
   </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-stroked-button [mat-dialog-close]="" cdkFocusInitial style="position: right">Schließen</button>
+  <button mat-stroked-button [mat-dialog-close]="">Schließen</button>
 </div>

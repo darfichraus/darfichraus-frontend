@@ -7,7 +7,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./dialog-wrapper.component.scss']
 })
 export class DialogWrapperComponent implements OnInit {
-@Input('headlineLabel') headlineLabel:string;
+
+@Input() headlineLabel: string;
 
   constructor(private dialogRef: MatDialogRef<DialogWrapperComponent>) { }
 

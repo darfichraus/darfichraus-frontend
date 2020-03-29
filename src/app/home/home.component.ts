@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
       height: '700px',
       restoreFocus: false,
       autoFocus: false,
-      hasBackdrop: true,
       panelClass: 'mat-dialog-override',
       data: {}
     });
@@ -65,7 +64,6 @@ export class HomeComponent implements OnInit {
       width: '610px',
       restoreFocus: false,
       autoFocus: false,
-      hasBackdrop: true,
       data: {}
     });
 
@@ -83,12 +81,7 @@ export class HomeComponent implements OnInit {
       data: {}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
-
-
 
   openRestrictionDialog(): void {
     const dialogRef = this.dialog.open(MeldungReactiveComponent, {
@@ -96,14 +89,10 @@ export class HomeComponent implements OnInit {
       height: '700px',
       restoreFocus: false,
       autoFocus: false,
-      hasBackdrop: true,
       panelClass: 'custom-dialog-container',
       data: undefined
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
   openBookmarkDialog(): void {
@@ -117,9 +106,6 @@ export class HomeComponent implements OnInit {
       data: {type: undefined}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
   onIcon(icon) {

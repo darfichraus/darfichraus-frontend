@@ -11,11 +11,11 @@ export class SubscriptionService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'API-KEY': '5a7c3a9a69f00a5877b847ee645981673aa6994464ddba3ee8d4a805934deb76'
+      'API-KEY': environment.apiKey
     })
   };
 
-  url = 'https://api.darfichraus.de/restrictions/';
+  apiExt = 'subscriptions/'
 
 
 
@@ -24,13 +24,20 @@ export class SubscriptionService {
 
   fetchData(): any {
 
-    const httpOptions = {
-        headers: new HttpHeaders({
-          'API-KEY': environment.apiKey
-        })
-      };
+    return this.http.get(environment.apiUrl + this.apiExt, this.httpOptions);
+  }
 
-    return this.http.get(environment.apiUrl + 'subscriptions', httpOptions);
+  deleteSubscription(subscription): any {
+    const url = environment.apiUrl + this.apiExt;
+
+    const options = {
+      headers: new HttpHeaders({
+        'API-KEY': environment.apiKey
+      }),
+      body: subscription
+    };
+
+    return this.http.request('delete', url, options);
   }
 
 

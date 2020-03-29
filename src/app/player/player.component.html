@@ -3,17 +3,20 @@
 <app-dialog-wrapper headlineLabel="#wirvsvirus | Pitch- und Konzeptvideo"></app-dialog-wrapper>
         
 
-<span class="video-message">
+<div class="video-message">
         Wir haben für euch beim #wirvsvirus - Hackathon der Bundesregierung vom 20.03. - 22.03.2020 mitgemacht. 
-</span>
-<span style="margin-top: 10px; margin-top: 25px; margin-bottom: 25px; ">
-        <a href="https://wirvsvirushackathon.org"><img src="../../assets/wvv-projekt.png" class="wvv-logo content-desktop"></a>
-        <a href="https://www.darfichraus.de"><img src="../../assets/logo.svg" class="logo"></a>
-</span>
-<span class="video-message">
-        Das Konzept und Pitch-Video zum Thema Krisenkommunikation könnt ihr euch hier ansehen.
-</span>
+</div>
+<div fxLayout="row" fxLayoutAlign="space-around center">
 
+        <a href="https://wirvsvirushackathon.org"><img src="../assets/logo-wvv.svg" class="wvv-logo"></a>
+        <a href="https://www.darfichraus.de"><img src="../assets/logo.svg" class="logo"></a>
+    
+      </div>
+
+<div class="video-message">
+        Das Konzept und Pitch-Video zum Thema Krisenkommunikation könnt ihr euch hier ansehen.
+</div>
+
+<div style="color: #a0a0a0;" *ngIf="isLoading">loading...</div>
 <iframe width="560" height="315" [src]="this.safeURL" frameborder="0" allowfullscreen (load)="isLoading=false"></iframe>
 
-<p class="loading" *ngIf="isLoading">loading...</p>
