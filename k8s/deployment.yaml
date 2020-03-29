@@ -51,9 +51,11 @@ spec:
   tls:
     - hosts:
         - darfichraus.com
+        - www.darfichraus.com
       secretName: darfichraus-com-tls
     - hosts:
         - darfichraus.de
+        - www.darfichraus.de
       secretName: darfichraus-de-tls
   rules:
     - host: darfichraus.de
@@ -64,6 +66,20 @@ spec:
               serviceName: frontend
               servicePort: 80
     - host: darfichraus.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: frontend
+              servicePort: 80
+    - host: www.darfichraus.de
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: frontend
+              servicePort: 80
+    - host: www.darfichraus.com
       http:
         paths:
           - path: /
