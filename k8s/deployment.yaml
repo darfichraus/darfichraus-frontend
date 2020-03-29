@@ -50,14 +50,11 @@ metadata:
 spec:
   tls:
     - hosts:
+        - darfichraus.com
+      secretName: darfichraus-com-tls
+    - hosts:
         - darfichraus.de
       secretName: darfichraus-de-tls
-    - hosts:
-        - darfichraus.com
-      secretName: darfichrausi-com-tls
-    - hosts:
-        - darfichraus.info
-      secretName: darfichraus-info-tls
   rules:
     - host: darfichraus.de
       http:
@@ -67,16 +64,16 @@ spec:
               serviceName: frontend
               servicePort: 80
     - host: darfichraus.com
-        http:
-          paths:
-              - path: /
-                backend:
-                  serviceName: frontend
-                  servicePort: 80
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: frontend
+              servicePort: 80
     - host: darfichraus.info
-        http:
-          paths:
-              - path: /
-                backend:
-                  serviceName: frontend
-                  servicePort: 80
+      http:
+        paths:
+          - path: /api
+            backend:
+              serviceName: frontend
+              servicePort: 80
