@@ -34,6 +34,8 @@ jobs:
           node-version: '13.x'
       - name: Install Dependencies
         run: npm install
+      - name: Install Angular Cli
+        run: npm install -g @angular/cli
       - name: Build Angular App
         run: ng build
       - name: Docker Login
