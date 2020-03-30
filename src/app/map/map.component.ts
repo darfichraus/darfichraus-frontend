@@ -255,7 +255,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           case 3:
             return ColorTransportation.STAGE_THREE;
           default:
-              return ColorTransportation.STAGE_FOUR
+              return ColorTransportation.STAGE_FOUR;
         }
       case 'person':
         switch (severity) {
