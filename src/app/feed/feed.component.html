@@ -1,9 +1,9 @@
-<h1 class="heading">{{data.searchQuery?.arealValue}}</h1>
+<h1 class="heading deutschland">{{data.searchQuery?.arealValue}}</h1>
 
 <p class="feedItem">Aktuelle Verordnungen und Einschränkungen bezüglich des Coronavirus Covid-19</p>
 
-<mat-form-field>
-    <mat-icon matPrefix class="pre-text">search</mat-icon>
+<mat-form-field class="mw">
+    <mat-icon matPrefix class="formPrefix">search</mat-icon>
     <mat-label>Suche</mat-label>
       <input matInput [(ngModel)]="query" placeholder="Titel oder Beschreibung...">
       <button mat-icon-button *ngIf="query" matSuffix (click)="this.query=''">
@@ -12,10 +12,10 @@
   </mat-form-field>
 
   <div *ngFor="let item of data.data | search:'arealIdentifier,restrictionDescription':query" class="container feed-item-container">
-        <div [class.ban]="item.restrictionState == 'BAN'" class="state">{{translateRestrictionState(item.restrictionState)}}</div>
-    <div class="type">{{translateRestrictionType(item.restrictionType)}}</div>
+        <div [class.ban]="item.restrictionState == 'BAN'" class="restrictionState">{{translateRestrictionState(item.restrictionState)}}</div>
+    <div class="restrictionType">{{translateRestrictionType(item.restrictionType)}}</div>
     <div *ngIf="item.arealIdentifier != data.searchQuery.arealValue" class="subhead">{{item.arealIdentifier}}</div>
     <div class="text">{{item.restrictionDescription}}</div>
-    <div class="left datum">-- Beschluss vom {{item.restrictionStart | date:'dd.MM.yyyy' }}</div>
-    <div class="right furtherInformation"><a href="{{item.furtherInformation}}" target="_blank">Link folgen</a></div>
+    <div class="left date">-- Beschluss vom {{item.restrictionStart | date:'dd.MM.yyyy' }}</div>
+    <div class="right furtherInformation"><a href="{{item.furtherInformation}}" target="_blank" class="link">Link folgen</a></div>
 </div>

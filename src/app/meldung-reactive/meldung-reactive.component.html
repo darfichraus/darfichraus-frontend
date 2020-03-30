@@ -9,7 +9,7 @@
 
 
 
-    <div class="modal__content" fxLayout="row" fxLayoutAlign="space-between start" >
+    <div class="modal__content" fxLayout="row" fxLayoutAlign="space-between start">
 
 
 
@@ -91,43 +91,45 @@
 
                 <mat-form-field fxFlex="50" appearance="outline">
                     <mat-label>Anfang</mat-label>
-                    <input matInput [matDatepicker]="picker1" formControlName="restrictionStart" disabled [max]="this.f.restrictionEnd.value">
+                    <input matInput [matDatepicker]="picker1" formControlName="restrictionStart" disabled
+                        [max]="this.f.restrictionEnd.value">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1 disabled="false"></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="50" appearance="outline">
                     <mat-label>Ende</mat-label>
-                    <input matInput [matDatepicker]="picker2" formControlName="restrictionEnd" disabled [min]="this.f.restrictionStart.value">
+                    <input matInput [matDatepicker]="picker2" formControlName="restrictionEnd" disabled
+                        [min]="this.f.restrictionStart.value">
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2 disabled="false" ></mat-datepicker>
+                    <mat-datepicker #picker2 disabled="false"></mat-datepicker>
                 </mat-form-field>
 
             </div>
 
-             <mat-slide-toggle *ngIf="data !== undefined" formControlName="verified">Verified</mat-slide-toggle>
+            <mat-slide-toggle *ngIf="data !== undefined" formControlName="verified">Verified</mat-slide-toggle>
 
 
         </form>
-        
-        
+
+
         <div fxFlex="40" class="right-column">
 
             <h1 class="subhead">Vorschau</h1>
-            <p class="restriction">{{this.f.restrictionState.value == 'ban' ? 'Verbot' : 'Einschränkung'}}</p>
+            <p class="restrictionState">{{this.f.restrictionState.value == 'ban' ? 'Verbot' : 'Einschränkung'}}</p>
             <mat-divider></mat-divider>
 
-            <p class="type">{{this.translator(this.f.restrictionType.value)}}</p>
+            <p class="restrictionType">{{this.translator(this.f.restrictionType.value)}}</p>
 
             <h1 class="subhead" *ngIf="this.f.areal.value == 'COUNTRY'">Deutschland</h1>
             <h1 class="subhead" *ngIf="this.f.areal.value =='STATE'">{{this.f.county.value}}</h1>
             <h1 class="subhead" *ngIf="this.f.areal.value =='ZIP'"> {{this.f.zip.value}}</h1>
 
             <p class="text">{{this.f.restrictionDescription.value}}</p>
-            <p class="restriction">{{this.f.furtherInformation.value}}</p>
-            <span class="datum" *ngIf="this.f.restrictionStart.value != ''">von
-                {{this.f.restrictionStart.value | date: 'dd.MM.yyyy'}} </span><span class="datum"
-                *ngIf="this.f.restrictionEnd.value != ''">bis
+            <p class="restrictionType">{{this.f.furtherInformation.value}}</p>
+            <span class="date" *ngIf="this.f.restrictionStart.value != ''">von
+                {{this.f.restrictionStart.value | date: 'dd.MM.yyyy'}} </span>
+            <span class="date" *ngIf="this.f.restrictionEnd.value != ''">bis
                 {{this.f.restrictionEnd.value | date: 'dd.MM.yyyy'}}</span>
 
         </div>
@@ -136,7 +138,7 @@
 
 
 
-       
+
 
     </div>
 
@@ -150,7 +152,3 @@
     </div>
 
 </div>
-
-
-
-

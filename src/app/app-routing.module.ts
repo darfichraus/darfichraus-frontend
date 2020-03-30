@@ -10,11 +10,13 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 const routes: Routes = [
   {path: '', component: HomeComponent},
   // {path: 'admin', component: AdminPageComponent},
+  /*
   {path: 'admin', component: AdminPageComponent, children: [
     {path: '', redirectTo: 'restrictions', pathMatch: 'full'},
     {path: 'restrictions', component: AdminReviewComponent},
     {path: 'subscriptions', component: SubscriptionsPageComponent},
   ]},
+*/
   { path: '**', redirectTo: '', pathMatch: 'full'}
 
 ];

@@ -1,0 +1,31 @@
+mat-icon.formPrefix, mat-label.formPrefix {
+  color: #a0a0a0;
+  margin-right: 10px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+
+
+.mat-dialog-override {
+  mat-dialog-container {
+    > :first-child {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    mat-dialog-content,
+    div[mat-dialog-content] {
+      flex-grow: 1;
+    }
+  }
+}
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 0px;
+}
+
+

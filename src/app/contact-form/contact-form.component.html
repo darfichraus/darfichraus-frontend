@@ -2,6 +2,8 @@
 </app-dialog-wrapper>
 
 <div mat-dialog-content>
+
+    <p stlye="color='#ff0000'">Zurzeit ist es nicht möglich uns mit diesem Formular zu kontaktieren. Bitte schreiben Sie uns eine Email an info@darfichraus.de</p>
     <div style="margin-bottom: 15px;">
         <span class="contact-message">
                 Für Anfragen jeglicher Art benutzt bitte das unten stehende Kontaktformular. 
@@ -76,5 +78,6 @@
 
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
     <button mat-stroked-button (click)="onNoClick()">Abbrechen</button>
-    <button mat-stroked-button [disabled]="!myForm.valid" (click)="onSubmit()" cdkFocusInitial>Senden</button>
+    <!-- <button mat-stroked-button [disabled]="!myForm.valid" (click)="onSubmit()" cdkFocusInitial>Senden</button> -->
+    <button mat-stroked-button [disabled]="true" (click)="onSubmit()" cdkFocusInitial>Senden</button>
 </div>
