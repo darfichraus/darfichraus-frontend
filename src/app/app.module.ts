@@ -8,7 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FeedComponent} from './feed/feed.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from './material.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MapComponent} from './map/map.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RestrictionRepository} from './restriction.repository';
@@ -39,6 +39,9 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { RestrTableComponent } from './restr-table/restr-table.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { AuthInterceptor } from './auth.interceptor';
+import { AuthGuard } from './auth.guard';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -62,7 +65,8 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     AdminPageComponent,
     SubscriptionsPageComponent,
     ConfirmComponent,
-    RestrTableComponent
+    RestrTableComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +110,12 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
       provide: RECAPTCHA_LANGUAGE,
       useValue: 'en',
     },
-
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  },
+  AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

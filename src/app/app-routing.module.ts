@@ -5,18 +5,21 @@ import { ImpressumComponent } from './impressum/impressum.component';
 import { AdminReviewComponent } from './admin-review/admin-review.component';
 import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'login', component: LoginPageComponent},
   // {path: 'admin', component: AdminPageComponent},
-  /*
-  {path: 'admin', component: AdminPageComponent, children: [
+  
+  {path: 'admin', component: AdminPageComponent, canActivate: [AuthGuard], children: [
     {path: '', redirectTo: 'restrictions', pathMatch: 'full'},
     {path: 'restrictions', component: AdminReviewComponent},
     {path: 'subscriptions', component: SubscriptionsPageComponent},
   ]},
-*/
+
   { path: '**', redirectTo: '', pathMatch: 'full'}
 
 ];
