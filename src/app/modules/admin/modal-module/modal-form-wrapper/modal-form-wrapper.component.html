@@ -1,0 +1,23 @@
+<div class="modal">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <span> {{this.title}}</span>
+            <span class="spacer"></span>
+            <mat-icon (click)="onClose()">close</mat-icon>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="modal__content" fxLayout="row" fxLayoutAlign="space-between start">
+        <ng-content select="[d-body]">
+        </ng-content>
+    </div>
+
+    <div class="dialog-actions" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <!-- <button *ngIf="showSave" (click)="onSave()" [disabled]="this.disabled" mat-flat-button color="primary">Save</button>
+        <button *ngIf="!showSave" (click)="onEdit()" mat-flat-button color="primary">Edit</button>
+        <button (click)="onCancel()" mat-stroked-button>Cancel</button> -->
+
+        <ng-content select="[d-actions]">
+        </ng-content>
+    </div>
+</div>

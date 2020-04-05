@@ -4,6 +4,7 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ClarityModule} from '@clr/angular';
+import { ClrIconModule } from '@clr/angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FeedComponent} from './feed/feed.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -69,6 +70,7 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     BrowserModule,
     AppRoutingModule,
     ClarityModule,
+    ClrIconModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,

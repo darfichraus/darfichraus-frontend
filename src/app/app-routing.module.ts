@@ -5,6 +5,7 @@ import { ImpressumComponent } from './impressum/impressum.component';
 import { AdminReviewComponent } from './admin-review/admin-review.component';
 import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
     {path: 'restrictions', component: AdminReviewComponent},
     {path: 'subscriptions', component: SubscriptionsPageComponent},
   ]},
+  {path: 'clr', component: AdminPanelComponent},
   { path: '**', redirectTo: '', pathMatch: 'full'}
 
 ];
