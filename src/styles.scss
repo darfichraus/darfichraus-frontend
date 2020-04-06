@@ -2,6 +2,11 @@
 
 @import 'assets/fonts/sans-pro';
 
+@import './styles_comp_override.scss';
+@import './styles_fonts_override.scss';
+@import './styles_global.scss';
+
+
 @font-face {
   font-family: 'Playfair Display';
   font-style: normal;
@@ -88,9 +93,11 @@ body {
 
 //@import "~leaflet/dist/leaflet.css";
 
+/*
 h1.heading {
   font-family: "Playfair Display";
 }
+*/
 
 .feed .type {
   padding-bottom: 1em;
@@ -168,21 +175,6 @@ h1.heading {
 
 
 
-.mat-dialog-override {
-  mat-dialog-container {
-    > :first-child {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    mat-dialog-content,
-    div[mat-dialog-content] {
-      flex-grow: 1;
-    }
-  }
-}
-
-.custom-dialog-container .mat-dialog-container {
-  padding: 0px;
+button:focus, a:focus, input:focus, clr-icon:focus { 
+  outline: none; 
 }

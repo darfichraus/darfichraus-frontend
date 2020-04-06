@@ -1,9 +1,4 @@
 
-.mat-dialog-title {
-    //padding: 24px;
-    margin: -24px -24px 24px -24px;
-    width: auto;
-}
 
 .modal-heading {
     font-family: "Playfair Display";
@@ -20,4 +15,11 @@
 
 mat-icon:hover {
     cursor: pointer;
+}
+
+
+.mat-dialog-title {
+    //padding: 24px;
+    margin: -24px -24px 24px -24px;
+    width: auto;
 }

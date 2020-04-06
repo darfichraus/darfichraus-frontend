@@ -8,12 +8,14 @@ import { ConfirmModalComponent} from './confirm-modal/confirm.component';
 import { InfoModalComponent } from './information-modal/info.component';
 import { ModalCancelButtonComponent } from './modal-buttons/cancel-button/cancle-button.component';
 import { ModalConfirmButtonComponent } from './modal-buttons/confirm-button/confirm-button.component';
-import { ModalEditButtonComponent } from './modal-buttons/edit-button/edit-button.component';
 import { ModalSaveButtonComponent } from './modal-buttons/save-button/save-button.component';
 import { ModalFormWrapperComponent } from './modal-form-wrapper/modal-form-wrapper.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ClarityModule } from '@clr/angular';
+
 
 @NgModule({
-  declarations: [ModalFormWrapperComponent, ModalSaveButtonComponent, ModalCancelButtonComponent, ModalEditButtonComponent,
+  declarations: [ModalFormWrapperComponent, ModalSaveButtonComponent, ModalCancelButtonComponent,
   ModalConfirmButtonComponent, ConfirmModalComponent, InfoModalComponent],
   imports: [
     CommonModule,
@@ -21,9 +23,12 @@ import { ModalFormWrapperComponent } from './modal-form-wrapper/modal-form-wrapp
     MatToolbarModule,
     MatIconModule,
     FlexLayoutModule,
+    ClarityModule,
+    MatDialogModule
   ],
   exports: [
     ModalFormWrapperComponent,
+    ModalConfirmButtonComponent,
     ModalSaveButtonComponent,
     ModalCancelButtonComponent,
     ConfirmModalComponent,

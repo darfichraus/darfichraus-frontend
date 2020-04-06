@@ -1,7 +1,7 @@
 
   <mat-toolbar>
     <a href="https://wirvsvirushackathon.org"><img src="../assets/logo-wvv.svg" class="wvv-logo content-desktop"></a>
-    <a href="https://www.darfichraus.de"><img src="../assets/logo.svg" class="logo"></a>
+    <a href="https://www.darfichraus.de"><img src="../assets/logo.svg" class="dir-logo"></a>
     <div class="toolbar-links" style="position: fixed; right: 10px">
       <button mat-stroked-button (click)="openDialog()" style="color: #2D3780;">
         Impressum
@@ -88,25 +88,21 @@
       </div>
 
       <div class="feed" fxFlex="" [class.isMobile]="isMobile">
-
-        <div class="content-desktop">
-            <button mat-stroked-button (click)="openBookmarkDialog()" style="float: left;">
-                <mat-icon style="font-size: 20px; padding-top: 4px;">bookmark</mat-icon>Abbonieren
+        <div class="content-desktop" style="margin-bottom: 20px;">
+          <div>
+            <button mat-stroked-button (click)="openBookmarkDialog()" style="display: inline-block;">
+                <mat-icon style="font-size: 20px; padding-top: 4px;">bookmark</mat-icon>
+                Abonnieren
               </button>
-          <button mat-stroked-button (click)="openRestrictionDialog()" style="float: right;">
+          <button mat-stroked-button (click)="openRestrictionDialog()" style="margin-left: 7px;">
             <mat-icon style="font-size: 20px; padding-top: 4px;">add</mat-icon>
             Verordnung eintragen
           </button>
-          <div style="font-size: 14px; float: right; margin-top: 12px;">
-            <b>34</b> Einschränkungen, <b>8</b> Verbote
-          </div>
         </div>
-        <app-feed></app-feed>
-
       </div>
-
-
+      <div>
+       <app-feed></app-feed>
+      </div>
     </div>
-
-
   </div>
+</div>

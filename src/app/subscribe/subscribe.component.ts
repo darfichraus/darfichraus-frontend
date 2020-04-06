@@ -11,7 +11,7 @@ import { SubscribePayload } from './subscribe.service';
 import { ReplaySubject, Subject } from 'rxjs';
 import { MatSelect } from '@angular/material/select';
 import { takeUntil, take } from 'rxjs/operators';
-import { RestrictionType, RestrictionState } from '../Restriction';
+import { RestrictionType, RestrictionState, RestrictionTypeTranslator } from '../Restriction';
 import { minOneChecked } from './custom-val.validator';
 
 
@@ -246,6 +246,9 @@ export class SubscribeComponent implements OnInit {
     );
   }
 
+  translate(type) {
+    return RestrictionTypeTranslator.translate(type);
+  }
 
 
 

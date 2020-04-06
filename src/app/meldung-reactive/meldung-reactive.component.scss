@@ -1,19 +1,11 @@
 
-
-mat-form-field {
-    width: 100%;
-}
-
-
 mat-radio-button {
     margin-right: 10px;
     margin-bottom: 20px;
 }
 
 
-.source {
-    float: right;
-}
+
 
 .modal-heading {
     font-family: "Playfair Display";
@@ -21,54 +13,6 @@ mat-radio-button {
     font-weight: bold;
     font-size: 32px;
     line-height: 36px;
-  }
-
-.subhead {
-    font-family: "Playfair Display";
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 32px;
-  }
-
-  .text {
-    margin-bottom: 10px;
-    font-family: "Source Sans Pro", serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 135.69%;
-    max-width: 363px;
-    overflow-wrap: break-word;  /* CSS3 */   
-
-  }
-
-  .datum {
-    font-family: "Source Sans Pro", serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 135.69%;
-    color: #5B5B5B;
-  }
-
-  .type {
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 135.69%;
-    padding-bottom: 15px;
-  }
-
-  .restriction {
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 135.69%;
-    padding-bottom: 15px;
-    float: right;
   }
 
   .mat-dialog-title {

@@ -9,7 +9,7 @@
     <form [formGroup]="myForm">
 
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="mw">
             <mat-label>Email</mat-label>
             <input required type="text" formControlName="email" matInput placeholder="Email"
                 pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
@@ -54,7 +54,7 @@
 
         <div formGroupName="restrTypes">
             <mat-checkbox *ngFor="let restr of this.restrictionTypes" formControlName="{{restr.value}}"
-                style="display: block;">{{restr.value}}</mat-checkbox>
+                style="display: block;">{{this.translate(restr.value)}}</mat-checkbox>
                 <mat-error *ngIf="f.restrTypes.touched && f.restrTypes.errors?.minOneChecked" style="font-size: 80%; margin-top: 5px; margin-left: 10px;">Auswahl fehlt.</mat-error>
 
         </div>

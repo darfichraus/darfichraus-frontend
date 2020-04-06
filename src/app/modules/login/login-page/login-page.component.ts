@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -7,9 +10,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor() { }
+  loginForm = this.fb.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required],
+  });
 
-  ngOnInit(): void {
+  error = false;
+
+
+
+  constructor(public authService: AuthService, private fb: FormBuilder,
+              private router: Router) { }
+
+  ngOnInit() {
   }
+
+  get f(): FormGroup['controls'] {
+    return this.loginForm.controls;
+  }
+
+  onLogin() {
+    this.error = false;
+    this.authService.onLogin(this.f.email.value, this.f.password.value).subscribe(
+      (val) => {
+          this.authService.setSession(val);
+          this.router.navigate(['./admin']);
+      }, (err) => {
+        this.error = true;
+      }
+  );
+
+
+  }
+
+  onForgotPassword() {}
+
 
 }

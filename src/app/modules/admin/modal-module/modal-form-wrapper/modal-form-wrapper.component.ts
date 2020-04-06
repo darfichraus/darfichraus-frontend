@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'eta-modal-form-wrapper',
+  selector: 'modal-wrapper',
   templateUrl: './modal-form-wrapper.component.html',
   styleUrls: ['./modal-form-wrapper.component.scss'],
 })

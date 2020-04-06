@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 
 @Component({
-  selector: 'eta-modal-save-button',
+  selector: 'modal-save-button',
   templateUrl: './save-button.component.html',
   styleUrls: ['./save-button.component.scss'],
 })

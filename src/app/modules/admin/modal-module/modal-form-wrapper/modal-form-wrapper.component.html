@@ -1,4 +1,6 @@
-<div class="modal">
+<!-- 
+    
+    <div class="modal">
     <mat-toolbar color="primary">
         <mat-toolbar-row>
             <span> {{this.title}}</span>
@@ -13,11 +15,53 @@
     </div>
 
     <div class="dialog-actions" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-        <!-- <button *ngIf="showSave" (click)="onSave()" [disabled]="this.disabled" mat-flat-button color="primary">Save</button>
-        <button *ngIf="!showSave" (click)="onEdit()" mat-flat-button color="primary">Edit</button>
-        <button (click)="onCancel()" mat-stroked-button>Cancel</button> -->
-
         <ng-content select="[d-actions]">
         </ng-content>
     </div>
 </div>
+
+-->
+
+
+
+<!-- 
+
+  <div class="modal" (click)="onClose()">
+    <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" (click)="onClose()">
+                    <clr-icon aria-hidden="true" shape="close"></clr-icon>
+                </button>
+                <h3 class="modal-title">{{this.title}}</h3>
+            </div>
+            <div class="modal-body">
+                <ng-content select="[d-body]"></ng-content>
+            </div>
+            <div class="modal-footer">
+                <ng-content select="[d-actions]">
+                </ng-content>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->
+
+
+    <div class="modal-dialog" role="dialog">
+        
+            <div class="dialog-title" fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 class="title">{{this.title}}</h3>
+
+                    <clr-icon class="close-button inline" (click)="onClose()" shape="close"></clr-icon>
+
+            </div>
+            <div class="modal__content">
+                <ng-content select="[d-body]"></ng-content>
+            </div>
+            <div class="dialog-actions" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                <ng-content select="[d-actions]">
+                </ng-content>
+            </div>
+    </div>

@@ -1,28 +1,22 @@
-<p>asdfas</p>
-
-
-
-<!-- 
-    
+   
     
     <div class="main-container">
     <header class="header-6">
         <div class="branding">
             <a href="..." class="nav-link">
-                <clr-icon shape="vm-bug"></clr-icon>
-                <span class="title">Project Clarity</span>
+                <img class="dir-logo" src="../../../../assets/logo_min.svg">
+                <span class="title">Admin Panel</span>
             </a>
         </div>
         <div class="header-actions">
 
             <clr-dropdown>
                 <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
-                    john.doe@vmware.com
+                    {{this.authService.getUserEmail()}}
                     <clr-icon shape="caret down"></clr-icon>
                 </button>
                 <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                    <a href="..." clrDropdownItem>Preferences</a>
-                    <a href="..." clrDropdownItem>Log out</a>
+                    <a (click)="this.authService.onLogout()" clrDropdownItem>Log out</a>
                 </clr-dropdown-menu>
             </clr-dropdown>
 
@@ -31,21 +25,23 @@
     <nav class="subnav">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" href="#">Restricions</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="'restrictions'">Restricions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" href="#">Subscriptions</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="'subscriptions'">Subscriptions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" href="#">User Management</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="'user-management'">User Management</a>
             </li>
         </ul>
     </nav>
     <div class="content-container">
         <div class="content-area">
-            asfsdf
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>
 
--->
+
+
+

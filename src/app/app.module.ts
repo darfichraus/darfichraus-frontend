@@ -9,11 +9,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FeedComponent} from './feed/feed.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from './material.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MapComponent} from './map/map.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RestrictionRepository} from './restriction.repository';
-import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 import {MeldungReactiveComponent} from './meldung-reactive/meldung-reactive.component';
 import {DeviceDetectorModule} from 'ngx-device-detector';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -25,8 +24,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSettings, RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
 import { AdminReviewComponent } from './admin-review/admin-review.component';
-import { UnverifiedRestrComponent } from './unverified-restr/unverified-restr.component';
-import { VerifiedRestrComponent } from './verified-restr/verified-restr.component';
+
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { DialogWrapperComponent } from './dialog-wrapper/dialog-wrapper.component';
 import { NumericDirective } from './meldung-reactive/number-input.directive';
@@ -40,6 +38,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { RestrTableComponent } from './restr-table/restr-table.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { AuthGuard } from './core/guards/auth.guard';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -58,13 +59,12 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     PlayerComponent,
     ContactFormComponent,
     AdminReviewComponent,
-    UnverifiedRestrComponent,
-    VerifiedRestrComponent,
     SubscribeComponent,
     DialogWrapperComponent,
     AdminPageComponent,
     SubscriptionsPageComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    RestrTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,7 +99,6 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
         RestrictionRepository
       ], multi: true
     },
-    //{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {panelClass: 'mat-dialog-override'}},
     {provide: MAT_DATE_LOCALE, useValue: 'de'},
     {
       provide: RECAPTCHA_SETTINGS,
@@ -109,7 +108,12 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
       provide: RECAPTCHA_LANGUAGE,
       useValue: 'en',
     },
-
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  },
+  AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,6 @@
+@import '../../styles_vars.scss';
+@import '../../styles_global.scss';
+
 mat-toolbar {
     z-index: 99;
     position: fixed;
@@ -10,6 +13,7 @@ mat-toolbar {
     
 }
 
+/*
 .logo {
     height: 60px;
 }
@@ -17,6 +21,7 @@ mat-toolbar {
 .wvv-logo {
     width: 250px;
 }
+*/
 
 .spacer {
     flex: 1 1 auto;
@@ -89,8 +94,8 @@ button {
     position: relative;
     overflow: auto;
     padding: 10px;
-    padding-left: 35px;
-    padding-right: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
     overflow-y: auto;
     overflow-x: hidden;
     margin-top: 5px;
