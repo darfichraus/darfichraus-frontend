@@ -1,5 +1,13 @@
 <dir-header>User Management</dir-header>
 
+<mat-form-field class="mw">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="email address ..." [(ngModel)]="searchQuery">
+    <button mat-button *ngIf="searchQuery" matSuffix mat-icon-button (click)="searchQuery=''">
+        <mat-icon>close</mat-icon>
+      </button>
+  </mat-form-field>
+
 <clr-datagrid [(clrDgSelected)]="selected">
     <clr-dg-placeholder>No users found.</clr-dg-placeholder>
 
@@ -17,7 +25,7 @@
     <clr-dg-column>Role</clr-dg-column>
 
 
-    <clr-dg-row *clrDgItems="let user of users" [clrDgItem]="user">
+    <clr-dg-row *clrDgItems="let user of filteredUsers" [clrDgItem]="user">
         <clr-dg-cell>{{user.username}}</clr-dg-cell>
         <clr-dg-cell>{{user.roles}}</clr-dg-cell>
     </clr-dg-row>

@@ -11,7 +11,6 @@ import {
 } from '../Restriction';
 import { MeldungReactiveComponent } from '../meldung-reactive/meldung-reactive.component';
 import { MenuItem } from 'primeng/api';
-import { ConfirmComponent } from '../confirm/confirm.component';
 import { NONE_TYPE } from '@angular/compiler';
 import { AdminReviewService } from '../admin-review/admin-review.service';
 
@@ -134,7 +133,7 @@ export class RestrTableComponent implements OnInit {
   }
 
   deleteRestriction(restr) {
-    const dialogRef = this.dialog.open(ConfirmComponent, {
+    /*const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '350px',
       autoFocus: false,
       data: {}
@@ -154,6 +153,7 @@ export class RestrTableComponent implements OnInit {
       }
 
     });
+    */
 
   }
 

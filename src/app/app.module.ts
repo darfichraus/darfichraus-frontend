@@ -35,9 +35,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import {DropdownModule} from 'primeng/dropdown';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import { AdminPageComponent } from './admin-page/admin-page.component';
 import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
-import { ConfirmComponent } from './confirm/confirm.component';
 import { RestrTableComponent } from './restr-table/restr-table.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { AuthGuard } from './core/guards/auth.guard';
@@ -61,9 +59,7 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     AdminReviewComponent,
     SubscribeComponent,
     DialogWrapperComponent,
-    AdminPageComponent,
     SubscriptionsPageComponent,
-    ConfirmComponent,
     RestrTableComponent,
   ],
   imports: [

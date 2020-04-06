@@ -7,7 +7,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Restriction, RestrictionType, RestrictionTypeTranslator } from '../Restriction';
 import { MeldungReactiveComponent } from '../meldung-reactive/meldung-reactive.component';
 import {MenuItem} from 'primeng/api';
-import { ConfirmComponent } from '../confirm/confirm.component';
 import { NONE_TYPE } from '@angular/compiler';
 
 @Component({

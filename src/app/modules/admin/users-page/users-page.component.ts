@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { UserManagementService } from "./user-management.service";
 import { User } from "src/app/models/user";
-import { ModalService } from "../modal-module/modal.service";
+import { ModalService } from "../../modal-template-module/modal.service";
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -13,7 +13,9 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 })
 export class UsersPageComponent implements OnInit {
   users: User[] = [];
+  filteredUsers: User[] = [];
   selected: User[] = [];
+  _search = '';
 
   constructor(
     private userManagementService: UserManagementService,
@@ -26,12 +28,31 @@ export class UsersPageComponent implements OnInit {
       (val) => {
         console.log(val);
         this.users = val;
+        this.filteredUsers = val;
       },
       (err) => {
         console.log(err);
       }
     );
   }
+
+
+  get searchQuery() {
+    return this._search;
+  }
+
+  set searchQuery(value: string) {
+    this._search = value;
+    if (value) {
+      const lowercase = value.toLowerCase().trim();
+      this.filteredUsers = this.users.filter(user => {
+        return user.username.toLowerCase().indexOf(lowercase) >= 0; //|| user.lastname.toLowerCase().indexOf(lowercase) >= 0
+      });
+    } else {
+      this.filteredUsers = this.users;
+    }
+  }
+
 
   openModal(mode: string, user: User) {
 

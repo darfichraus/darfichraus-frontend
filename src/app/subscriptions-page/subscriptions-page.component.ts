@@ -4,7 +4,6 @@ import { RestrictionType, RestrictionTypeTranslator } from '../Restriction';
 import { SubscriptionService } from './subscription.service';
 import {MenuItem} from 'primeng/api';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmComponent } from '../confirm/confirm.component';
 
 
 @Component({
@@ -54,6 +53,7 @@ export class SubscriptionsPageComponent implements OnInit {
 
   deleteSub(sub) {
 
+    /*
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '350px',
       autoFocus: false,
@@ -71,6 +71,7 @@ export class SubscriptionsPageComponent implements OnInit {
         });
       }
     });
+    */
   }
 
 

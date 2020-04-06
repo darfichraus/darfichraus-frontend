@@ -1,0 +1,58 @@
+
+
+<dir-header>Subscriptions</dir-header>
+
+<mat-form-field class="mw">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="ID or email address ..." [(ngModel)]="searchQuery">
+    <button mat-button *ngIf="searchQuery" matSuffix mat-icon-button (click)="searchQuery=''">
+        <mat-icon>close</mat-icon>
+      </button>
+  </mat-form-field>
+
+<clr-datagrid [(clrDgSelected)]="selected">
+    <clr-dg-placeholder>No subscriptions found.</clr-dg-placeholder>
+
+    <clr-dg-action-bar>
+        <div class="btn-group">
+            <!-- 
+            <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Add', undefined)" *ngIf="selected.length == 0"><clr-icon shape="plus"></clr-icon> Add subscription</button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onDeleteSelection()" *ngIf="selected.length > 0"><clr-icon shape="trash"></clr-icon> Delete</button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Edit', this.selected[0])" *ngIf="selected.length == 1"><clr-icon shape="pencil"></clr-icon> Edit</button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="this.selected = []" *ngIf="selected.length > 0"><clr-icon shape="times"></clr-icon> Deselect all</button>
+            -->
+        </div>
+    </clr-dg-action-bar>
+   
+    id: string;
+    email: string;
+    areal: string;
+    arealIdentifier: string;
+    types: Restriction[];
+    created: string;
+
+    <clr-dg-column>Id</clr-dg-column>
+    <clr-dg-column>Email</clr-dg-column>
+    <clr-dg-column>Areal</clr-dg-column>
+    <clr-dg-column>ArealIdentifier</clr-dg-column>
+    <clr-dg-column>Types</clr-dg-column>
+    <clr-dg-column>Created</clr-dg-column>
+
+
+    <clr-dg-row *clrDgItems="let sub of filteredSubs" [clrDgItem]="sub">
+        <clr-dg-cell>{{sub.id}}</clr-dg-cell>
+        <clr-dg-cell>{{sub.email}}</clr-dg-cell>
+        <clr-dg-cell>{{sub.areal}}</clr-dg-cell>
+        <clr-dg-cell>{{sub.arealIdentifier}}</clr-dg-cell>
+        <clr-dg-cell><mat-icon *ngFor="let type of sub.types" matTooltip="{{this.translateRestrictionType(type)}}">{{this.translateRestrictionToIcon(type)}}</mat-icon></clr-dg-cell>
+        <clr-dg-cell>{{sub.created}}</clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="10">
+            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Subscriptions per page</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} subscriptions
+        </clr-dg-pagination>
+    </clr-dg-footer>
+</clr-datagrid>

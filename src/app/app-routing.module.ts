@@ -4,7 +4,6 @@ import { HomeComponent } from './home/home.component';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { AdminReviewComponent } from './admin-review/admin-review.component';
 import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminPanelComponent } from './modules/admin/admin-panel/admin-panel.component';
 import { AuthGuard } from './core/guards/auth.guard';
 
