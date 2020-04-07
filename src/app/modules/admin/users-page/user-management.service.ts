@@ -10,12 +10,6 @@ export class UserManagementService {
   static readonly USERS_URL = environment.apiUrl + 'admin/users/';
   static readonly USERS_REGISTER_URL = environment.apiUrl + 'admin/users/register';
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'API-KEY': environment.apiKey,
-    }),
-  };
-
   constructor(private readonly http: HttpClient) {}
 
  

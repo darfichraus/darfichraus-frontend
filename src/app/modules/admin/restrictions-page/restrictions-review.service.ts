@@ -1,26 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Restriction } from 'src/app/Restriction';
-import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
-import { NotificationService } from '../core/services/notification.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { Restriction } from 'src/app/models/restrictions';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminReviewService {
+export class RestrictionsReviewService {
 
   data = new BehaviorSubject<Restriction[]>([]);
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'API-KEY': environment.apiKey
-    })
-  };
-
-  apiExt = 'admin/restrictions';
-
-
+  static readonly RESTR_URL = environment.apiUrl + 'restrictions/';
 
 
   constructor(private http: HttpClient, private notifService: NotificationService) { }
@@ -28,7 +20,7 @@ export class AdminReviewService {
 
   fetchData(): any {
 
-    this.http.get<Restriction[]>(environment.apiUrl + this.apiExt, this.httpOptions).subscribe((val) => {
+    this.http.get<Restriction[]>(RestrictionsReviewService.RESTR_URL).subscribe((val) => {
       this.data.next(val);
     }, (err) => {
       console.log(err);
@@ -38,13 +30,10 @@ export class AdminReviewService {
   deleteRestriction(restriction: Restriction): any {
 
     const options = {
-      headers: new HttpHeaders({
-        'API-KEY': environment.apiKey
-      }),
       body: restriction
     };
 
-    return this.http.request('delete', environment.apiUrl + this.apiExt, options);
+    return this.http.request('delete', RestrictionsReviewService.RESTR_URL, options);
   }
 
   deleteRestrictionFromData(restriction): void {
@@ -54,7 +43,7 @@ export class AdminReviewService {
   }
 
   updateRestriction(restriction: Restriction) {
-    return this.http.put(environment.apiUrl + this.apiExt, restriction, this.httpOptions);
+    return this.http.put(RestrictionsReviewService.RESTR_URL, restriction);
   }
 
   updateRestrictionFromData(restriction): void {

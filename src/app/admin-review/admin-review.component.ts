@@ -28,8 +28,6 @@ export class AdminReviewComponent implements OnInit {
     this.adminReviewService.fetchData();
 
     this.adminReviewService.data.subscribe((val) => {
-      console.log("aRS.subscribe()..");
-      console.log(val);
       this.data = val;
     }, (err) => {
       console.log(err);

@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { RestrictionTableComponent } from './restrictions-page/restriction-table/restriction-table.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     UsersPageComponent,
     AddUserModalComponent,
     SubscriptionsPageComponent,
+    RestrictionTableComponent
   ],
   imports: [
     CommonModule,

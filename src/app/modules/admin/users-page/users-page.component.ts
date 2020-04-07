@@ -67,6 +67,7 @@ export class UsersPageComponent implements OnInit {
       if (result !== undefined) {
         if (mode === 'Add') {
           this.users = [...this.users, result];
+          this.filteredUsers = [...this.filteredUsers, result];
         }
         else if (mode === 'Edit') {
           /*
@@ -102,6 +103,7 @@ export class UsersPageComponent implements OnInit {
         let count = 0;
         this.selected.forEach((user) => {
           this.users = this.users.filter(e => e.username !== user.username);
+          this.filteredUsers = this.filteredUsers.filter(e => e.username !== user.username);
           this.userManagementService.deleteUser(user.username).subscribe((val) => {
             count += 1;
             if (count === toBeRemoved) {

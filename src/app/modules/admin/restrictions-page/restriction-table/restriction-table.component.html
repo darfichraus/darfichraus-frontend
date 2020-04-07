@@ -1,0 +1,84 @@
+
+
+
+<mat-form-field class="mw search">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="ID..." [(ngModel)]="searchQuery">
+    <button mat-button *ngIf="searchQuery" matSuffix mat-icon-button (click)="searchQuery=''">
+        <mat-icon>close</mat-icon>
+      </button>
+  </mat-form-field>
+
+<clr-datagrid [(clrDgSelected)]="selected">
+    <clr-dg-placeholder>No restrictions found.</clr-dg-placeholder>
+
+    <clr-dg-action-bar>
+        <div class="btn-group">
+
+            <!-- <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Add', undefined)" *ngIf="selected.length == 0"><clr-icon shape="plus"></clr-icon> Add subscription</button> -->
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onDeleteSelection()" *ngIf="selected.length > 0"><clr-icon shape="trash"></clr-icon> Delete</button>
+            <!-- <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Edit', this.selected[0])" *ngIf="selected.length == 1"><clr-icon shape="pencil"></clr-icon> Edit</button> -->
+            <button type="button" class="btn btn-sm btn-secondary" (click)="this.selected = []" *ngIf="selected.length > 0"><clr-icon shape="times"></clr-icon> Deselect all</button>
+
+        </div>
+    </clr-dg-action-bar>
+   
+
+    <clr-dg-column>Id</clr-dg-column>
+    <clr-dg-column>
+        <ng-container *clrDgHideableColumn="{hidden: false}">
+            restrictionType
+        </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
+        <ng-container *clrDgHideableColumn="{hidden: false}">
+            areal
+        </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
+        <ng-container *clrDgHideableColumn="{hidden: false}">
+            shortDescription
+        </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
+        <ng-container *clrDgHideableColumn="{hidden: true}">
+            arealIdentifier
+        </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
+        <ng-container *clrDgHideableColumn="{hidden: true}">
+            restrictionStart
+        </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
+        <ng-container *clrDgHideableColumn="{hidden: true}">
+            restrictionEnd
+        </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
+        <ng-container *clrDgHideableColumn="{hidden: true}">
+            furtherInformation
+        </ng-container>
+    </clr-dg-column>
+
+
+    <clr-dg-row *clrDgItems="let restr of filteredRestrictions" [clrDgItem]="restr">
+        <clr-dg-cell>{{restr.id}}</clr-dg-cell>
+        <clr-dg-cell><mat-icon matTooltip="{{this.restrictionToType(restr.restrictionType)}}">{{this.restrictionToIcon(restr.restrictionType)}}</mat-icon></clr-dg-cell>
+        <clr-dg-cell>{{restr.areal}}</clr-dg-cell>
+        <clr-dg-cell>{{restr.shortDescription}}</clr-dg-cell>
+        <clr-dg-cell>{{restr.arealIdentifier}}</clr-dg-cell>
+        <clr-dg-cell>{{restr.restrictionStart}}</clr-dg-cell>
+        <clr-dg-cell>{{restr.restrictionEnd}}</clr-dg-cell>
+        <clr-dg-cell>{{restr.furtherInformation}}</clr-dg-cell>
+
+    </clr-dg-row>
+
+    <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="10">
+            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Restrictions per page</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} restrictions
+        </clr-dg-pagination>
+    </clr-dg-footer>
+</clr-datagrid>

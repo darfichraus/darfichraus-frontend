@@ -1,2 +1,16 @@
-<p>restrictions-page works!</p>
+<dir-header>Restrictions</dir-header>
 
+<clr-tabs>
+    <clr-tab>
+        <button clrTabLink id="link1">Unverified</button>
+        <clr-tab-content id="content1" *clrIfActive="true">
+            <restriction-table [restrictions]="this.unverifData()"></restriction-table>
+        </clr-tab-content>
+    </clr-tab>
+    <clr-tab>
+        <button clrTabLink>Verified</button>
+        <clr-tab-content *clrIfActive>
+            <restriction-table [restrictions]="this.verifData()"></restriction-table>
+        </clr-tab-content>
+    </clr-tab>
+</clr-tabs>

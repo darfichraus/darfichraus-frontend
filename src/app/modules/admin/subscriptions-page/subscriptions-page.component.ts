@@ -3,8 +3,10 @@ import { Subscription } from "./Subscription";
 import { SubscriptionService } from "./subscription.service";
 import { MenuItem } from "primeng/api";
 import { MatDialog } from "@angular/material/dialog";
-import { RestrictionType } from 'src/app/models/restriction-type';
-import { RestrictionTypeTranslator } from 'src/app/models/restriction-type-translator';
+import { RestrictionType } from "src/app/models/restriction-type";
+import { RestrictionTypeTranslator } from "src/app/models/restriction-type-translator";
+import { ModalService } from "../../modal-template-module/modal.service";
+import { NotificationService } from "src/app/core/services/notification.service";
 
 @Component({
   selector: "app-subscriptions-page",
@@ -15,11 +17,15 @@ export class SubscriptionsPageComponent implements OnInit {
   subs: Subscription[] = [];
   filteredSubs: Subscription[] = [];
   selected = [];
-  _search = '';
+  _search = "";
+  restrictionToIcon = RestrictionTypeTranslator.translateToIcon;
+  restrictionToType = RestrictionTypeTranslator.translate;
 
   constructor(
     public subscriptionService: SubscriptionService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private modalService: ModalService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +39,7 @@ export class SubscriptionsPageComponent implements OnInit {
       }
     );
   }
+  
   get searchQuery() {
     return this._search;
   }
@@ -41,8 +48,11 @@ export class SubscriptionsPageComponent implements OnInit {
     this._search = value;
     if (value) {
       const lowercase = value.toLowerCase().trim();
-      this.filteredSubs = this.subs.filter(sub => {
-        return sub.id.toLowerCase().indexOf(lowercase) >= 0 || sub.email.toLowerCase().indexOf(lowercase) >= 0
+      this.filteredSubs = this.subs.filter((sub) => {
+        return (
+          sub.id.toLowerCase().indexOf(lowercase) >= 0 ||
+          sub.email.toLowerCase().indexOf(lowercase) >= 0
+        );
       });
     } else {
       this.filteredSubs = this.subs;
@@ -51,7 +61,7 @@ export class SubscriptionsPageComponent implements OnInit {
 
   viewSub(sub) {}
 
-  deleteSub(sub) {
+  onDeleteSelection() {
     /*
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '350px',
@@ -71,16 +81,35 @@ export class SubscriptionsPageComponent implements OnInit {
       }
     });
     */
+
+    const toBeRemoved = this.selected.length;
+
+    const dialogRef: any = this.modalService.confirmModal(
+      "Do you want to delete " + toBeRemoved + " subscriptions?"
+    );
+
+    dialogRef.afterClosed().subscribe((val) => {
+
+      if (val === true) {
+        let count = 0;
+        this.selected.forEach((sub) => {
+          this.subs = this.subs.filter((e) => e.id !== sub.id);
+          this.filteredSubs = this.filteredSubs.filter((e) => e.id !== sub.id);
+          this.subscriptionService.deleteSubscription(sub).subscribe((val) => {
+            count += 1;
+            if (count === toBeRemoved) {
+              this.notificationService.info(
+                "Deleted " + toBeRemoved + " users."
+              );
+            }
+          });
+        });
+      }
+    });
   }
 
- translateRestrictionToIcon(restrictionType: RestrictionType): string {
-    return RestrictionTypeTranslator.translateToIcon(restrictionType);
-  }
-
-
-  translateRestrictionType(restrictionType: RestrictionType): string {
-    return RestrictionTypeTranslator.translate(restrictionType);
-  }
 
   openDialog(data) {}
+
+
 }

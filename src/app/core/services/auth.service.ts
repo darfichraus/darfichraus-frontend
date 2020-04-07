@@ -20,9 +20,6 @@ export class AuthService {
   user: UserToken = null;
   token: string;
 
-  httpHeader = new HttpHeaders({
-    'API-KEY': environment.apiKey,
-  });
 
   constructor(
     private readonly http: HttpClient,
@@ -66,7 +63,7 @@ export class AuthService {
       password: password
     };
 
-    return this.http.post(AuthService.LOGIN_URL, body, {headers: this.httpHeader, responseType: 'text'});
+    return this.http.post(AuthService.LOGIN_URL, body, {responseType: 'text'});
   }
 
   getUserRole() {
