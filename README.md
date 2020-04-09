@@ -61,9 +61,3 @@ Zur Eindämmung der Krise werden in schneller Folge viele rechtliche Regelungen 
 > Die Idee ist es eine Website, die alle Regelungen gut sortiert und durchsuchbar enthält. Uns ist dabei wichtig, dass eine Sortierung nach räumlichen Gebieten und Sachbereichen, um die jeweils gültigen Regelungen zu finden ist und einen Vergleich zu ermöglicht. Auch sind Metadaten für eine Suche hilfreich. Um der Entwicklung Schritt zu halten können, ist es wichtig, dass es als Nutzer möglich ist, auf neue Regelungen hinzuweisen und/oder mitzumachen, indem man eine bestimmte Region jeweils auf dem aktuellen Stand hält.
 
 A project for [WirvsVirus](https://wirvsvirushackathon.org/)
-
-> ![Einschränkungen Nahverkehr](img/Startseite_01.png)
-Einschränkungen Nahverkehr
-
-> ![Neue Verordnung hinzufügen](img/Startseite_04.png)
-Neue Verordnung hinzufügen
