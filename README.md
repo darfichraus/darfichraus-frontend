@@ -25,3 +25,45 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+
+
+
+
+
+<a href="https://wirvsvirushackathon.org" target="_blank">
+<img src="https://github.com/darfichraus-de/darfichraus-de.github.io/blob/master/img/wirvsvirus/Logo_Projekt_01.png?raw=true)"
+     alt="Markdown Monster icon"
+     height="100"
+     widht="10"
+     style="float: right; margin-right: 10px" />
+</a>
+
+<a href="http://darfichraus.de/" target="_blank">
+<img src="https://github.com/darfichraus-de/darfichraus-de.github.io/blob/master/img/logo_darf-ich-raus.png?raw=true)"
+     alt="Markdown Monster icon"
+     height="100"
+     widht="20"
+     style="float: right; margin-right: 10px" />
+</a>
+
+# Dokumentation
+
+Diese Seite ist die Projektdokumenation von [darfichraus.de](https://darfichraus.de)
+
+Zwischen dem 20. und 22. März 2020 fand der Remote Hackerthon #WirVsVirus statt, um Lösungen für Probleme der "Corona-Krise" zu entwickeln.
+
+## Die Idee
+
+Zur Eindämmung der Krise werden in schneller Folge viele rechtliche Regelungen erlassen, insb. in Form von Allgemeinverfügungen und Verordnungen. Sie kommen zu einem kleinen Teil von Bund, viele auch von den Ländern, die meisten aber von den Kreisen und kreisfreien Städten. Die Inhalte der Regelungen sind zwar in einem gewissen Maße koordiniert,aber nicht völlig identisch. Zusätzlich gibt es noch Erlasse der Landesregierungen an die Kreise, die zum Verständnis der Entscheidungen hilfreich sind, wenn sie auch nicht direkt auf die Bürger wirken. Zur Auslegung der Regelungen sind auch die amtlichen Begründungen (soweit verfügbar) interessant. Auf den Webseiten der vielen regelnden Stellen, sind die Dokumente auch nicht immer schnell zu finden. Es ist deshalb schwer, den Überblick zu behalten, was an einem bestimmten Ort gerade gilt.
+
+> Die Idee ist es eine Website, die alle Regelungen gut sortiert und durchsuchbar enthält. Uns ist dabei wichtig, dass eine Sortierung nach räumlichen Gebieten und Sachbereichen, um die jeweils gültigen Regelungen zu finden ist und einen Vergleich zu ermöglicht. Auch sind Metadaten für eine Suche hilfreich. Um der Entwicklung Schritt zu halten können, ist es wichtig, dass es als Nutzer möglich ist, auf neue Regelungen hinzuweisen und/oder mitzumachen, indem man eine bestimmte Region jeweils auf dem aktuellen Stand hält.
+
+A project for [WirvsVirus](https://wirvsvirushackathon.org/)
+
+> ![Einschränkungen Nahverkehr](img/Startseite_01.png)
+Einschränkungen Nahverkehr
+
+> ![Neue Verordnung hinzufügen](img/Startseite_04.png)
+Neue Verordnung hinzufügen
