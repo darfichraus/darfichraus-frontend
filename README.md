@@ -18,7 +18,7 @@
 
 Diese Seite ist die Projektdokumenation von [darfichraus.de](https://darfichraus.de)
 
-Zwischen dem 20. und 22. März 2020 fand der Remote Hackerthon #WirVsVirus statt, um Lösungen für Probleme der "Corona-Krise" zu entwickeln.
+Zwischen dem 20. und 22. März 2020 fand der Hackathon der Bundesregierung #WirVsVirus statt, um Lösungen für Probleme in der "Corona-Krise" zu entwickeln.
 
 ## Die Idee
 
