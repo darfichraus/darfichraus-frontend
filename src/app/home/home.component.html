@@ -89,16 +89,14 @@
 
       <div class="feed" fxFlex="" [class.isMobile]="isMobile">
         <div class="content-desktop" style="margin-bottom: 20px;">
-          <div>
-            <button mat-stroked-button (click)="openBookmarkDialog()" style="display: inline-block;">
-                <mat-icon style="font-size: 20px; padding-top: 4px;">bookmark</mat-icon>
-                Abonnieren
-              </button>
-          <button mat-stroked-button (click)="openRestrictionDialog()" style="margin-left: 7px;">
-            <mat-icon style="font-size: 20px; padding-top: 4px;">add</mat-icon>
-            Verordnung eintragen
+          <button mat-stroked-button (click)="openBookmarkDialog()" style="display: inline-block;">
+            <mat-icon style="font-size: 20px; padding-top: 4px;">bookmark</mat-icon>
+            Abonnieren
           </button>
-        </div>
+        <button mat-stroked-button (click)="openRestrictionDialog()" style="margin-left: 7px;">
+          <mat-icon style="font-size: 20px; padding-top: 4px;">add</mat-icon>
+          Verordnung eintragen
+        </button>
       </div>
       <div>
        <app-feed></app-feed>

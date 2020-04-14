@@ -141,8 +141,8 @@ export class MapComponent implements OnInit, AfterViewInit {
     // method that we will use to update the control based on feature properties passed
     this.info.update = function(props) {
       const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
-      this._div.innerHTML = '<h4>Corona Länderinformation</h4>' + (props ?
-        '<b>' + props.GEN + '</b><br />'
+      this._div.innerHTML = '<div class="additionalinformation"><h4>Corona Länderinformation</h4>' + (props ?
+           '<b>' + props.GEN + '</b><br />'
         + '<ul>'
         + '<li><b>23.03.20</b> - Weitreichendes Kontaktverbot</li>'
         + '<li><b>10.03.20</b> - Gaststätten geschlossen</li>'
@@ -154,16 +154,15 @@ export class MapComponent implements OnInit, AfterViewInit {
         + '<li><b>Bürgertelefon</b> <br />0211 / 9119-1001</li>'
         + '<li><b>Ärztl. Bereitschaftsdienst</b> <br />116-117</li>'
         + '<li><b>Bürgschaftsbank NRW</b> <br />02131 / 5107-200</li>'
-        + '</ul>'
+        + '</ul></div>'
         : 'Ein Bundesland auswählen');
     };
 
     this.info.addTo(this.coronamap);
-
   }
 
   ngAfterViewInit(): void {
-
+    
   }
 
   style(feature) {
