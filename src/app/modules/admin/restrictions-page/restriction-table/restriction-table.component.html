@@ -41,6 +41,11 @@
         </ng-container>
     </clr-dg-column>
     <clr-dg-column>
+        <ng-container *clrDgHideableColumn="{hidden: false}">
+            restrictionDescription
+        </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
         <ng-container *clrDgHideableColumn="{hidden: true}">
             arealIdentifier
         </ng-container>
@@ -67,6 +72,7 @@
         <clr-dg-cell><mat-icon matTooltip="{{this.restrictionToType(restr.restrictionType)}}">{{this.restrictionToIcon(restr.restrictionType)}}</mat-icon></clr-dg-cell>
         <clr-dg-cell>{{restr.areal}}</clr-dg-cell>
         <clr-dg-cell>{{restr.shortDescription}}</clr-dg-cell>
+        <clr-dg-cell>{{restr.restrictionDescription}}</clr-dg-cell>
         <clr-dg-cell>{{restr.arealIdentifier}}</clr-dg-cell>
         <clr-dg-cell>{{restr.restrictionStart}}</clr-dg-cell>
         <clr-dg-cell>{{restr.restrictionEnd}}</clr-dg-cell>

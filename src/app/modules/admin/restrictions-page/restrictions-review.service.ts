@@ -12,7 +12,7 @@ export class RestrictionsReviewService {
 
   data = new BehaviorSubject<Restriction[]>([]);
 
-  static readonly RESTR_URL = environment.apiUrl + 'restrictions/';
+  static readonly RESTR_URL = environment.apiUrl + 'admin/restrictions/';
 
 
   constructor(private http: HttpClient, private notifService: NotificationService) { }

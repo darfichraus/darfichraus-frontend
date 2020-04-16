@@ -110,6 +110,8 @@ export class Restriction {
   publisher: string;
   searchQuery?: SearchInformation;
   verified?;
+  created: string;
+  modified: string;
 }
 
 export type Restrictions = Restriction[];

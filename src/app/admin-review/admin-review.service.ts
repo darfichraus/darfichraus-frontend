@@ -12,11 +12,7 @@ export class AdminReviewService {
 
   data = new BehaviorSubject<Restriction[]>([]);
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'API-KEY': environment.apiKey
-    })
-  };
+
 
   apiExt = 'admin/restrictions';
 
@@ -28,7 +24,9 @@ export class AdminReviewService {
 
   fetchData(): any {
 
-    this.http.get<Restriction[]>(environment.apiUrl + this.apiExt, this.httpOptions).subscribe((val) => {
+    this.http.get<Restriction[]>(environment.apiUrl + this.apiExt).subscribe((val) => {
+      console.log("FETCH_DATA()");
+      console.log(val);
       this.data.next(val);
     }, (err) => {
       console.log(err);
@@ -54,7 +52,7 @@ export class AdminReviewService {
   }
 
   updateRestriction(restriction: Restriction) {
-    return this.http.put(environment.apiUrl + this.apiExt, restriction, this.httpOptions);
+    return this.http.put(environment.apiUrl + this.apiExt, restriction);
   }
 
   updateRestrictionFromData(restriction): void {

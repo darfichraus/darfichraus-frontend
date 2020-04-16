@@ -29,6 +29,7 @@ export class AdminReviewComponent implements OnInit {
 
     this.adminReviewService.data.subscribe((val) => {
       this.data = val;
+      console.log(val);
     }, (err) => {
       console.log(err);
     });
