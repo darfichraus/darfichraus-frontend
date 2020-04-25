@@ -5,7 +5,7 @@ import { UserManagementService } from '../user-management.service';
 import { User } from 'src/app/models/user';
 import { Role } from '../../../../models/role-enum';
 import { UserCreate } from 'src/app/models/user-create';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { NotificationService } from 'src/app/modules/core/services/notification.service';
 
 @Component({
   selector: 'app-add-user-modal',
@@ -83,8 +83,6 @@ export class AddUserModalComponent implements OnInit {
         this.notificationService.info(err.error.message);
       });
 
-      
-
     }
 
 
@@ -108,8 +106,6 @@ export class AddUserModalComponent implements OnInit {
 
       */
     }
-
-    
 
 
   }

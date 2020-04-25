@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { UserManagementService } from "./user-management.service";
-import { User } from "src/app/models/user";
-import { ModalService } from "../../modal-template-module/modal.service";
+import { Component, OnInit } from '@angular/core';
+import { UserManagementService } from './user-management.service';
+import { User } from 'src/app/models/user';
+import { ModalService } from '../../modal-template-module/modal.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
-import { NotificationService } from 'src/app/core/services/notification.service';
+import { NotificationService } from 'src/app/modules/core/services/notification.service';
 
 @Component({
   selector: "app-users-page",
-  templateUrl: "./users-page.component.html",
-  styleUrls: ["./users-page.component.scss"],
+  templateUrl: './users-page.component.html',
+  styleUrls: ['./users-page.component.scss'],
 })
 export class UsersPageComponent implements OnInit {
   users: User[] = [];
@@ -46,7 +46,7 @@ export class UsersPageComponent implements OnInit {
     if (value) {
       const lowercase = value.toLowerCase().trim();
       this.filteredUsers = this.users.filter(user => {
-        return user.username.toLowerCase().indexOf(lowercase) >= 0; //|| user.lastname.toLowerCase().indexOf(lowercase) >= 0
+        return user.username.toLowerCase().indexOf(lowercase) >= 0; // || user.lastname.toLowerCase().indexOf(lowercase) >= 0
       });
     } else {
       this.filteredUsers = this.users;
@@ -63,13 +63,12 @@ export class UsersPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      
+
       if (result !== undefined) {
         if (mode === 'Add') {
           this.users = [...this.users, result];
           this.filteredUsers = [...this.filteredUsers, result];
-        }
-        else if (mode === 'Edit') {
+        } else if (mode === 'Edit') {
           /*
           const index: number = this.users.findIndex((e) => e.id === user.id);
           const usersNew: User[] = [...this.users];
@@ -93,7 +92,7 @@ export class UsersPageComponent implements OnInit {
     const toBeRemoved = this.selected.length;
 
     const dialogRef: any = this.modalService.confirmModal(
-      "Do you want to delete " + toBeRemoved + " users?"
+      'Do you want to delete ' + toBeRemoved + ' users?'
     );
 
 

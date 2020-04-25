@@ -1,4 +1,4 @@
-import { Restriction } from 'src/app/models/restrictions';
+import { Restriction } from 'src/app/models/restriction';
 
 export class Subscription {
     id: string;

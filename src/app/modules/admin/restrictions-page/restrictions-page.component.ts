@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Restriction } from 'src/app/models/restrictions';
 import { RestrictionsReviewService } from './restrictions-review.service';
+import { Restriction } from 'src/app/models/restriction';
 
 @Component({
   selector: 'app-restrictions-page',

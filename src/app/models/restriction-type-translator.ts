@@ -21,7 +21,7 @@ export class RestrictionTypeTranslator {
           return 'Allgemeiner Hinweis';
       }
     }
-  
+
     public static translateToIcon(restrictionType: RestrictionType): string {
       switch (restrictionType) {
         case RestrictionType.PUBLIC_TRANSPORTATION:

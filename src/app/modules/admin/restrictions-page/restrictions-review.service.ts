@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { NotificationService } from 'src/app/core/services/notification.service';
-import { Restriction } from 'src/app/models/restrictions';
+import { NotificationService } from 'src/app/modules/core/services/notification.service';
+import { Restriction } from 'src/app/models/restriction';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

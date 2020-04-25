@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Restriction } from 'src/app/models/restrictions';
+import { Restriction } from 'src/app/models/restriction';
 import { RestrictionTypeTranslator } from 'src/app/models/restriction-type-translator';
 import { RestrictionsReviewService } from '../restrictions-review.service';
 

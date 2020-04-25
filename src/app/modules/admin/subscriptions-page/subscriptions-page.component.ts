@@ -1,23 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { Subscription } from "./Subscription";
-import { SubscriptionService } from "./subscription.service";
-import { MenuItem } from "primeng/api";
-import { MatDialog } from "@angular/material/dialog";
-import { RestrictionType } from "src/app/models/restriction-type";
-import { RestrictionTypeTranslator } from "src/app/models/restriction-type-translator";
-import { ModalService } from "../../modal-template-module/modal.service";
-import { NotificationService } from "src/app/core/services/notification.service";
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from './Subscription';
+import { SubscriptionService } from './subscription.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalService } from '../../modal-template-module/modal.service';
+import { NotificationService } from 'src/app/modules/core/services/notification.service';
+import { RestrictionTypeTranslator } from 'src/app/models/restriction-type-translator';
 
 @Component({
   selector: "app-subscriptions-page",
-  templateUrl: "./subscriptions-page.component.html",
-  styleUrls: ["./subscriptions-page.component.scss"],
+  templateUrl: './subscriptions-page.component.html',
+  styleUrls: ['./subscriptions-page.component.scss'],
 })
 export class SubscriptionsPageComponent implements OnInit {
   subs: Subscription[] = [];
   filteredSubs: Subscription[] = [];
   selected = [];
-  _search = "";
+  _search = '';
   restrictionToIcon = RestrictionTypeTranslator.translateToIcon;
   restrictionToType = RestrictionTypeTranslator.translate;
 
@@ -39,7 +37,7 @@ export class SubscriptionsPageComponent implements OnInit {
       }
     );
   }
-  
+
   get searchQuery() {
     return this._search;
   }
@@ -85,7 +83,7 @@ export class SubscriptionsPageComponent implements OnInit {
     const toBeRemoved = this.selected.length;
 
     const dialogRef: any = this.modalService.confirmModal(
-      "Do you want to delete " + toBeRemoved + " subscriptions?"
+      'Do you want to delete ' + toBeRemoved + ' subscriptions?'
     );
 
     dialogRef.afterClosed().subscribe((val) => {
@@ -99,7 +97,7 @@ export class SubscriptionsPageComponent implements OnInit {
             count += 1;
             if (count === toBeRemoved) {
               this.notificationService.info(
-                "Deleted " + toBeRemoved + " users."
+                'Deleted ' + toBeRemoved + ' users.'
               );
             }
           });

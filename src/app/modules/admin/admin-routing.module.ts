@@ -7,7 +7,7 @@ import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-p
 
 
 const routes: Routes = [
-  {path: '', component: AdminPanelComponent, /* canActivate: [AuthGuard],*/ 
+  {path: '', component: AdminPanelComponent,
   children: [
     {path: '', redirectTo: 'restrictions', pathMatch: 'full'},
     {path: 'restrictions', component: RestrictionsPageComponent},
