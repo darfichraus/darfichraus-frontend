@@ -16,7 +16,7 @@ import { ClarityModule } from '@clr/angular';
 
 @NgModule({
   declarations: [ModalFormWrapperComponent, ModalSaveButtonComponent, ModalCancelButtonComponent,
-  ModalConfirmButtonComponent, ConfirmModalComponent, InfoModalComponent],
+  ModalConfirmButtonComponent, ConfirmModalComponent, InfoModalComponent,],
   imports: [
     CommonModule,
     MatButtonModule,

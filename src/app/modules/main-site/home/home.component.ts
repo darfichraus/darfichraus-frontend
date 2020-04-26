@@ -4,7 +4,6 @@ import {DeviceDetectorService} from 'ngx-device-detector';
 import { FetchResult } from '../../../Restriction';
 import { FeedService } from '../feed/feed.service';
 import { RestrictionRepository } from '../../../restriction.repository';
-import { MeldungReactiveComponent } from '../meldung-reactive/meldung-reactive.component';
 import { SubscribeComponent } from '../../../subscribe/subscribe.component';
 import { RestrictionType } from '../../../models/restriction-type';
 

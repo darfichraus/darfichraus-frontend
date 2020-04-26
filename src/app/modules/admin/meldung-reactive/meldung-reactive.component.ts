@@ -5,8 +5,8 @@ import {
   Validators
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FeedService } from '../feed/feed.service';
-import { RestrictionsReviewService } from '../../admin/restrictions-page/restrictions-review.service';
+import { FeedService } from '../../main-site/feed/feed.service';
+import { RestrictionsReviewService } from '../restrictions-page/restrictions-review.service';
 import { Restriction } from '../../../models/restriction';
 import { RestrictionTypeTranslator } from '../../../models/restriction-type-translator';
 
@@ -63,38 +63,38 @@ export class MeldungReactiveComponent implements OnInit {
     { value: 'ZIP', viewValue: 'Stadt' }
   ];
 
-  /*
-  
-  areal: string;
-  arealIdentifier: string;
-  restrictionState: RestrictionState;
-  restrictionType: RestrictionType;
-  restrictionStart: string;
-  restrictionEnd: string;
-  shortDescription: string;
-  restrictionDescription: string;
-  furtherInformation: string;
-  publisher: string;
 
-  */
 
   myForm: FormGroup = this.fb.group({
     areal: ['STATE', [Validators.required]],
     county: ['', [Validators.required]],
     zip: [''],
     restrictionType: [[], [Validators.required]],
-    shortDescription: ['', [Validators.required, Validators.maxLength(32)]],
+    shortDescription: ['', [Validators.required, Validators.maxLength(256)]],
     restrictionDescription: [
       '',
-      [Validators.required, Validators.minLength(1), Validators.maxLength(2048)]
+      [Validators.required, Validators.minLength(1), Validators.maxLength(10000)]
     ],
     restrictionState: ['RESTRICTION', [Validators.required]],
 
-    furtherInformation: ['', [Validators.required, Validators.maxLength(32)]],
+    furtherInformation: ['', [Validators.required, Validators.maxLength(256)]],
     restrictionStart: ['', [Validators.required]],
     restrictionEnd: ['', [Validators.required]],
-    verified: [false, []]
+    verified: [false, [Validators.required]]
   });
+
+  onLog() {
+    console.log(this.f.areal.errors);
+    console.log(this.f.county.errors);
+    console.log(this.f.zip.errors);
+    console.log(this.f.restrictionType.errors);
+    console.log(this.f.restrictionDescription.errors);
+    console.log(this.f.restrictionState.errors);
+    console.log(this.f.furtherInformation.errors);
+    console.log(this.f.restrictionStart.errors);
+    console.log(this.f.restrictionEnd.errors);
+    console.log(this.f.verified.errors);
+  }
 
   translator = RestrictionTypeTranslator.translate;
 
@@ -147,6 +147,8 @@ export class MeldungReactiveComponent implements OnInit {
     this.dialogRef.close();
   }
 
+
+
   onSelectCountry(): any {
     this.f.county.clearValidators();
     this.f.county.updateValueAndValidity();
@@ -183,10 +185,10 @@ export class MeldungReactiveComponent implements OnInit {
         }
       );
     } else {
+      
       this.feedService.submit(this.constructRestriction()).subscribe(
         val => {
           this.dialogRef.close();
-          // this.feedService.fetchDataForAll();
         },
         err => {
           console.log(err);

@@ -49,19 +49,17 @@
 -->
 
 
-    <div class="modal-dialog" role="dialog">
-        
-            <div class="dialog-title" fxLayout="row" fxLayoutAlign="space-between center">
-                <h3 class="title">{{this.title}}</h3>
+<div class="my-modal">
 
-                    <clr-icon class="close-button inline" (click)="onClose()" shape="close"></clr-icon>
-
-            </div>
-            <div class="modal__content">
-                <ng-content select="[d-body]"></ng-content>
-            </div>
-            <div class="dialog-actions" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-                <ng-content select="[d-actions]">
-                </ng-content>
-            </div>
+    <div class="dialog-title" fxLayout="row" fxLayoutAlign="space-between center">
+        <h3 class="title">{{this.title}}</h3>
+        <clr-icon class="close-button inline" (click)="onClose()" shape="close"></clr-icon>
     </div>
+    <div class="modal__content">
+        <ng-content select="[d-body]"></ng-content>
+    </div>
+    <div class="dialog-actions" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <ng-content select="[d-actions]">
+        </ng-content>
+    </div>
+</div>

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TestPageComponent } from './test-page.component';
-import { ImpressumPageComponent } from '../main-site/impressum-page/impressum-page.component';
-import { ContactPageComponent } from '../main-site/contact-page/contact-page.component';
+import { ImpressumPageComponent } from './impressum-page/impressum-page.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
 import { SubscribeComponent } from 'src/app/subscribe/subscribe.component';
-import { HomeComponent } from '../main-site/home/home.component';
+import { HomeComponent } from './home/home.component';
+import { MainSiteComponent } from './main-site-comp/main-site.component';
 
 
 const routes: Routes = [
-  {path: '', component: TestPageComponent,
+  {path: '', component: MainSiteComponent,
   children: [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
     {path: 'impressum', component: ImpressumPageComponent},
@@ -23,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TestRoutingModule {}
+export class MainSiteRoutingModule {}

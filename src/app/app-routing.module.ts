@@ -9,7 +9,7 @@ const routes: Routes = [
   // {path: 'dir',
   // loadChildren: () => import('./modules/dir/dir.module').then(m => m.DirModule)},
   {path: 'dir',
-  loadChildren: () => import('./modules/test/test.module').then(m => m.TestModule)},
+  loadChildren: () => import('./modules/main-site/main-site.module').then(m => m.MainSiteModule)},
   {path: 'login',
   loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)},
   {path: 'admin', canActivate: [AuthGuard],

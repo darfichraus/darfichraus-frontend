@@ -67,7 +67,7 @@
     </clr-dg-column>
 
 
-    <clr-dg-row *clrDgItems="let restr of filteredRestrictions" [clrDgItem]="restr">
+    <clr-dg-row *clrDgItems="let restr of filteredRestrictions" [clrDgItem]="restr" (click)="openDialog(restr)">
         <clr-dg-cell>{{restr.id}}</clr-dg-cell>
         <clr-dg-cell><mat-icon matTooltip="{{this.restrictionToType(restr.restrictionType)}}">{{this.restrictionToIcon(restr.restrictionType)}}</mat-icon></clr-dg-cell>
         <clr-dg-cell>{{restr.areal}}</clr-dg-cell>

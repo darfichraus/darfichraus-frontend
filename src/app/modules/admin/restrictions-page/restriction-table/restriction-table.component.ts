@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Restriction } from 'src/app/models/restriction';
 import { RestrictionTypeTranslator } from 'src/app/models/restriction-type-translator';
 import { RestrictionsReviewService } from '../restrictions-review.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MeldungReactiveComponent } from '../../meldung-reactive/meldung-reactive.component';
 
 @Component({
   selector: 'restriction-table',
@@ -26,7 +28,7 @@ export class RestrictionTableComponent implements OnInit {
   restrictionToIcon = RestrictionTypeTranslator.translateToIcon;
   restrictionToType = RestrictionTypeTranslator.translate;
 
-  constructor(private restrictionsReviewService: RestrictionsReviewService) { }
+  constructor(private restrictionsReviewService: RestrictionsReviewService, private dialog: MatDialog) { }
 
  ngOnInit(): void {
 
@@ -82,8 +84,10 @@ export class RestrictionTableComponent implements OnInit {
 
 
   openDialog(row): void {
+    console.log("open dialog");
+    console.log(row);
 
-    /*
+    
     const dialogRef = this.dialog.open(MeldungReactiveComponent, {
       width: '900px',
       height: '700px',
@@ -97,7 +101,7 @@ export class RestrictionTableComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
-    */
+    
   }
 
 }

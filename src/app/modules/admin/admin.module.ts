@@ -19,6 +19,13 @@ import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-p
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RestrictionTableComponent } from './restrictions-page/restriction-table/restriction-table.component';
 import { DirCoreModule } from 'src/app/modules/core/core.module';
+import { MeldungReactiveComponent } from './meldung-reactive/meldung-reactive.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -27,7 +34,8 @@ import { DirCoreModule } from 'src/app/modules/core/core.module';
     UsersPageComponent,
     AddUserModalComponent,
     SubscriptionsPageComponent,
-    RestrictionTableComponent
+    RestrictionTableComponent,
+    MeldungReactiveComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +43,7 @@ import { DirCoreModule } from 'src/app/modules/core/core.module';
     ModalModule,
     ClarityModule,
     AdminRoutingModule,
+    FlexLayoutModule,
 
     MatDialogModule,
     ReactiveFormsModule,
@@ -47,6 +56,11 @@ import { DirCoreModule } from 'src/app/modules/core/core.module';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    MatDividerModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatToolbarModule,
+    MatSlideToggleModule,
   ],
 })
 export class AdminModule {}

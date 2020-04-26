@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SearchPipe } from './pipes/search.pipe';
 import { NumericDirective } from './directives/number-input.directive';
+import { AdminHeaderComponent } from './components/admin-header/header.component';
 
 @NgModule({
     declarations: [
       HeaderComponent,
+      AdminHeaderComponent,
       ContentComponent,
       SearchPipe,
       NumericDirective,
@@ -20,6 +22,7 @@ import { NumericDirective } from './directives/number-input.directive';
         ContentComponent,
         SearchPipe,
         NumericDirective,
+        AdminHeaderComponent,
     ]
   })
   export class DirCoreModule {}
