@@ -1,4 +1,4 @@
 export enum RestrictionState {
-    RESTRICTION,
-    BAN,
+    RESTRICTION = 'RESTRICTION',
+    BAN = 'BAN'
   }

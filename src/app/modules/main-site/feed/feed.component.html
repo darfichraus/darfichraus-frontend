@@ -2,17 +2,21 @@
 
 <p class="feedItem">Aktuelle Verordnungen und Einschränkungen bezüglich des Coronavirus Covid-19</p>
 
+<!-- 
 <div class="types">
     <b>34</b> Einschränkungen, <b>8</b> Verbote
 </div>
+-->
 
-<mat-form-field class="mw suche">
-    <mat-icon matPrefix class="formPrefix">search</mat-icon>
+
+<mat-form-field class="mw suche" appearance="outline">
+    <mat-icon matPrefix class="form-prefix">search</mat-icon>
     <mat-label>Suche</mat-label>
-      <input matInput [(ngModel)]="query" placeholder="Titel oder Beschreibung...">
-      <button mat-icon-button *ngIf="query" matSuffix (click)="this.query=''">
-          <mat-icon>close</mat-icon>
-      </button>
+    <button mat-icon-button *ngIf="query" matSuffix (click)="this.query=''">
+        <mat-icon class="form-prefix">close</mat-icon>
+    </button>
+    <input matInput [(ngModel)]="query" placeholder="Titel oder Beschreibung...">  
+      <mat-hint>{{data.data.length}} durchsuchbare Einträge</mat-hint>
   </mat-form-field>
 
   <div *ngFor="let item of data.data | search:'arealIdentifier,restrictionDescription':query" class="container feed-item-container">

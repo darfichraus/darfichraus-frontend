@@ -4,11 +4,12 @@
 
 
 <dir-content>
-    <p stlye="color='#ff0000'">Zurzeit ist es nicht möglich uns mit diesem Formular zu kontaktieren. Bitte schreiben Sie uns eine Email an info@darfichraus.de</p>
+    <p stlye="color='#ff0000'">Zurzeit ist es <b>nicht</b> möglich uns mit diesem Formular zu kontaktieren. Bitte schreiben Sie
+        uns eine Email an <a href="anfrage@darfichraus.de">anfrage@darfichraus.de</a></p>
     <div style="margin-bottom: 15px;">
         <span class="contact-message">
-                Für Anfragen jeglicher Art benutzt bitte das unten stehende Kontaktformular. 
-                Wir helfen gerne weiter und kümmern uns so schnell wie möglich um Eure Anfragen.  
+            Für Anfragen jeglicher Art benutzt bitte das unten stehende Kontaktformular.
+            Wir helfen gerne weiter und kümmern uns so schnell wie möglich um Eure Anfragen.
         </span>
     </div>
     <form [formGroup]="myForm">
@@ -33,8 +34,8 @@
 
             <mat-form-field appearance="outline" fxFlex="50">
                 <mat-label>Email</mat-label>
-                <input required type="text" formControlName="email" matInput
-                    placeholder="Email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                <input required type="text" formControlName="email" matInput placeholder="Email"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
                 <mat-error *ngIf="f.email.touched && f.email.errors?.required">Email Adresse fehlt.</mat-error>
                 <mat-error *ngIf="f.email.touched && f.email.errors?.pattern">Ungültige Email Adresse</mat-error>
             </mat-form-field>
@@ -54,24 +55,18 @@
         </mat-form-field>
 
 
-        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="10px">
 
-            <div fxFlex="50" class="contact-message">
-                
-                Platzhalter Datenschutzerkärung
+        <div style="margin-bottom: 30px;">
 
-                 <!-- DATENSCHUTZERKLÄRUNG -->
-
-
-                <!-- -------------------- -->
-
-            </div>
-
-                <re-captcha required formControlName="recaptcha"></re-captcha>
+            Ihre Daten werden gemäß unserer <a href="https://darfichrausde/datenschutz">Datenschutzerklärung</a>
+            DSGVO-konform verarbeitet.
 
         </div>
 
-       
-    
+        <re-captcha required formControlName="recaptcha"></re-captcha>
+
+
+        <button mat-stroked-button (click)="onSubmit()" style="margin-top: 30px;" disabled>Senden</button>
+
     </form>
 </dir-content>
