@@ -6,4 +6,28 @@
 
 .content-area {
     padding: 0px !important;
+    height: calc(100% - 45px);
+}
+
+.clr-footer{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 45px;
+    background-color: #2c2c2c;
+    text-align: center;
+    padding: 10px;
+}
+
+.footer-link {
+    margin: 15px;
+    color: #a0a0a0
+}
+.footer-link:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+fa-icon {
+    margin-right: 5px;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'main-site-page',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-site.component.scss']
 })
 export class MainSiteComponent implements OnInit {
+
+  faInstagram = faInstagram;
+  faTwitter = faTwitter;
 
   constructor() { }
 

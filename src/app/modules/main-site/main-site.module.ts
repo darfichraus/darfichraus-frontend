@@ -18,6 +18,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeComponent } from './home/home.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MainSiteComponent } from './main-site-comp/main-site.component';
+import { NewsWrapperComponent } from './news-page/news-wrapper/news-wrapper.component';
+import { NewsPageComponent } from 'src/app/modules/main-site/news-page/news-page.component';
+
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -33,6 +36,7 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     FeedComponent,
     HomeComponent,
     MapComponent,
+    NewsWrapperComponent, NewsPageComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,25 @@
+
+<!-- <mat-card style="margin-bottom: 30px;"> -->
+
+    <div style="margin-bottom: 30px;">
+    <h4>
+        <ng-content select="[n-title]"></ng-content>
+        <span style="float: right;"><ng-content select="[n-date]"></ng-content></span>
+    </h4>
+
+   
+
+    <div style="margin-top: 20px;" fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxFlex="30">
+            <ng-content select="[n-image]"></ng-content>
+        </div>
+        <p fxFlex="60">
+            <ng-content select="[n-body]"></ng-content>
+        </p>
+    </div>
+   
+    <mat-divider style="margin-top: 30px;"></mat-divider>
+    </div>
+<!-- </mat-card> -->
+
+

@@ -36,7 +36,7 @@
 <clr-main-container>
     <clr-header class="header-6">
         <div class="branding">
-            <a href="..." class="nav-link">
+            <a [routerLink]="'home'" class="nav-link">
                 <img class="dir-logo" src="../../../../assets/logo_min.svg">
                 <span class="title">Darf ich raus</span>
             </a>
@@ -45,11 +45,11 @@
 
     <nav class="subnav" [clr-nav-level]="1">
         <ul class="nav">
-      <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'home'">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="'information'">Über DIR</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="'information'">Über</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'aktuelles'">Aktuelles</a>
@@ -57,25 +57,24 @@
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'kontakt'">Kontakt</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="'impressum'">Impressum</a>
-            </li>
-
-
-
-      
         </ul>
     </nav>
 
     <div class="content-container">
         <main class="content-area">
-<router-outlet></router-outlet>
-
+            <router-outlet></router-outlet>
         </main>
+        <div class="clr-footer">
+            <a class="footer-link" routerLinkActive="active" [routerLink]="'impressum'">Impressum</a>
+            <a class="footer-link" routerLinkActive="active" [routerLink]="'datenschutz'">Datenschutz</a>
+            <a class="footer-link" href="https://www.instagram.com/darfichraus/"><fa-icon [icon]="faInstagram"></fa-icon>Instagram</a>
+            <a class="footer-link" href="https://twitter.com/darfichraus"><fa-icon [icon]="faTwitter"></fa-icon>Twitter</a>
+        </div>
     </div>
 </clr-main-container>
 
-   
-    <!-- 
+
+
+<!-- 
 </div>
     -->
