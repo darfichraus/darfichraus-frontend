@@ -1,5 +1,7 @@
-import {Areal} from './_model/areal.enum';
+import { Areal } from './models/areal.enum';
+import { Restriction } from './models/restriction';
 
+/*
 export enum RestrictionType {
 
   PUBLIC_TRANSPORTATION = 'PUBLIC_TRANSPORTATION',
@@ -9,7 +11,8 @@ export enum RestrictionType {
   RETAIL = 'RETAIL',
   CURFEW = 'CURFEW'
 }
-
+*/
+/*
 export class RestrictionTypeTranslator {
 
   public static translate(restrictionType: RestrictionType): string {
@@ -51,7 +54,8 @@ export class RestrictionTypeTranslator {
     }
   }
 }
-
+*/
+/*
 export class RestrictionStateTranslator {
 
   public static translate(restrictionState: RestrictionState): string {
@@ -66,11 +70,14 @@ export class RestrictionStateTranslator {
     }
   }
 }
+*/
 
+/*
 export enum RestrictionState {
   restriction = 'RESTRICTION',
   ban = 'BAN'
 }
+*/
 
 export class SearchInformation {
   areal: Areal;
@@ -93,7 +100,7 @@ export class FetchResult {
 
 
 }
-
+/*
 export class Restriction {
 
   id?: string;
@@ -110,6 +117,9 @@ export class Restriction {
   publisher: string;
   searchQuery?: SearchInformation;
   verified?;
+  created: string;
+  modified: string;
 }
+*/
 
 export type Restrictions = Restriction[];

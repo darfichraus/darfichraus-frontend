@@ -1,0 +1,55 @@
+
+.deutschland {
+  font-family: "Playfair Display", serif;
+  font-size: 300%;
+}
+
+.feedItem {
+  font-family: "Playfair Display", "serif";
+  margin-bottom: 20px;
+  font-size: 20px;
+  line-height: 27px;
+}
+
+.types {
+  float: right;
+  font-size: 12px;
+}
+
+.my-padding {
+  padding: 10px;
+}
+
+.container {
+  margin-top: 30px;
+}
+
+.container:after {
+    content:'';
+    display: inline-block;
+    top: 10px;
+    border-top: 1px dotted #828282;
+    height: 1px;
+    width: 100%;
+    position: relative;
+    z-index: -1;
+}
+
+.feed-item-container:hover {
+  background-color: #f0f0f0;
+  cursor: default;
+}
+
+a {
+  font-family:Arial,Verdana,Helvetica;
+  font-size:12pt;
+  text-decoration:none;
+}
+
+a:hover {
+  
+  color:#808080;
+}
+
+
+

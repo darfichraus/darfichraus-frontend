@@ -29,33 +29,7 @@
   -webkit-font-feature-settings: 'liga';
 }
 
-a:link {
-    font-family:Arial,Verdana,Helvetica;
-    font-size:12pt;
-    text-decoration:none;
-    color:#C0C0C0;
-  }
 
-  a:visited {
-    font-family:Arial,Verdana,Helvetica;
-    font-size:12pt;
-    text-decoration:none;
-    color:#808080;
-  }
-
-  a:active {
-    font-family:Arial,Verdana,Helvetica;
-    font-size:12pt;
-    text-decoration:none;
-    color:#808080;
-  }
-
-  a:hover {
-    font-family:Arial,Verdana,Helvetica;
-    font-size:12pt;
-    text-decoration:none;
-    color:#808080;
-  }
 
 // Font Faces
 
@@ -175,3 +149,6 @@ h1.heading {
 
 
 
+button:focus, a:focus, input:focus, clr-icon:focus, div:focus, clr-checkbox-wrapper:focus, label:focus { 
+  outline: none; 
+}

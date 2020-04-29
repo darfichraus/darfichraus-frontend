@@ -10,9 +10,11 @@ import { SubscribeService } from './subscribe.service';
 import { SubscribePayload } from './subscribe.service';
 import { ReplaySubject, Subject } from 'rxjs';
 import { MatSelect } from '@angular/material/select';
-import { takeUntil, take } from 'rxjs/operators';
-import { RestrictionType, RestrictionState, RestrictionTypeTranslator } from '../Restriction';
+import { takeUntil } from 'rxjs/operators';
 import { minOneChecked } from './custom-val.validator';
+import { RestrictionState } from '../models/restriction-state';
+import { RestrictionType } from '../models/restriction-type';
+import { RestrictionTypeTranslator } from '../models/restriction-type-translator';
 
 
 interface DropSelection {

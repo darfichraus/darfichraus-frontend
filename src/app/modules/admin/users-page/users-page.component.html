@@ -1,0 +1,40 @@
+<dir-admin-header>User Management</dir-admin-header>
+
+<mat-form-field class="mw">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="email address ..." [(ngModel)]="searchQuery">
+    <button mat-button *ngIf="searchQuery" matSuffix mat-icon-button (click)="searchQuery=''">
+        <mat-icon>close</mat-icon>
+      </button>
+  </mat-form-field>
+
+<clr-datagrid [(clrDgSelected)]="selected">
+    <clr-dg-placeholder>No users found.</clr-dg-placeholder>
+
+    <clr-dg-action-bar>
+        <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Add', undefined)" *ngIf="selected.length == 0"><clr-icon shape="plus"></clr-icon> Add user</button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onDeleteSelection()" *ngIf="selected.length > 0"><clr-icon shape="trash"></clr-icon> Delete</button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Edit', this.selected[0])" *ngIf="selected.length == 1"><clr-icon shape="pencil"></clr-icon> Edit</button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="this.selected = []" *ngIf="selected.length > 0"><clr-icon shape="times"></clr-icon> Deselect all</button>
+        </div>
+    </clr-dg-action-bar>
+   
+
+    <clr-dg-column>Username</clr-dg-column>
+    <clr-dg-column>Role</clr-dg-column>
+
+
+    <clr-dg-row *clrDgItems="let user of filteredUsers" [clrDgItem]="user">
+        <clr-dg-cell>{{user.username}}</clr-dg-cell>
+        <clr-dg-cell>{{user.roles}}</clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="10">
+            <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Users per page</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} users
+        </clr-dg-pagination>
+    </clr-dg-footer>
+</clr-datagrid>

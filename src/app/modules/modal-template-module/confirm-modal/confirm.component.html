@@ -1,0 +1,37 @@
+<modal-wrapper title="{{this.action}}">
+
+  <div d-body>
+    <div>Are you sure? The action cannot be undone.</div>
+  </div>
+  
+  <div d-actions>
+    <modal-confirm-button (click)="onConfirm()"></modal-confirm-button>
+    <modal-cancel-button (click)="onCancel()"></modal-cancel-button>
+  </div>
+
+</modal-wrapper>
+
+
+
+
+<!-- 
+
+<div class="modal-dialog" role="dialog" aria-hidden="true">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button aria-label="Close" class="close" type="button">
+              <clr-icon aria-hidden="true" shape="close"></clr-icon>
+          </button>
+          <h3 class="modal-title">I have a nice title</h3>
+      </div>
+      <div class="modal-body">
+          <p>But not much to say...</p>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-outline" type="button">Cancel</button>
+          <button class="btn btn-primary" type="button">Ok</button>
+      </div>
+  </div>
+</div>
+
+-->

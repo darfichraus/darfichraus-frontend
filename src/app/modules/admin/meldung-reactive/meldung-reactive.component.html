@@ -1,0 +1,152 @@
+<modal-wrapper title="Verordnung hinzufügen / bearbeiten">
+
+    <div d-body>
+
+
+
+        <div fxLayout="row" fxLayoutAlign="space-between start">
+
+
+
+            <form [formGroup]="myForm" fxFlex="60" class="left-column">
+    
+                <h2 class="subhead">Geltungsbereich</h2>
+    
+                <mat-radio-group formControlName="areal">
+                    <mat-radio-button *ngFor="let areal of this.areals" value="{{areal.value}}">{{areal.viewValue}}
+                    </mat-radio-button>
+                </mat-radio-group>
+    
+    
+                <div fxLayout="row" fxLayoutGap="10px" *ngIf="f.areal.value !== 'COUNTRY'">
+    
+                    <mat-form-field fxFlex="50" appearance="outline" *ngIf="f.areal.value != 'ZIP' ">
+                        <mat-label>Bundesland</mat-label>
+                        <mat-select formControlName="county">
+                            <mat-option *ngFor="let county of counties" [value]="county.value">
+                                {{county.viewValue}}
+                            </mat-option>
+                            <mat-error *ngIf="f.county.touched && f.county.errors?.required">Bundesland fehlt.</mat-error>
+                        </mat-select>
+                    </mat-form-field>
+    
+                    <mat-form-field fxFlex="50" appearance="outline" *ngIf="f.areal.value !== 'STATE'">
+                        <mat-label>Postleitzahl</mat-label>
+                        <input numeric matInput placeholder="12345" formControlName="zip" maxlength="5">
+                        <mat-error *ngIf="f.zip.touched && f.zip.errors?.required">Postleitzahl fehlt.</mat-error>
+                    </mat-form-field>
+    
+                </div>
+    
+    
+                <h2 class="subhead">Kategorie</h2>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Bereich</mat-label>
+                    <mat-select formControlName="restrictionType">
+                        <mat-option *ngFor="let restriction of this.restrictionTypes" [value]="restriction.value">
+                            {{restriction.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f.restrictionType.touched && f.restrictionType.errors?.required">Kategorie fehlt.
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Kurzbeschreibung</mat-label>
+                    <input formControlName="shortDescription" matInput maxlength="256">
+                    <mat-error *ngIf="f.shortDescription.touched && f.shortDescription.errors?.required">Kurzbeschreibung
+                        darf nicht leer sein.</mat-error>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Beschreibung</mat-label>
+                    <textarea formControlName="restrictionDescription" matInput></textarea>
+                    <mat-error *ngIf="f.restrictionDescription.touched && f.restrictionDescription.errors?.required">
+                        Beschreibung darf nicht leer sein.</mat-error>
+                    <mat-error *ngIf="f.restrictionDescription.touched && f.restrictionDescription.errors?.minlength">
+                        Beschreibung ist zu kurz.</mat-error>
+                </mat-form-field>
+    
+                <mat-radio-group formControlName="restrictionState">
+                    <mat-radio-button *ngFor="let state of this.restrictionStates" value="{{state.value}}">
+                        {{state.viewValue}}</mat-radio-button>
+                </mat-radio-group>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Quelle</mat-label>
+                    <input formControlName="furtherInformation" matInput maxlength="256">
+                    <mat-error *ngIf="f.furtherInformation.touched && f.furtherInformation.errors?.required">Quelle fehlt.
+                    </mat-error>
+                </mat-form-field>
+    
+                <h3 class="subhead">Gültigkeit</h3>
+    
+                <div fxLayout="row" fxLayoutGap="10px">
+    
+                    <mat-form-field fxFlex="50" appearance="outline">
+                        <mat-label>Anfang</mat-label>
+                        <input matInput [matDatepicker]="picker1" formControlName="restrictionStart" disabled
+                            [max]="this.f.restrictionEnd.value">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+    
+                    <mat-form-field fxFlex="50" appearance="outline">
+                        <mat-label>Ende</mat-label>
+                        <input matInput [matDatepicker]="picker2" formControlName="restrictionEnd" disabled
+                            [min]="this.f.restrictionStart.value">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+    
+                </div>
+    
+                <mat-slide-toggle *ngIf="data !== undefined" formControlName="verified">Verified</mat-slide-toggle>
+    
+    
+            </form>
+    
+    
+            <div fxFlex="40" class="right-column">
+    
+                <h1 class="subhead">Vorschau</h1>
+                <p class="restrictionState">{{this.f.restrictionState.value == 'ban' ? 'Verbot' : 'Einschränkung'}}</p>
+                <mat-divider></mat-divider>
+    
+                <p class="restrictionType">{{this.translator(this.f.restrictionType.value)}}</p>
+    
+                <h1 class="subhead" *ngIf="this.f.areal.value == 'COUNTRY'">Deutschland</h1>
+                <h1 class="subhead" *ngIf="this.f.areal.value =='STATE'">{{this.f.county.value}}</h1>
+                <h1 class="subhead" *ngIf="this.f.areal.value =='ZIP'"> {{this.f.zip.value}}</h1>
+    
+                <p class="text">{{this.f.restrictionDescription.value}}</p>
+                <p class="restrictionType">{{this.f.furtherInformation.value}}</p>
+                <span class="date" *ngIf="this.f.restrictionStart.value != ''">von
+                    {{this.f.restrictionStart.value | date: 'dd.MM.yyyy'}} </span>
+                <span class="date" *ngIf="this.f.restrictionEnd.value != ''">bis
+                    {{this.f.restrictionEnd.value | date: 'dd.MM.yyyy'}}</span>
+    
+            </div>
+    
+    
+    
+    
+    
+    
+    
+        </div>
+
+        
+
+    </div>
+
+
+    <div d-actions>
+        <modal-save-button [disabled]="!myForm.valid" (click)="onSubmit()"></modal-save-button>
+        <modal-cancel-button (click)="onNoClick()"></modal-cancel-button>
+        <!-- <modal-confirm-button (click)="onLog()"></modal-confirm-button> -->
+    </div>
+
+</modal-wrapper>
+

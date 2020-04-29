@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {FeedService} from './feed.service';
-import {FetchResult, Restrictions, RestrictionType} from './Restriction';
+import {FeedService} from './modules/main-site/feed/feed.service';
 import {BehaviorSubject} from 'rxjs';
+import { RestrictionType } from './models/restriction-type';
+import { Restrictions } from './Restriction';
 
 
 @Injectable()

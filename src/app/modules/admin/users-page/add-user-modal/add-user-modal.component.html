@@ -1,0 +1,81 @@
+<modal-wrapper title="Add User">
+
+  <div d-body>
+
+    <!-- 
+
+ <form clrForm clrLayout="vertical" [formGroup]="signupForm">
+
+      <clr-input-container>
+        <label>Email</label>
+        <input clrInput type="text" formControlName="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+        <clr-control-error *clrIfError="'required'">Email is required.</clr-control-error>
+        <clr-control-error *clrIfError="'pattern'">Email format is invalid.</clr-control-error>
+      </clr-input-container>
+
+      <clr-input-container>
+        <label>Password</label>
+        <input clrInput type="password" formControlName="password" />
+        <clr-control-error *clrIfError="'required'">Password is required.</clr-control-error>
+        <clr-control-error *clrIfError="'minlength'">Min. of 6 characters required.</clr-control-error>
+      </clr-input-container>
+
+      <clr-select-container>
+
+        <label for="select-error" class="clr-control-label">Role</label>
+
+        <select clrSelect formControlName="roles">
+          <option *ngFor="let role of this.roles" value="role">{{role}}</option>
+        </select>
+      <clr-control-error>Role is required.</clr-control-error>
+      </clr-select-container>
+
+    </form>
+
+    -->
+
+
+
+    <form [formGroup]="signupForm" autocomplete="off">
+
+
+      <mat-form-field class="max-width" appearance="standard">
+        <mat-icon matPrefix class="form-prefix">email</mat-icon>
+        <mat-label>Email</mat-label>
+        <input required type="text" formControlName="email" matInput placeholder="Email"
+          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+
+
+        <mat-error *ngIf="f.email.touched && f.email.errors?.required">This field is required.</mat-error>
+        <mat-error *ngIf="f.email.touched && f.email.errors?.pattern">The given e-mail
+          address is invalid.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="max-width" appearance="standard">
+        <mat-label>Password</mat-label>
+        <mat-icon matPrefix class="form-prefix">lock</mat-icon>
+        <input required type="password" formControlName="password" matInput placeholder="Password">
+        <mat-error *ngIf="f.password.touched && f.password.errors?.required">The password cannot be empty.
+        </mat-error>
+        <mat-error *ngIf="f.password.touched && f.password.errors?.minlength">The password is too short.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="max-width" appearance="standard">
+        <mat-icon matPrefix class="form-prefix">security</mat-icon>
+        <mat-label>Roles</mat-label>
+        <mat-select formControlName="roles" multiple>
+          <mat-option *ngFor="let role of roles" [value]="role">{{role}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.roles.touched && f.roles.errors?.required">User has to have a role.</mat-error>
+      </mat-form-field>
+
+    </form>
+
+  </div>
+
+  <div d-actions>
+    <modal-save-button [disabled]="!signupForm.valid" (click)="onSave()"></modal-save-button>
+    <modal-cancel-button (click)="onCancel()"></modal-cancel-button>
+  </div>
+
+</modal-wrapper>

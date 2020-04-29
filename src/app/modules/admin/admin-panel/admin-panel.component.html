@@ -1,0 +1,41 @@
+<div class="main-container">
+    <header class="header-6">
+        <div class="branding">
+            <a href="..." class="nav-link">
+                <img class="dir-logo" src="../../../../assets/logo_min.svg">
+                <span class="title">Admin Panel</span>
+            </a>
+        </div>
+        <div class="header-actions">
+
+            <clr-dropdown>
+                <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+                    {{this.authService.getUserEmail()}}
+                    <clr-icon shape="caret down"></clr-icon>
+                </button>
+                <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                    <a (click)="this.authService.onLogout()" clrDropdownItem>Log out</a>
+                </clr-dropdown-menu>
+            </clr-dropdown>
+
+        </div>
+    </header>
+    <nav class="subnav">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="'restrictions'">Restrictions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="'subscriptions'">Subscriptions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="'user-management'">User Management</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="content-container">
+        <div class="content-area">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
