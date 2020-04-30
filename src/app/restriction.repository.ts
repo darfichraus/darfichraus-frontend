@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FeedService} from './modules/main-site/feed/feed.service';
+import {FeedService} from './modules/main-site/home-page/feed/feed.service';
 import {BehaviorSubject} from 'rxjs';
 import { RestrictionType } from './models/restriction-type';
 import { Restrictions } from './Restriction';

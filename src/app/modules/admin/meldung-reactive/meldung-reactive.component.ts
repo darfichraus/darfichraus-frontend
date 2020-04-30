@@ -5,7 +5,7 @@ import {
   Validators
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FeedService } from '../../main-site/feed/feed.service';
+import { FeedService } from 'src/app/modules/main-site/home-page/feed/feed.service';
 import { RestrictionsReviewService } from '../restrictions-page/restrictions-review.service';
 import { Restriction } from '../../../models/restriction';
 import { RestrictionTypeTranslator } from '../../../models/restriction-type-translator';

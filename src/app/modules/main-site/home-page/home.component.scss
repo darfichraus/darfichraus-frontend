@@ -1,0 +1,96 @@
+@import '../../../../styles_vars.scss';
+@import '../../../../styles_global.scss';
+
+
+.icon-list {
+    width: 50px;
+}
+
+.mat-list-item .mat-icon:hover {
+    cursor: pointer;
+}
+
+.feed {
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 1);
+    height: calc(100vh - 96px - 45px);
+    //height: 100%;
+    width: 460px;
+    opacity: 0.8;
+    overflow-y: scroll;
+}
+
+.map-cont {
+    width: 100%;
+    position: initial;
+    position: absolute;
+    z-index: 0;
+    height: calc(100% - 96px);
+}
+
+.icon {
+    font-size: 30px;
+    transition: transform .2s;
+}
+
+.icon:hover, .icon.bus.selected, .icon.people.selected, .icon.restaurant.selected, .icon.eco.selected, .icon.shopping.selected, .icon.close.selected {
+    transform: scale(1.5);
+}
+
+// State icons
+.icon.bus:hover, .icon.bus:active, .icon.bus.selected {
+    color: #3A49CB;
+}
+
+.icon.people:hover, .icon.people:active, .icon.people.selected{
+    color: #6E5BE1;
+}
+
+.icon.restaurant:hover, .icon.restaurant:active, .icon.restaurant.selected {
+    color: #2584B4;
+}
+
+.icon.eco:hover, .icon.eco:active, .icon.eco.selected {
+    color: #268478;
+}
+
+.icon.shopping:hover, .icon.shopping:active, .icon.shopping.selected {
+    color: #B4C03F;
+}
+
+.icon.close:hover, .icon.close:active, .icon.close.selected {
+    color: #FAC401;
+}
+
+
+
+.icon.bus:hover, .icon.bus:active, .icon.bus.selected + .transport-icon-label, .icon.people:hover, .icon.people:active,
+ .icon.people.selected + .people-icon-label, .icon.restaurant:hover, .icon.restaurant:active, .icon.restaurant.selected + .restaurant-icon-label,
+ .icon.eco:hover, .icon.eco:hover, .icon.eco.selected + .eco-icon-label, .icon.shopping:hover, .icon.shopping:hover, .icon.shopping.selected + .shopping-icon-label,
+ .icon.close:hover, .icon.close:hover, .icon.close.selected + .closed-icon-label {
+    display: inline;
+}
+
+.content-bar-label {
+    font: 14px/14px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    //line-height: 36px;
+    margin-left: 40px;
+    margin-bottom: 23px;
+    color: #2E3680;
+    //width: 10px;
+    padding: 10px;
+    background: rgba(255,255,255, .9);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.transport-icon-label, .people-icon-label, .restaurant-icon-label, .eco-icon-label, .shopping-icon-label, .closed-icon-label   {
+    display: none;
+}
+
+
+
+
+
+
