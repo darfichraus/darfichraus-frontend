@@ -6,6 +6,9 @@ import { FetchResult } from 'src/app/Restriction';
 import { RestrictionTypeTranslator } from 'src/app/models/restriction-type-translator';
 import { RestrictionState } from 'src/app/models/restriction-state';
 import { RestrictionStateTranslator } from 'src/app/models/restriction-state-translator';
+import { Restriction } from 'src/app/models/restriction';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewFeedComponent } from '../view-feed/view-feed.component';
 
 
 @Component({
@@ -19,7 +22,8 @@ export class FeedComponent implements OnInit {
   query: string;
 
   constructor(private feedService: FeedService,
-              private restrictionRepository: RestrictionRepository) {
+              private restrictionRepository: RestrictionRepository,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -43,5 +47,20 @@ export class FeedComponent implements OnInit {
     return RestrictionStateTranslator.translate(input);
 
   }
+
+  onOpenFeed(restr: Restriction) {
+    const dialogRef = this.dialog.open(ViewFeedComponent, {
+      autoFocus: false,
+      data: restr,
+      width: "500px",
+      height: "600px",
+      panelClass: 'custom-dialog-container',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+
 
 }

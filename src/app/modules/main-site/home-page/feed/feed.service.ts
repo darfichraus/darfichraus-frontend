@@ -74,4 +74,8 @@ fetchDataForAll(): any {
     return this.http.post(FeedService.api, restriction, this.httpOptions);
 
   }
+
+  getFeedById(id: string) {
+    return this.http.get(FeedService.api + id);
+  }
 }

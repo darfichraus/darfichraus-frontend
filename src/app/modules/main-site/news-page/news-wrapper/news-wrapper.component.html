@@ -2,18 +2,20 @@
 <!-- <mat-card style="margin-bottom: 30px;"> -->
 
     <div style="margin-bottom: 30px;">
-    <h4>
+    <h3>
         <ng-content select="[n-title]"></ng-content>
         <span style="float: right;"><ng-content select="[n-date]"></ng-content></span>
-    </h4>
+    </h3>
 
    
 
     <div style="margin-top: 20px;" fxLayout="row" fxLayoutAlign="space-between start">
-        <div fxFlex="40">
-            <ng-content select="[n-image]"></ng-content>
+        <div fxFlex="50" fxFlex.sm="100" fxFlex.xs="100">
+            <div style="text-align: center;">
+                <ng-content select="[n-image]"></ng-content>
+            </div>
         </div>
-        <p fxFlex="50">
+        <p fxFlex="50" fxFlex.sm="100" fxFlex.xs="100">
             <ng-content select="[n-body]"></ng-content>
         </p>
     </div>

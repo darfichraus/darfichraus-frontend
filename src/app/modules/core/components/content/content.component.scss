@@ -1,3 +1,10 @@
 .my-container {
     padding: 20px;
+
+ 
+}
+
+.my-container ::ng-deep p {
+    font-size: 120%;
+    line-height: 140%;
 }

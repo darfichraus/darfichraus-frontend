@@ -28,6 +28,7 @@ import { NewsPageComponent } from "src/app/modules/main-site/news-page/news-page
 import { DatenschutzPageComponent } from "./datenschutz-page/datenschutz-page.component";
 import { FeedComponent } from './home-page/feed/feed.component';
 import { AboutPageComponent } from './about-page/about-page.component';
+import { ViewFeedComponent } from './home-page/view-feed/view-feed.component';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -46,6 +47,7 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     NewsPageComponent,
     DatenschutzPageComponent,
     AboutPageComponent,
+    ViewFeedComponent,
   ],
   imports: [
     CommonModule,
