@@ -1,9 +1,16 @@
 <modal-wrapper title="Eintrag anschauen">
 
-    <div d-body>
+    <div d-body *ngIf="this.restr">
 
-            <p class="restrictionType">{{this.typeTranslate()}}<mat-icon style="margin-left: 10px;">{{this.iconTranslate()}}</mat-icon></p>
-            <p class="restrictionState">{{this.stateTranslate()}}</p>
+        <p class="restrictionType">
+            <mat-icon style="margin-right: 10px; margin-top: 5px;">{{this.iconTranslate()}}</mat-icon>
+            {{this.typeTranslate()}}<mat-chip-list aria-label="Restriction type" class="restrictionState">
+                <mat-chip color="primary" selected style="font-size: 12px; margin-top: 14px;">
+                    {{this.stateTranslate()}}
+                </mat-chip>
+            </mat-chip-list>
+        </p>
+
 
 
         <h1 class="subhead" *ngIf="this.restr.areal == 'COUNTRY'">Deutschland</h1>
@@ -11,8 +18,10 @@
         <h1 class="subhead" *ngIf="this.restr.areal =='ZIP'"> {{this.restr.arealIdentifier}}</h1>
 
         <p class="text">{{this.restr.restrictionDescription}}</p>
-        <p class="restrictionType">{{this.restr.furtherInformation}}</p>
-        <span class="date" *ngIf="this.restr.restrictionStart != ''">von
+        <p class="restrictionType">
+            <a href="{{this.restr.furtherInformation}}" target="_blank">Zur Quelle</a>
+        </p>
+        <span class="date" *ngIf="this.restr.restrictionStart != ''">gültig vom
             {{this.restr.restrictionStart | date: 'dd.MM.yyyy'}} </span>
         <span class="date" *ngIf="this.restr.restrictionEnd != ''">bis
             {{this.restr.restrictionEnd | date: 'dd.MM.yyyy'}}</span>
@@ -20,7 +29,7 @@
     </div>
 
     <div d-actions>
-      <modal-confirm-button (click)="onCancel()"></modal-confirm-button>
+        <modal-confirm-button (click)="onCancel()"></modal-confirm-button>
     </div>
-  
-  </modal-wrapper>  
+
+</modal-wrapper>
