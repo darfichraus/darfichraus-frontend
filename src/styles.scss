@@ -6,13 +6,17 @@
 @import './styles_fonts_override.scss';
 @import './styles_global.scss';
 
+@import '~@angular/material/theming';
 
-@font-face {
+//$custom-typography: mat-typography-config($font-family: '"Oswald", sans-serif;');
+//@include mat-core($custom-typography);
+
+/*@font-face {
   font-family: 'Playfair Display';
   font-style: normal;
   font-weight: 400;
   src: url(assets/fonts/playfair-display-v20-latin-regular.woff2) format('woff2');
-}
+}*/
 
 .material-icons {
   font-family: 'Material Icons';
@@ -33,10 +37,10 @@
 
 // Font Faces
 
-@font-face {
+/*@font-face {
   font-family: "Playfair Display";
-}
-
+}*/
+/*
 .content-desktop {
   display: block;
 }
@@ -44,7 +48,8 @@
 .content-mobile {
   display: none;
 }
-
+*/
+/*
 @media screen and (max-width: 768px) {
   .content-desktop {
     display: none;
@@ -53,17 +58,19 @@
     display: block;
   }
 }
+*/
 
 /* You can add global styles to this file, and also import other style files */
-
+/*
 html, body {
   height: 100%;
 }
-
+*/
+/*
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+}*/
 
 //@import "~leaflet/dist/leaflet.css";
 
@@ -72,15 +79,17 @@ h1.heading {
   font-family: "Playfair Display";
 }
 */
-
+/*
 .feed .type {
   padding-bottom: 1em;
 }
-
+*/
+/*
 .isMobile {
   padding-left: 0.5em !important;
   padding-right: 0.5em !important;
 }
+*/
 
 .info {
   display: absolute;
@@ -122,6 +131,7 @@ h1.heading {
   opacity: 0.7;
 }
 
+/*
 .legend span, .legend label {
   display: block;
   width: 50px;
@@ -131,19 +141,8 @@ h1.heading {
   text-align: center;
   font-size: 80%;
 }
+*/
 
-.leaflet-bar a {
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
-  color: #444;
-  display: block;
-  height: 26px;
-  width: 26px;
-  line-height: 1.45 !important;
-  text-align: center;
-  text-decoration: none;
-  font: bold 18px 'Lucida Console', Monaco, monospace;
-}
 
 
 

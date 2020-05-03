@@ -40,7 +40,13 @@ export class ContactPageComponent implements OnInit {
     private fb: FormBuilder,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.f.firstName.disable();
+    this.f.lastName.disable();
+    this.f.email.disable();
+    this.f.title.disable();
+    this.f.message.disable();
+  }
 
 
   onSubmit() {

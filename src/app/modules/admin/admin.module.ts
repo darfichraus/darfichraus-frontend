@@ -26,6 +26,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AdvisorAdminPageComponent } from './advisor-admin-page/advisor-admin-page.component';
+import { AdvisorModalComponent } from './advisor-admin-page/advisor-modal/advisor-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     SubscriptionsPageComponent,
     RestrictionTableComponent,
     MeldungReactiveComponent,
+    AdvisorAdminPageComponent,
+    AdvisorModalComponent,
   ],
   imports: [
     CommonModule,
