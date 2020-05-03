@@ -12,6 +12,7 @@ import { AuthInterceptor } from './modules/core/interceptors/auth.interceptor';
 import { AuthGuard } from './modules/core/guards/auth.guard';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './modules/material.module';
+import { QuillModule } from 'ngx-quill';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
@@ -28,6 +29,7 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
     DeviceDetectorModule.forRoot(),
     FontAwesomeModule,
     MaterialModule,
+    QuillModule.forRoot()
   ],
   providers: [
     RestrictionRepository,

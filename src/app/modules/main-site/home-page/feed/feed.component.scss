@@ -5,23 +5,17 @@
 }
 
 .feedItem {
-  font-family: "Playfair Display", "serif";
+  //font-family: "Playfair Display", "serif";
   margin-bottom: 20px;
   font-size: 20px;
   line-height: 27px;
 }
 
-.types {
-  float: right;
-  font-size: 12px;
-}
 
-.my-padding {
-  padding: 10px;
-}
 
 .container {
   margin-top: 30px;
+  //overflow-y: scroll;
 }
 
 .container:after {
@@ -33,6 +27,12 @@
     width: 100%;
     position: relative;
     z-index: -1;
+}
+
+.feed-list {
+  height: calc(100% - 45px);
+  overflow-y: scroll;
+
 }
 
 .feed-item-container:hover {

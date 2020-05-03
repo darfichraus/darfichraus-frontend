@@ -1,1 +1,96 @@
-<p>advisor-modal works!</p>
+<modal-wrapper title="Advice hinzufügen / bearbeiten">
+
+    <div d-body>
+
+
+        <form [formGroup]="myForm" fxLayout="row" fxLayoutAlign="space-between start">
+
+            <div fxFlex="47">
+                <h4>Situation bestimmen</h4>
+                <mat-form-field appearance="outline">
+                    <mat-label>Welche Situation ist gegenwärtig betroffen?</mat-label>
+                    <mat-select></mat-select>
+                </mat-form-field>
+
+                <h4>Information definieren</h4>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Titel</mat-label>
+                    <input matInput>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Typ</mat-label>
+                    <mat-select></mat-select>
+                    <mat-icon matSuffix matTooltip="Dieser Typ definiert, dass...">help_outline</mat-icon>
+                </mat-form-field>
+
+                <p>Gültigkeitsbereich</p>
+                <div fxLayout="row" fxLayoutGap="10px">
+    
+                    <mat-form-field fxFlex="50" appearance="outline">
+                        <mat-label>Anfang</mat-label>
+                        <input matInput [matDatepicker]="picker1" formControlName="restrictionStart" disabled
+                            [max]="this.f.restrictionEnd.value">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+    
+                    <mat-form-field fxFlex="50" appearance="outline">
+                        <mat-label>Ende</mat-label>
+                        <input matInput [matDatepicker]="picker2" formControlName="restrictionEnd" disabled
+                            [min]="this.f.restrictionStart.value">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+                    </mat-form-field>
+    
+                </div>
+
+                <h4></h4>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Empfänger</mat-label>
+                    <mat-select></mat-select>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Quelle (URL, Dokument)</mat-label>
+                    <input matInput>
+                </mat-form-field>
+
+                <p>Nachricht</p>
+                <dir-editor></dir-editor>
+
+            </div>
+
+            <div fxFlex="47">
+                <h4>Geltungsbereich definieren</h4>
+
+                <div fxLayout="row" fxLayoutAlign="space-between start" >
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ortssuche</mat-label>
+                        <mat-icon matPrefix>search</mat-icon>
+                        <input matInput>
+                    </mat-form-field>
+                    <button mat-icon-button>
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                
+
+                <p>Ausgewählte Bereiche</p>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div d-actions>
+        <modal-save-button [disabled]="!myForm.valid" (click)="onSubmit()"></modal-save-button>
+        <modal-cancel-button (click)="onNoClick()"></modal-cancel-button>
+        <!-- <modal-confirm-button (click)="onLog()"></modal-confirm-button> -->
+    </div>
+
+</modal-wrapper>

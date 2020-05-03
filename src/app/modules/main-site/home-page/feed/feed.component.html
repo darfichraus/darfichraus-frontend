@@ -1,6 +1,6 @@
-<h1 class="heading deutschland">{{data.searchQuery?.arealValue}}</h1>
+<!-- <h1 class="heading deutschland"></h1> -->
 
-<p class="feedItem">Aktuelle Verordnungen und Einschränkungen bezüglich des Coronavirus Covid-19</p>
+<p class="feedItem">Aktuelle Verordnungen und Einschränkungen bezüglich des Coronavirus Covid-19 in <b>{{data.searchQuery?.arealValue}}</b></p>
 
 <!-- 
 <div class="types">
@@ -19,7 +19,8 @@
       <mat-hint>{{data.data.length}} durchsuchbare Einträge</mat-hint>
   </mat-form-field>
 
-  <div *ngFor="let item of data.data | search:'arealIdentifier,restrictionDescription':query" class="container feed-item-container" (click)="onOpenFeed(item)">
+<div class="feed-list">
+    <div *ngFor="let item of data.data | search:'arealIdentifier,restrictionDescription':query" class="container feed-item-container" (click)="onOpenFeed(item)">
         <div [class.ban]="item.restrictionState == 'BAN'" class="restrictionState">
             <mat-chip-list aria-label="Restriction type">
                 <mat-chip color="primary" selected style="font-size: 12px; margin-top: -3px;">
@@ -29,7 +30,8 @@
         </div>
     <div class="restrictionType">{{translateRestrictionType(item.restrictionType)}}</div>
     <div *ngIf="item.arealIdentifier != data.searchQuery.arealValue" class="subhead">{{item.arealIdentifier}}</div>
-    <div class="text">{{item.restrictionDescription}} ...</div>
+    <div class="text">{{item.shortDescription}} ...</div>
     <div class="left date">{{item.restrictionStart | date:'dd.MM.yyyy' }}</div>
     <!-- <div class="right furtherInformation"><a href="{{item.furtherInformation}}" target="_blank" class="link">Link folgen</a></div> -->
+</div>
 </div>

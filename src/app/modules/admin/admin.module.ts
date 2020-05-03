@@ -28,6 +28,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdvisorAdminPageComponent } from './advisor-admin-page/advisor-admin-page.component';
 import { AdvisorModalComponent } from './advisor-admin-page/advisor-modal/advisor-modal.component';
+import { EditorComponent } from '../core/components/editor/editor.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { AdvisorModalComponent } from './advisor-admin-page/advisor-modal/adviso
     MeldungReactiveComponent,
     AdvisorAdminPageComponent,
     AdvisorModalComponent,
+    EditorComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +55,7 @@ import { AdvisorModalComponent } from './advisor-admin-page/advisor-modal/adviso
     MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
+    QuillModule.forRoot(),
 
     MatFormFieldModule,
     MatOptionModule,

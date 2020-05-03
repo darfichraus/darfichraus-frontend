@@ -38,6 +38,7 @@
               "node_modules/primeng/resources/primeng.min.css",
               "./node_modules/leaflet/dist/leaflet.css",
               "src/assets/openlayer/ol.css"
+
             ],
             "scripts": [
               "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js",

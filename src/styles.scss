@@ -8,6 +8,10 @@
 
 @import '~@angular/material/theming';
 
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
 //$custom-typography: mat-typography-config($font-family: '"Oswald", sans-serif;');
 //@include mat-core($custom-typography);
 

@@ -28,8 +28,8 @@ export class AuthService {
 
   loadToken(): void {
     this.token = localStorage.getItem(AuthService.JWT_STORAGE_KEY);
+    //this.token = this.token.replace('"', '');
     this.user = jwt_decode(this.token);
-
   }
 
   isLoggedIn(): boolean {

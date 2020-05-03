@@ -27,7 +27,7 @@
 
  
 
-    <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="space-between center" style="height: 100%;">
 
       <div>
         <mat-list class="icon-list">
@@ -89,7 +89,7 @@
         </mat-list>
       </div>      
 
-      <div class="feed"  [class.isMobile]="isMobile">
+      <div class="feed">
         <div class="right">
           <button mat-icon-button (click)="openBookmarkDialog()" style="display: inline-block;">
             <mat-icon style="font-size: 20px; padding-top: 4px;" matTooltip="abonnieren">bookmark</mat-icon>
@@ -99,7 +99,7 @@
       </button> -->
         </div>
             
-      <div style="padding: 10px">
+      <div style="padding: 10px" style="height: calc(100% - 120px);">
         <app-feed></app-feed>
       </div>
     </div>

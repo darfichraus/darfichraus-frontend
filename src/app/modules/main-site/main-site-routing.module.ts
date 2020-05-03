@@ -21,7 +21,7 @@ const routes: Routes = [
       { path: 'about', component: AboutPageComponent },
       { path: 'aktuelles', component: NewsPageComponent },
       { path: 'kontakt', component: ContactPageComponent },
-      // {path: 'impressum', component: ImpressumPageComponent},
+      {path: 'impressum', component: ImpressumPageComponent},
       { path: 'datenschutz', component: DatenschutzPageComponent },
       {
         path: '**',

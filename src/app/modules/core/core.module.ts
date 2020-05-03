@@ -13,9 +13,11 @@ import { AdminHeaderComponent } from './components/admin-header/header.component
       ContentComponent,
       SearchPipe,
       NumericDirective,
+      
     ],
     imports: [
       FlexLayoutModule,
+
     ],
     exports: [
         HeaderComponent,
