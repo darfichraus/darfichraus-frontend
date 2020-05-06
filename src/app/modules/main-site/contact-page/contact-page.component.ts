@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-contact-page',
@@ -7,6 +9,10 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./contact-page.component.scss']
 })
 export class ContactPageComponent implements OnInit {
+
+  faInstagram = faInstagram;
+  faTwitter = faTwitter;
+  faEnvelope = faEnvelope;
 
   myForm: FormGroup = this.fb.group({
 

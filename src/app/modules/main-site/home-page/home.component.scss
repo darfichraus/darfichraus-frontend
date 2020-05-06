@@ -21,7 +21,14 @@
 
 }
 
+.icons-and-feed {
+    //height: calc(100% - 96px - 45px);
+    height: 100%;
+}
 
+app-feed {
+    height: calc(100% - 120px);
+}
 .map-cont {
     width: 100%;
     position: initial;

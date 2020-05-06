@@ -18,10 +18,14 @@ import { ViewFeedComponent } from '../view-feed/view-feed.component';
 })
 export class FeedComponent implements OnInit {
 
+  myIcons = ['directions_bus', 'people', 'restaurant_menu', 'map', 'shopping_cart', 'cancel'];
+
   data: FetchResult;
   query: string;
+  mode: string;
 
-  constructor(private feedService: FeedService,
+
+  constructor(public feedService: FeedService,
               private restrictionRepository: RestrictionRepository,
               private dialog: MatDialog) {
   }
@@ -33,7 +37,7 @@ export class FeedComponent implements OnInit {
     });
 
     this.restrictionRepository.filteredRestrictions.subscribe(data => {
-      console.log("update");
+      console.log('update');
       this.data.data = data;
     });
 
@@ -48,12 +52,37 @@ export class FeedComponent implements OnInit {
 
   }
 
+  translateMapModeToRestrictionType(mapMode): RestrictionType {
+    switch (mapMode) {
+      case 'directions_bus':
+        return RestrictionType.PUBLIC_TRANSPORTATION;
+      case 'people':
+        return RestrictionType.EVENTS_AND_ASSEMBLIES;
+      case 'restaurant_menu':
+        return RestrictionType.GASTRONOMY;
+      case 'map':
+        return RestrictionType.PUBLIC_PLACES;
+      case 'shopping_cart':
+        return RestrictionType.RETAIL;
+      case 'cancel':
+        return RestrictionType.CURFEW;
+      default:
+        return RestrictionType.CURFEW;
+    }
+  }
+
+  onIcon(icon) {
+    this.mode = icon;
+    //this.selectedMode = icon;
+    this.restrictionRepository.filterByType(this.translateMapModeToRestrictionType(this.mode));
+  }
+
   onOpenFeed(restr: Restriction) {
     const dialogRef = this.dialog.open(ViewFeedComponent, {
       autoFocus: false,
       data: restr,
-      width: "500px",
-      height: "600px",
+      width: '500px',
+      height: '600px',
       panelClass: 'custom-dialog-container',
     });
 

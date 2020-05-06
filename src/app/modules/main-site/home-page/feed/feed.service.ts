@@ -18,12 +18,13 @@ export class FeedService {
   private dataSource = new BehaviorSubject<FetchResult>(new FetchResult());
   data = this.dataSource.asObservable();
 
-  bus_count = 0;
-  person_count = 0;
-  restaurant_count = 0;
-  eco_count = 0;
-  shopping_count = 0;
-  close_count = 0;
+
+  directions_bus_count = 0;
+  people_count = 0;
+  restaurant_menu_count = 0;
+  map_count = 0;
+  shopping_cart_count = 0;
+  cancel_count = 0;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -48,12 +49,12 @@ export class FeedService {
 
       this.dataSource.next(new FetchResult(data, searchQuery));
 
-      this.bus_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.PUBLIC_TRANSPORTATION).length;
-      this.person_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.EVENTS_AND_ASSEMBLIES).length;
-      this.restaurant_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.GASTRONOMY).length;
-      this.eco_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.PUBLIC_PLACES).length;
-      this.shopping_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.RETAIL).length;
-      this.close_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.CURFEW).length;
+      this.directions_bus_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.PUBLIC_TRANSPORTATION).length;
+      this.people_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.EVENTS_AND_ASSEMBLIES).length;
+      this.restaurant_menu_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.GASTRONOMY).length;
+      this.map_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.PUBLIC_PLACES).length;
+      this.shopping_cart_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.RETAIL).length;
+      this.cancel_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.CURFEW).length;
     });
   }
 

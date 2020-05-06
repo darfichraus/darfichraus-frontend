@@ -182,7 +182,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   translateMapModeToRestrictionType(mapMode): RestrictionType {
     switch (mapMode) {
-      case 'bus':
+      case 'directions_bus':
         return RestrictionType.PUBLIC_TRANSPORTATION;
       case 'person':
         return RestrictionType.EVENTS_AND_ASSEMBLIES;
@@ -245,7 +245,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   getMapColorByModeAndSeverity(mode, severity): string {
 
     switch (mode) {
-      case 'bus':
+      case 'directions_bus':
       default:
         switch (severity) {
           case 1:

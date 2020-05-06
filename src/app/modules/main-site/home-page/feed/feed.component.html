@@ -1,13 +1,14 @@
 <!-- <h1 class="heading deutschland"></h1> -->
 
-<p class="feedItem">Aktuelle Verordnungen und Einschränkungen bezüglich des Coronavirus Covid-19 in <b>{{data.searchQuery?.arealValue}}</b></p>
+<p class="feedItem">Aktuelle Verordnungen und Einschränkungen bezüglich des Coronavirus Covid-19 in
+    <b>{{data.searchQuery?.arealValue}}</b></p>
 
-<!-- 
-<div class="types">
-    <b>34</b> Einschränkungen, <b>8</b> Verbote
-</div>
--->
-
+<ng-container *ngFor="let type of this.myIcons">
+    <mat-icon (click)="onIcon(type)" [class]="'my-icon ' + type" [class.selected]="this.mode == type" [matBadge]="this.feedService[type + '_count']"
+    [matBadgeHidden]="this.feedService[type + '_count'] == 0"
+         matBadgePosition="above after">{{type}}
+    </mat-icon>
+</ng-container>
 
 <mat-form-field class="mw suche" appearance="outline">
     <mat-icon matPrefix class="form-prefix">search</mat-icon>
@@ -15,12 +16,13 @@
     <button mat-icon-button *ngIf="query" matSuffix (click)="this.query=''">
         <mat-icon class="form-prefix">close</mat-icon>
     </button>
-    <input matInput [(ngModel)]="query" placeholder="Titel oder Beschreibung...">  
-      <mat-hint>{{data.data.length}} durchsuchbare Einträge</mat-hint>
-  </mat-form-field>
+    <input matInput [(ngModel)]="query" placeholder="Titel oder Beschreibung...">
+    <mat-hint>{{data.data.length}} durchsuchbare Einträge</mat-hint>
+</mat-form-field>
 
 <div class="feed-list">
-    <div *ngFor="let item of data.data | search:'arealIdentifier,restrictionDescription':query" class="container feed-item-container" (click)="onOpenFeed(item)">
+    <div *ngFor="let item of data.data | search:'arealIdentifier,restrictionDescription':query"
+        class="container feed-item-container" (click)="onOpenFeed(item)">
         <div [class.ban]="item.restrictionState == 'BAN'" class="restrictionState">
             <mat-chip-list aria-label="Restriction type">
                 <mat-chip color="primary" selected style="font-size: 12px; margin-top: -3px;">
@@ -28,10 +30,10 @@
                 </mat-chip>
             </mat-chip-list>
         </div>
-    <div class="restrictionType">{{translateRestrictionType(item.restrictionType)}}</div>
-    <div *ngIf="item.arealIdentifier != data.searchQuery.arealValue" class="subhead">{{item.arealIdentifier}}</div>
-    <div class="text">{{item.shortDescription}} ...</div>
-    <div class="left date">{{item.restrictionStart | date:'dd.MM.yyyy' }}</div>
-    <!-- <div class="right furtherInformation"><a href="{{item.furtherInformation}}" target="_blank" class="link">Link folgen</a></div> -->
-</div>
+        <div class="restrictionType">{{translateRestrictionType(item.restrictionType)}}</div>
+        <div *ngIf="item.arealIdentifier != data.searchQuery.arealValue" class="subhead">{{item.arealIdentifier}}</div>
+        <div class="text">{{item.shortDescription}} ...</div>
+        <div class="left date">{{item.restrictionStart | date:'dd.MM.yyyy' }}</div>
+        <!-- <div class="right furtherInformation"><a href="{{item.furtherInformation}}" target="_blank" class="link">Link folgen</a></div> -->
+    </div>
 </div>

@@ -14,7 +14,7 @@ import { RestrictionType } from '../../../models/restriction-type';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  title = 'dir-frontend';
+  // title = 'dir-frontend';
   mode: string;
   data: FetchResult;
   selectedMode: string;
@@ -125,7 +125,7 @@ export class HomeComponent implements OnInit {
 
   translateMapModeToRestrictionType(mapMode): RestrictionType {
     switch (mapMode) {
-      case 'bus':
+      case 'directions_bus':
         return RestrictionType.PUBLIC_TRANSPORTATION;
       case 'person':
         return RestrictionType.EVENTS_AND_ASSEMBLIES;
