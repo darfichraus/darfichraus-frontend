@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { SearchInformation, FetchResult } from 'src/app/Restriction';
-import { Restriction } from 'src/app/models/restriction';
-import { Areal } from 'src/app/models/areal.enum';
-import { RestrictionType } from 'src/app/models/restriction-type';
+import {environment} from 'src/environments/environment';
+import {SearchInformation, FetchResult} from 'src/app/Restriction';
+import {Restriction} from 'src/app/models/restriction';
+import {Areal} from 'src/app/models/areal.enum';
+import {RestrictionType} from 'src/app/models/restriction-type';
 
 
 @Injectable({
@@ -17,6 +17,12 @@ export class FeedService {
   // @ts-ignore
   private dataSource = new BehaviorSubject<FetchResult>(new FetchResult());
   data = this.dataSource.asObservable();
+
+  private mapModeSource = new BehaviorSubject<string>('');
+  mapMode = this.mapModeSource.asObservable();
+
+  private hoveredMapModeSource = new BehaviorSubject<string>('');
+  hoverMapMode = this.hoveredMapModeSource.asObservable();
 
 
   directions_bus_count = 0;
@@ -33,7 +39,16 @@ export class FeedService {
   };
 
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {
+  }
+
+  switchMapMode(mapMode: string) {
+    this.mapModeSource.next(mapMode);
+  }
+
+  hoveredMapMode(mapMode: string) {
+    this.hoveredMapModeSource.next(mapMode);
+  }
 
   fetchData(url: string, searchQuery: SearchInformation): any {
 
@@ -58,14 +73,14 @@ export class FeedService {
     });
   }
 
-fetchDataByAreal(areal: Areal, value: string): any {
+  fetchDataByAreal(areal: Areal, value: string): any {
     const url = FeedService.api + areal.toString() + '/' + value;
     // const url = FeedService.api + 'ZIP/36124';
 
     this.fetchData(url, new SearchInformation(areal, value));
   }
 
-fetchDataForAll(): any {
+  fetchDataForAll(): any {
     const url = FeedService.api;
     this.fetchData(url, new SearchInformation(Areal.COUNTRY, 'Deutschland'));
   }
@@ -79,4 +94,7 @@ fetchDataForAll(): any {
   getFeedById(id: string) {
     return this.http.get(FeedService.api + id);
   }
+
+
+
 }

@@ -5,13 +5,14 @@ import * as statesData from 'src/json-assets/bundeslaender_simplify200.json';
 import {FeedService} from '../feed/feed.service';
 import {Areal} from '../../../../models/areal.enum';
 import {RestrictionRepository} from '../../../../restriction.repository';
-import {Restrictions, } from '../../../../Restriction';
+import {Restrictions,} from '../../../../Restriction';
 import {faHome} from '@fortawesome/free-solid-svg-icons';
-import { RestrictionType } from '../../../../models/restriction-type';
-import { Restriction } from '../../../../models/restriction';
+import {RestrictionType} from '../../../../models/restriction-type';
+import {Restriction} from '../../../../models/restriction';
+import {FeedRepository} from '../../../core/repositories/feed.repository';
 
 @Component({
-  selector: 'app-map',
+  selector: 'dir-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
@@ -57,6 +58,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   zoomHome;
 
   constructor(private feedService: FeedService,
+              private feedRepository: FeedRepository,
               private restrictionRepository: RestrictionRepository) {
   }
 
@@ -112,7 +114,12 @@ export class MapComponent implements OnInit, AfterViewInit {
 
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-      attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>', id: 'mapbox/light-v9', tileSize: 512, zoomOffset: -1, maxZoom: 8, minZoom: 6
+      attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      id: 'mapbox/light-v9',
+      tileSize: 512,
+      zoomOffset: -1,
+      maxZoom: 8,
+      minZoom: 6
     }).addTo(this.coronamap);
 
     const statesD = {type: statesData.type, crs: statesData.crs, source: statesData.source, features: statesData.features};
@@ -143,7 +150,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.info.update = function(props) {
       const stateCriticality = [1, 20000, 212, 495, 1230, 3322, 8902, 10020, 12555, 222, 12, 0, 1234, 1234, 1234, 1244];
       this._div.innerHTML = '<div class="additionalinformation"><h4>Corona Länderinformation</h4>' + (props ?
-           '<b>' + props.GEN + '</b><br />'
+        '<b>' + props.GEN + '</b><br />'
         + '<ul>'
         + '<li><b>23.03.20</b> - Weitreichendes Kontaktverbot</li>'
         + '<li><b>10.03.20</b> - Gaststätten geschlossen</li>'
@@ -163,7 +170,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    
+
   }
 
   style(feature) {
@@ -184,15 +191,15 @@ export class MapComponent implements OnInit, AfterViewInit {
     switch (mapMode) {
       case 'directions_bus':
         return RestrictionType.PUBLIC_TRANSPORTATION;
-      case 'person':
+      case 'people':
         return RestrictionType.EVENTS_AND_ASSEMBLIES;
-      case 'restaurant':
+      case 'restaurant_menu':
         return RestrictionType.GASTRONOMY;
-      case 'eco':
+      case 'map':
         return RestrictionType.PUBLIC_PLACES;
-      case 'shopping':
+      case 'shopping_cart':
         return RestrictionType.RETAIL;
-      case 'close':
+      case 'cancel':
         return RestrictionType.CURFEW;
       default:
         return RestrictionType.CURFEW;
@@ -206,6 +213,12 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   calculateDayDifferenceOfLastPublication(mode, state): number {
 
+    const savedCrit = this.feedRepository.getStateCriticality(mode, state);
+
+    if (savedCrit >= 0) {
+      return savedCrit;
+    }
+
     const stateRestrictions = this.restrictionRepository?.restrictions?.filter(e => e.arealIdentifier === state && !(e.areal === Areal.COUNTRY));
 
     const resType = this.translateMapModeToRestrictionType(mode);
@@ -213,6 +226,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     restrictionsByType = stateRestrictions?.filter(e => e.restrictionType.toString() === resType);
 
     if (restrictionsByType === undefined || restrictionsByType?.length === 0) {
+      this.feedRepository.addStateCriticality(mode, state, 4);
       return 4;
     }
 
@@ -223,14 +237,17 @@ export class MapComponent implements OnInit, AfterViewInit {
     const diff = Math.abs(lastRestrictionAt - Date.now());
     const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
 
-    if (diffDays > 7) {
+    if (diffDays > 10) {
+      this.feedRepository.addStateCriticality(mode, state, 4);
       return 4;
     }
 
-    if (diffDays < 7 && diffDays > 1) {
+    if (diffDays < 11 && diffDays > 1) {
+      this.feedRepository.addStateCriticality(mode, state, 2);
       return 2;
     }
 
+    this.feedRepository.addStateCriticality(mode, state, 1);
     return 1;
   }
 
@@ -255,9 +272,9 @@ export class MapComponent implements OnInit, AfterViewInit {
           case 3:
             return ColorTransportation.STAGE_THREE;
           default:
-              return ColorTransportation.STAGE_FOUR;
+            return ColorTransportation.STAGE_FOUR;
         }
-      case 'person':
+      case 'people':
         switch (severity) {
           case 1:
             return ColorEvents.STAGE_ONE;
@@ -268,7 +285,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           default:
             return ColorEvents.STAGE_FOUR;
         }
-      case 'restaurant':
+      case 'restaurant_menu':
         switch (severity) {
           case 1:
             return ColorGastronomy.STAGE_ONE;
@@ -279,7 +296,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           default:
             return ColorGastronomy.STAGE_FOUR;
         }
-      case 'eco':
+      case 'map':
         switch (severity) {
           case 1:
             return ColorPublicPlaces.STAGE_ONE;
@@ -290,7 +307,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           default:
             return ColorPublicPlaces.STAGE_FOUR;
         }
-      case 'shopping':
+      case 'shopping_cart':
         switch (severity) {
           case 1:
             return ColorRetail.STAGE_ONE;
@@ -301,7 +318,7 @@ export class MapComponent implements OnInit, AfterViewInit {
           default:
             return ColorRetail.STAGE_FOUR;
         }
-      case 'close':
+      case 'cancel':
         switch (severity) {
           case 1:
             return ColorCurfew.STAGE_ONE;

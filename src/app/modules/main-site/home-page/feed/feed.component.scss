@@ -49,7 +49,7 @@ a {
 }
 
 a:hover {
-  
+
   color:#808080;
 }
 
@@ -64,6 +64,7 @@ a:hover {
 
 mat-icon {
   cursor: pointer;
+  font-size: 30px;
 }
 
 .my-icon.directions_bus:hover, .directions_bus.selected {

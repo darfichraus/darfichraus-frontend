@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {DeviceDetectorService} from 'ngx-device-detector';
-import { FetchResult } from '../../../Restriction';
-import { FeedService } from './feed/feed.service'
-import { RestrictionRepository } from '../../../restriction.repository';
-import { SubscribeComponent } from '../subscribe/subscribe.component';
-import { RestrictionType } from '../../../models/restriction-type';
+import {FetchResult} from '../../../Restriction';
+import {FeedService} from './feed/feed.service';
+import {RestrictionRepository} from '../../../restriction.repository';
+import {SubscribeComponent} from '../subscribe/subscribe.component';
+import {RestrictionType} from '../../../models/restriction-type';
 
 
 @Component({
@@ -36,64 +36,11 @@ export class HomeComponent implements OnInit {
     this.feedService.data.subscribe(data => {
       this.data = data;
     });
-  }
-  /*
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ImpressumComponent, {
-      width: '900px',
-      height: '700px',
-      restoreFocus: false,
-      autoFocus: false,
-      panelClass: 'mat-dialog-override',
-      data: {}
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    this.feedService.mapMode.subscribe(mode => {
+      this.onIcon(mode);
     });
   }
-  */
-
-  /*
-  openVideo(): void {
-    const dialogRef = this.dialog.open(PlayerComponent, {
-      width: '610px',
-      restoreFocus: false,
-      autoFocus: false,
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-  */
-
-  /*
-  openContact(): void {
-    const dialogRef = this.dialog.open(ContactFormComponent, {
-      width: '700px',
-      restoreFocus: false,
-      autoFocus: false,
-      hasBackdrop: true,
-      data: {}
-    });
-
-  }
-  */
-
-  /*
-  openRestrictionDialog(): void {
-    const dialogRef = this.dialog.open(MeldungReactiveComponent, {
-      width: '900px',
-      height: '700px',
-      restoreFocus: false,
-      autoFocus: false,
-      panelClass: 'custom-dialog-container',
-      data: undefined
-    });
-  }
-  */
 
   openBookmarkDialog(): void {
     const dialogRef = this.dialog.open(SubscribeComponent, {
@@ -144,7 +91,7 @@ export class HomeComponent implements OnInit {
 
   success(pos) {
     const crd = pos.coords;
-    const msg = 'Your current position is:' + `Latitude : ${crd.latitude}` +  `Longitude: ${crd.longitude}` + `More or less ${crd.accuracy} meters.`;
+    const msg = 'Your current position is:' + `Latitude : ${crd.latitude}` + `Longitude: ${crd.longitude}` + `More or less ${crd.accuracy} meters.`;
     alert(msg);
   }
 

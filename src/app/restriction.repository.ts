@@ -31,7 +31,7 @@ export class RestrictionRepository {
   }
 
   filterByType(restrictionType: RestrictionType) {
-    this.restrictions = this.allRestrictions.filter(e => e.restrictionType === restrictionType);
+    this.restrictions = this.allRestrictions?.filter(e => e.restrictionType === restrictionType);
     this.filterDataSource.next(this.restrictions);
   }
 

@@ -17,7 +17,7 @@
         <mat-icon class="form-prefix">close</mat-icon>
     </button>
     <input matInput [(ngModel)]="query" placeholder="Titel oder Beschreibung...">
-    <mat-hint>{{data.data.length}} durchsuchbare Einträge</mat-hint>
+    <mat-hint>{{data?.data?.length}} durchsuchbare Einträge</mat-hint>
 </mat-form-field>
 
 <div class="feed-list">
