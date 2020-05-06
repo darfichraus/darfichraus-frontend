@@ -99,7 +99,7 @@ export class FeedComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.onIcon(this.mode);
-    });
+    }, 100);
   }
 
 
