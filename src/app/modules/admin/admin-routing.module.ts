@@ -5,6 +5,11 @@ import { RestrictionsPageComponent } from './restrictions-page/restrictions-page
 import { UsersPageComponent } from './users-page/users-page.component';
 import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
 import { AdvisorAdminPageComponent } from './advisor-admin-page/advisor-admin-page.component';
+import { SituationTypesPageComponent } from './situation-types-page/situation-types-page.component';
+import { SituationsPageComponent } from './situations-page/situations-page.component';
+import { SituationMessageTypesPageComponent } from './situation-message-types-page/situation-message-types-page.component';
+import { SituationMessagesPageComponent } from './situation-messages-page/situation-messages-page.component';
+import { SituationReferencesPageComponent } from './situation-references-page/situation-references-page.component';
 
 
 const routes: Routes = [
@@ -15,7 +20,11 @@ const routes: Routes = [
     {path: 'restrictions', component: RestrictionsPageComponent},
     {path: 'subscriptions', component: SubscriptionsPageComponent},
     {path: 'user-management', component: UsersPageComponent},
-
+    {path: 'advisor/situation-types', component: SituationTypesPageComponent},
+    {path: 'advisor/situations', component: SituationsPageComponent},
+    {path: 'advisor/situation-message-types', component: SituationMessageTypesPageComponent},
+    {path: 'advisor/situation-messages', component: SituationMessagesPageComponent},
+    {path: 'advisor/situation-references', component: SituationReferencesPageComponent},
   ]},
 ];
 

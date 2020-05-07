@@ -1,0 +1,53 @@
+<modal-wrapper title="{{data.mode}} Situation Type">
+
+    <div d-body>
+
+        <form [formGroup]="myForm">
+
+
+            <mat-form-field class="max-width" appearance="standard">
+              <mat-icon matPrefix class="form-prefix">label</mat-icon>
+              <mat-label>Name</mat-label>
+              <input required type="text" formControlName="name" matInput placeholder="Situation 1 ...">
+              <mat-error *ngIf="f.name.touched && f.name.errors?.required">This field is required.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="max-width" appearance="standard">
+                <mat-icon matPrefix class="form-prefix">subject</mat-icon>
+                <mat-label>Description</mat-label>
+                <input required type="text" formControlName="description" matInput placeholder="Situation description ...">
+                <mat-error *ngIf="f.description.touched && f.description.errors?.required">This field is required.</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="max-width" appearance="standard">
+                <mat-icon matPrefix class="form-prefix">feedback</mat-icon>
+                <mat-label>Severity</mat-label>
+                <mat-select formControlName="severity" required>
+                  <mat-option *ngFor="let sev of severities" [value]="sev">{{sev}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="f.severity.touched && f.severity.errors?.required">This field is required.</mat-error>
+              </mat-form-field>
+      
+
+         <mat-form-field class="max-width" appearance="standard">
+              <mat-icon matPrefix class="form-prefix">image</mat-icon>
+              <mat-label>Media</mat-label>
+              <mat-select formControlName="media" required>
+                <mat-option *ngFor="let med of medias" [value]="med">{{med}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.media.touched && f.media.errors?.required">This field is required.</mat-error>
+            </mat-form-field>
+
+   
+      
+          </form>
+
+    </div>
+
+
+  <div d-actions>
+    <modal-save-button [disabled]="!myForm.valid" (click)="onSave()"></modal-save-button>
+    <modal-cancel-button (click)="onCancel()"></modal-cancel-button>
+  </div>
+
+</modal-wrapper>

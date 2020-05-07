@@ -30,6 +30,13 @@ import { AdvisorAdminPageComponent } from './advisor-admin-page/advisor-admin-pa
 import { AdvisorModalComponent } from './advisor-admin-page/advisor-modal/advisor-modal.component';
 import { EditorComponent } from '../core/components/editor/editor.component';
 import { QuillModule } from 'ngx-quill';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SituationTypesPageComponent } from './situation-types-page/situation-types-page.component';
+import { SituationsPageComponent } from './situations-page/situations-page.component';
+import { SituationMessageTypesPageComponent } from './situation-message-types-page/situation-message-types-page.component';
+import { SituationMessagesPageComponent } from './situation-messages-page/situation-messages-page.component';
+import { SituationReferencesPageComponent } from './situation-references-page/situation-references-page.component';
+import { SituationTypeDialogComponent } from './situation-types-page/situation-type-dialog/situation-type-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +50,12 @@ import { QuillModule } from 'ngx-quill';
     AdvisorAdminPageComponent,
     AdvisorModalComponent,
     EditorComponent,
+    SituationTypesPageComponent,
+    SituationsPageComponent,
+    SituationMessageTypesPageComponent,
+    SituationMessagesPageComponent,
+    SituationReferencesPageComponent,
+    SituationTypeDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +82,7 @@ import { QuillModule } from 'ngx-quill';
     MatRadioModule,
     MatToolbarModule,
     MatSlideToggleModule,
+    FontAwesomeModule,
   ],
 })
 export class AdminModule {}

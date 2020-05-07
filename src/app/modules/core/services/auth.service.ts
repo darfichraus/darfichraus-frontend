@@ -28,6 +28,8 @@ export class AuthService {
 
   loadToken(): void {
     this.token = localStorage.getItem(AuthService.JWT_STORAGE_KEY);
+    console.log("load token this.token");
+    console.log(this.token);
     //this.token = this.token.replace('"', '');
     this.user = jwt_decode(this.token);
   }
@@ -52,6 +54,8 @@ export class AuthService {
   }
 
   setSession(authResult) {
+    console.log("set session auth result");
+    console.log(authResult);
     this.token = authResult;
     this.user = jwt_decode(authResult);
     localStorage.setItem(AuthService.JWT_STORAGE_KEY, authResult);
@@ -63,7 +67,7 @@ export class AuthService {
       password: password
     };
 
-    return this.http.post(AuthService.LOGIN_URL, body, {responseType: 'text'});
+    return this.http.post(AuthService.LOGIN_URL, body);
   }
 
   getUserRole() {

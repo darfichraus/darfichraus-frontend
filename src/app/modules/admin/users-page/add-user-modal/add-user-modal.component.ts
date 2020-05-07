@@ -53,7 +53,7 @@ export class AddUserModalComponent implements OnInit {
    * @param user user param to fill form values with
    */
   setFormValues(user: User): void {
-    this.signupForm.controls['email'].setValue(this.data.user.username);
+    this.signupForm.controls['email'].setValue(this.data.user.id);
     this.signupForm.controls['email'].disable();
     this.signupForm.controls['password'].setValue('passwort123');
     this.signupForm.controls['password'].disable();  

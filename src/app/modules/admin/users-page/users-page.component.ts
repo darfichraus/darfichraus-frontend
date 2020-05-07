@@ -46,7 +46,7 @@ export class UsersPageComponent implements OnInit {
     if (value) {
       const lowercase = value.toLowerCase().trim();
       this.filteredUsers = this.users.filter(user => {
-        return user.username.toLowerCase().indexOf(lowercase) >= 0; // || user.lastname.toLowerCase().indexOf(lowercase) >= 0
+        return user.id.toLowerCase().indexOf(lowercase) >= 0; // || user.lastname.toLowerCase().indexOf(lowercase) >= 0
       });
     } else {
       this.filteredUsers = this.users;
@@ -101,9 +101,9 @@ export class UsersPageComponent implements OnInit {
       if (val === true) {
         let count = 0;
         this.selected.forEach((user) => {
-          this.users = this.users.filter(e => e.username !== user.username);
-          this.filteredUsers = this.filteredUsers.filter(e => e.username !== user.username);
-          this.userManagementService.deleteUser(user.username).subscribe((val) => {
+          this.users = this.users.filter(e => e.id !== user.id);
+          this.filteredUsers = this.filteredUsers.filter(e => e.id !== user.id);
+          this.userManagementService.deleteUser(user.id).subscribe((val) => {
             count += 1;
             if (count === toBeRemoved) {
               this.notificationService.info('Deleted ' + toBeRemoved + ' users.');

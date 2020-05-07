@@ -20,7 +20,7 @@
 
         </div>
     </header>
-    <nav class="subnav">
+    <!-- <nav class="subnav">
         <ul class="nav">
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'advisor'">Advisor</a>
@@ -35,8 +35,33 @@
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'user-management'">User Management</a>
             </li>
         </ul>
-    </nav>
+    </nav> -->
+    
     <div class="content-container">
+        <nav class="sidenav" [clr-nav-level]="1">
+            <section class="sidenav-content">
+    
+                <section class="nav-group">
+                    <label for="tabexample1"><fa-icon class="sidenav-icon" [icon]="faComment"></fa-icon>Advisor</label>
+                    <ul class="nav-list">
+                        <li><a class="nav-link" [routerLink]="'advisor/situation-types'">Situation Types</a></li>
+                        <li><a class="nav-link" [routerLink]="'advisor/situations'">Situations</a></li>
+                        <li><a class="nav-link" [routerLink]="'advisor/situation-message-types'">Situation Message Types</a></li>
+                        <li><a class="nav-link" [routerLink]="'advisor/situation-messages'">Situation Messages</a></li>
+                        <li><a class="nav-link" [routerLink]="'advisor/situation-references'">Situation References</a></li>
+                    </ul>
+                </section>
+                <a [routerLink]="'restrictions'" routerLinkActive="active" class="nav-link">
+                    <fa-icon class="sidenav-icon" [icon]="faListAlt"></fa-icon>Restrictions
+                </a>
+                <a [routerLink]="'subscriptions'" routerLinkActive="active" class="nav-link">
+                    <fa-icon class="sidenav-icon" [icon]="faBookmark"></fa-icon>Subscriptions
+                </a>
+                <a [routerLink]="'user-management'" routerLinkActive="active" class="nav-link">
+                    <fa-icon class="sidenav-icon" [icon]="faUserCircle"></fa-icon>User Management
+                </a>
+            </section>
+        </nav>
         <div class="content-area">
             <router-outlet></router-outlet>
         </div>
