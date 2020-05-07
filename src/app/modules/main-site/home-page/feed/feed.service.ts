@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { SearchInformation, FetchResult } from 'src/app/Restriction';
-import { Restriction } from 'src/app/models/restriction';
-import { Areal } from 'src/app/models/areal.enum';
-import { RestrictionType } from 'src/app/models/restriction-type';
+import {environment} from 'src/environments/environment';
+import {SearchInformation, FetchResult} from 'src/app/Restriction';
+import {Restriction} from 'src/app/models/restriction';
+import {Areal} from 'src/app/models/areal.enum';
+import {RestrictionType} from 'src/app/models/restriction-type';
 
 
 @Injectable({
@@ -18,12 +18,19 @@ export class FeedService {
   private dataSource = new BehaviorSubject<FetchResult>(new FetchResult());
   data = this.dataSource.asObservable();
 
-  bus_count = 0;
-  person_count = 0;
-  restaurant_count = 0;
-  eco_count = 0;
-  shopping_count = 0;
-  close_count = 0;
+  private mapModeSource = new BehaviorSubject<string>('');
+  mapMode = this.mapModeSource.asObservable();
+
+  private hoveredMapModeSource = new BehaviorSubject<string>('');
+  hoverMapMode = this.hoveredMapModeSource.asObservable();
+
+
+  directions_bus_count = 0;
+  people_count = 0;
+  restaurant_menu_count = 0;
+  map_count = 0;
+  shopping_cart_count = 0;
+  cancel_count = 0;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -32,7 +39,16 @@ export class FeedService {
   };
 
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient) {
+  }
+
+  switchMapMode(mapMode: string) {
+    this.mapModeSource.next(mapMode);
+  }
+
+  hoveredMapMode(mapMode: string) {
+    this.hoveredMapModeSource.next(mapMode);
+  }
 
   fetchData(url: string, searchQuery: SearchInformation): any {
 
@@ -48,23 +64,23 @@ export class FeedService {
 
       this.dataSource.next(new FetchResult(data, searchQuery));
 
-      this.bus_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.PUBLIC_TRANSPORTATION).length;
-      this.person_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.EVENTS_AND_ASSEMBLIES).length;
-      this.restaurant_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.GASTRONOMY).length;
-      this.eco_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.PUBLIC_PLACES).length;
-      this.shopping_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.RETAIL).length;
-      this.close_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.CURFEW).length;
+      this.directions_bus_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.PUBLIC_TRANSPORTATION).length;
+      this.people_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.EVENTS_AND_ASSEMBLIES).length;
+      this.restaurant_menu_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.GASTRONOMY).length;
+      this.map_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.PUBLIC_PLACES).length;
+      this.shopping_cart_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.RETAIL).length;
+      this.cancel_count = data.filter(e => RestrictionType[e.restrictionType] === RestrictionType.CURFEW).length;
     });
   }
 
-fetchDataByAreal(areal: Areal, value: string): any {
+  fetchDataByAreal(areal: Areal, value: string): any {
     const url = FeedService.api + areal.toString() + '/' + value;
     // const url = FeedService.api + 'ZIP/36124';
 
     this.fetchData(url, new SearchInformation(areal, value));
   }
 
-fetchDataForAll(): any {
+  fetchDataForAll(): any {
     const url = FeedService.api;
     this.fetchData(url, new SearchInformation(Areal.COUNTRY, 'Deutschland'));
   }
@@ -78,4 +94,7 @@ fetchDataForAll(): any {
   getFeedById(id: string) {
     return this.http.get(FeedService.api + id);
   }
+
+
+
 }

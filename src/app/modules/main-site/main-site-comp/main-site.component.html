@@ -1,4 +1,3 @@
-
 <clr-main-container>
     <clr-header class="header-6">
         <div class="branding">
@@ -23,14 +22,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'feed'">Feed</a>
-            </li>        
+            </li>
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'about'">Über</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'aktuelles'">Aktuelles</a>
             </li>
-        
+
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'kontakt'">Kontakt</a>
             </li>
@@ -43,11 +42,18 @@
         <main class="content-area">
             <router-outlet></router-outlet>
         </main>
-        <div class="clr-footer">
-            <a class="footer-link" routerLinkActive="active" [routerLink]="'impressum'">Impressum</a>
-            <a class="footer-link" href="https://www.instagram.com/darfichraus/"><fa-icon [icon]="faInstagram"></fa-icon>Instagram</a>
-            <a class="footer-link" href="https://twitter.com/darfichraus"><fa-icon [icon]="faTwitter"></fa-icon>Twitter</a>
-            <a class="footer-link" routerLinkActive="active" [routerLink]="'datenschutz'">Datenschutz</a>
+        <div class="clr-footer" fxLayout="row" fxLayoutAlign="space-between center">
+            <div> <a class="footer-link link" routerLinkActive="active" [routerLink]="'impressum'">Impressum</a>
+                <span>|</span>
+                <a class="footer-link link" routerLinkActive="active" [routerLink]="'datenschutz'">Datenschutz</a></div>
+            <div>
+                <a class="footer-link" href="https://www.instagram.com/darfichraus?/">
+                    <fa-icon class="instagram" [icon]="faInstagram"></fa-icon>
+                </a>
+                <a class="footer-link" href="https://twitter.com/darfichraus">
+                    <fa-icon class="twitter" [icon]="faTwitter"></fa-icon>
+                </a>
+            </div>
         </div>
     </div>
 </clr-main-container>

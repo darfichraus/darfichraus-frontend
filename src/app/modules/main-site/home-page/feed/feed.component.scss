@@ -30,8 +30,10 @@
 }
 
 .feed-list {
-  height: calc(100% - 45px);
-  overflow-y: scroll;
+  height: calc(100% - 220px);
+  //height: 100%;
+  position: relative;
+  overflow-y: auto;
 
 }
 
@@ -47,9 +49,45 @@ a {
 }
 
 a:hover {
-  
+
   color:#808080;
 }
 
 
+
+
+.my-icon {
+  margin: 10px;
+  color: #a0a0a0;
+  transition: 0.2s;
+}
+
+mat-icon {
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.my-icon.directions_bus:hover, .directions_bus.selected {
+  color: #3A49CB;
+}
+
+.my-icon.people:hover, .people.selected{
+  color: #6E5BE1;
+}
+
+.my-icon.restaurant_menu:hover, .restaurant_menu.selected {
+  color: #2584B4;
+}
+
+.my-icon.map:hover, .map.selected {
+  color: #268478;
+}
+
+.my-icon.shopping_cart:hover, .shopping_cart.selected {
+  color: #B4C03F;
+}
+
+.my-icon.cancel:hover, .cancel.selected {
+  color: #FAC401;
+}
 
