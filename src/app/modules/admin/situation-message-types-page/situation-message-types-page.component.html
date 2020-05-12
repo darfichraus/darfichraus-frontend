@@ -1,1 +1,41 @@
-<p>situation-message-types-page works!</p>
+<dir-admin-header>Situation Message Types</dir-admin-header>
+
+
+    <clr-datagrid [(clrDgSelected)]="selected">
+        <clr-dg-placeholder>No situation message types found.</clr-dg-placeholder>
+    
+        <clr-dg-action-bar>
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Add', undefined)" *ngIf="selected.length == 0"><clr-icon shape="plus"></clr-icon> Add Situation Message Type</button>
+                <button type="button" class="btn btn-sm btn-secondary" (click)="onDeleteSelection()" *ngIf="selected.length > 0"><clr-icon shape="trash"></clr-icon> Delete</button>
+                <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Edit', this.selected[0])" *ngIf="selected.length == 1"><clr-icon shape="pencil"></clr-icon> Edit</button>
+                <button type="button" class="btn btn-sm btn-secondary" (click)="this.selected = []" *ngIf="selected.length > 0"><clr-icon shape="times"></clr-icon> Deselect all</button>
+            </div>
+        </clr-dg-action-bar>
+       
+    
+        <clr-dg-column>Id</clr-dg-column>
+        <clr-dg-column>Modified</clr-dg-column>
+        <clr-dg-column>Name</clr-dg-column>
+        <clr-dg-column>Media</clr-dg-column>
+        <clr-dg-column>Severity</clr-dg-column>
+        <clr-dg-column>Color </clr-dg-column>
+    
+    
+        <clr-dg-row *clrDgItems="let st of filteredSituationMessageTypes" [clrDgItem]="st">
+            <clr-dg-cell>{{st.id}}</clr-dg-cell>
+            <clr-dg-cell>{{st.modified | date: 'dd/MM/yyyy' }}</clr-dg-cell>
+            <clr-dg-cell>{{st.name}}</clr-dg-cell>
+            <clr-dg-cell>{{st.media}}</clr-dg-cell>
+            <clr-dg-cell>{{st.severity}}</clr-dg-cell>
+            <clr-dg-cell><span class="color-sec" [style.background-color]="st.color"></span>{{st.color}}</clr-dg-cell>
+        </clr-dg-row>
+    
+        <clr-dg-footer>
+            <clr-dg-pagination #pagination [clrDgPageSize]="10">
+                <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Items per page</clr-dg-page-size>
+                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                of {{pagination.totalItems}} situation message types
+            </clr-dg-pagination>
+        </clr-dg-footer>
+    </clr-datagrid>

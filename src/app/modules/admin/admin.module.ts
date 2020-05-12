@@ -37,6 +37,14 @@ import { SituationMessageTypesPageComponent } from './situation-message-types-pa
 import { SituationMessagesPageComponent } from './situation-messages-page/situation-messages-page.component';
 import { SituationReferencesPageComponent } from './situation-references-page/situation-references-page.component';
 import { SituationTypeDialogComponent } from './situation-types-page/situation-type-dialog/situation-type-dialog.component';
+import { SituationDialogComponent } from './situations-page/situation-dialog/situation-dialog.component';
+import { DirPickerModule } from '../core/components/dir-picker/dir-picker.module';
+import { SituationCategoriesPageComponent } from './situation-categories-page/situation-categories-page.component';
+import { SituationCategoryDialogComponent } from './situation-categories-page/situation-category-dialog/situation-category-dialog.component';
+import { DirColorPickerModule } from '../core/components/color-picker/dir-color-picker.module';
+import { SituationReferenceDialogComponent } from './situation-references-page/situation-type-dialog/situation-reference-dialog.component';
+import { AssetsPageComponent } from './assets-page/assets-page.component';
+import { SituationMessageTypeDialogComponent } from './situation-message-types-page/situation-message-type-dialog/situation-message-type-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +57,7 @@ import { SituationTypeDialogComponent } from './situation-types-page/situation-t
     MeldungReactiveComponent,
     AdvisorAdminPageComponent,
     AdvisorModalComponent,
+    AssetsPageComponent,
     EditorComponent,
     SituationTypesPageComponent,
     SituationsPageComponent,
@@ -56,6 +65,11 @@ import { SituationTypeDialogComponent } from './situation-types-page/situation-t
     SituationMessagesPageComponent,
     SituationReferencesPageComponent,
     SituationTypeDialogComponent,
+    SituationDialogComponent,
+    SituationCategoriesPageComponent,
+    SituationCategoryDialogComponent,
+    SituationReferenceDialogComponent,
+    SituationMessageTypeDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -83,6 +97,8 @@ import { SituationTypeDialogComponent } from './situation-types-page/situation-t
     MatToolbarModule,
     MatSlideToggleModule,
     FontAwesomeModule,
+    DirPickerModule,
+    DirColorPickerModule
   ],
 })
 export class AdminModule {}

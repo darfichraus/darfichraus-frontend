@@ -1,0 +1,70 @@
+<modal-wrapper title="{{data.mode}} Situation Type">
+
+    <div d-body>
+
+        <form [formGroup]="myForm">
+
+
+            <mat-form-field class="max-width" appearance="standard">
+              <mat-icon matPrefix class="form-prefix">label</mat-icon>
+              <mat-label>Name</mat-label>
+              <input required type="text" formControlName="name" matInput placeholder="Situation 1 ...">
+              <mat-error *ngIf="f.name.touched && f.name.errors?.required">This field is required.</mat-error>
+            </mat-form-field>
+
+            <dir-picker formControlName="situationTypeId" [label]="'Situation Type ID'" [items]="mySituationTypes" [selector]="'name'"
+            icon="chevron_right">
+            </dir-picker>
+
+            <mat-form-field appearance="standard">
+              <mat-icon matPrefix class="form-prefix">date_range</mat-icon>
+              <mat-label>Anfang</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="startDate" disabled
+                  [max]="this.f.endDate.value">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field  appearance="standard">
+            <mat-icon matPrefix class="form-prefix">date_range</mat-icon>
+              <mat-label>Ende</mat-label>
+              <input matInput [matDatepicker]="picker2" formControlName="endDate" disabled
+                  [min]="this.f.startDate.value">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+          </mat-form-field>
+
+
+
+              <mat-form-field class="max-width" appearance="standard">
+                <mat-icon matPrefix class="form-prefix">feedback</mat-icon>
+                <mat-label>Severity</mat-label>
+                <mat-select formControlName="severity" required>
+                  <mat-option *ngFor="let sev of severities" [value]="sev">{{sev}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="f.severity.touched && f.severity.errors?.required">This field is required.</mat-error>
+              </mat-form-field>
+      
+
+            <mat-form-field class="max-width" appearance="standard">
+              <mat-icon matPrefix class="form-prefix">check_circle</mat-icon>
+              <mat-label>Active</mat-label>
+              <mat-select formControlName="active" required>
+                <mat-option [value]="true">true</mat-option>
+                <mat-option [value]="false">false</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.active.touched && f.active.errors?.required">This field is required.</mat-error>
+            </mat-form-field>
+   
+      
+          </form>
+
+    </div>
+
+
+  <div d-actions>
+    <modal-save-button [disabled]="!myForm.valid" (click)="onSave()"></modal-save-button>
+    <modal-cancel-button (click)="onCancel()"></modal-cancel-button>
+  </div>
+
+</modal-wrapper>

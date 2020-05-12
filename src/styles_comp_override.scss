@@ -3,6 +3,11 @@ mat-icon.form-prefix, mat-label.form-prefix {
   margin-right: 10px;
 }
 
+mat-icon.small {
+  height: 10px;
+  font-size: 120%;
+}
+
 mat-form-field {
   width: 100%;
 }

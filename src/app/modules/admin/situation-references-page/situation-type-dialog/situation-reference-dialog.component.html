@@ -1,0 +1,62 @@
+<modal-wrapper title="{{data.mode}} Situation Reference">
+
+    <div d-body>
+
+        <form [formGroup]="myForm">
+
+
+            <mat-form-field class="max-width" appearance="standard">
+              <mat-icon matPrefix class="form-prefix">label</mat-icon>
+              <mat-label>Name</mat-label>
+              <input required type="text" formControlName="title" matInput placeholder="Situation reference 1 ...">
+              <mat-error *ngIf="f.title.touched && f.title.errors?.required">This field is required.</mat-error>
+            </mat-form-field>
+
+
+
+              <mat-form-field class="max-width" appearance="standard">
+                <mat-icon matPrefix class="form-prefix">local_offer</mat-icon>
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="type" required>
+                  <mat-select-trigger>
+                    <mat-icon class="form-prefix small" color="primary" style="padding-top: 5px;">{{typeToIcon(this.f.type.value)}}</mat-icon>{{this.f.type.value}}
+                  </mat-select-trigger>
+                  <mat-option *ngFor="let ty of types" [value]="ty">
+                    <mat-icon matPrefix class="form-prefix">{{typeToIcon(ty)}}</mat-icon>{{ty}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="f.type.touched && f.type.errors?.required">This field is required.</mat-error>
+              </mat-form-field>
+      
+
+         <mat-form-field class="max-width" appearance="standard">
+              <mat-icon matPrefix class="form-prefix">class</mat-icon>
+              <mat-label>Classifier</mat-label>
+              <mat-select formControlName="classifier" required>
+                <mat-select-trigger>
+                  <mat-icon class="form-prefix small" color="primary" style="padding-top: 5px;">{{classifierToIcon(this.f.classifier.value)}}</mat-icon>{{this.f.classifier.value}}
+                </mat-select-trigger>
+                <mat-option *ngFor="let class of classifiers" [value]="class">
+                  <mat-icon class="form-prefix">{{classifierToIcon(class)}}</mat-icon>{{class}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.classifier.touched && f.classifier.errors?.required">This field is required.</mat-error>
+            </mat-form-field>
+
+   
+            <mat-form-field class="max-width" appearance="standard">
+              <mat-icon matPrefix class="form-prefix">insert_link</mat-icon>
+              <mat-label>Source</mat-label>
+              <input required type="text" formControlName="source" matInput placeholder="Situation description ...">
+              <mat-error *ngIf="f.source.touched && f.source.errors?.required">This field is required.</mat-error>
+            </mat-form-field>
+      
+          </form>
+
+    </div>
+
+
+  <div d-actions>
+    <modal-save-button [disabled]="!myForm.valid" (click)="onSave()"></modal-save-button>
+    <modal-cancel-button (click)="onCancel()"></modal-cancel-button>
+  </div>
+
+</modal-wrapper>

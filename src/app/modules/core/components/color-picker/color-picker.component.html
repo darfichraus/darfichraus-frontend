@@ -1,0 +1,16 @@
+<span #menuTrigger [matMenuTriggerFor]="menu" class="color-picker-div">
+  
+  <div *ngIf="value || focused" class="colorPreview" [style.background-color]="hexColor"></div>
+  <mat-label class="color-label">{{this.hexColor}}</mat-label>
+</span>
+
+<mat-icon class="reset-button" *ngIf="value !== ''" (click)="onReset()">close</mat-icon>
+
+
+<mat-menu #menu="matMenu" (click)="$event.stopPropagation()" xPosition="after" (closed)="closeMenuEvent($event)">
+  <div (click)="$event.stopPropagation()">
+    <color-chrome [color]="hexColor" disableAlpha="true"
+      (onChangeComplete)="onColorChange($event.color.hex, $event.color.rgb)">
+    </color-chrome>   
+  </div>
+</mat-menu>

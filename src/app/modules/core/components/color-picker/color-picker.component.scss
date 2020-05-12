@@ -1,0 +1,33 @@
+
+.colorPreview {
+  float: left;
+  height: 13px;
+  width: 13px;
+  border: 1px solid rgba(0, 0, 0, 0.31);
+  border-radius: 50%;
+}
+
+.mat-menu-content {
+  padding: 0px !important;
+}
+
+.color-label {
+  margin-left: 10px;
+  vertical-align: bottom;
+}
+
+.color-picker-div {
+  cursor: pointer;
+}
+
+.reset-button {
+  float: right;
+  font-size: 120%;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.chrome-picker {
+  box-shadow: none !important;
+}

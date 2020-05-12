@@ -38,6 +38,7 @@
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
     "ng-recaptcha": "^5.0.0",
+    "ngx-color": "^5.1.2",
     "ngx-device-detector": "^1.4.1",
     "ngx-mat-select-search": "^2.1.2",
     "ngx-quill": "^9.1.1",

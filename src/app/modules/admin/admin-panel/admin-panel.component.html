@@ -44,13 +44,17 @@
                 <section class="nav-group">
                     <label for="tabexample1"><fa-icon class="sidenav-icon" [icon]="faComment"></fa-icon>Advisor</label>
                     <ul class="nav-list">
-                        <li><a class="nav-link" [routerLink]="'advisor/situation-types'">Situation Types</a></li>
-                        <li><a class="nav-link" [routerLink]="'advisor/situations'">Situations</a></li>
-                        <li><a class="nav-link" [routerLink]="'advisor/situation-message-types'">Situation Message Types</a></li>
-                        <li><a class="nav-link" [routerLink]="'advisor/situation-messages'">Situation Messages</a></li>
-                        <li><a class="nav-link" [routerLink]="'advisor/situation-references'">Situation References</a></li>
+                        <li><a class="nav-link" routerLinkActive="active" [routerLink]="'advisor/situation-types'">Situation Types</a></li>
+                        <li><a class="nav-link" routerLinkActive="active" [routerLink]="'advisor/situations'">Situations</a></li>
+                        <li><a class="nav-link" routerLinkActive="active" [routerLink]="'advisor/situation-message-types'">Situation Message Types</a></li>
+                        <li><a class="nav-link" routerLinkActive="active" [routerLink]="'advisor/situation-messages'">Situation Messages</a></li>
+                        <li><a class="nav-link" routerLinkActive="active" [routerLink]="'advisor/situation-references'">Situation References</a></li>
+                        <li><a class="nav-link" routerLinkActive="active" [routerLink]="'advisor/situation-categories'">Situation Categories</a></li>
                     </ul>
                 </section>
+                <a [routerLink]="'assets'" routerLinkActive="active" class="nav-link">
+                    <fa-icon class="sidenav-icon" [icon]="faFileImage"></fa-icon>Assets
+                </a>
                 <a [routerLink]="'restrictions'" routerLinkActive="active" class="nav-link">
                     <fa-icon class="sidenav-icon" [icon]="faListAlt"></fa-icon>Restrictions
                 </a>
@@ -60,6 +64,7 @@
                 <a [routerLink]="'user-management'" routerLinkActive="active" class="nav-link">
                     <fa-icon class="sidenav-icon" [icon]="faUserCircle"></fa-icon>User Management
                 </a>
+                
             </section>
         </nav>
         <div class="content-area">

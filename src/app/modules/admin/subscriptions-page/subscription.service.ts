@@ -8,7 +8,7 @@ import {environment} from '../../../../environments/environment';
 })
 export class SubscriptionService {
 
-  static readonly SUBS_URL = environment.apiUrl + 'subscriptions/';
+  static readonly SUBS_URL = environment.apiUrl + 'admin/subscriptions/';
   
   constructor(private http: HttpClient) { }
 

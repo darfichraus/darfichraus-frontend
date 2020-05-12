@@ -1,13 +1,7 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   forwardRef,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -23,11 +17,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-/**
- * Editor implements ControlValueAccessor interface functions to be used in Form via formcontrolname or ngModel. Uses ngx-quill module
- */
-export class EditorComponent implements OnInit, ControlValueAccessor {
-  // settings for quill-editor. Each array item is a group of settings
+
+
+export class EditorComponent implements  ControlValueAccessor {
+
   editorConfig: any = {
     toolbar: [
       ['bold', 'italic', 'underline'],
@@ -83,66 +76,31 @@ export class EditorComponent implements OnInit, ControlValueAccessor {
     height: '200px',
   };
 
-  // data contains string being edited in quill-editor
   data: string;
 
   constructor(public elementRef: ElementRef) {}
+  
 
-  /**
-   * ngOnInit method of class
-   */
-  ngOnInit(): void {}
-
-  /**
-   * this function is necessary because 'registerOnChange' does not emit on Quill Editor object.
-   * Method 'OnChange' is therefore called here
-   *
-   * @param event_object - event-object with editor object, html-text and 'normal'-text
-   */
   onContentChanged({ quill, html, text }: any): void {
     this.onChange(html);
   }
 
-  /**
-   * call-back functino when registerOnChange is called
-   */
+
   onChange(delta: any): void {
-    // console.log('onChange()');
   }
 
-  /**
-   * call-back function when registerOnTouched is called
-   */
   onTouched = () => {
     console.log('onTouched()');
   }
 
-  /**
-   * function from ControlValueAccessor. Updates internal model when data input changes
-   * From Angular Docs: Writes a new value to the element.
-   *
-   * @param delta The new value for the element
-   */
   writeValue(delta: any): void {
     this.data = delta;
   }
 
-  /**
-   * Function from Interface.
-   * From Angular Docs: Registers a callback function that is called when the control's value changes in the UI.
-   *
-   * @param fn The callback function to register
-   */
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  /**
-   * Function from interface.
-   * From Angular docs: Registers a callback function which is called by the forms API on initialization to update the form model on blur.
-   *
-   * @param fn - The callback function to register
-   */
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }

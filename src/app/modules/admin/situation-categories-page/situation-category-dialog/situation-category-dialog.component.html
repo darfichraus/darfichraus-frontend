@@ -1,0 +1,63 @@
+<modal-wrapper title="{{data.mode}} Situation Category">
+
+    <div d-body>
+
+        <form [formGroup]="myForm">
+
+
+            <mat-form-field class="max-width" appearance="standard">
+              <mat-icon matPrefix class="form-prefix">label</mat-icon>
+              <mat-label>Name</mat-label>
+              <input required type="text" formControlName="name" matInput placeholder="Situation 1 ...">
+              <mat-error *ngIf="f.name.touched && f.name.errors?.required">This field is required.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="max-width" appearance="standard">
+                <mat-icon matPrefix class="form-prefix">subject</mat-icon>
+                <mat-label>Info</mat-label>
+                <input required type="text" formControlName="info" matInput placeholder="Situation category info ...">
+                <mat-error *ngIf="f.info.touched && f.info.errors?.required">This field is required.</mat-error>
+              </mat-form-field>
+
+   
+
+      
+              <mat-form-field class="mw">
+                <mat-icon matPrefix class="form-prefix">colorize</mat-icon>
+                <mat-label>Color</mat-label>
+                <dir-color-picker formControlName="color"></dir-color-picker>
+            </mat-form-field>
+
+            <mat-form-field class="max-width" appearance="standard">
+              <mat-icon matPrefix class="form-prefix">check_circle</mat-icon>
+              <mat-label>Active</mat-label>
+              <mat-select formControlName="active" required>
+                <mat-option [value]="true">true</mat-option>
+                <mat-option [value]="false">false</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.active.touched && f.active.errors?.required">This field is required.</mat-error>
+            </mat-form-field>
+
+
+         <mat-form-field class="max-width" appearance="standard">
+              <mat-icon matPrefix class="form-prefix">image</mat-icon>
+              <mat-label>Icon</mat-label>
+              <mat-select formControlName="icon" required>
+                <mat-option *ngFor="let ic of icons" [value]="ic">{{ic}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.icon.touched && f.icon.errors?.required">This field is required.</mat-error>
+            </mat-form-field>
+
+   
+      
+          </form>
+
+    </div>
+
+
+  <div d-actions>
+    <modal-save-button [disabled]="!myForm.valid" (click)="onSave()"></modal-save-button>
+    <modal-cancel-button (click)="onCancel()"></modal-cancel-button>
+  </div>
+
+</modal-wrapper>

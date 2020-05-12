@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/modules/core/services/auth.service';
 
-import { faUserCircle, faBookmark, faListAlt, faComment } from '@fortawesome/free-regular-svg-icons';
+import { faUserCircle, faBookmark, faListAlt, faComment, faFileImage } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-admin-panel',
@@ -14,7 +14,7 @@ export class AdminPanelComponent implements OnInit {
   faBookmark = faBookmark;
   faListAlt = faListAlt;
   faComment = faComment;
-
+  faFileImage = faFileImage;
 
   constructor(public authService: AuthService) { }
 
