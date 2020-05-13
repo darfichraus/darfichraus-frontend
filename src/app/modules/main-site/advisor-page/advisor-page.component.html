@@ -85,6 +85,28 @@
                 <li><strong>Bitte</strong> Kontakt zu anderen Personen minimieren.</li>
               </ul>
             </ng-template>
+
+            <ng-template
+              [ngIf]="translateCases7ToSeverity(healthInformation?.healthInformation[0]?.cases7Per100k) == 'high'">
+              <clr-icon shape="warning"
+                        class="{{translateCases7ToColor(healthInformation?.healthInformation[0]?.cases7Per100k)}} is-solid"
+                        size="36"></clr-icon>
+              <strong> Schwellenwert überschritten. Höchste Vorsicht geboten!</strong>
+              <br>
+              <br>
+              <ul class="list">
+                <li>Maßnahmen werden zeitnah erfolgen.</li>
+                <li><strong>Bitte</strong> dringend den Kontakt zu anderen Personen meiden, das heißt: </li>
+                  <ul class="list">
+                    <li>öffentliche Plätze</li>
+                    <li>Museen, Theater</li>
+                    <li>jegliche Anlagen für Freizeitaktivität</li>
+                  </ul>
+                meiden.
+              </ul>
+              <br>
+              Des Weiteren bitte auch den erlaubten Zusammenschluss zweier Haushalte reduzieren und ggf. vermeiden.
+            </ng-template>
           </div>
 
           <button class="btn btn-link" (click)="showMore()">weitere Informationen</button>

@@ -72,7 +72,7 @@ export class SituationMessageTypesPageComponent implements OnInit {
           this.situationMessageTypes = [...this.situationMessageTypes, result];
           this.filteredSituationMessageTypes = [...this.filteredSituationMessageTypes, result];
         } else if (mode === 'Edit') {
-          
+
           const index1: number = this.situationMessageTypes.findIndex((e) => e.id === result.id);
           console.log("index");
           console.log(index1);
@@ -92,7 +92,7 @@ export class SituationMessageTypesPageComponent implements OnInit {
           this.situationMessageTypes = st;
           fSt[index2] = result;
           this.filteredSituationMessageTypes = fSt;
-          
+
         }
     }
 
@@ -102,13 +102,12 @@ export class SituationMessageTypesPageComponent implements OnInit {
   }
 
   onDeleteSelection() {
-    
+
     const toBeRemoved = this.selected.length;
 
     const dialogRef: any = this.modalService.confirmModal(
       'Do you want to delete ' + toBeRemoved + ' users?'
     );
-
 
     dialogRef.afterClosed().subscribe((val) => {
       console.log(val);
@@ -126,7 +125,7 @@ export class SituationMessageTypesPageComponent implements OnInit {
         });
       }
     });
-    
+
   }
 
 
