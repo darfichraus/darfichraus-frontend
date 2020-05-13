@@ -1,3 +1,137 @@
-<dir-header>Aktuelle Meldungen</dir-header>
+<dir-header>Wie ist's bei mir?</dir-header>
 
-<dir-content>...</dir-content>
+<dir-content>
+
+  <ng-template [ngIf]="showInitScreen" [ngIfElse]="showFacts">
+    <p>Wir möchten hier einen aktuellen Überblick über die Situation mit Corona "vor der Haustür" geben.</p>
+    <p>Damit wir das zielgerichtet können, fragen wir nach der Postleitzahl. Wir führen mit dieser eine Abfrage an unser
+      System aus,
+      ohne Daten zu speichern - weder personenbezogene, noch anonymisierte.</p>
+    <p>Die Postleitzahl wird auf dem Endgerät vorgehalten werden, damit bei der täglichen Wiederkehr sofort die neusten
+      Informationen bereitstehen.</p>
+
+
+    <form clrForm>
+      <input clrInput placeholder="Postleitzahl" name="name" [(ngModel)]="inputPlz" (ngModelChange)="searchPlz()"/>
+    </form>
+
+  </ng-template>
+
+</dir-content>
+
+<div class="modal" *ngIf="showResult">
+  <div class="modal-dialog" role="dialog" aria-hidden="false">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Diese Standorte wurden gefunden</h3>
+      </div>
+      <div class="modal-body">
+        <ul *ngFor="let city of cities">
+          <li><strong>{{city.city}}</strong>, {{city.county}}</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" type="button" (click)="showResult = false">ändern</button>
+        <button class="btn btn-primary" type="button" (click)="submitAndSave()">übernehmen</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop" aria-hidden="true" *ngIf="showResult"></div>
+
+<ng-template #showFacts>
+
+
+  <div class="clr-row">
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <clr-icon shape="home" class="is-solid"></clr-icon>
+          {{healthInformation?.location?.city}}
+          <button class="btn btn-link" (click)="changeLocation()">ändern</button>
+        </div>
+        <div class="card-block">
+          <div class="card-title">
+            {{healthInformation?.location?.county}}
+          </div>
+          <div class="card-text">
+            Die aktuell wichtigste Zahl ist die Anzahl der Neuinfektionen je 100.000 Einwohner.
+            <br/>Diese liegt bei
+            <strong>{{healthInformation?.healthInformation[0]?.cases7Per100k | number: '1.0-2'}}</strong>.
+            <br><br>
+            <ng-template
+              [ngIf]="translateCases7ToSeverity(healthInformation?.healthInformation[0]?.cases7Per100k) == 'low'">
+              <clr-icon shape="info-standard"
+                        class="{{translateCases7ToColor(healthInformation?.healthInformation[0]?.cases7Per100k)}} is-solid"
+                        size="36"></clr-icon>
+              <strong> Wert im Normbereich, weiter so!</strong>
+              <br>
+              <br>
+              <ul class="list">
+                <li><strong>Bitte</strong> weiterhin maßvoll verhalten</li>
+              </ul>
+            </ng-template>
+
+            <ng-template
+              [ngIf]="translateCases7ToSeverity(healthInformation?.healthInformation[0]?.cases7Per100k) == 'mid'">
+              <clr-icon shape="eye"
+                        class="{{translateCases7ToColor(healthInformation?.healthInformation[0]?.cases7Per100k)}} is-solid"
+                        size="36"></clr-icon>
+              <strong> Nahe dem Schwellenwert</strong>
+              <br>
+              <br>
+              <ul class="list">
+                <li>Es ist mit Maßnahmen zu rechnen.</li>
+                <li><strong>Bitte</strong> Kontakt zu anderen Personen minimieren.</li>
+              </ul>
+            </ng-template>
+          </div>
+
+          <button class="btn btn-link" (click)="showMore()">weitere Informationen</button>
+          <div *ngIf="doShowMore">
+              <clr-icon shape="exclamation-circle"></clr-icon>
+              Informationen sind landkreis-bezogen.
+            <br><br>
+            <strong>{{healthInformation?.location?.county}}</strong>
+            <table class="table table-vertical">
+              <tbody>
+              <tr>
+                <th>Einwohner</th>
+                <td>{{healthInformation?.healthInformation[0]?.ewz | number}}</td>
+              </tr>
+              <tr>
+                <th>Fälle</th>
+                <td>{{healthInformation?.healthInformation[0]?.cases | number}}</td>
+              </tr>
+              <tr>
+                <th>Tote</th>
+                <td>{{healthInformation?.healthInformation[0]?.deaths | number}}</td>
+              </tr>
+              <tr>
+                <th>Todesrate</th>
+                <td>{{healthInformation?.healthInformation[0]?.deathRate | number}}</td>
+              </tr>
+              <tr>
+                <th>Fälle pro 100.000 Einwohner</th>
+                <td>{{healthInformation?.healthInformation[0]?.casesPer100k | number}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+        <div class="card-footer">
+<!--          <button class="btn btn-sm btn-link">Footer Action 1</button>-->
+<!--          <button class="btn btn-sm btn-link">Footer Action 2</button>-->
+          Stand: {{healthInformation?.healthInformation[0]?.lastUpdate}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-template>
+
+<ng-template #warnBy7mid>
+
+</ng-template>

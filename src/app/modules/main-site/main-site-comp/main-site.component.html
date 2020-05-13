@@ -3,12 +3,12 @@
         <div class="branding">
             <a [routerLink]="'home'" class="nav-link">
                 <img class="dir-logo" src="../../../../assets/logo_min.svg">
-                <span class="title">Darf ich raus?</span>
+                <span class="title">darfichraus</span>
             </a>
         </div>
         <div class="header-actions">
             <img src="../../../../assets/logo_se_white.svg" style="width: 150px;">
-            <a routerLink="../login" class="nav-link nav-text">
+            <a routerLink="../login" class="nav-link nav-text" *ngIf="!isMobile()">
                 Anmelden
             </a>
 
@@ -20,7 +20,7 @@
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'home'">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="!isMobile()">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'feed'">Feed</a>
             </li>
             <li class="nav-item">
@@ -36,7 +36,7 @@
         </ul>
     </nav>
 
-   
+
 
     <div class="content-container">
         <main class="content-area">
@@ -60,6 +60,6 @@
 
 
 
-<!-- 
+<!--
 </div>
     -->

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import {APP_INITIALIZER, LOCALE_ID, NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,10 +13,14 @@ import { AuthGuard } from './modules/core/guards/auth.guard';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './modules/material.module';
 import { QuillModule } from 'ngx-quill';
+import {registerLocaleData} from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 
 export function restrictionProviderFactory(provider: RestrictionRepository) {
   return () => provider.preloadData();
 }
+
+registerLocaleData(localeDe, 'de');
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,6 +44,9 @@ export function restrictionProviderFactory(provider: RestrictionRepository) {
       multi: true,
     },
     { provide: MAT_DATE_LOCALE, useValue: 'de' },
+    {
+      provide: LOCALE_ID, useValue: 'de-de'
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

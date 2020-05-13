@@ -38,7 +38,7 @@ export class SituationMessageTypeDialogComponent implements OnInit {
 
   onSave() {
     const smt: SituationMessageType = this.myForm.value as SituationMessageType;
-    if (this.data.mode == 'Add') {
+    if (this.data.mode === 'Add') {
       this.situationMessageTypeService.addSituationMessageType(smt).subscribe((val) => {
         console.log('succ. added st');
         console.log(val);
@@ -46,7 +46,7 @@ export class SituationMessageTypeDialogComponent implements OnInit {
       });
     }
 
-    if (this.data.mode == 'Edit') {
+    if (this.data.mode === 'Edit') {
       smt.id = this.data.smt.id;
       this.situationMessageTypeService.updateSituationMessageType(smt).subscribe((val) => {
         console.log('succ. updated st');
