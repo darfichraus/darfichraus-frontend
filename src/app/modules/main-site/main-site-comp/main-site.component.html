@@ -18,20 +18,29 @@
     <nav class="subnav" [clr-nav-level]="1">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" [routerLink]="'home'">Home</a>
+                <a class="nav-link" routerLinkActive="active" [routerLink]="'overview'">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="'advisor'">Advisor</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="'lage'">Lage</a>
             </li>
             <li class="nav-item" *ngIf="!isMobile()">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'feed'">Feed</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'about'">Über</a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'aktuelles'">Aktuelles</a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="'kontakt'">Kontakt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://darfichraus.de" target="_blank">Projektseite</a>
             </li>
         </ul>
     </nav>

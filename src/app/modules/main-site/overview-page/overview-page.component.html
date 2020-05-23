@@ -1,0 +1,29 @@
+<dir-header>
+    Übersicht
+</dir-header>
+
+<dir-content>
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+        <overview-cell fxFlex="30" fxFlex.xs="100" [routerLink]="'../advisor'">
+            <span o-title>Advisor</span>
+            <span o-body>Aktuelle Meldungen der Bundesregierung, Bundesländer und der Kommunen.</span>
+            <img o-image src="../../../../assets/information.svg">
+        </overview-cell>
+
+        <overview-cell fxFlex="30" fxFlex.xs="100" [routerLink]="'../lage'">
+            <span o-title>Lage</span>
+            <span o-body>Wie sieht die aktuelle Infektionslage bei mir und der Umgebung aus?</span>
+            <img o-image src="../../../../assets/location.svg">
+        </overview-cell>
+
+        <overview-cell fxFlex="30" fxFlex.xs="100" [routerLink]="'../feed'">
+            <span o-title>Feed</span>
+            <span o-body>Aktuelle und vergangene Nachrichten standortbasiert durchsuchen und filtern.</span>
+            <img o-image src="../../../../assets/feed.svg">
+        </overview-cell>
+
+    </div>
+
+</dir-content>
