@@ -1,12 +1,48 @@
-<form class="clr-form">
-  <div class="clr-form-control">
-    <label for="example" class="clr-control-label">Label</label>
-    <div class="clr-control-container">
-      <div class="clr-input-wrapper">
-        <input type="text" id="example" placeholder="Example Input" class="clr-input">
-        <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
-      </div>
-      <span class="clr-subtext">Helper Text</span>
-    </div>
-  </div>
-</form>
+<dir-admin-header>Situation Messages</dir-admin-header>
+
+
+    <clr-datagrid [(clrDgSelected)]="selected">
+        <clr-dg-placeholder>No situation message found.</clr-dg-placeholder>
+    
+        <clr-dg-action-bar>
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Add', undefined)" *ngIf="selected.length == 0"><clr-icon shape="plus"></clr-icon> Add Situation Message</button>
+                <button type="button" class="btn btn-sm btn-secondary" (click)="onDeleteSelection()" *ngIf="selected.length > 0"><clr-icon shape="trash"></clr-icon> Delete</button>
+                <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Edit', this.selected[0])" *ngIf="selected.length == 1"><clr-icon shape="pencil"></clr-icon> Edit</button>
+                <button type="button" class="btn btn-sm btn-secondary" (click)="this.selected = []" *ngIf="selected.length > 0"><clr-icon shape="times"></clr-icon> Deselect all</button>
+            </div>
+        </clr-dg-action-bar>
+       
+    
+        <clr-dg-column>Id</clr-dg-column>
+        <clr-dg-column>Modified</clr-dg-column>
+        <clr-dg-column>SituationId</clr-dg-column>
+        <clr-dg-column>MessageTypeId</clr-dg-column>
+        <clr-dg-column>Title</clr-dg-column>
+        <clr-dg-column>Message</clr-dg-column>
+        <clr-dg-column>Excerpt</clr-dg-column>
+        <clr-dg-column>Icon</clr-dg-column>
+        <clr-dg-column>Severity</clr-dg-column>
+        <clr-dg-column>Documents</clr-dg-column>
+        <clr-dg-column>AreaOfEffect</clr-dg-column>
+        <clr-dg-column>AffectedCategories</clr-dg-column>
+        <clr-dg-column>Status</clr-dg-column>
+        <clr-dg-column>Version</clr-dg-column>
+    
+    
+        <clr-dg-row *clrDgItems="let st of filteredSituationMessages" [clrDgItem]="st">
+            <clr-dg-cell>{{st.id}}</clr-dg-cell>
+            <clr-dg-cell>{{st.modified | date: 'dd/MM/yyyy' }}</clr-dg-cell>
+            <clr-dg-cell>{{st.name}}</clr-dg-cell>
+            <clr-dg-cell>{{st.media}}</clr-dg-cell>
+            <clr-dg-cell>{{st.severity}}</clr-dg-cell>
+        </clr-dg-row>
+    
+        <clr-dg-footer>
+            <clr-dg-pagination #pagination [clrDgPageSize]="10">
+                <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Items per page</clr-dg-page-size>
+                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                of {{pagination.totalItems}} situation messages
+            </clr-dg-pagination>
+        </clr-dg-footer>
+    </clr-datagrid>

@@ -45,6 +45,8 @@ import { DirColorPickerModule } from '../core/components/color-picker/dir-color-
 import { SituationReferenceDialogComponent } from './situation-references-page/situation-type-dialog/situation-reference-dialog.component';
 import { AssetsPageComponent } from './assets-page/assets-page.component';
 import { SituationMessageTypeDialogComponent } from './situation-message-types-page/situation-message-type-dialog/situation-message-type-dialog.component';
+import { FileUploadComponent } from './assets-page/file-upload/file-upload.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { SituationMessageTypeDialogComponent } from './situation-message-types-p
     AdvisorModalComponent,
     AssetsPageComponent,
     EditorComponent,
+    FileUploadComponent,
     SituationTypesPageComponent,
     SituationsPageComponent,
     SituationMessageTypesPageComponent,
@@ -88,6 +91,7 @@ import { SituationMessageTypeDialogComponent } from './situation-message-types-p
     MatOptionModule,
     MatSelectModule,
     MatInputModule,
+    MatListModule,
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,

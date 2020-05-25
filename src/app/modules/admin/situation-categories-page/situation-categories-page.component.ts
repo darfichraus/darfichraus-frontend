@@ -77,16 +77,11 @@ export class SituationCategoriesPageComponent implements OnInit {
           console.log(index1);
           const st: SituationCategory[] = [...this.situationCategories];
 
-          const index2: number = this.situationCategories.findIndex((e) => e.id === result.id);
+          const index2: number = this.filteredSituationCategories.findIndex((e) => e.id === result.id);
           console.log("index");
           console.log(index2);
-          const fSt: SituationCategory[] = [...this.situationCategories];
-          //const updSt: SituationType = {...user};
-          /*updUser.firstName = result.firstName;
-          updUser.lastName = result.lastName;
-          updUser.roles = result.roles;
-          updUser.phoneNumber = result.phoneNumber;
-          */
+          const fSt: SituationCategory[] = [...this.filteredSituationCategories];
+          
           st[index1] = result;
           this.situationCategories = st;
           fSt[index2] = result;

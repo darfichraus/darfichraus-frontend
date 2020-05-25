@@ -5,15 +5,16 @@ import {SituationCategory} from './situation-category';
 export class SituationMessage {
   id: string;
   modified: string;
-  situation: Situation;
+  situationId: string;
+  messageTypeId: string;
   title: string;
   message: string;
   excerpt: string;
   icon: string;
   severity: number;
-  documents: Array<SituationReference>;
-  areaOfEffect: {};
-  affectedCategories: Array<SituationCategory>;
+  documents: [string];
+  areaOfEffect: [string];
+  affectedCategories: [string];
   status: string;
   version: number;
 }

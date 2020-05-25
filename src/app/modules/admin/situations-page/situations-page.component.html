@@ -6,7 +6,7 @@
 
     <clr-dg-action-bar>
         <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Add', undefined)" *ngIf="selected.length == 0"><clr-icon shape="plus"></clr-icon> Add Situation Type</button>
+            <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Add', undefined)" *ngIf="selected.length == 0"><clr-icon shape="plus"></clr-icon> Add Situation</button>
             <button type="button" class="btn btn-sm btn-secondary" (click)="onDeleteSelection()" *ngIf="selected.length > 0"><clr-icon shape="trash"></clr-icon> Delete</button>
             <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Edit', this.selected[0])" *ngIf="selected.length == 1"><clr-icon shape="pencil"></clr-icon> Edit</button>
             <button type="button" class="btn btn-sm btn-secondary" (click)="this.selected = []" *ngIf="selected.length > 0"><clr-icon shape="times"></clr-icon> Deselect all</button>

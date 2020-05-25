@@ -77,7 +77,7 @@ export class SituationReferencesPageComponent implements OnInit {
           console.log(index1);
           const st: SituationReference[] = [...this.situationReferences];
 
-          const index2: number = this.situationReferences.findIndex((e) => e.id === result.id);
+          const index2: number = this.filteredSituationReferences.findIndex((e) => e.id === result.id);
           console.log("index");
           console.log(index2);
           const fSt: SituationReference[] = [...this.situationReferences];

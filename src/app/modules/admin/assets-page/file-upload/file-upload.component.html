@@ -1,0 +1,51 @@
+<modal-wrapper title="Upload Webresource">
+
+    <div d-body>
+
+
+        <p>Max. file size is 30 MB.</p>
+
+        <div class="dropzone" [class.hovering]="hovering" fileDrop (dropped)="onDropFiles($event)"
+            (hovered)="toggleHover($event)" *ngIf="this.mode !== 'upload'">
+
+            <p>Drag files here</p>
+
+            <div>
+                <input class="hide-input" type=file accept="image/*, .pdf" id="fileinput" #fileinput
+                    (change)="onFileSelect($event)" multiple="multiple">
+                <button mat-flat-button color="primary" (click)="fileinput.click()">
+                    or select from device</button>
+            </div>
+
+        </div>
+
+
+        <mat-divider>
+        </mat-divider>
+      
+        <mat-list *ngIf="this.mode == 'selection'">
+          <mat-list-item *ngFor="let file of this.files; let i = index">
+            <mat-icon matListIcon>{{this.selectIcon(file.type)}}</mat-icon>
+            <h4 matLine>{{file.name}}</h4>
+            <p matLine>{{file.size | fileSize}}</p>
+      
+            <button mat-icon-button (click)="onRemove(i)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+            <mat-divider></mat-divider>
+      
+          </mat-list-item>
+          <button class="upload" *ngIf="files.length > 0" color="primary" mat-flat-button (click)="onUpload()">Upload</button>
+        </mat-list>
+
+
+
+    </div>
+
+
+    <div d-actions>
+        <modal-confirm-button *ngIf="mode == 'finished'" (click)="onSave()"></modal-confirm-button>
+        <modal-cancel-button *ngIf="mode != 'finished'" (click)="onCancel()"></modal-cancel-button>
+    </div>
+
+</modal-wrapper>
