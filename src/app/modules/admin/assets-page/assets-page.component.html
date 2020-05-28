@@ -7,7 +7,7 @@
         <div class="btn-group">
             <button type="button" class="btn btn-sm btn-secondary" (click)="openModal()" *ngIf="selected.length == 0"><clr-icon shape="plus"></clr-icon> Add Webresource</button>
             <button type="button" class="btn btn-sm btn-secondary" (click)="onDeleteSelection()" *ngIf="selected.length > 0"><clr-icon shape="trash"></clr-icon> Delete</button>
-            <!-- <button type="button" class="btn btn-sm btn-secondary" (click)="openModal('Edit', this.selected[0])" *ngIf="selected.length == 1"><clr-icon shape="pencil"></clr-icon> Edit</button> -->
+            <button type="button" class="btn btn-sm btn-secondary" (click)="onImagePreview(this.selected[0])" *ngIf="selected.length == 1"><clr-icon shape="eye"></clr-icon> View</button>
             <button type="button" class="btn btn-sm btn-secondary" (click)="this.selected = []" *ngIf="selected.length > 0"><clr-icon shape="times"></clr-icon> Deselect all</button>
         </div>
     </clr-dg-action-bar>
@@ -15,17 +15,18 @@
 
     <clr-dg-column>Id</clr-dg-column>
     <clr-dg-column>Modified</clr-dg-column>
-    <clr-dg-column>File</clr-dg-column>
     <clr-dg-column>ContentType</clr-dg-column>
     <clr-dg-column>FileName</clr-dg-column>
+    <clr-dg-column>Preview</clr-dg-column>
 
     <clr-dg-row *clrDgItems="let st of filteredWebresources" [clrDgItem]="st">
         <clr-dg-cell>{{st.id}}</clr-dg-cell>
         <clr-dg-cell>{{st.modified | date: 'dd/MM/yyyy' }}</clr-dg-cell>
-        <clr-dg-cell>{{st.file}}</clr-dg-cell>
         <clr-dg-cell>{{st.contentType}}</clr-dg-cell>
         <clr-dg-cell>{{st.fileName}}</clr-dg-cell>
+        <clr-dg-cell><img (click)="onImagePreview(st)" class="image-preview" src="https://api.dev.crimsy.tech/webresources/{{st.id}}/download"></clr-dg-cell>
     </clr-dg-row>
+
 
     <clr-dg-footer>
         <clr-dg-pagination #pagination [clrDgPageSize]="10">

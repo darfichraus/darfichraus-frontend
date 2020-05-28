@@ -28,8 +28,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AdvisorAdminPageComponent } from './advisor-admin-page/advisor-admin-page.component';
 import { AdvisorModalComponent } from './advisor-admin-page/advisor-modal/advisor-modal.component';
-import { EditorComponent } from '../core/components/editor/editor.component';
-import { QuillModule } from 'ngx-quill';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SituationTypesPageComponent } from './situation-types-page/situation-types-page.component';
 import { SituationsPageComponent } from './situations-page/situations-page.component';
@@ -47,6 +45,7 @@ import { AssetsPageComponent } from './assets-page/assets-page.component';
 import { SituationMessageTypeDialogComponent } from './situation-message-types-page/situation-message-type-dialog/situation-message-type-dialog.component';
 import { FileUploadComponent } from './assets-page/file-upload/file-upload.component';
 import { MatListModule } from '@angular/material/list';
+import { ImagePreviewComponent } from './assets-page/image-preview/image-preview.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +59,6 @@ import { MatListModule } from '@angular/material/list';
     AdvisorAdminPageComponent,
     AdvisorModalComponent,
     AssetsPageComponent,
-    EditorComponent,
     FileUploadComponent,
     SituationTypesPageComponent,
     SituationsPageComponent,
@@ -73,6 +71,7 @@ import { MatListModule } from '@angular/material/list';
     SituationCategoryDialogComponent,
     SituationReferenceDialogComponent,
     SituationMessageTypeDialogComponent,
+    ImagePreviewComponent,
   ],
   imports: [
     CommonModule,
@@ -85,8 +84,6 @@ import { MatListModule } from '@angular/material/list';
     MatDialogModule,
     ReactiveFormsModule,
     FormsModule,
-    QuillModule.forRoot(),
-
     MatFormFieldModule,
     MatOptionModule,
     MatSelectModule,

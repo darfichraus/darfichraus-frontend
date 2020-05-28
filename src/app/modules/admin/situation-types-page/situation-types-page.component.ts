@@ -64,34 +64,27 @@ export class SituationTypesPageComponent implements OnInit {
       panelClass: 'custom-dialog-container',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: SituationType) => {
 
       if (result !== undefined) {
         if (mode === 'Add') {
           this.situationTypes = [...this.situationTypes, result];
           this.filteredSituationTypes = [...this.filteredSituationTypes, result];
+          this.notificationService.info('Successfully added new situation type ' + result.name);
         } else if (mode === 'Edit') {
           
           const index1: number = this.situationTypes.findIndex((e) => e.id === result.id);
-          console.log("index");
-          console.log(index1);
           const st: SituationType[] = [...this.situationTypes];
 
           const index2: number = this.situationTypes.findIndex((e) => e.id === result.id);
-          console.log("index");
-          console.log(index2);
           const fSt: SituationType[] = [...this.situationTypes];
-          //const updSt: SituationType = {...user};
-          /*updUser.firstName = result.firstName;
-          updUser.lastName = result.lastName;
-          updUser.roles = result.roles;
-          updUser.phoneNumber = result.phoneNumber;
-          */
+
           st[index1] = result;
           this.situationTypes = st;
           fSt[index2] = result;
           this.filteredSituationTypes = fSt;
-          
+          this.notificationService.info('Successfully edited situation type ' + result.name);
+
         }
     }
 
@@ -105,7 +98,7 @@ export class SituationTypesPageComponent implements OnInit {
     const toBeRemoved = this.selected.length;
 
     const dialogRef: any = this.modalService.confirmModal(
-      'Do you want to delete ' + toBeRemoved + ' users?'
+      'Do you want to delete ' + toBeRemoved + ' situation types?'
     );
 
 

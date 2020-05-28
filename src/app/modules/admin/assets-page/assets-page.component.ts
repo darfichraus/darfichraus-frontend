@@ -5,6 +5,7 @@ import { NotificationService } from "../../core/services/notification.service";
 import { MatDialog } from "@angular/material/dialog";
 import { WebresourceService } from "./assets.service";
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ImagePreviewComponent } from './image-preview/image-preview.component';
 
 @Component({
   selector: "app-assets-page",
@@ -25,6 +26,10 @@ export class AssetsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+   this.fetchWebresources();
+  }
+
+  fetchWebresources() {
     this.webresourceService.getWebresource().subscribe(
       (val) => {
         console.log(val);
@@ -53,6 +58,20 @@ export class AssetsPageComponent implements OnInit {
     }
   }
 
+  onImagePreview(wr: Webresource) {
+    const dialogRef = this.dialog.open(ImagePreviewComponent, {
+      width: '450px',
+      height: '450px',
+      data: wr,
+      panelClass: 'custom-dialog-container',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.selected = [];
+    });
+  }
+
   openModal() {
 
 
@@ -61,6 +80,11 @@ export class AssetsPageComponent implements OnInit {
       width: "450px",
       panelClass: 'custom-dialog-container',
     });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.fetchWebresources();
+        });
 
     /*
     const dialogRef = this.dialog.open(SituationCategoryDialogComponent, {
@@ -107,7 +131,7 @@ export class AssetsPageComponent implements OnInit {
     const toBeRemoved = this.selected.length;
 
     const dialogRef: any = this.modalService.confirmModal(
-      "Do you want to delete " + toBeRemoved + " users?"
+      "Do you want to delete " + toBeRemoved + " assets?"
     );
 
     dialogRef.afterClosed().subscribe((val) => {

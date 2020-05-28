@@ -64,29 +64,27 @@ export class SituationCategoriesPageComponent implements OnInit {
       panelClass: 'custom-dialog-container',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: SituationCategory) => {
 
       if (result !== undefined) {
         if (mode === 'Add') {
           this.situationCategories = [...this.situationCategories, result];
           this.filteredSituationCategories = [...this.filteredSituationCategories, result];
+          this.notificationService.info("Successfully added category " + result.name);
         } else if (mode === 'Edit') {
           
           const index1: number = this.situationCategories.findIndex((e) => e.id === result.id);
-          console.log("index");
-          console.log(index1);
           const st: SituationCategory[] = [...this.situationCategories];
 
           const index2: number = this.filteredSituationCategories.findIndex((e) => e.id === result.id);
-          console.log("index");
-          console.log(index2);
           const fSt: SituationCategory[] = [...this.filteredSituationCategories];
           
           st[index1] = result;
           this.situationCategories = st;
           fSt[index2] = result;
           this.filteredSituationCategories = fSt;
-          
+          this.notificationService.info("Successfully edited category " + result.name);
+
         }
     }
 
@@ -100,7 +98,7 @@ export class SituationCategoriesPageComponent implements OnInit {
     const toBeRemoved = this.selected.length;
 
     const dialogRef: any = this.modalService.confirmModal(
-      'Do you want to delete ' + toBeRemoved + ' users?'
+      'Do you want to delete ' + toBeRemoved + ' situation categories?'
     );
 
 

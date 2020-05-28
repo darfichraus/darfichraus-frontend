@@ -26,7 +26,7 @@
             <clr-dg-cell>{{st.id}}</clr-dg-cell>
             <clr-dg-cell>{{st.modified | date: 'dd/MM/yyyy' }}</clr-dg-cell>
             <clr-dg-cell>{{st.name}}</clr-dg-cell>
-            <clr-dg-cell>{{st.media}}</clr-dg-cell>
+            <clr-dg-cell><img-prev [url]="st.media"></img-prev></clr-dg-cell>
             <clr-dg-cell>{{st.severity}}</clr-dg-cell>
             <clr-dg-cell><span class="color-sec" [style.background-color]="st.color"></span>{{st.color}}</clr-dg-cell>
         </clr-dg-row>

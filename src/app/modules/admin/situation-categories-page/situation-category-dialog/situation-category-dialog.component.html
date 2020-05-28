@@ -39,7 +39,8 @@
             </mat-form-field>
 
 
-         <mat-form-field class="max-width" appearance="standard">
+            <!-- 
+            <mat-form-field class="max-width" appearance="standard">
               <mat-icon matPrefix class="form-prefix">image</mat-icon>
               <mat-label>Icon</mat-label>
               <mat-select formControlName="icon" required>
@@ -47,8 +48,12 @@
               </mat-select>
               <mat-error *ngIf="f.icon.touched && f.icon.errors?.required">This field is required.</mat-error>
             </mat-form-field>
+            -->
+         
 
    
+            <dir-image-picker label="Icon" required="true" formControlName="icon" icon="image"></dir-image-picker>
+
       
           </form>
 

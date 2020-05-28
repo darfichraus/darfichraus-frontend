@@ -1,21 +1,16 @@
 import {
   Component,
   forwardRef,
-  HostBinding,
   Input,
   OnDestroy,
   OnInit,
-  Optional,
-  Self,
   ViewChild,
 } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR,
-  NgControl,
 } from '@angular/forms';
-import { MatFormFieldControl } from '@angular/material/form-field';
 import { MatSelect } from '@angular/material/select';
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -41,11 +36,7 @@ export interface Item {
 export class DirPickerComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   public itemCtrl: FormControl = new FormControl();
-
-
   public itemFilterCtrl: FormControl = new FormControl();
-
-
   public filteredItems: ReplaySubject<Item[]> = new ReplaySubject<Item[]>(1);
 
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;

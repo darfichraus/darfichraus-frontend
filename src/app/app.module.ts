@@ -12,7 +12,6 @@ import { AuthInterceptor } from './modules/core/interceptors/auth.interceptor';
 import { AuthGuard } from './modules/core/guards/auth.guard';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './modules/material.module';
-import { QuillModule } from 'ngx-quill';
 import {registerLocaleData} from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 
@@ -33,7 +32,6 @@ registerLocaleData(localeDe, 'de');
     DeviceDetectorModule.forRoot(),
     FontAwesomeModule,
     MaterialModule,
-    QuillModule.forRoot()
   ],
   providers: [
     RestrictionRepository,

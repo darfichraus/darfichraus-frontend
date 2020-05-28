@@ -1,4 +1,4 @@
-<modal-wrapper title="{{data.mode}} Situation Category">
+<modal-wrapper title="{{data.mode}} Situation Message Type">
 
     <div d-body>
 
@@ -13,7 +13,8 @@
             </mat-form-field>
   
 
-            <mat-form-field class="max-width" appearance="standard">
+            <!-- 
+              <mat-form-field class="max-width" appearance="standard">
               <mat-icon matPrefix class="form-prefix">image</mat-icon>
               <mat-label>Media</mat-label>
               <mat-select formControlName="media" required>
@@ -21,7 +22,10 @@
               </mat-select>
               <mat-error *ngIf="f.media.touched && f.media.errors?.required">This field is required.</mat-error>
             </mat-form-field>
-      
+            -->
+            
+            <dir-image-picker label="Media" required="true" formControlName="media" icon="image"></dir-image-picker>
+
              
 
             <mat-form-field class="max-width" appearance="standard">

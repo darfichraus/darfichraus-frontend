@@ -10,7 +10,7 @@ export class NotificationService {
 
   info(message: string) {
     this.snackBar.open(message, 'Ok', {
-      duration: 3000,
+      duration: 4000,
     });
   }
   

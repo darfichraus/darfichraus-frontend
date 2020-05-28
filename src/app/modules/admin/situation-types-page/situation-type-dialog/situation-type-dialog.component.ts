@@ -4,6 +4,8 @@ import { NotificationService } from "src/app/modules/core/services/notification.
 import { SituationType } from "src/app/models/situation-type";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { SituationTypeService } from '../situtation-types.service';
+import { Webresource } from 'src/app/models/webresource';
+import { WebresourceService } from '../../assets-page/assets.service';
 
 @Component({
   selector: "app-situation-type-dialog",
@@ -22,15 +24,29 @@ export class SituationTypeDialogComponent implements OnInit {
 
   medias = ["media.png", "image.jpg"];
 
+  myMedias: Webresource[] = [];
+
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<SituationTypeDialogComponent>,
     private situationTypeService: SituationTypeService,
     @Inject(MAT_DIALOG_DATA) public data: { mode: string; st: SituationType },
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private webresourceService: WebresourceService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.webresourceService.getWebresource().subscribe(
+      (val) => {
+        console.log(val);
+        this.myMedias = val;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 
     // convenience getter for easy access to form fields
     get f(): FormGroup['controls'] {
@@ -39,6 +55,7 @@ export class SituationTypeDialogComponent implements OnInit {
     
   onSave() {
     let st: SituationType = this.myForm.value as SituationType;
+    console.log(st);
     if(this.data.mode == 'Add') {
       this.situationTypeService.addSituationType(st).subscribe((val) => {
         console.log("succ. added st");

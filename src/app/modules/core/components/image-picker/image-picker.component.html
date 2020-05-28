@@ -1,0 +1,19 @@
+  <mat-form-field>
+    <mat-label>{{label}}</mat-label>
+    <mat-icon *ngIf="this.icon" matPrefix class="form-prefix">{{this.icon}}</mat-icon>
+
+    <mat-select [formControl]="itemCtrl" placeholder="Asset" #singleSelect [required]="required">
+      <mat-select-trigger>
+        <img class="image-preview" src="https://api.dev.crimsy.tech/webresources/{{this.itemCtrl?.value?.id}}/download">
+        {{this.itemCtrl?.value?.fileName}}
+      </mat-select-trigger>
+      <mat-option>
+        <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
+      </mat-option>
+
+      <mat-option *ngFor="let item of filteredWebresources | async" [value]="item">
+        <img class="image-preview" src="https://api.dev.crimsy.tech/webresources/{{item.id}}/download">
+        {{item.fileName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
