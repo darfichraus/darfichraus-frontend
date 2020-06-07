@@ -1,0 +1,16 @@
+<mat-form-field>
+    <mat-label>{{label}}</mat-label>
+    <mat-icon *ngIf="this.icon" matPrefix class="form-prefix">{{this.icon}}</mat-icon>
+
+    <mat-select [formControl]="itemCtrl" placeholder="Asset" #singleSelect [required]="required">
+      
+      <mat-option>
+        <ngx-mat-select-search [formControl]="bankFilterCtrl"></ngx-mat-select-search>
+      </mat-option>
+
+      <!-- <mat-option *ngFor="let item of filteredWebresources | async" [value]="item"> -->
+    <mat-option *ngFor="let item of this.myCity?.hierarchy" [value]="item">
+        {{item.name}} - {{item.locationType}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>

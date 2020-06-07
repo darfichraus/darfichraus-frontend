@@ -28,7 +28,9 @@
         <clr-dg-cell>{{st.id}}</clr-dg-cell>
         <clr-dg-cell>{{st.modified | date: 'dd/MM/yyyy' }}</clr-dg-cell>
         <clr-dg-cell>{{st.name}}</clr-dg-cell>
-        <clr-dg-cell>{{st.situationTypeId}}</clr-dg-cell>
+        <clr-dg-cell>
+            <img-prev [url]="st.situationType?.media"></img-prev>{{st.situationType?.name}}
+        </clr-dg-cell>
         <clr-dg-cell>{{st.startDate}}</clr-dg-cell>
         <clr-dg-cell>{{st.endDate?.isPresent !== false ? st.endDate : '-'}}</clr-dg-cell>
         <clr-dg-cell>{{st.severity}}</clr-dg-cell>

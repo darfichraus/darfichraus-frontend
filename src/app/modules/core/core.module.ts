@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { ImgPrevComponent } from './components/img-prev/img-prev.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { LocationPickerComponent } from './components/location-picker/location-picker.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FileDropDirective,
     ImagePickerComponent,
     ImgPrevComponent,
+    LocationPickerComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +57,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FileDropDirective,
     ImagePickerComponent,
     ImgPrevComponent,
+    LocationPickerComponent,
   ]
 })
 export class DirCoreModule {

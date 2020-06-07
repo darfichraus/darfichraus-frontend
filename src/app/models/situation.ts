@@ -1,3 +1,5 @@
+import { SituationType } from './situation-type';
+
 export class Situation {
     id: string;
     modified: string;
@@ -7,4 +9,5 @@ export class Situation {
     endDate: string;
     severity: number;
     active: boolean;
+    situationType: SituationType;
 }

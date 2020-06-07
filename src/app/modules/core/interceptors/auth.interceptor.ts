@@ -23,7 +23,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // TODO - check if request is of type HttpResponse or of type HttpErrorResponse (redirect user on failed login)
     if (bearerToken) {
-      console.log('bearar');
 
       const headers = new HttpHeaders({
         Authorization: `Bearer ${bearerToken}`,
@@ -33,7 +32,6 @@ export class AuthInterceptor implements HttpInterceptor {
       const cloned = req.clone({ headers });
       return next.handle(cloned);
     } else {
-      console.log('no bearer');
 
       const headers = new HttpHeaders({
         'API-KEY': apiToken,

@@ -8,7 +8,7 @@ import { SituationMessage } from 'src/app/models/situation-message';
   providedIn: 'root',
 })
 export class SituationMessageService {
-  static readonly SITUATION_MESSAGE__URL = environment.apiUrl + 'situation-advisor/situations-messages/';
+  static readonly SITUATION_MESSAGE__URL = environment.apiUrl + 'situation-advisor/situation-messages/';
   static readonly SITUATION_MESSAGE__URL_ADMIN = environment.apiUrl + 'admin/situation-advisor/situation-messages/';
 
   constructor(private readonly http: HttpClient) {}

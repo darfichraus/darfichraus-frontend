@@ -1,0 +1,8 @@
+export enum LocationType {
+    CITY = "CTIY",
+    COUNTY = "COUNTY",
+    ADMINISTRATIVE_AREA = "ADMINISTRATIVE_AREA",
+    STATE ="STATE",
+    COUNTRY ="COUNTRY"
+
+}

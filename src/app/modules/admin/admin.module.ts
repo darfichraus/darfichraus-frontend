@@ -46,6 +46,7 @@ import { SituationMessageTypeDialogComponent } from './situation-message-types-p
 import { FileUploadComponent } from './assets-page/file-upload/file-upload.component';
 import { MatListModule } from '@angular/material/list';
 import { ImagePreviewComponent } from './assets-page/image-preview/image-preview.component';
+import { SituationMessagesDialogComponent } from './situation-messages-page/situations-messages-dialog/situation-messages-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { ImagePreviewComponent } from './assets-page/image-preview/image-preview
     SituationCategoryDialogComponent,
     SituationReferenceDialogComponent,
     SituationMessageTypeDialogComponent,
+    SituationMessagesDialogComponent,
     ImagePreviewComponent,
   ],
   imports: [

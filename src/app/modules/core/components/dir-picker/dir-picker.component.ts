@@ -75,7 +75,9 @@ export class DirPickerComponent implements OnInit, OnDestroy, ControlValueAccess
   writeValue(value: any): void {
     console.log('writeValue');
     if (value !== undefined) {
+      console.log(this.itemCtrl.value);
       this.itemCtrl.setValue(value);
+      console.log(this.itemCtrl.value);
     }
   }
 

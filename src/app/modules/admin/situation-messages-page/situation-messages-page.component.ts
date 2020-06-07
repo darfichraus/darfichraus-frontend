@@ -6,6 +6,7 @@ import { SituationMessageService } from './situtation-message-type.service';
 import { ModalService } from '../../modal-template-module/modal.service';
 import { NotificationService } from '../../core/services/notification.service';
 import { SituationMessage } from 'src/app/models/situation-message';
+import { SituationMessagesDialogComponent } from './situations-messages-dialog/situation-messages-dialog.component';
 
 @Component({
   selector: 'app-situation-messages-page',
@@ -58,14 +59,16 @@ export class SituationMessagesPageComponent implements OnInit {
 
   openModal(mode: string, smt: SituationMessage) {
 
-    /*
-    const dialogRef = this.dialog.open(SituationMessageTypeDialogComponent, {
+    
+    const dialogRef = this.dialog.open(SituationMessagesDialogComponent, {
       autoFocus: false,
       data: {mode, smt},
       width: "450px",
+      height: "600px",
       panelClass: 'custom-dialog-container',
     });
 
+    /*
     dialogRef.afterClosed().subscribe(result => {
 
       if (result !== undefined) {
@@ -103,7 +106,7 @@ export class SituationMessagesPageComponent implements OnInit {
     const toBeRemoved = this.selected.length;
 
     const dialogRef: any = this.modalService.confirmModal(
-      'Do you want to delete ' + toBeRemoved + ' users?'
+      'Do you want to delete ' + toBeRemoved + ' messages?'
     );
 
     dialogRef.afterClosed().subscribe((val) => {
@@ -116,7 +119,7 @@ export class SituationMessagesPageComponent implements OnInit {
           this.situationMessageTypeService.deleteSituationMessage(st.id).subscribe((val) => {
             count += 1;
             if (count === toBeRemoved) {
-              this.notificationService.info('Deleted ' + toBeRemoved + ' situation message types.');
+              this.notificationService.info('Deleted ' + toBeRemoved + ' situation messages.');
             }
           });
         });

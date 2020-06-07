@@ -16,8 +16,8 @@
     
         <clr-dg-column>Id</clr-dg-column>
         <clr-dg-column>Modified</clr-dg-column>
-        <clr-dg-column>SituationId</clr-dg-column>
-        <clr-dg-column>MessageTypeId</clr-dg-column>
+        <clr-dg-column>Situation</clr-dg-column>
+        <clr-dg-column>MessageType</clr-dg-column>
         <clr-dg-column>Title</clr-dg-column>
         <clr-dg-column>Message</clr-dg-column>
         <clr-dg-column>Excerpt</clr-dg-column>
@@ -33,9 +33,20 @@
         <clr-dg-row *clrDgItems="let st of filteredSituationMessages" [clrDgItem]="st">
             <clr-dg-cell>{{st.id}}</clr-dg-cell>
             <clr-dg-cell>{{st.modified | date: 'dd/MM/yyyy' }}</clr-dg-cell>
-            <clr-dg-cell>{{st.name}}</clr-dg-cell>
-            <clr-dg-cell>{{st.media}}</clr-dg-cell>
+            <clr-dg-cell>{{st.situation?.name}}</clr-dg-cell>
+            <clr-dg-cell><img-prev [url]="st.messageType?.media"></img-prev>{{st.messageType?.name}}</clr-dg-cell>
+            <clr-dg-cell>{{st.title}}</clr-dg-cell>
+            <clr-dg-cell>{{st.message}}</clr-dg-cell>
+            <clr-dg-cell>{{st.excerpt}}</clr-dg-cell>
+            <clr-dg-cell>
+                <img-prev [url]="st.icon"></img-prev>
+            </clr-dg-cell>
             <clr-dg-cell>{{st.severity}}</clr-dg-cell>
+            <clr-dg-cell><span *ngFor="let doc of st.documents">{{doc.title}}</span></clr-dg-cell>
+            <clr-dg-cell>{{st.areaOfEffect}}</clr-dg-cell>
+            <clr-dg-cell><span *ngFor="let ar of st.affectedCategories"><img-prev [matTooltip]="ar.name" [url]="ar.icon"></img-prev></span></clr-dg-cell>
+            <clr-dg-cell>{{st.status}}</clr-dg-cell>
+            <clr-dg-cell>{{st.version}}</clr-dg-cell>
         </clr-dg-row>
     
         <clr-dg-footer>

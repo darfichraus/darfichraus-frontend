@@ -1,0 +1,124 @@
+<modal-wrapper title="{{data.mode}} Situation Message">
+
+  <div d-body>
+
+    <form [formGroup]="myForm">
+
+
+      <!-- SITUATION ID -->
+
+
+      <dir-picker formControlName="situationId" [label]="'Situation Type'" [items]="mySituations"
+        [selector]="'name'" icon="chevron_right">
+      </dir-picker>
+
+      <!-- MESSAGE TYPE ID -->
+
+      <dir-picker formControlName="messageTypeId" [label]="'Situation Message Type'" [items]="mySituationMessageTypes"
+        [selector]="'name'" icon="chevron_right">
+      </dir-picker>
+
+
+      <!-- TITLE -->
+      <mat-form-field class="max-width" appearance="standard">
+        <mat-icon matPrefix class="form-prefix">label</mat-icon>
+        <mat-label>Title</mat-label>
+        <input required type="text" formControlName="title" matInput placeholder="Title ...">
+        <mat-error *ngIf="f.title.touched && f.title.errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+
+      <!-- MESSAGE -->
+      <mat-form-field class="max-width" appearance="standard">
+        <mat-icon matPrefix class="form-prefix">subject</mat-icon>
+        <mat-label>Message</mat-label>
+        <textarea formControlName="message" placeholder="Situation message ..." matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"></textarea>
+        <!-- <input required type="text" formControlName="message" matInput placeholder="Situation message ..."> -->
+        <mat-error *ngIf="f.message.touched && f.message.errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+
+      <!-- EXCERPT -->
+
+      <mat-form-field class="max-width" appearance="standard">
+        <mat-icon matPrefix class="form-prefix">label</mat-icon>
+        <mat-label>Excerpt</mat-label>
+        <input required type="text" formControlName="excerpt" matInput placeholder="Excerpt ...">
+        <mat-error *ngIf="f.excerpt.touched && f.excerpt.errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+
+      <!-- ICON -->
+      <dir-image-picker label="Icon" required="true" formControlName="icon" icon="image"></dir-image-picker>
+
+      <!-- SEVERITY -->
+      <mat-form-field class="max-width" appearance="standard">
+        <mat-icon matPrefix class="form-prefix">feedback</mat-icon>
+        <mat-label>Severity</mat-label>
+        <mat-select formControlName="severity" required>
+          <mat-option *ngFor="let sev of severities" [value]="sev">{{sev}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.severity.touched && f.severity.errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+
+      <!-- DOCUMENTS -->
+
+      <dir-picker formControlName="documents" [label]="'References / Documents'" [items]="mySituationReferences"
+        [selector]="'title'" icon="chevron_right">
+      </dir-picker>
+
+
+      <!-- AREA OF EFFECT -->
+
+      <dir-location-picker label="Location" required="true" formControlName="arealOfEffect" icon="map"></dir-location-picker>
+
+
+
+      <!-- AFFECTED CATEGORIES -->
+
+      <mat-form-field>
+        <mat-icon matPrefix class="form-prefix">local_offer</mat-icon>
+        <mat-label>Affected categories</mat-label>
+        <mat-select formControlName="affectedCategories" multiple>
+          <mat-option *ngFor="let cat of mySituationCategories" [value]="cat">
+            <img class="image-preview" src="https://api.dev.crimsy.tech/webresources/{{cat.icon}}/download">
+            {{cat.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- STATUS -->
+
+      <mat-form-field class="max-width" appearance="standard">
+        <mat-icon matPrefix class="form-prefix">local_offer</mat-icon>
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" required>
+          <mat-option *ngFor="let st of statuses" [value]="st">
+          {{st}}
+        </mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.status.touched && f.status.errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+
+      <!-- VERSION -->
+
+      <mat-form-field class="max-width" appearance="standard">
+        <mat-icon matPrefix class="form-prefix">label</mat-icon>
+        <mat-label>Version</mat-label>
+        <input numeric matInput placeholder="3" formControlName="version" maxlength="5">
+        <mat-error *ngIf="f.title.touched && f.title.errors?.required">This field is required.</mat-error>
+      </mat-form-field>
+
+
+
+    </form>
+
+  </div>
+
+
+  <div d-actions>
+    <modal-save-button [disabled]="!myForm.valid" (click)="onSave()"></modal-save-button>
+    <modal-cancel-button (click)="onCancel()"></modal-cancel-button>
+  </div>
+
+</modal-wrapper>

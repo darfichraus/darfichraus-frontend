@@ -1,21 +1,22 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NotificationService } from 'src/app/modules/core/services/notification.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SituationService } from '../situations.service';
-import { Situation } from 'src/app/models/situation';
-import { SituationType } from 'src/app/models/situation-type';
-import { SituationTypeService } from '../../situation-types-page/situtation-types.service';
+import { Component, OnInit, Inject } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { NotificationService } from "src/app/modules/core/services/notification.service";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { SituationService } from "../situations.service";
+import { Situation } from "src/app/models/situation";
+import { SituationType } from "src/app/models/situation-type";
+import { SituationTypeService } from "../../situation-types-page/situtation-types.service";
+import * as moment from "moment";
 
 @Component({
   selector: "app-situation-type-dialog",
-  templateUrl: './situation-dialog.component.html',
-  styleUrls: ['./situation-dialog.component.scss'],
+  templateUrl: "./situation-dialog.component.html",
+  styleUrls: ["./situation-dialog.component.scss"],
 })
 export class SituationDialogComponent implements OnInit {
   myForm: FormGroup = this.fb.group({
     name: [this.data?.st?.name, [Validators.required]],
-    situationTypeId: [this.data?.st?.situationTypeId, [Validators.required]],
+    situationTypeId: [this.data?.st?.situationType, [Validators.required]],
     startDate: [this.data?.st?.startDate, [Validators.required]],
     endDate: [this.data?.st?.endDate, [Validators.required]],
     severity: [this.data?.st?.severity, [Validators.required]],
@@ -23,7 +24,7 @@ export class SituationDialogComponent implements OnInit {
   });
 
   severities = [1, 2, 3, 4, 5];
-  medias = ['media.png', 'image.jpg'];
+  medias = ["media.png", "image.jpg"];
   mySituationTypes: SituationType[] = [];
 
   constructor(
@@ -32,38 +33,49 @@ export class SituationDialogComponent implements OnInit {
     private situationService: SituationService,
     @Inject(MAT_DIALOG_DATA) public data: { mode: string; st: Situation },
     private notificationService: NotificationService,
-    private situationTypeService: SituationTypeService,
+    private situationTypeService: SituationTypeService
   ) {}
 
   ngOnInit(): void {
-
-    this.situationTypeService.getAllSituationTypes().subscribe((val) => {
-      this.mySituationTypes = val;
-    }, (err) => {
-      console.log(err);
-    });
-
+    this.situationTypeService.getAllSituationTypes().subscribe(
+      (val) => {
+        this.mySituationTypes = val;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
-    // convenience getter for easy access to form fields
-    get f(): FormGroup['controls'] {
-      return this.myForm.controls;
-    }
+  // convenience getter for easy access to form fields
+  get f(): FormGroup["controls"] {
+    return this.myForm.controls;
+  }
 
   onSave() {
     const st: Situation = this.myForm.value as Situation;
-    if (this.data.mode == 'Add') {
+    st.situationTypeId = this.f.situationTypeId.value.id;
+    console.log(st);
+    const startDate = new Date(this.f.startDate.value); // Replace event.value with your date value
+    const formattedStartDate = moment(startDate).format("YYYY-MM-DD");
+    console.log(formattedStartDate);
+    const endDate = new Date(this.f.endDate.value); // Replace event.value with your date value
+    const formattedEndDate = moment(endDate).format("YYYY-MM-DD");
+    st.startDate = formattedStartDate;
+    st.endDate = formattedEndDate;
+    console.log(formattedEndDate);
+    if (this.data.mode == "Add") {
       this.situationService.addSituation(st).subscribe((val) => {
-        console.log('succ. added st');
+        console.log("succ. added st");
         console.log(val);
         this.dialogRef.close(val);
       });
     }
 
-    if (this.data.mode == 'Edit') {
+    if (this.data.mode == "Edit") {
       st.id = this.data.st.id;
       this.situationService.updateSituation(st).subscribe((val) => {
-        console.log('succ. updated st');
+        console.log("succ. updated st");
         console.log(val);
         this.dialogRef.close(val);
       });

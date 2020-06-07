@@ -28,8 +28,6 @@ export class AuthService {
 
   loadToken(): void {
     this.token = localStorage.getItem(AuthService.JWT_STORAGE_KEY);
-    console.log("load token this.token");
-    console.log(this.token);
     //this.token = this.token.replace('"', '');
     this.user = jwt_decode(this.token);
   }
